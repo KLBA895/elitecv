@@ -565,9 +565,10 @@ export default function Home() {
               </div>
 
               <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <label className="text-sm font-medium text-[#0A1F44]/85">{t.orderUpload}<input required type="file" accept=".pdf,.doc,.docx" className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-white px-4 py-2.5 text-sm outline-none file:mr-3 file:rounded-md file:border-0 file:bg-[#0A1F44]/10 file:px-3 file:py-1.5 file:text-[#0A1F44]" /></label>
-                <label className="text-sm font-medium text-[#0A1F44]/85">{t.orderAdditionalDocs}<input type="file" multiple accept=".pdf,.doc,.docx" className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-white px-4 py-2.5 text-sm outline-none file:mr-3 file:rounded-md file:border-0 file:bg-[#0A1F44]/10 file:px-3 file:py-1.5 file:text-[#0A1F44]" /></label>
-              </div>
+  <p className="md:col-span-2 rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
+    Sende deinen CV und zusätzliche Dokumente nach der Anfrage direkt per E-Mail an info@elitecv.ch.
+  </p>
+</div>
 
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderPackage}<input readOnly value={`${selectedPlan.name} - ${selectedPlan.price}`} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-[#0A1F44]/[0.03] px-4 py-2.5 text-[#0A1F44]/85 outline-none" /></label>
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderMessage}<textarea rows={4} placeholder={t.orderMessagePlaceholder} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]" /></label>
