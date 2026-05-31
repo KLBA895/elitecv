@@ -25,15 +25,16 @@ export default function ImpressumPage() {
             <h1 className="mt-6 text-4xl font-semibold tracking-[-0.02em]">Impressum</h1>
             <div className="mt-8 space-y-6 leading-relaxed text-[#0A1F44]/80">
               <p>
-                <strong>EliteCV</strong><br />
-                Klaudio Batinić<br />
-                Schweiz
+              <strong>EliteCV</strong><br />
+Inhaber: Klaudio Batinić<br />
+Dietikon, Schweiz
               </p>
               <p>
                 E-Mail: <a href="mailto:info@elitecv.ch" className="font-semibold hover:text-[#C9A95A]">info@elitecv.ch</a>
               </p>
               <p>
-                Verantwortlich für den Inhalt dieser Website ist Klaudio Batinić.
+              Verantwortlich für den Inhalt:
+              Klaudio Batinić
               </p>
             </div>
           </>
@@ -42,15 +43,16 @@ export default function ImpressumPage() {
             <h1 className="mt-6 text-4xl font-semibold tracking-[-0.02em]">Imprint</h1>
             <div className="mt-8 space-y-6 leading-relaxed text-[#0A1F44]/80">
               <p>
-                <strong>EliteCV</strong><br />
-                Klaudio Batinić<br />
-                Switzerland
+              <strong>EliteCV</strong><br />
+Owner: Klaudio Batinić<br />
+Dietikon, Switzerland
               </p>
               <p>
                 Email: <a href="mailto:info@elitecv.ch" className="font-semibold hover:text-[#C9A95A]">info@elitecv.ch</a>
               </p>
               <p>
-                Klaudio Batinić is responsible for the content of this website.
+                KContent responsibility:
+                Klaudio Batinić
               </p>
             </div>
           </>
