@@ -1,0 +1,17 @@
+<svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="goldGrad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(48 40) rotate(44) scale(100)">
+      <stop stop-color="#F8EFCF"/>
+      <stop offset="1" stop-color="#E3CB80"/>
+    </radialGradient>
+  </defs>
+  <circle cx="70" cy="70" r="64" fill="url(#goldGrad)" stroke="#C9A95A" stroke-width="3"/>
+  <circle cx="70" cy="70" r="54" fill="none" stroke="#9C7726" stroke-opacity="0.55" stroke-width="1.5"/>
+  <path d="M56 68.5L66.2 78.5L85.5 58.8" stroke="#9C7726" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="70" y="96" text-anchor="middle" fill="#0A1F44" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1.1">
+    ELITECV
+  </text>
+  <text x="70" y="110" text-anchor="middle" fill="#9C7726" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1.2">
+    CERTIFIED
+  </text>
+</svg>
