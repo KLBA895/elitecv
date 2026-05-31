@@ -51,7 +51,7 @@ Dietikon, Switzerland
                 Email: <a href="mailto:info@elitecv.ch" className="font-semibold hover:text-[#C9A95A]">info@elitecv.ch</a>
               </p>
               <p>
-                KContent responsibility:
+              Responsible for the content:
                 Klaudio Batinić
               </p>
             </div>
