@@ -565,9 +565,11 @@ export default function Home() {
               </div>
 
               <div className="mt-4 grid gap-4 md:grid-cols-2">
-  <p className="md:col-span-2 rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
-    Sende deinen CV und zusätzliche Dokumente nach der Anfrage direkt per E-Mail an info@elitecv.ch.
-  </p>
+              <p className="md:col-span-2 rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
+  {lang === "de"
+    ? "Sende deinen CV und zusätzliche Dokumente nach der Anfrage direkt per E-Mail an info@elitecv.ch."
+    : "Please send your CV and any additional documents by email to info@elitecv.ch after submitting your request."}
+</p>
 </div>
 
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderPackage}<input readOnly value={`${selectedPlan.name} - ${selectedPlan.price}`} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-[#0A1F44]/[0.03] px-4 py-2.5 text-[#0A1F44]/85 outline-none" /></label>
