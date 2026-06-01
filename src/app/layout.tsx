@@ -9,7 +9,16 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "EliteCV",
-  description: "Premium CV transformation service.",
+  description: "Professionelle CV-Optimierung für den Schweizer Arbeitsmarkt.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    title: "EliteCV",
+    description: "Professionelle CV-Optimierung für den Schweizer Arbeitsmarkt.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
