@@ -382,6 +382,8 @@ export default function Home() {
   const [lang, setLang] = useState<Lang>("de");
   const [activePlan, setActivePlan] = useState<PlanKey>("standard");
   const [orderSubmitted, setOrderSubmitted] = useState(false);
+  const [contactSubmitted, setContactSubmitted] = useState(false);
+const [contactError, setContactError] = useState(false);
   const t = content[lang];
 
   const metrics = useMemo(
@@ -605,7 +607,80 @@ export default function Home() {
         <section id="kontakt" className="mx-auto w-full max-w-7xl px-6 py-20">
           <div className="grid gap-6 lg:grid-cols-2">
             <article className="rounded-2xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm"><h2 className="text-3xl font-semibold tracking-[-0.02em]">{t.contactTitle}</h2><p className="mt-3 text-[#0A1F44]/72">{t.contactText}</p><p className="mt-5 text-sm uppercase tracking-[0.15em] text-[#C9A95A]">{t.contactEmailLabel}</p><a href="mailto:info@elitecv.ch" className="mt-1 inline-block text-lg font-semibold text-[#0A1F44] transition hover:text-[#C9A95A]">info@elitecv.ch</a></article>
-            <form className="rounded-2xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm"><div className="grid gap-4 md:grid-cols-2"><label className="text-sm font-medium text-[#0A1F44]/85">{t.contactFormName}<input type="text" className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]" /></label><label className="text-sm font-medium text-[#0A1F44]/85">{t.contactFormEmail}<input type="email" className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]" /></label></div><label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.contactFormMessage}<textarea rows={5} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]" /></label><button type="button" className="mt-5 rounded-full border border-[#0A1F44]/20 px-6 py-2.5 text-sm font-semibold text-[#0A1F44] transition hover:border-[#C9A95A] hover:text-[#C9A95A]">{t.contactFormSubmit}</button></form>
+            <form
+  onSubmit={async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    formData.append("type", "Kontakt");
+
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      setContactSubmitted(true);
+      setContactError(false);
+      (e.target as HTMLFormElement).reset();
+    } else {
+      setContactSubmitted(false);
+      setContactError(true);
+    }
+  }}
+  className="rounded-2xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm"
+>
+  <div className="grid gap-4 md:grid-cols-2">
+    <label className="text-sm font-medium text-[#0A1F44]/85">
+      {t.contactFormName}
+      <input
+        name="name"
+        required
+        type="text"
+        className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
+      />
+    </label>
+
+    <label className="text-sm font-medium text-[#0A1F44]/85">
+      {t.contactFormEmail}
+      <input
+        name="email"
+        required
+        type="email"
+        className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
+      />
+    </label>
+  </div>
+
+  <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">
+    {t.contactFormMessage}
+    <textarea
+      name="message"
+      required
+      rows={5}
+      className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]"
+    />
+  </label>
+
+  <button
+    type="submit"
+    className="mt-5 rounded-full border border-[#0A1F44]/20 px-6 py-2.5 text-sm font-semibold text-[#0A1F44] transition hover:border-[#C9A95A] hover:text-[#C9A95A]"
+  >
+    {t.contactFormSubmit}
+  </button>
+  {contactSubmitted && (
+  <p className="mt-4 rounded-xl border border-emerald-600/25 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-800">
+    Vielen Dank. Ihre Nachricht wurde erfolgreich übermittelt. Wir melden uns per E-Mail.
+  </p>
+)}
+
+{contactError && (
+  <p className="mt-4 rounded-xl border border-red-600/25 bg-red-500/10 px-4 py-3 text-sm text-red-800">
+    Die Nachricht konnte leider nicht versendet werden. Bitte kontaktieren Sie uns direkt über info@elitecv.ch.
+  </p>
+)}
+</form>
           </div>
         </section>
 
