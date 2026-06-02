@@ -29,7 +29,7 @@ const content = {
     whyText: [
       "EliteCV schreibt Lebensläufe nicht nur um.",
       "EliteCV positioniert Menschen klarer, stärker und professioneller.",
-      "Recruiter verstehen IhreStärken in Sekunden - nicht erst nach 5 Minuten Lesen.",
+      "Recruiter verstehen Ihre Stärken in Sekunden - nicht erst nach 5 Minuten Lesen.",
     ],
     processTitle: "So funktioniert es",
     processSteps: [
