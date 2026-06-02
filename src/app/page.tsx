@@ -85,7 +85,7 @@ const content = {
     pricingDescription: "Klicke auf ein Paket für Details.",
     selectedLabel: "Ausgewählt",
     orderTitle: "Auftrag starten",
-    orderText: "Wähle ein Paket und sende deinen Auftrag. Wir melden uns per E-Mail.",
+    orderText: "Wählen Sie ein Paket und senden Sie Auftrag. Wir melden uns per E-Mail.",
     orderName: "Name",
     orderEmail: "E-Mail",
     orderUpload: "CV Upload (PDF/DOCX)",
@@ -569,7 +569,7 @@ const [contactError, setContactError] = useState(false);
               <div className="mt-4 grid gap-4 md:grid-cols-2">
               <p className="md:col-span-2 rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
   {lang === "de"
-    ? "Sende deinen CV und zusätzliche Dokumente nach der Anfrage direkt per E-Mail an info@elitecv.ch."
+    ? "Senden Sie ihren CV und zusätzliche Dokumente nach der Anfrage direkt per E-Mail an info@elitecv.ch."
     : "Please send your CV and any additional documents by email to info@elitecv.ch after submitting your request."}
 </p>
 </div>
@@ -589,7 +589,7 @@ const [contactError, setContactError] = useState(false);
             <aside className="rounded-2xl border border-[#0A1F44]/10 bg-[#FCFCFB] p-7 shadow-sm">
               <h3 className="text-xl font-semibold">{t.paymentTitle}</h3>
               <p className="mt-3 text-[#0A1F44]/70">{t.paymentLead}</p>
-              <p className="mt-4 text-sm font-medium text-[#0A1F44]/80">{lang === "de" ? "Du erhältst anschliessend per Email:" : "You will then receive by email:"}</p>
+              <p className="mt-4 text-sm font-medium text-[#0A1F44]/80">{lang === "de" ? "Sie erhalten anschliessend per E-Mail:" : "You will then receive by email:"}</p>
               <ul className="mt-2 space-y-2 text-sm text-[#0A1F44]/76">{t.paymentItems.map((item) => <li key={item}>- {item}</li>)}</ul>
               <p className="mt-4 text-sm font-medium text-[#0A1F44]/80">{t.paymentMethodsTitle}</p>
               <ul className="mt-2 space-y-2 text-sm text-[#0A1F44]/76">{t.paymentMethods.map((method) => <li key={method}>- {method}</li>)}</ul>
