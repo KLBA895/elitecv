@@ -393,9 +393,26 @@ const [contactError, setContactError] = useState(false);
 
   const selectedPlan = pricingPlans.find((plan) => plan.key === activePlan) ?? pricingPlans[1];
 
-  const onOrderSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onOrderSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setOrderSubmitted(true);
+  
+    const formData = new FormData(event.currentTarget);
+  
+    formData.append("type", "Auftrag");
+    formData.append("package", `${selectedPlan.name} - ${selectedPlan.price}`);
+  
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      body: formData,
+    });
+  
+    if (response.ok) {
+      setOrderSubmitted(true);
+      (event.target as HTMLFormElement).reset();
+    } else {
+      setOrderSubmitted(false);
+      alert("Fehler beim Versand.");
+    }
   };
 
   return (
@@ -562,8 +579,24 @@ const [contactError, setContactError] = useState(false);
               </div>
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">
-                <label className="text-sm font-medium text-[#0A1F44]/85">{t.orderName}<input required type="text" className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]" /></label>
-                <label className="text-sm font-medium text-[#0A1F44]/85">{t.orderEmail}<input required type="email" className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]" /></label>
+              <label className="text-sm font-medium text-[#0A1F44]/85">
+  {t.orderName}
+  <input
+    name="name"
+    required
+    type="text"
+    className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
+  />
+</label>
+<label className="text-sm font-medium text-[#0A1F44]/85">
+  {t.orderEmail}
+  <input
+    name="email"
+    required
+    type="email"
+    className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
+  />
+</label>
               </div>
               <label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
   CV / Dokumente hochladen
