@@ -88,8 +88,8 @@ const content = {
     orderText: "Wählen Sie ein Paket und senden Sie Ihren Auftrag. Wir melden uns per E-Mail.",
     orderName: "Name",
     orderEmail: "E-Mail",
-    orderUpload: "CV Upload (PDF/DOCX)",
-    orderAdditionalDocs: "Zusätzliche Dokumente (z. B. Bewerbungsschreiben, Zeugnisse)",
+    orderUpload: "Lebenslauf & Zusatzdokumente hochladen",
+orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zertifikate gemeinsam auswählen.",
     orderPackage: "Ausgewähltes Paket",
     orderMessage: "Optionale Nachricht",
     orderMessagePlaceholder: "Zielrolle, Branche oder besondere Anforderungen...",
@@ -209,8 +209,8 @@ const content = {
     orderText: "Choose a package and submit your request. We will get back to you by email.",
     orderName: "Name",
     orderEmail: "Email",
-    orderUpload: "CV upload (PDF/DOCX)",
-    orderAdditionalDocs: "Additional documents (e.g. cover letter, certificates)",
+    orderUpload: "Upload CV & supporting documents",
+    orderAdditionalDocs: "You can select your CV, references, diplomas or certificates together.",
     orderPackage: "Selected package",
     orderMessage: "Optional message",
     orderMessagePlaceholder: "Target role, industry, or specific requirements...",
@@ -600,9 +600,7 @@ const t = content[lang];
 </label>
               </div>
               <label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
-              {lang === "de"
-  ? "Lebenslauf & Zusatzdokumente hochladen"
-  : "Upload CV & supporting documents"}
+              {t.orderUpload}
   <input
     type="file"
     name="files"
@@ -621,9 +619,7 @@ const t = content[lang];
   </span>
 
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
-  {lang === "de"
-  ? "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zertifikate gemeinsam auswählen."
-  : "You can select your CV, references, diplomas or certificates together."}
+  {t.orderAdditionalDocs}
   </span>
 
   {selectedFiles.length > 0 && (
@@ -640,6 +636,13 @@ const t = content[lang];
     </div>
   )}
 </label>
+<div className="mt-4">
+  <p className="rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
+    {lang === "de"
+      ? "Alternativ können Sie Ihre Unterlagen auch per E-Mail an info@elitecv.ch senden."
+      : "Alternatively, you may send your documents by email to info@elitecv.ch."}
+  </p>
+</div>
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderPackage}<input readOnly value={`${selectedPlan.name} - ${selectedPlan.price}`} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-[#0A1F44]/[0.03] px-4 py-2.5 text-[#0A1F44]/85 outline-none" /></label>
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderMessage}<textarea rows={4} placeholder={t.orderMessagePlaceholder} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]" /></label>
 
