@@ -565,7 +565,19 @@ const [contactError, setContactError] = useState(false);
                 <label className="text-sm font-medium text-[#0A1F44]/85">{t.orderName}<input required type="text" className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]" /></label>
                 <label className="text-sm font-medium text-[#0A1F44]/85">{t.orderEmail}<input required type="email" className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]" /></label>
               </div>
-
+              <label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
+  CV / Dokumente hochladen
+  <input
+    type="file"
+    name="files"
+    multiple
+    accept=".pdf,.doc,.docx"
+    className="mt-2 block w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3"
+  />
+  <span className="mt-1 block text-xs text-[#0A1F44]/60">
+    PDF, DOC oder DOCX (max. 10 MB)
+  </span>
+</label>
               <div className="mt-4 grid gap-4 md:grid-cols-2">
               <p className="md:col-span-2 rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
   {lang === "de"

@@ -11,6 +11,42 @@ export async function POST(request: Request) {
     const packageName = String(formData.get("package") || "");
     const type = String(formData.get("type") || "Kontakt");
 
+    const files = formData
+      .getAll("files")
+      .filter((file): file is File => file instanceof File && file.size > 0);
+
+    const maxSize = 10 * 1024 * 1024;
+
+    for (const file of files) {
+      if (file.size > maxSize) {
+        return NextResponse.json(
+          { ok: false, error: "Datei ist zu gross. Maximal 10 MB erlaubt." },
+          { status: 400 }
+        );
+      }
+
+      const allowedTypes = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      ];
+
+      if (!allowedTypes.includes(file.type)) {
+        return NextResponse.json(
+          { ok: false, error: "Ungültiger Dateityp. Nur PDF, DOC und DOCX erlaubt." },
+          { status: 400 }
+        );
+      }
+    }
+
+    const attachments = await Promise.all(
+      files.map(async (file) => ({
+        filename: file.name,
+        content: Buffer.from(await file.arrayBuffer()),
+        contentType: file.type || "application/octet-stream",
+      }))
+    );
+
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT || 587),
@@ -36,6 +72,7 @@ Paket: ${packageName}
 Nachricht:
 ${message}
       `,
+      attachments,
     });
 
     return NextResponse.json({ ok: true });
