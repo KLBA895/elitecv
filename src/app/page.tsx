@@ -600,7 +600,9 @@ const t = content[lang];
 </label>
               </div>
               <label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
-  Lebenslauf & Zusatzdokumente hochladen
+              {lang === "de"
+  ? "Lebenslauf & Zusatzdokumente hochladen"
+  : "Upload CV & supporting documents"}
   <input
     type="file"
     name="files"
@@ -613,17 +615,21 @@ const t = content[lang];
   />
 
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
-    PDF, DOC oder DOCX (mehrere Dateien möglich, max. 10 MB)
+  {lang === "de"
+  ? "PDF, DOC oder DOCX (mehrere Dateien möglich, max. 10 MB)"
+  : "PDF, DOC or DOCX (multiple files possible, max. 10 MB)"}
   </span>
 
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
-    Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zertifikate gemeinsam auswählen.
+  {lang === "de"
+  ? "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zertifikate gemeinsam auswählen."
+  : "You can select your CV, references, diplomas or certificates together."}
   </span>
 
   {selectedFiles.length > 0 && (
     <div className="mt-3 rounded-xl border border-[#0A1F44]/10 bg-[#F8FAFC] p-3">
       <p className="text-sm font-medium text-[#0A1F44]">
-        Ausgewählte Dokumente ({selectedFiles.length})
+      {lang === "de" ? "Ausgewählte Dokumente" : "Selected documents"} ({selectedFiles.length})
       </p>
 
       <ul className="mt-2 space-y-1 text-sm text-[#0A1F44]/80">
@@ -634,14 +640,6 @@ const t = content[lang];
     </div>
   )}
 </label>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <p className="md:col-span-2 rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
-  {lang === "de"
-    ? "Senden Sie ihren CV und zusätzliche Dokumente nach der Anfrage direkt per E-Mail an info@elitecv.ch."
-    : "Please send your CV and any additional documents by email to info@elitecv.ch after submitting your request."}
-</p>
-</div>
-
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderPackage}<input readOnly value={`${selectedPlan.name} - ${selectedPlan.price}`} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-[#0A1F44]/[0.03] px-4 py-2.5 text-[#0A1F44]/85 outline-none" /></label>
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderMessage}<textarea rows={4} placeholder={t.orderMessagePlaceholder} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]" /></label>
 
@@ -739,14 +737,18 @@ const t = content[lang];
   </button>
   {contactSubmitted && (
   <p className="mt-4 rounded-xl border border-emerald-600/25 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-800">
-    Vielen Dank. Ihre Nachricht wurde erfolgreich übermittelt. Wir melden uns per E-Mail.
-  </p>
+  {lang === "de"
+    ? "Vielen Dank. Ihre Nachricht wurde erfolgreich übermittelt. Wir melden uns per E-Mail."
+    : "Thank you. Your message has been sent successfully. We will get back to you by email."}
+</p>
 )}
 
 {contactError && (
   <p className="mt-4 rounded-xl border border-red-600/25 bg-red-500/10 px-4 py-3 text-sm text-red-800">
-    Die Nachricht konnte leider nicht versendet werden. Bitte kontaktieren Sie uns direkt über info@elitecv.ch.
-  </p>
+  {lang === "de"
+    ? "Die Nachricht konnte leider nicht versendet werden. Bitte kontaktieren Sie uns direkt per E-Mail an info@elitecv.ch."
+    : "Unfortunately, your message could not be sent. Please contact us directly by email at info@elitecv.ch."}
+</p>
 )}
 </form>
           </div>
