@@ -614,8 +614,8 @@ const t = content[lang];
 
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
   {lang === "de"
-  ? "PDF, DOC oder DOCX (mehrere Dateien möglich, max. 10 MB)"
-  : "PDF, DOC or DOCX (multiple files possible, max. 10 MB)"}
+  ? "PDF, DOC oder DOCX (mehrere Dateien möglich, max. 4 MB)"
+  : "PDF, DOC or DOCX (multiple files possible, max. 4 MB)"}
   </span>
 
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
@@ -639,8 +639,8 @@ const t = content[lang];
 <div className="mt-4">
   <p className="rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
     {lang === "de"
-      ? "Alternativ können Sie Ihre Unterlagen auch per E-Mail an info@elitecv.ch senden."
-      : "Alternatively, you may send your documents by email to info@elitecv.ch."}
+      ? "Grössere oder zusätzliche Unterlagen können Sie alternativ per E-Mail an info@elitecv.ch senden."
+      : "Larger or additional documents can alternatively be sent by email to info@elitecv.ch."}
   </p>
 </div>
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderPackage}<input readOnly value={`${selectedPlan.name} - ${selectedPlan.price}`} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-[#0A1F44]/[0.03] px-4 py-2.5 text-[#0A1F44]/85 outline-none" /></label>
