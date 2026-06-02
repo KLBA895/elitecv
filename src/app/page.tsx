@@ -382,9 +382,12 @@ export default function Home() {
   const [lang, setLang] = useState<Lang>("de");
   const [activePlan, setActivePlan] = useState<PlanKey>("standard");
   const [orderSubmitted, setOrderSubmitted] = useState(false);
-  const [contactSubmitted, setContactSubmitted] = useState(false);
+const [contactSubmitted, setContactSubmitted] = useState(false);
 const [contactError, setContactError] = useState(false);
-  const t = content[lang];
+
+const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+
+const t = content[lang];
 
   const metrics = useMemo(
     () => (lang === "de" ? ["WHY · Positionierung", "HOW · Struktur", "WHAT · Wirkung"] : ["WHY · Positioning", "HOW · Structure", "WHAT · Impact"]),
@@ -408,10 +411,8 @@ const [contactError, setContactError] = useState(false);
   
     if (response.ok) {
       setOrderSubmitted(true);
+      setSelectedFiles([]);
       (event.target as HTMLFormElement).reset();
-    } else {
-      setOrderSubmitted(false);
-      alert("Fehler beim Versand.");
     }
   };
 
@@ -599,17 +600,39 @@ const [contactError, setContactError] = useState(false);
 </label>
               </div>
               <label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
-  CV / Dokumente hochladen
+  Lebenslauf & Zusatzdokumente hochladen
   <input
     type="file"
     name="files"
     multiple
     accept=".pdf,.doc,.docx"
+    onChange={(e) => {
+      setSelectedFiles(Array.from(e.target.files ?? []));
+    }}
     className="mt-2 block w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3"
   />
+
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
-    PDF, DOC oder DOCX (max. 10 MB)
+    PDF, DOC oder DOCX (mehrere Dateien möglich, max. 10 MB)
   </span>
+
+  <span className="mt-1 block text-xs text-[#0A1F44]/60">
+    Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zertifikate gemeinsam auswählen.
+  </span>
+
+  {selectedFiles.length > 0 && (
+    <div className="mt-3 rounded-xl border border-[#0A1F44]/10 bg-[#F8FAFC] p-3">
+      <p className="text-sm font-medium text-[#0A1F44]">
+        Ausgewählte Dokumente ({selectedFiles.length})
+      </p>
+
+      <ul className="mt-2 space-y-1 text-sm text-[#0A1F44]/80">
+        {selectedFiles.map((file, index) => (
+          <li key={index}>✓ {file.name}</li>
+        ))}
+      </ul>
+    </div>
+  )}
 </label>
               <div className="mt-4 grid gap-4 md:grid-cols-2">
               <p className="md:col-span-2 rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
