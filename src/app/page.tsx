@@ -97,7 +97,7 @@ const content = {
     orderSubmit: "Auftrag senden",
     orderSuccess: "Vielen Dank. Wir prüfen deinen Auftrag und melden uns per E-Mail.",
     paymentTitle: "Zahlung & Ablauf",
-    paymentLead: "Nach Absenden deiner Anfrage prüfen wir deinen Auftrag und senden dir die nächsten Schritte per Email. Die Zahlungsdetails erhältst du nach Bestätigung. Die Bearbeitung beginnt nach Zahlungseingang.",
+    paymentLead: "Nach dem Absenden Ihrer Anfrage prüfen wir Ihren Auftrag und senden Ihnen die nächsten Schritte per E-Mail. Die Zahlungsinformationen erhalten Sie nach der Auftragsbestätigung. Die Bearbeitung beginnt nach bestätigtem Zahlungseingang.",
     paymentItems: [
       "eine Bestätigung deines gewählten Pakets",
       "die nächsten Schritte",
@@ -218,7 +218,7 @@ const content = {
     orderSubmit: "Send request",
     orderSuccess: "Thank you. We will review your request and get back to you by email.",
     paymentTitle: "Payment & Process",
-    paymentLead: "After submitting your request, we will review it and contact you by email with the next steps and payment details. Processing will begin once payment has been received.",
+    paymentLead: "After submitting your request, we will review your order and send you the next steps by email. Payment information will be provided after order confirmation. Processing begins once payment has been confirmed.",
     paymentItems: [
       "confirmation of your selected package",
       "the next steps",
