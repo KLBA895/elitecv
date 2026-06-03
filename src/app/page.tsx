@@ -644,7 +644,7 @@ const t = content[lang];
   </p>
 </div>
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderPackage}<input readOnly value={`${selectedPlan.name} - ${selectedPlan.price}`} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-[#0A1F44]/[0.03] px-4 py-2.5 text-[#0A1F44]/85 outline-none" /></label>
-              <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderMessage}<textarea rows={4} placeholder={t.orderMessagePlaceholder} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]" /></label>
+              <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderMessage}<textarea name="message" rows={4} placeholder={t.orderMessagePlaceholder} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]" /></label>
 
               <div className="mt-5 space-y-3 text-sm text-[#0A1F44]/80">
               <label className="flex items-start gap-2"><input type="checkbox" required /><span>{t.orderTerms}</span></label>
