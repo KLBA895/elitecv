@@ -771,7 +771,7 @@ const t = content[lang];
             {t.legalLinks.map((item) => item.href.startsWith("/") ? <Link key={item.label} href={item.href} className="text-[#0A1F44]/72 transition hover:text-[#0A1F44]">{item.label}</Link> : <a key={item.label} href={item.href} className="text-[#0A1F44]/72 transition hover:text-[#0A1F44]">{item.label}</a>)}
             <div className="mb-4 flex items-center justify-center gap-4">
   <a
-    href="DEIN_LINKEDIN_LINK"
+    href="https://www.linkedin.com/company/elitecv.ch"
     target="_blank"
     rel="noopener noreferrer"
     className="text-sm font-semibold text-[#0A1F44] hover:text-[#C9A95A]"
@@ -780,7 +780,7 @@ const t = content[lang];
   </a>
 
   <a
-    href="DEIN_FACEBOOK_LINK"
+    href="https://www.facebook.com/elitecv.ch"
     target="_blank"
     rel="noopener noreferrer"
     className="text-sm font-semibold text-[#0A1F44] hover:text-[#C9A95A]"
