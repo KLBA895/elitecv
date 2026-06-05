@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
+import { FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 
 type Lang = "de" | "en";
 type PlanKey = "basic" | "standard" | "professional" | "premium" | "elite";
@@ -770,32 +771,37 @@ const t = content[lang];
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
             {t.legalLinks.map((item) => item.href.startsWith("/") ? <Link key={item.label} href={item.href} className="text-[#0A1F44]/72 transition hover:text-[#0A1F44]">{item.label}</Link> : <a key={item.label} href={item.href} className="text-[#0A1F44]/72 transition hover:text-[#0A1F44]">{item.label}</a>)}
             <div className="mb-4 flex items-center justify-center gap-4">
+            <div className="mb-4 flex items-center justify-center gap-5">
   <a
-    href="https://www.linkedin.com/company/elitecv.ch"
+    href="https://www.linkedin.com/company/elitecv-ch/"
     target="_blank"
     rel="noopener noreferrer"
-    className="text-sm font-semibold text-[#0A1F44] hover:text-[#C9A95A]"
+    className="text-[#0A1F44] hover:text-[#C9A95A]"
+    aria-label="LinkedIn"
   >
-    LinkedIn
+    <FaLinkedin size={24} />
   </a>
 
   <a
-    href="https://www.facebook.com/elitecv.ch"
+    href="https://www.facebook.com/profile.php?id=61590596581435/"
     target="_blank"
     rel="noopener noreferrer"
-    className="text-sm font-semibold text-[#0A1F44] hover:text-[#C9A95A]"
+    className="text-[#0A1F44] hover:text-[#C9A95A]"
+    aria-label="Facebook"
   >
-    Facebook
+    <FaFacebook size={24} />
   </a>
 
   <a
-    href="https://www.instagram.com/elitecv.ch"
+    href="https://www.instagram.com/elitecv.ch/"
     target="_blank"
     rel="noopener noreferrer"
-    className="text-sm font-semibold text-[#0A1F44] hover:text-[#C9A95A]"
+    className="text-[#0A1F44] hover:text-[#C9A95A]"
+    aria-label="Instagram"
   >
-    Instagram
+    <FaInstagram size={24} />
   </a>
+</div>
 </div>
           </div>
           <p className="text-sm text-[#0A1F44]/62">© {new Date().getFullYear()} EliteCV. {t.footer}</p>
