@@ -769,6 +769,34 @@ const t = content[lang];
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-6">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
             {t.legalLinks.map((item) => item.href.startsWith("/") ? <Link key={item.label} href={item.href} className="text-[#0A1F44]/72 transition hover:text-[#0A1F44]">{item.label}</Link> : <a key={item.label} href={item.href} className="text-[#0A1F44]/72 transition hover:text-[#0A1F44]">{item.label}</a>)}
+            <div className="mb-4 flex items-center justify-center gap-4">
+  <a
+    href="DEIN_LINKEDIN_LINK"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-sm font-semibold text-[#0A1F44] hover:text-[#C9A95A]"
+  >
+    LinkedIn
+  </a>
+
+  <a
+    href="DEIN_FACEBOOK_LINK"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-sm font-semibold text-[#0A1F44] hover:text-[#C9A95A]"
+  >
+    Facebook
+  </a>
+
+  <a
+    href="https://www.instagram.com/elitecv.ch"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-sm font-semibold text-[#0A1F44] hover:text-[#C9A95A]"
+  >
+    Instagram
+  </a>
+</div>
           </div>
           <p className="text-sm text-[#0A1F44]/62">© {new Date().getFullYear()} EliteCV. {t.footer}</p>
         </div>
