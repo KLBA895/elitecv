@@ -807,7 +807,7 @@ const t = content[lang];
   </a>
 
   <a
-    href="https://www.facebook.com/profile.php?id=61590596581435/"
+    href="https://www.facebook.com/profile.php?id=61590596581435"
     target="_blank"
     rel="noopener noreferrer"
     className="text-[#0A1F44] hover:text-[#C9A95A]"
