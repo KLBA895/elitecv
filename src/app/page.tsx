@@ -42,6 +42,10 @@ const content = {
       "Bearbeitung",
     ],
     trustTitle: "Vertrauen durch Ergebnisse",
+    googleReviewTitle: "Google Bewertung",
+googleReviewText:
+  "Professionelle Beratung, schnelle Bearbeitung und ein überzeugendes Ergebnis.",
+googleReviewAuthor: "Google Bewertung",
     trustNote:
       "Namen, Firmenlogos und Unternehmensdaten werden nur mit ausdrücklicher Zustimmung veröffentlicht. Alle Beispiele sind anonymisiert.",
     trustStats: ["Klarere CV-Struktur", "Professionellere Positionierung", "Schnellere Rückmeldungen"],
@@ -63,6 +67,7 @@ const content = {
       },
     ],
     logosText: "Firmenlogos werden erst nach schriftlicher Freigabe gezeigt.",
+    
     visionTitle: "Vision",
     visionText:
       "EliteCV unterstützt Fach- und Führungskräfte dabei, sich strategisch zu positionieren und bessere Karrierechancen in der Schweiz zu erschliessen.",
@@ -168,6 +173,10 @@ orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zer
       "Delivery",
     ],
     trustTitle: "Trust Through Results",
+    googleReviewTitle: "Google Review",
+googleReviewText:
+  "Professional advice, fast turnaround and an excellent result.",
+googleReviewAuthor: "Google Review",
     trustNote:
       "Names, company logos, and company data are only published with explicit permission. All examples are anonymized.",
     trustStats: ["Clearer CV structure", "More professional positioning", "Faster responses"],
@@ -779,7 +788,7 @@ const t = content[lang];
     className="text-[#0A1F44] hover:text-[#C9A95A]"
     aria-label="LinkedIn"
   >
-    <FaLinkedin size={24} />
+    <FaLinkedin size={30} />
   </a>
 
   <a
@@ -789,7 +798,7 @@ const t = content[lang];
     className="text-[#0A1F44] hover:text-[#C9A95A]"
     aria-label="Facebook"
   >
-    <FaFacebook size={24} />
+    <FaFacebook size={30} />
   </a>
 
   <a
@@ -799,7 +808,7 @@ const t = content[lang];
     className="text-[#0A1F44] hover:text-[#C9A95A]"
     aria-label="Instagram"
   >
-    <FaInstagram size={24} />
+    <FaInstagram size={30} />
   </a>
 </div>
 </div>
