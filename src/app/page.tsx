@@ -42,10 +42,11 @@ const content = {
       "Bearbeitung",
     ],
     trustTitle: "Vertrauen durch Ergebnisse",
-    googleReviewTitle: "Google Bewertung",
-googleReviewText:
-  "Professionelle Beratung, schnelle Bearbeitung und ein überzeugendes Ergebnis.",
-googleReviewAuthor: "Google Bewertung",
+    googleReviewTitle: "auf Google",
+    googleReviewText:
+    "Herr Batinic hat mir meinen Lebenslauf derart professionell gestaltet, dass die Jobsuche fortan ein Vergnügen wurde! Danke für die tollen Unterlagen aus Wien.",
+  
+  googleReviewAuthor: "Stefanie Spitzy, Wien",
     trustNote:
       "Namen, Firmenlogos und Unternehmensdaten werden nur mit ausdrücklicher Zustimmung veröffentlicht. Alle Beispiele sind anonymisiert.",
     trustStats: ["Klarere CV-Struktur", "Professionellere Positionierung", "Schnellere Rückmeldungen"],
@@ -173,10 +174,11 @@ orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zer
       "Delivery",
     ],
     trustTitle: "Trust Through Results",
-    googleReviewTitle: "Google Review",
-googleReviewText:
-  "Professional advice, fast turnaround and an excellent result.",
-googleReviewAuthor: "Google Review",
+    googleReviewTitle: "Google Reviews",
+    googleReviewText:
+    "Mr. Batinic redesigned my CV so professionally that job searching became a pleasure. Thank you for the excellent documents from Vienna.",
+  
+  googleReviewAuthor: "Stefanie Spitzy, Vienna",
     trustNote:
       "Names, company logos, and company data are only published with explicit permission. All examples are anonymized.",
     trustStats: ["Clearer CV structure", "More professional positioning", "Faster responses"],
