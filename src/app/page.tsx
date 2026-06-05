@@ -534,6 +534,19 @@ const t = content[lang];
               </article>
             </div>
             <p className="mt-6 text-sm text-[#0A1F44]/62">{t.logosText}</p>
+            <div className="mt-8 rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
+  <p className="text-lg font-semibold">
+    ⭐⭐⭐⭐⭐ 5.0 – {t.googleReviewTitle}
+  </p>
+
+  <p className="mt-3 text-[#0A1F44]/70">
+    "{t.googleReviewText}"
+  </p>
+
+  <p className="mt-2 text-sm font-medium text-[#0A1F44]/60">
+    {t.googleReviewAuthor}
+  </p>
+</div>
           </div>
         </section>
 
