@@ -8,15 +8,61 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "EliteCV",
-  description: "Professionelle CV-Optimierung für den Schweizer Arbeitsmarkt.",
+  metadataBase: new URL("https://www.elitecv.ch"),
+
+  title: "EliteCV | CV-Optimierung & LinkedIn Optimierung Schweiz",
+
+  description:
+    "Professionelle CV-Optimierung, LinkedIn Optimierung und Karriereberatung für Fach- und Führungskräfte in der Schweiz. Deutsch und Englisch.",
+
+  keywords: [
+    "CV Optimierung Schweiz",
+    "Lebenslauf optimieren Schweiz",
+    "Professioneller Lebenslauf Schweiz",
+    "LinkedIn Optimierung Schweiz",
+    "Karriereberatung Schweiz",
+    "Bewerbungsservice Schweiz",
+    "Executive CV Schweiz",
+    "CV Service Schweiz",
+  ],
+
+  alternates: {
+    canonical: "https://www.elitecv.ch",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
+
   openGraph: {
-    title: "EliteCV",
-    description: "Professionelle CV-Optimierung für den Schweizer Arbeitsmarkt.",
+    title: "EliteCV | CV-Optimierung & LinkedIn Optimierung Schweiz",
+    description:
+      "Professionelle CV-Optimierung, LinkedIn Optimierung und Karriereberatung für Fach- und Führungskräfte in der Schweiz.",
+    url: "https://www.elitecv.ch",
+    siteName: "EliteCV",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "EliteCV Schweiz",
+      },
+    ],
+    locale: "de_CH",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "EliteCV | CV-Optimierung & LinkedIn Optimierung Schweiz",
+    description:
+      "Professionelle CV-Optimierung, LinkedIn Optimierung und Karriereberatung für Fach- und Führungskräfte in der Schweiz.",
     images: ["/og-image.png"],
   },
 };
@@ -27,8 +73,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+    <html lang="de">
+      <body className={`${inter.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
