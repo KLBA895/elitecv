@@ -66,7 +66,37 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
 };
-
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "EliteCV Schweiz",
+  url: "https://www.elitecv.ch",
+  logo: "https://www.elitecv.ch/og-image.png",
+  image: "https://www.elitecv.ch/og-image.png",
+  description:
+    "Professionelle CV-Optimierung, LinkedIn Optimierung und Karriereberatung für Fach- und Führungskräfte in der Schweiz.",
+  email: "info@elitecv.ch",
+  areaServed: {
+    "@type": "Country",
+    name: "Switzerland",
+  },
+  availableLanguage: ["German", "English"],
+  sameAs: [
+    "https://www.linkedin.com/company/elitecv-ch/",
+    "https://www.facebook.com/profile.php?id=61590596581435",
+    "https://www.instagram.com/elitecv.ch/",
+  ],
+  serviceType: [
+    "CV Optimierung",
+    "LinkedIn Optimierung",
+    "Karriereberatung",
+    "Bewerbungsunterlagen",
+  ],
+  founder: {
+    "@type": "Person",
+    name: "Klaudio Batinic",
+  },
+};
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -75,8 +105,14 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body className={`${inter.variable} antialiased`}>
-        {children}
-      </body>
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(structuredData),
+    }}
+  />
+  {children}
+</body>
     </html>
   );
 }
