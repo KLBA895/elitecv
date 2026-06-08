@@ -331,6 +331,7 @@ const pricingPlans = [
       "Canva Premium Design",
       "LinkedIn Optimierung",
       "CV Übersetzung (DE ↔ EN)",
+      "1 Motivationsschreiben inklusive",
       "Priorisierte Bearbeitung",
     ],
     detailsEn: [
@@ -338,6 +339,7 @@ const pricingPlans = [
       "Canva premium design",
       "LinkedIn optimization",
       "CV translation (DE ↔ EN)",
+      "1 Cover Letter included",
       "Priority processing",
     ],
   },
@@ -595,7 +597,55 @@ const t = content[lang];
               );
             })}
           </div>
+          <div className="mt-10 rounded-2xl border border-[#0A1F44]/10 bg-[#FCFCFB] p-7 shadow-sm">
+  <h3 className="text-2xl font-semibold">
+    {lang === "de" ? "Zusatzleistungen" : "Add-ons"}
+  </h3>
 
+  <p className="mt-2 text-[#0A1F44]/70">
+    {lang === "de"
+      ? "Ergänzende Leistungen können zu einem bestehenden Paket hinzugebucht werden."
+      : "Additional services can be booked together with an existing package."}
+  </p>
+
+  <div className="mt-6 grid gap-4 md:grid-cols-2">
+    <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+      <p className="font-semibold">
+        {lang === "de"
+          ? "Motivationsschreiben Korrektur"
+          : "Cover Letter Review"}
+      </p>
+      <p className="mt-1 text-[#C9A95A] font-bold">CHF 49</p>
+    </div>
+
+    <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+      <p className="font-semibold">
+        {lang === "de"
+          ? "Motivationsschreiben Vorlage"
+          : "Cover Letter Template"}
+      </p>
+      <p className="mt-1 text-[#C9A95A] font-bold">CHF 79</p>
+    </div>
+
+    <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+      <p className="font-semibold">
+        {lang === "de"
+          ? "LinkedIn-Profil Optimierung"
+          : "LinkedIn Profile Optimization"}
+      </p>
+      <p className="mt-1 text-[#C9A95A] font-bold">CHF 79</p>
+    </div>
+
+    <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+      <p className="font-semibold">
+        {lang === "de"
+          ? "Zweite Sprachversion (DE ↔ EN)"
+          : "Second Language Version (DE ↔ EN)"}
+      </p>
+      <p className="mt-1 text-[#C9A95A] font-bold">CHF 50–70</p>
+    </div>
+  </div>
+</div>
           <div id="auftrag" className="mt-10 grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
             <form onSubmit={onOrderSubmit} className="rounded-2xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm">
               <h3 className="text-2xl font-semibold tracking-[-0.02em]">{t.orderTitle}</h3>
