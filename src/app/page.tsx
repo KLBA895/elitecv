@@ -751,7 +751,7 @@ const t = content[lang];
 
   <input
     name="linkedinUrl"
-    type="url"
+    type="text"
     placeholder="https://www.linkedin.com/in/..."
     className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
   />
