@@ -609,14 +609,43 @@ const t = content[lang];
   </p>
 
   <div className="mt-6 grid gap-4 md:grid-cols-2">
-    <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
-      <p className="font-semibold">
-        {lang === "de"
-          ? "Motivationsschreiben Korrektur"
-          : "Cover Letter Review"}
-      </p>
-      <p className="mt-1 text-[#C9A95A] font-bold">CHF 49</p>
-    </div>
+
+  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+    <p className="font-semibold">
+      {lang === "de" ? "LinkedIn-Profil Optimierung" : "LinkedIn Profile Optimization"}
+    </p>
+    <p className="mt-1 text-[#C9A95A] font-bold">CHF 79</p>
+  </div>
+
+  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+    <p className="font-semibold">
+      {lang === "de" ? "Motivationsschreiben Erstellung" : "Cover Letter Creation"}
+    </p>
+    <p className="mt-1 text-[#C9A95A] font-bold">CHF 89</p>
+  </div>
+
+  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+    <p className="font-semibold">
+      {lang === "de" ? "CV Übersetzung DE ↔ EN" : "CV Translation DE ↔ EN"}
+    </p>
+    <p className="mt-1 text-[#C9A95A] font-bold">CHF 59</p>
+  </div>
+
+  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+    <p className="font-semibold">
+      {lang === "de" ? "Arbeitszeugnis Analyse" : "Reference Letter Analysis"}
+    </p>
+    <p className="mt-1 text-[#C9A95A] font-bold">CHF 39</p>
+  </div>
+
+  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+    <p className="font-semibold">
+      {lang === "de" ? "Express-Bearbeitung (24h)" : "Express Processing (24h)"}
+    </p>
+    <p className="mt-1 text-[#C9A95A] font-bold">CHF 59</p>
+  </div>
+
+
 
     <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
       <p className="font-semibold">
