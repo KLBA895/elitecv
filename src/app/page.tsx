@@ -765,7 +765,7 @@ const t = content[lang];
   <div className="space-y-2">
 
     <label className="flex items-center gap-2 text-sm">
-      <input type="checkbox" name="addons" value="LinkedIn-Profil Optimierung" />
+      <input type="checkbox" name="addons" value="LinkedIn-Profil Optimierung (+ CHF 99)" />
       <span>
         {lang === "de"
           ? "LinkedIn-Profil Optimierung (+ CHF 99)"
@@ -774,7 +774,7 @@ const t = content[lang];
     </label>
 
     <label className="flex items-center gap-2 text-sm">
-      <input type="checkbox" name="addons" value="Motivationsschreiben Erstellung" />
+      <input type="checkbox" name="addons" value="Motivationsschreiben Erstellung (+ CHF 89)" />
       <span>
         {lang === "de"
           ? "Motivationsschreiben Erstellung (+ CHF 89)"
@@ -783,7 +783,7 @@ const t = content[lang];
     </label>
 
     <label className="flex items-center gap-2 text-sm">
-      <input type="checkbox" name="addons" value="CV Übersetzung" />
+    <input type="checkbox" name="addons" value="CV Übersetzung DE ↔ EN (+ CHF 59)" />
       <span>
         {lang === "de"
           ? "CV Übersetzung DE ↔ EN (+ CHF 59)"
@@ -792,7 +792,7 @@ const t = content[lang];
     </label>
 
     <label className="flex items-center gap-2 text-sm">
-      <input type="checkbox" name="addons" value="Arbeitszeugnis Analyse" />
+    <input type="checkbox" name="addons" value="Arbeitszeugnis Analyse (+ CHF 39)" />
       <span>
         {lang === "de"
           ? "Arbeitszeugnis Analyse (+ CHF 39)"
@@ -801,7 +801,7 @@ const t = content[lang];
     </label>
 
     <label className="flex items-center gap-2 text-sm">
-      <input type="checkbox" name="addons" value="Express Bearbeitung" />
+    <input type="checkbox" name="addons" value="Express-Bearbeitung 24h (+ CHF 59)" />
       <span>
         {lang === "de"
           ? "Express-Bearbeitung 24h (+ CHF 59)"
