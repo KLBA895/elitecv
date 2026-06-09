@@ -419,38 +419,47 @@ const t = content[lang];
   
     formData.append("type", "Auftrag");
     formData.append("package", `${selectedPlan.name} - ${selectedPlan.price}`);
+  
     const selectedAddonValues = formData.getAll("addons").map(String);
-
-const addonPrices: Record<string, number> = {
-  "LinkedIn-Profil Optimierung (+ CHF 99)": 99,
-  "Motivationsschreiben Erstellung (+ CHF 89)": 89,
-  "CV Übersetzung DE ↔ EN (+ CHF 59)": 59,
-  "Arbeitszeugnis Analyse (+ CHF 39)": 39,
-  "Express-Bearbeitung 24h (+ CHF 59)": 59,
-};
-
-const packagePrices: Record<string, number> = {
-  basic: 79,
-  standard: 129,
-  professional: 179,
-  premium: 249,
-  elite: 399,
-};
-
-const addonsText =
-  selectedAddonValues.length > 0
-    ? selectedAddonValues.join("\n")
-    : "Keine Zusatzleistungen ausgewählt";
-
-const total =
-  (packagePrices[selectedPlan.key] ?? 0) +
-  selectedAddonValues.reduce(
-    (sum, addon) => sum + (addonPrices[addon] ?? 0),
-    0
-  );
-
-formData.append("addonsText", addonsText);
-formData.append("totalText", `CHF ${total}`);
+  
+    const addonPriceByName = (addon: string) => {
+      if (addon.includes("LinkedIn")) return 99;
+      if (addon.includes("Motivationsschreiben")) return 89;
+      if (addon.includes("CV Übersetzung")) return 59;
+      if (addon.includes("Arbeitszeugnis")) return 39;
+      if (addon.includes("Express")) return 59;
+      return 0;
+    };
+  
+    const packagePrices: Record<string, number> = {
+      basic: 79,
+      standard: 129,
+      professional: 179,
+      premium: 249,
+      elite: 399,
+    };
+  
+    const addonsText =
+      selectedAddonValues.length > 0
+        ? selectedAddonValues
+            .map((addon) =>
+              addon.includes("CHF")
+                ? addon
+                : `${addon} (+ CHF ${addonPriceByName(addon)})`
+            )
+            .join("\n")
+        : "Keine Zusatzleistungen ausgewählt";
+  
+    const total =
+      (packagePrices[selectedPlan.key] ?? 0) +
+      selectedAddonValues.reduce(
+        (sum, addon) => sum + addonPriceByName(addon),
+        0
+      );
+  
+    formData.append("addonsText", addonsText);
+    formData.append("totalText", `CHF ${total}`);
+  
     const response = await fetch("/api/contact", {
       method: "POST",
       body: formData,
