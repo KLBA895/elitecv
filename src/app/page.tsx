@@ -726,16 +726,35 @@ const t = content[lang];
               </div>
               <label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
               {t.orderUpload}
+              <label className="mt-4 block">
+  <span className="mb-2 block text-sm font-medium text-[#0A1F44]/85">
+    {lang === "de" ? "Dokumente hochladen" : "Upload Documents"}
+  </span>
+
   <input
+    id="file-upload"
     type="file"
     name="files"
     multiple
     accept=".pdf,.doc,.docx"
-    onChange={(e) => {
-      setSelectedFiles(Array.from(e.target.files ?? []));
-    }}
-    className="mt-2 block w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3"
+    className="hidden"
   />
+
+  <label
+    htmlFor="file-upload"
+    className="inline-flex cursor-pointer items-center rounded-xl bg-[#0A1F44] px-4 py-3 text-white transition hover:opacity-90"
+  >
+    {lang === "de" ? "Dateien auswählen" : "Choose Files"}
+  </label>
+
+  {selectedFiles.length > 0 && (
+    <p className="mt-2 text-sm text-[#0A1F44]/75">
+      {lang === "de"
+        ? `${selectedFiles.length} Datei(en) ausgewählt`
+        : `${selectedFiles.length} file(s) selected`}
+    </p>
+  )}
+</label>
 
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
   {lang === "de"
