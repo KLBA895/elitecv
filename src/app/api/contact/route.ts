@@ -11,6 +11,7 @@ export async function POST(request: Request) {
     const packageName = String(formData.get("package") || "");
     const linkedinUrl = String(formData.get("linkedinUrl") || "");
     const addonsText = String(formData.get("addonsText") || "Keine Zusatzleistungen ausgewählt");
+    const totalText = String(formData.get("totalText") || "");
     const type = String(formData.get("type") || "Kontakt");
 
     const files = formData
@@ -71,7 +72,11 @@ Name: ${name}
 E-Mail: ${email}
 Paket: ${packageName}
 LinkedIn Profil: ${linkedinUrl || "Nicht angegeben"}
-Zusatzleistungen: ${addonsText}
+Zusatzleistungen:
+${addonsText}
+
+Gesamtpreis:
+${totalText || "Nicht berechnet"}
 
 Nachricht:
 ${message}

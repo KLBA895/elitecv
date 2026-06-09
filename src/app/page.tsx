@@ -419,12 +419,37 @@ const t = content[lang];
   
     formData.append("type", "Auftrag");
     formData.append("package", `${selectedPlan.name} - ${selectedPlan.price}`);
-    const addons = formData.getAll("addons");
+    const selectedAddonValues = formData.getAll("addons").map(String);
 
-    formData.append(
-      "addonsText",
-      addons.length > 0 ? addons.join(", ") : "Keine Zusatzleistungen ausgewählt"
-    );
+const addonPrices: Record<string, number> = {
+  "LinkedIn-Profil Optimierung": 99,
+  "Motivationsschreiben Erstellung": 89,
+  "CV Übersetzung": 59,
+  "Arbeitszeugnis Analyse": 39,
+  "Express Bearbeitung": 59,
+};
+
+const packagePrices: Record<string, number> = {
+  basic: 79,
+  standard: 129,
+  professional: 179,
+  premium: 249,
+  elite: 399,
+};
+
+const addonsText =
+  selectedAddonValues.length > 0
+    ? selectedAddonValues
+        .map((addon) => `${addon} (+ CHF ${addonPrices[addon] ?? 0})`)
+        .join("\n")
+    : "Keine Zusatzleistungen ausgewählt";
+
+const total =
+  (packagePrices[selectedPlan.key] ?? 0) +
+  selectedAddonValues.reduce((sum, addon) => sum + (addonPrices[addon] ?? 0), 0);
+
+formData.append("addonsText", addonsText);
+formData.append("totalText", `CHF ${total}`);
     const response = await fetch("/api/contact", {
       method: "POST",
       body: formData,
