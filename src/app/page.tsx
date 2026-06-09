@@ -723,53 +723,39 @@ const t = content[lang];
     className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
   />
 </label>
-              </div>
-              <label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
-              {t.orderUpload}
-              <label className="mt-4 block">
-  <span className="mb-2 block text-sm font-medium text-[#0A1F44]/85">
-    {lang === "de" ? "Dokumente hochladen" : "Upload Documents"}
-  </span>
+</div>
+
+<label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
+  {t.orderUpload}
 
   <input
-    id="file-upload"
     type="file"
     name="files"
     multiple
     accept=".pdf,.doc,.docx"
-    className="hidden"
+    onChange={(e) => {
+      setSelectedFiles(Array.from(e.target.files ?? []));
+    }}
+    className="mt-2 block w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3"
   />
 
-  <label
-    htmlFor="file-upload"
-    className="inline-flex cursor-pointer items-center rounded-xl bg-[#0A1F44] px-4 py-3 text-white transition hover:opacity-90"
-  >
-    {lang === "de" ? "Dateien auswählen" : "Choose Files"}
-  </label>
-
-  {selectedFiles.length > 0 && (
-    <p className="mt-2 text-sm text-[#0A1F44]/75">
-      {lang === "de"
-        ? `${selectedFiles.length} Datei(en) ausgewählt`
-        : `${selectedFiles.length} file(s) selected`}
-    </p>
-  )}
-</label>
-
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
-  {lang === "de"
-  ? "PDF, DOC oder DOCX (mehrere Dateien möglich, max. 4 MB)"
-  : "PDF, DOC or DOCX (multiple files possible, max. 4 MB)"}
+    {lang === "de"
+      ? "PDF, DOC oder DOCX (mehrere Dateien möglich, max. 4 MB)"
+      : "PDF, DOC or DOCX (multiple files possible, max. 4 MB)"}
   </span>
 
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
-  {t.orderAdditionalDocs}
+    {t.orderAdditionalDocs}
   </span>
 
   {selectedFiles.length > 0 && (
     <div className="mt-3 rounded-xl border border-[#0A1F44]/10 bg-[#F8FAFC] p-3">
       <p className="text-sm font-medium text-[#0A1F44]">
-      {lang === "de" ? "Ausgewählte Dokumente" : "Selected documents"} ({selectedFiles.length})
+        {lang === "de"
+          ? "Ausgewählte Dokumente"
+          : "Selected Documents"}{" "}
+        ({selectedFiles.length})
       </p>
 
       <ul className="mt-2 space-y-1 text-sm text-[#0A1F44]/80">
