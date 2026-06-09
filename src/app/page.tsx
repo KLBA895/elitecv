@@ -750,6 +750,60 @@ const t = content[lang];
   </p>
 </div>
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderPackage}<input readOnly value={`${selectedPlan.name} - ${selectedPlan.price}`} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-[#0A1F44]/[0.03] px-4 py-2.5 text-[#0A1F44]/85 outline-none" /></label>
+              <div className="mt-5">
+  <p className="mb-3 text-sm font-semibold text-[#0A1F44]">
+    {lang === "de" ? "Zusatzleistungen auswählen" : "Select Add-ons"}
+  </p>
+
+  <div className="space-y-2">
+
+    <label className="flex items-center gap-2 text-sm">
+      <input type="checkbox" name="addons" value="LinkedIn-Profil Optimierung" />
+      <span>
+        {lang === "de"
+          ? "LinkedIn-Profil Optimierung (+ CHF 79)"
+          : "LinkedIn Profile Optimization (+ CHF 79)"}
+      </span>
+    </label>
+
+    <label className="flex items-center gap-2 text-sm">
+      <input type="checkbox" name="addons" value="Motivationsschreiben Erstellung" />
+      <span>
+        {lang === "de"
+          ? "Motivationsschreiben Erstellung (+ CHF 89)"
+          : "Cover Letter Creation (+ CHF 89)"}
+      </span>
+    </label>
+
+    <label className="flex items-center gap-2 text-sm">
+      <input type="checkbox" name="addons" value="CV Übersetzung" />
+      <span>
+        {lang === "de"
+          ? "CV Übersetzung DE ↔ EN (+ CHF 59)"
+          : "CV Translation DE ↔ EN (+ CHF 59)"}
+      </span>
+    </label>
+
+    <label className="flex items-center gap-2 text-sm">
+      <input type="checkbox" name="addons" value="Arbeitszeugnis Analyse" />
+      <span>
+        {lang === "de"
+          ? "Arbeitszeugnis Analyse (+ CHF 39)"
+          : "Reference Letter Analysis (+ CHF 39)"}
+      </span>
+    </label>
+
+    <label className="flex items-center gap-2 text-sm">
+      <input type="checkbox" name="addons" value="Express Bearbeitung" />
+      <span>
+        {lang === "de"
+          ? "Express-Bearbeitung 24h (+ CHF 59)"
+          : "Express Processing 24h (+ CHF 59)"}
+      </span>
+    </label>
+
+  </div>
+</div>
               <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderMessage}<textarea name="message" rows={4} placeholder={t.orderMessagePlaceholder} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]" /></label>
 
               <div className="mt-5 space-y-3 text-sm text-[#0A1F44]/80">
