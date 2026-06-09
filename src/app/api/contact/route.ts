@@ -9,6 +9,7 @@ export async function POST(request: Request) {
     const email = String(formData.get("email") || "");
     const message = String(formData.get("message") || "");
     const packageName = String(formData.get("package") || "");
+    const addonsText = String(formData.get("addonsText") || "Keine Zusatzleistungen ausgewählt");
     const type = String(formData.get("type") || "Kontakt");
 
     const files = formData
@@ -68,6 +69,7 @@ Typ: ${type}
 Name: ${name}
 E-Mail: ${email}
 Paket: ${packageName}
+Zusatzleistungen: ${addonsText}
 
 Nachricht:
 ${message}

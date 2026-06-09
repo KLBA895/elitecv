@@ -419,7 +419,12 @@ const t = content[lang];
   
     formData.append("type", "Auftrag");
     formData.append("package", `${selectedPlan.name} - ${selectedPlan.price}`);
-  
+    const addons = formData.getAll("addons");
+
+    formData.append(
+      "addonsText",
+      addons.length > 0 ? addons.join(", ") : "Keine Zusatzleistungen ausgewählt"
+    );
     const response = await fetch("/api/contact", {
       method: "POST",
       body: formData,
