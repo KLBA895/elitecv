@@ -422,11 +422,11 @@ const t = content[lang];
     const selectedAddonValues = formData.getAll("addons").map(String);
 
 const addonPrices: Record<string, number> = {
-  "LinkedIn-Profil Optimierung": 99,
-  "Motivationsschreiben Erstellung": 89,
-  "CV Übersetzung": 59,
-  "Arbeitszeugnis Analyse": 39,
-  "Express Bearbeitung": 59,
+  "LinkedIn-Profil Optimierung (+ CHF 99)": 99,
+  "Motivationsschreiben Erstellung (+ CHF 89)": 89,
+  "CV Übersetzung DE ↔ EN (+ CHF 59)": 59,
+  "Arbeitszeugnis Analyse (+ CHF 39)": 39,
+  "Express-Bearbeitung 24h (+ CHF 59)": 59,
 };
 
 const packagePrices: Record<string, number> = {
@@ -439,14 +439,15 @@ const packagePrices: Record<string, number> = {
 
 const addonsText =
   selectedAddonValues.length > 0
-    ? selectedAddonValues
-        .map((addon) => `${addon} (+ CHF ${addonPrices[addon] ?? 0})`)
-        .join("\n")
+    ? selectedAddonValues.join("\n")
     : "Keine Zusatzleistungen ausgewählt";
 
 const total =
   (packagePrices[selectedPlan.key] ?? 0) +
-  selectedAddonValues.reduce((sum, addon) => sum + (addonPrices[addon] ?? 0), 0);
+  selectedAddonValues.reduce(
+    (sum, addon) => sum + (addonPrices[addon] ?? 0),
+    0
+  );
 
 formData.append("addonsText", addonsText);
 formData.append("totalText", `CHF ${total}`);
