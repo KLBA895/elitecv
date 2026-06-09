@@ -587,7 +587,16 @@ const t = content[lang];
               const highlighted = plan.key === "standard";
               const details = lang === "de" ? plan.detailsDe : plan.detailsEn;
               return (
-                <button type="button" key={plan.key} onClick={() => { setActivePlan(plan.key); setOrderSubmitted(false); }} className={`rounded-2xl border bg-white p-6 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${highlighted ? "border-[#C9A95A]/65 ring-1 ring-[#C9A95A]/40" : "border-[#0A1F44]/10"} ${expanded ? "md:col-span-2" : ""}`}>
+                <button type="button" key={plan.key} onClick={() => {
+                  setActivePlan(plan.key);
+                  setOrderSubmitted(false);
+                  setTimeout(() => {
+                    document.getElementById("auftrag")?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }, 100);
+                }} className={`rounded-2xl border bg-white p-6 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${highlighted ? "border-[#C9A95A]/65 ring-1 ring-[#C9A95A]/40" : "border-[#0A1F44]/10"} ${expanded ? "md:col-span-2" : ""}`}>
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="text-sm uppercase tracking-[0.14em] text-[#0A1F44]/58">{plan.name}</p>
