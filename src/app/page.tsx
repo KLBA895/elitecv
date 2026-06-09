@@ -614,69 +614,39 @@ const t = content[lang];
   </p>
 
   <div className="mt-6 grid gap-4 md:grid-cols-2">
-
-  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
-    <p className="font-semibold">
-      {lang === "de" ? "LinkedIn-Profil Optimierung" : "LinkedIn Profile Optimization"}
-    </p>
-    <p className="mt-1 text-[#C9A95A] font-bold">CHF 79</p>
-  </div>
-
-  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
-    <p className="font-semibold">
-      {lang === "de" ? "Motivationsschreiben Erstellung" : "Cover Letter Creation"}
-    </p>
-    <p className="mt-1 text-[#C9A95A] font-bold">CHF 89</p>
-  </div>
-
-  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
-    <p className="font-semibold">
-      {lang === "de" ? "CV Übersetzung DE ↔ EN" : "CV Translation DE ↔ EN"}
-    </p>
-    <p className="mt-1 text-[#C9A95A] font-bold">CHF 59</p>
-  </div>
-
-  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
-    <p className="font-semibold">
-      {lang === "de" ? "Arbeitszeugnis Analyse" : "Reference Letter Analysis"}
-    </p>
-    <p className="mt-1 text-[#C9A95A] font-bold">CHF 39</p>
-  </div>
-
-  <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
-    <p className="font-semibold">
-      {lang === "de" ? "Express-Bearbeitung (24h)" : "Express Processing (24h)"}
-    </p>
-    <p className="mt-1 text-[#C9A95A] font-bold">CHF 59</p>
-  </div>
-
-
-
     <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
       <p className="font-semibold">
-        {lang === "de"
-          ? "Motivationsschreiben Vorlage"
-          : "Cover Letter Template"}
+        {lang === "de" ? "LinkedIn-Profil Optimierung" : "LinkedIn Profile Optimization"}
       </p>
-      <p className="mt-1 text-[#C9A95A] font-bold">CHF 79</p>
+      <p className="mt-1 font-bold text-[#C9A95A]">CHF 99</p>
     </div>
 
     <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
       <p className="font-semibold">
-        {lang === "de"
-          ? "LinkedIn-Profil Optimierung"
-          : "LinkedIn Profile Optimization"}
+        {lang === "de" ? "Motivationsschreiben Erstellung" : "Cover Letter Creation"}
       </p>
-      <p className="mt-1 text-[#C9A95A] font-bold">CHF 79</p>
+      <p className="mt-1 font-bold text-[#C9A95A]">CHF 89</p>
     </div>
 
     <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
       <p className="font-semibold">
-        {lang === "de"
-          ? "Zweite Sprachversion (DE ↔ EN)"
-          : "Second Language Version (DE ↔ EN)"}
+        {lang === "de" ? "CV Übersetzung DE ↔ EN" : "CV Translation DE ↔ EN"}
       </p>
-      <p className="mt-1 text-[#C9A95A] font-bold">CHF 50–70</p>
+      <p className="mt-1 font-bold text-[#C9A95A]">CHF 59</p>
+    </div>
+
+    <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+      <p className="font-semibold">
+        {lang === "de" ? "Arbeitszeugnis Analyse" : "Reference Letter Analysis"}
+      </p>
+      <p className="mt-1 font-bold text-[#C9A95A]">CHF 39</p>
+    </div>
+
+    <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
+      <p className="font-semibold">
+        {lang === "de" ? "Express-Bearbeitung (24h)" : "Express Processing (24h)"}
+      </p>
+      <p className="mt-1 font-bold text-[#C9A95A]">CHF 59</p>
     </div>
   </div>
 </div>
@@ -747,6 +717,7 @@ const t = content[lang];
     </div>
   )}
 </label>
+
 <div className="mt-4">
   <p className="rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FB] p-4 text-sm text-[#0A1F44]/75">
     {lang === "de"
@@ -754,8 +725,30 @@ const t = content[lang];
       : "Larger or additional documents can alternatively be sent by email to info@elitecv.ch."}
   </p>
 </div>
-              <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderPackage}<input readOnly value={`${selectedPlan.name} - ${selectedPlan.price}`} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-[#0A1F44]/[0.03] px-4 py-2.5 text-[#0A1F44]/85 outline-none" /></label>
-              <div className="mt-5">
+
+<label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">
+  {t.orderPackage}
+  <input
+    readOnly
+    value={`${selectedPlan.name} - ${selectedPlan.price}`}
+    className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-[#0A1F44]/[0.03] px-4 py-2.5 text-[#0A1F44]/85 outline-none"
+  />
+</label>
+
+<label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">
+  {lang === "de"
+    ? "LinkedIn Profil URL (optional)"
+    : "LinkedIn Profile URL (optional)"}
+
+  <input
+    name="linkedinUrl"
+    type="url"
+    placeholder="https://www.linkedin.com/in/..."
+    className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
+  />
+</label>
+
+<div className="mt-5">
   <p className="mb-3 text-sm font-semibold text-[#0A1F44]">
     {lang === "de" ? "Zusatzleistungen auswählen" : "Select Add-ons"}
   </p>
@@ -766,8 +759,8 @@ const t = content[lang];
       <input type="checkbox" name="addons" value="LinkedIn-Profil Optimierung" />
       <span>
         {lang === "de"
-          ? "LinkedIn-Profil Optimierung (+ CHF 79)"
-          : "LinkedIn Profile Optimization (+ CHF 79)"}
+          ? "LinkedIn-Profil Optimierung (+ CHF 99)"
+          : "LinkedIn Profile Optimization (+ CHF 99)"}
       </span>
     </label>
 

@@ -9,6 +9,7 @@ export async function POST(request: Request) {
     const email = String(formData.get("email") || "");
     const message = String(formData.get("message") || "");
     const packageName = String(formData.get("package") || "");
+    const linkedinUrl = String(formData.get("linkedinUrl") || "");
     const addonsText = String(formData.get("addonsText") || "Keine Zusatzleistungen ausgewählt");
     const type = String(formData.get("type") || "Kontakt");
 
@@ -69,6 +70,7 @@ Typ: ${type}
 Name: ${name}
 E-Mail: ${email}
 Paket: ${packageName}
+LinkedIn Profil: ${linkedinUrl || "Nicht angegeben"}
 Zusatzleistungen: ${addonsText}
 
 Nachricht:
