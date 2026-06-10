@@ -1,0 +1,213 @@
+/* ─── Form Root ───────────────────────────────────────────────────────────── */
+.cv-form-root {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  color: #1a1a1a;
+}
+
+.cv-form-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1b2a4a;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e8eef8;
+}
+
+/* ─── Fields ──────────────────────────────────────────────────────────────── */
+.cv-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.cv-form-field--full {
+  grid-column: 1 / -1;
+}
+
+.cv-form-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #5a6a7e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cv-form-input,
+.cv-form-textarea,
+.cv-form-select {
+  width: 100%;
+  border: 1.5px solid #d0dce8;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #1a1a1a;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+
+.cv-form-input:focus,
+.cv-form-textarea:focus,
+.cv-form-select:focus {
+  outline: none;
+  border-color: #1b2a4a;
+  box-shadow: 0 0 0 3px rgba(27, 42, 74, 0.08);
+}
+
+.cv-form-textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* ─── Grid ────────────────────────────────────────────────────────────────── */
+.cv-form-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ─── Accordion ───────────────────────────────────────────────────────────── */
+.cv-form-accordion {
+  border: 1.5px solid #e0e8f4;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.cv-form-accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f4f8ff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.cv-form-accordion-header:hover {
+  background: #e8f0fb;
+}
+
+.cv-form-accordion-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1b2a4a;
+}
+
+.cv-form-accordion-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cv-form-badge {
+  background: #1b2a4a;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+
+.cv-form-accordion-arrow {
+  font-size: 11px;
+  color: #6a8ab0;
+}
+
+.cv-form-accordion-body {
+  padding: 16px;
+  background: #fff;
+  border-top: 1px solid #e8eef8;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ─── Repeat Items ────────────────────────────────────────────────────────── */
+.cv-form-repeat-item {
+  background: #f8faff;
+  border: 1px solid #e0eaf8;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.cv-form-repeat-item--major {
+  border-left: 3px solid #1b2a4a;
+}
+
+.cv-form-repeat-item:last-of-type {
+  margin-bottom: 0;
+}
+
+.cv-form-repeat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cv-form-repeat-index {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1b2a4a;
+}
+
+/* ─── List rows ───────────────────────────────────────────────────────────── */
+.cv-form-list-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.cv-form-list-row .cv-form-input {
+  flex: 1;
+}
+
+/* ─── Buttons ─────────────────────────────────────────────────────────────── */
+.cv-form-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1.5px dashed #1b2a4a;
+  border-radius: 6px;
+  color: #1b2a4a;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cv-form-add-btn:hover {
+  background: #eef4ff;
+}
+
+.cv-form-remove-btn {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #fee8e8;
+  color: #cc2222;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  transition: background 0.15s;
+}
+
+.cv-form-remove-btn:hover {
+  background: #fcc;
+}

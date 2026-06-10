@@ -75,7 +75,7 @@ LinkedIn Profil: ${linkedinUrl || "Nicht angegeben"}
 Zusatzleistungen:
 ${addonsText}
 
-Gesamtpreis:
+Auftragswert:
 ${totalText || "Nicht berechnet"}
 
 Nachricht:
