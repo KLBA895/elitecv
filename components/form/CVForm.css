@@ -74,7 +74,7 @@
   border: 1.5px solid #e0e8f4;
   border-radius: 8px;
   margin-bottom: 10px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .cv-form-accordion-header {

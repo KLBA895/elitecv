@@ -7,23 +7,22 @@ export const sampleCVData: CVData = {
   personal: {
     firstName: "Sandra",
     lastName: "Meier",
-    targetTitle: "Head of Operations",
-    targetPosition: "Head of Operations / COO",
-    targetIndustry: "Finanzdienstleistungen / Versicherung",
+    targetTitle: "Head of Operations / COO",
+    targetPosition: "Process Excellence",
+    targetIndustry: "Change Management",
     email: "sandra.meier@example.com",
     phone: "+41 79 123 45 67",
     location: "Zürich, Schweiz",
     linkedin: "linkedin.com/in/sandrameier",
     website: "",
     photo: "",
+    iconStyle: "professional",
   },
 
   profile: {
-    rawText:
-      "Ich bin eine erfahrene Operations-Führungspersönlichkeit mit über 12 Jahren Erfahrung in der Optimierung von Geschäftsprozessen in der Finanzbranche. Ich bringe Teams zusammen und schaffe nachhaltige Strukturen.",
-    why: "Ich glaube, dass exzellente operative Strukturen die Grundlage für nachhaltiges Unternehmenswachstum sind – und genau darin liegt meine Leidenschaft.",
-    how: "Mit datengetriebener Analyse, klarer Priorisierung und einem kollaborativen Führungsstil schaffe ich Prozesse, die skalieren.",
-    what: "12+ Jahre Erfahrung in Operations-Führung, Prozessoptimierung (Lean/Six Sigma) und Cross-funktionaler Teamleitung mit nachweisbaren Kosteneinsparungen.",
+    rawText:"Operations-Führungskraft mit über 12 Jahren Erfahrung in der Finanzbranche. Spezialisiert auf Prozessoptimierung, Change Management und den Aufbau leistungsstarker Teams. Schafft nachhaltige Strukturen, steigert Effizienz und begleitet Organisationen erfolgreich durch Transformationsphasen.",
+    how: "",
+    what: "",
   },
 
   usps: [
@@ -48,14 +47,30 @@ export const sampleCVData: CVData = {
   ],
 
   strengths: [
-    { id: "s-1", label: "Strategisches Denken", description: "Komplexe Sachverhalte strukturieren und priorisieren" },
-    { id: "s-2", label: "Führungsstärke", description: "Teams motivieren und auf gemeinsame Ziele ausrichten" },
-    { id: "s-3", label: "Prozessoptimierung", description: "Ineffizienzen erkennen und nachhaltig beheben" },
-    { id: "s-4", label: "Kommunikation", description: "Klar und adressatengerecht auf allen Ebenen" },
-    { id: "s-5", label: "Resilienz", description: "Ruhig und lösungsorientiert in Hochdruckphasen" },
-    { id: "s-6", label: "Datenaffinität", description: "Entscheidungen auf Basis valider Kennzahlen treffen" },
+    { id: "s-1", icon: "brain", label: "Strategisches Denken", description: "Komplexe Sachverhalte strukturieren und priorisieren" },
+    { id: "s-2", icon: "users", label: "Führungsstärke", description: "Teams motivieren und auf gemeinsame Ziele ausrichten" },
+    { id: "s-3", icon: "settings", label: "Prozessoptimierung", description: "Ineffizienzen erkennen und nachhaltig beheben" },
+    { id: "s-4", icon: "message", label: "Kommunikation", description: "Klar und adressatengerecht auf allen Ebenen" },
+    { id: "s-5", icon: "shield", label: "Resilienz", description: "Ruhig und lösungsorientiert in Hochdruckphasen" },
+    { id: "s-6", icon: "chart", label: "Datenaffinität", description: "Entscheidungen auf Basis valider Kennzahlen treffen" },
   ],
-
+  keyAchievements: [
+    {
+      id: "ka-1",
+      title: "Kostenreduktion",
+      description: "Operative Kosten um 30 % gesenkt",
+    },
+    {
+      id: "ka-2",
+      title: "Teamführung",
+      description: "35 Mitarbeitende erfolgreich geführt",
+    },
+    {
+      id: "ka-3",
+      title: "Digitalisierung",
+      description: "Projektvolumen CHF 8 Mio. umgesetzt",
+    },
+  ],
   achievements: [
     { id: "a-1", text: "Operative Kosten um 30% reduziert durch Einführung von Lean-Prozessen", metric: "–30% Kosten" },
     { id: "a-2", text: "Digitalisierungsprojekt (8 Mio. CHF) termingerecht und im Budget abgeschlossen", metric: "8 Mio. CHF" },
@@ -194,5 +209,19 @@ export const sampleCVData: CVData = {
     { id: "cert-2", title: "Lean Six Sigma Green Belt", issuer: "TÜV Rheinland", year: "2018" },
     { id: "cert-3", title: "Leadership Essentials", issuer: "IMD Lausanne", year: "2020" },
     { id: "cert-4", title: "Digital Transformation", issuer: "MIT Sloan (online)", year: "2022" },
+  ],
+  projects: [
+    {
+      id: uuidv4(),
+      title: "ERP-Migration Selectline → Infor COM",
+      role: "Projektleitung",
+      description:
+        "Migration und Strukturierung von Stammdaten, Prozessen und Systemlogik.",
+      results: [
+        "Über 6'000 Stammdaten erfolgreich migriert",
+        "Projekt über 18 Monate begleitet",
+        "Schnittstelle zwischen Fachbereich, IT und Management übernommen",
+      ],
+    },
   ],
 };

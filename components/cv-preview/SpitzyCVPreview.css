@@ -21,7 +21,27 @@
   align-items: flex-end;
   gap: 24px;
 }
+.cv-header-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
 
+.cv-photo-placeholder {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 3px solid white;
+  background: rgba(255, 255, 255, 0.15);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
 .cv-name {
   font-size: 22pt;
   font-weight: 700;
@@ -418,21 +438,13 @@
 }
 
 .cv-work-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding-left: 0;
+  margin: 8px 0 0 0;
+  padding-left: 18px;
 }
 
 .cv-work-list li {
-  font-size: 8.5pt;
-  color: #2a2a2a;
-  padding-left: 12px;
-  position: relative;
-  line-height: 1.5;
+  margin-bottom: 3px;
+  line-height: 1.45;
 }
 
 .cv-work-list li::before {
@@ -447,12 +459,12 @@
 }
 
 .cv-work-achievements-label {
-  font-size: 7.5pt;
-  font-weight: 700;
-  color: #1b2a4a;
-  text-transform: uppercase;
+  margin: 10px 0 4px;
+  font-size: 12px;
+  font-weight: 800;
   letter-spacing: 0.5px;
-  margin: 0 0 3px;
+  color: #173a56;
+  text-transform: uppercase;
 }
 
 .cv-work-list--achievements li {
@@ -498,4 +510,38 @@
     box-shadow: none;
     width: 100%;
   }
+}
+.cv-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+.cv-work-list {
+  margin: 8px 0 0 0;
+  padding-left: 18px;
+}
+
+.cv-work-list li {
+  margin-bottom: 3px;
+  line-height: 1.45;
+}
+
+.cv-work-achievements-label {
+  margin: 10px 0 4px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #173a56;
+  text-transform: uppercase;
+}
+
+.cv-work-list--achievements {
+  margin-top: 4px;
+}
+
+.cv-work-list--achievements li {
+  color: #173a56;
+  font-weight: 500;
 }

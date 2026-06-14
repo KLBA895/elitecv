@@ -12,7 +12,7 @@ import type {
   Language,
   Education,
   Certificate,
-} from "../src/types/cv";
+} from "../types/cv";
 
 interface CVFormProps {
   data: CVData;

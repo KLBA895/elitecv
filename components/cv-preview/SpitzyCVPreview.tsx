@@ -80,17 +80,35 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
     <div className="cv-root">
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <header className="cv-header">
-        <div className="cv-header-name">
-          <h1 className="cv-name">{personal.firstName} {personal.lastName}</h1>
-          <p className="cv-target-title">{personal.targetTitle}</p>
-        </div>
-        <div className="cv-header-contact">
-          {personal.email && <span>{personal.email}</span>}
-          {personal.phone && <span>{personal.phone}</span>}
-          {personal.location && <span>{personal.location}</span>}
-          {personal.linkedin && <span>{personal.linkedin}</span>}
-        </div>
-      </header>
+  <div className="cv-header-left">
+
+  <div className="cv-photo-placeholder">
+  {personal.photo ? (
+    <img src={personal.photo} alt="Profilfoto" className="cv-photo-img" />
+  ) : (
+    <span>FOTO</span>
+  )}
+</div>
+
+    <div className="cv-header-name">
+      <h1 className="cv-name">
+        {personal.firstName} {personal.lastName}
+      </h1>
+
+      <p className="cv-target-title">
+        {personal.targetTitle}
+      </p>
+    </div>
+
+  </div>
+
+  <div className="cv-header-contact">
+    {personal.email && <span>{personal.email}</span>}
+    {personal.phone && <span>{personal.phone}</span>}
+    {personal.location && <span>{personal.location}</span>}
+    {personal.linkedin && <span>{personal.linkedin}</span>}
+  </div>
+</header>
 
       {/* ── Body: Sidebar + Main ────────────────────────────────────────── */}
       <div className="cv-body">

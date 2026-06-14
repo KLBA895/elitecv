@@ -230,6 +230,27 @@ export function CVForm({ data, onChange }: CVFormProps) {
             <FieldLabel>LinkedIn</FieldLabel>
             <Input value={data.personal.linkedin ?? ""} onChange={(v) => updatePersonal("linkedin", v)} placeholder="linkedin.com/in/name" />
           </div>
+          <div className="cv-form-field cv-form-field--full">
+  <FieldLabel>Foto hochladen</FieldLabel>
+
+  <input
+    type="file"
+    accept="image/png,image/jpeg,image/webp"
+    className="cv-form-input"
+    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        updatePersonal("photo", String(reader.result));
+      };
+
+      reader.readAsDataURL(file);
+    }}
+  />
+</div>
         </div>
       </AccordionSection>
 
@@ -376,6 +397,155 @@ export function CVForm({ data, onChange }: CVFormProps) {
         ))}
         <AddButton onClick={addWork} label="Position hinzufügen" />
       </AccordionSection>
+      <AccordionSection title="Projekte" badge={data.projects.length}>
+  {data.projects.map((project, idx) => (
+    <div key={project.id} className="cv-form-repeat-item">
+
+      <div className="cv-form-repeat-header">
+        <span className="cv-form-repeat-index">
+          Projekt {idx + 1}
+        </span>
+
+        <RemoveButton
+          onClick={() =>
+            update(
+              "projects",
+              data.projects.filter((p) => p.id !== project.id)
+            )
+          }
+        />
+      </div>
+
+      <div className="cv-form-field">
+        <FieldLabel>Projekttitel</FieldLabel>
+        <Input
+          value={project.title}
+          onChange={(v) =>
+            update(
+              "projects",
+              data.projects.map((p) =>
+                p.id === project.id ? { ...p, title: v } : p
+              )
+            )
+          }
+          placeholder="ERP-Migration Selectline → Infor COM"
+        />
+      </div>
+
+      <div className="cv-form-field">
+        <FieldLabel>Rolle</FieldLabel>
+        <Input
+          value={project.role ?? ""}
+          onChange={(v) =>
+            update(
+              "projects",
+              data.projects.map((p) =>
+                p.id === project.id ? { ...p, role: v } : p
+              )
+            )
+          }
+          placeholder="Projektleitung"
+        />
+      </div>
+
+      <div className="cv-form-field">
+        <FieldLabel>Beschreibung</FieldLabel>
+        <Textarea
+          value={project.description ?? ""}
+          onChange={(v) =>
+            update(
+              "projects",
+              data.projects.map((p) =>
+                p.id === project.id
+                  ? { ...p, description: v }
+                  : p
+              )
+            )
+          }
+          rows={3}
+        />
+      </div>
+
+      <div className="cv-form-field">
+        <FieldLabel>Ergebnisse (eine Zeile pro Ergebnis)</FieldLabel>
+
+        {(project.results ?? []).map((result, i) => (
+          <div key={i} className="cv-form-list-row">
+            <Input
+              value={result}
+              onChange={(v) =>
+                update(
+                  "projects",
+                  data.projects.map((p) =>
+                    p.id === project.id
+                      ? {
+                          ...p,
+                          results: p.results.map((r, idx) =>
+                            idx === i ? v : r
+                          ),
+                        }
+                      : p
+                  )
+                )
+              }
+            />
+
+            <RemoveButton
+              onClick={() =>
+                update(
+                  "projects",
+                  data.projects.map((p) =>
+                    p.id === project.id
+                      ? {
+                          ...p,
+                          results: p.results.filter(
+                            (_, idx) => idx !== i
+                          ),
+                        }
+                      : p
+                  )
+                )
+              }
+            />
+          </div>
+        ))}
+
+        <AddButton
+          onClick={() =>
+            update(
+              "projects",
+              data.projects.map((p) =>
+                p.id === project.id
+                  ? {
+                      ...p,
+                      results: [...p.results, ""],
+                    }
+                  : p
+              )
+            )
+          }
+          label="Ergebnis hinzufügen"
+        />
+      </div>
+    </div>
+  ))}
+
+  <AddButton
+    onClick={() =>
+      update("projects", [
+        ...data.projects,
+        {
+          id: uid(),
+          title: "",
+          role: "",
+          description: "",
+          results: [""],
+        },
+      ])
+    }
+    label="Projekt hinzufügen"
+  />
+</AccordionSection>
 
       {/* ── Skills ─────────────────────────────────────────────────────────── */}
       <AccordionSection title="Fachkenntnisse (Skill-Gruppen)">

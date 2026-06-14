@@ -10,12 +10,14 @@ import type { CVData } from "../../../types/cv";
 import "../../../components/form/CVForm.css";
 import "../../../components/cv-preview/SpitzyCVPreview.css";
 import "./cv-generator.css";
-
+import { ProfessionalTwoPageCV } from "../../../components/cv-preview/ProfessionalTwoPageCV";
+import "../../../components/cv-preview/ProfessionalTwoPageCV.css";
 type Tab = "form" | "preview" | "split";
 
 export default function CVGeneratorPage() {
   const [cvData, setCVData] = useState<CVData>(sampleCVData);
   const [tab, setTab] = useState<Tab>("split");
+  const [layout, setLayout] = useState<"executive" | "classic">("executive");
   const previewRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = () => {
@@ -44,11 +46,48 @@ export default function CVGeneratorPage() {
           <meta charset="UTF-8" />
           <title>${cvData.personal.firstName} ${cvData.personal.lastName} – CV</title>
           <style>
-            @page { size: A4; margin: 0; }
-            body { margin: 0; padding: 0; }
-            ${styles}
-            .cv-root { box-shadow: none; width: 100%; }
-          </style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  width: 210mm;
+}
+
+  ${styles}
+
+  .cv-root {
+  box-shadow: none;
+  width: 100%;
+}
+
+.elitecv-doc {
+  display: block !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.elitecv-page {
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+  .elitecv-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .elitecv-sidebar {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+</style>
         </head>
         <body>${printContent}</body>
       </html>
@@ -131,10 +170,9 @@ export default function CVGeneratorPage() {
               }))
             }
             title={value === "professional" ? "Verfügbar" : "Bald verfügbar"}
-            disabled={value !== "professional"}
+            disabled={false}
           >
             {label}
-            {value !== "professional" && <span className="cvgen-soon">bald</span>}
           </button>
         ))}
       </div>
@@ -166,7 +204,11 @@ export default function CVGeneratorPage() {
 
             <div className="cvgen-preview-scaler">
               <div ref={previewRef}>
-                <ProfessionalCVPreview data={cvData} />
+              {cvData.layout === "professional" ? (
+  <ProfessionalTwoPageCV data={cvData} />
+) : (
+  <ProfessionalCVPreview data={cvData} />
+)}
               </div>
             </div>
           </div>
