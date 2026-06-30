@@ -168,7 +168,7 @@ orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zer
 heroTitle: "Professional CV optimization for the Swiss job market.",
 heroText:
   "Individual CVs, LinkedIn profiles and application documents for professionals and executives. Clearly positioned. Professionally presented.",
-secondaryCta: "View pricing",
+secondaryCta:  "View Pricing",
 generatorNoticeText:
   "CV, cover letter, ATS check and PDF export in just a few minutes.",
 generatorNoticeLink: "Open generator →",
@@ -589,27 +589,34 @@ export default function Home() {
       <div className="flex flex-col items-start gap-4">
     <div>
       <span className="inline-flex items-center rounded-full bg-[#C9A95A] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
-      ✨ NEU BEI ELITECV
+      {lang === "de" ? "✨ NEU BEI ELITECV" : "✨ NEW AT ELITECV"}
       </span>
 
       <h3 className="mt-3 text-[1.45rem] font-semibold tracking-[-0.02em] text-[#0A1F44]">
-        EliteCV Generator 1.0
+      {lang === "de"
+  ? "EliteCV Generator 1.0"
+  : "EliteCV Generator 1.0"}
       </h3>
 
       <p className="mt-2 text-sm leading-6 text-[#0A1F44]/72">
-      Erstellen Sie ATS-optimierte Lebensläufe und professionelle Motivationsschreiben – schnell, hochwertig und nach Schweizer Bewerbungsstandard.
+      {lang === "de"
+  ? "Erstellen Sie ATS-optimierte Lebensläufe und professionelle Motivationsschreiben – schnell, hochwertig und nach Schweizer Bewerbungsstandard."
+  : "Create ATS-optimized CVs and professional cover letters – fast, high-quality and tailored to Swiss application standards."}
       </p>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        {["ATS", "CV", "Motivationsschreiben", "PDF", "DE ↔ EN"].map((item) => (
-          <span
-            key={item}
-            className="rounded-full border border-[#C9A95A]/30 bg-white px-3 py-1 text-xs font-semibold text-[#0A1F44]"
-          >
-            ✓ {item}
-          </span>
-        ))}
-      </div>
+  {(lang === "de"
+    ? ["ATS", "CV", "Motivationsschreiben", "PDF", "DE ↔ EN"]
+    : ["ATS", "CV", "Cover Letter", "PDF", "DE ↔ EN"]
+  ).map((item) => (
+    <span
+      key={item}
+      className="rounded-full border border-[#C9A95A]/30 bg-white px-3 py-1 text-xs font-semibold text-[#0A1F44]"
+    >
+      ✓ {item}
+    </span>
+  ))}
+</div>
     </div>
     <div className="h-1" />
 
@@ -617,7 +624,9 @@ export default function Home() {
   href="/cv-generator"
   className="inline-flex w-fit items-center justify-center rounded-lg bg-[#C9A95A] px-4 py-2 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_rgba(201,169,90,0.45)] transition-all hover:-translate-y-0.5 hover:brightness-105"
 >
-  Zum CV-Generator →
+{lang === "de"
+  ? "Zum CV-Generator →"
+  : "Open CV Generator →"}
 </Link>
   </div>
 </div>
@@ -676,23 +685,42 @@ export default function Home() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        {[
-          {
-            title: "WHY",
-            heading: "Motivation",
-            text: "Karriereziel und berufliches Profil klar positionieren.",
-          },
-          {
-            title: "HOW",
-            heading: "Fähigkeiten & Stärken",
-            text: "Stärken strukturieren und strategisch sichtbar machen.",
-          },
-          {
-            title: "WHAT",
-            heading: "Erfahrung",
-            text: "Erfahrung in konkrete Ergebnisse übersetzen.",
-          },
-        ].map((item) => (
+      {(lang === "de"
+  ? [
+      {
+        title: "WHY",
+        heading: "Motivation",
+        text: "Karriereziel und berufliches Profil klar positionieren.",
+      },
+      {
+        title: "HOW",
+        heading: "Fähigkeiten & Stärken",
+        text: "Stärken strukturieren und strategisch sichtbar machen.",
+      },
+      {
+        title: "WHAT",
+        heading: "Erfahrung",
+        text: "Erfahrung in konkrete Ergebnisse übersetzen.",
+      },
+    ]
+  : [
+      {
+        title: "WHY",
+        heading: "Motivation",
+        text: "Clearly position your career goals and professional profile.",
+      },
+      {
+        title: "HOW",
+        heading: "Skills & Strengths",
+        text: "Structure your strengths and present them strategically.",
+      },
+      {
+        title: "WHAT",
+        heading: "Experience",
+        text: "Turn your experience into clear, relevant achievements.",
+      },
+    ]
+).map((item) => (
           <article
             key={item.title}
             className="rounded-xl border border-[#0A1F44]/10 bg-white p-4 shadow-sm"
