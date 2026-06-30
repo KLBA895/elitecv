@@ -637,13 +637,6 @@ export default function Home() {
   </div>
 </div>
       <div className="mt-12 flex flex-wrap gap-4">
-        <Link
-          href="/cv-generator"
-          className="rounded-full bg-[#0A1F44] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_38px_-18px_rgba(10,31,68,0.9)] transition-all hover:-translate-y-0.5 hover:bg-[#102A5E]"
-        >
-          🚀 {t.cta}
-        </Link>
-
         <a
           href="#preise"
           className="rounded-full border border-[#0A1F44]/18 bg-white px-7 py-3 text-sm font-semibold text-[#0A1F44] transition-all hover:-translate-y-0.5 hover:border-[#C9A95A] hover:text-[#C9A95A]"
