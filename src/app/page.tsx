@@ -28,7 +28,7 @@ const content = {
 heroTitle: "Professionelle CV-Optimierung für den Schweizer Arbeitsmarkt.",
 heroText:
   "Individuelle CVs, LinkedIn-Profile und Bewerbungsunterlagen für Fach- und Führungskräfte. Klar positioniert. Professionell aufbereitet.",
-secondaryCta: "Preise ansehen",
+  secondaryCta: "Preise & Pakete ansehen",
 generatorNoticeTitle: "Neu: EliteCV Generator 1.0",
 generatorNoticeText:
   "CV, Motivationsschreiben, ATS-Check und PDF-Export in wenigen Minuten.",
@@ -168,7 +168,7 @@ orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zer
 heroTitle: "Professional CV optimization for the Swiss job market.",
 heroText:
   "Individual CVs, LinkedIn profiles and application documents for professionals and executives. Clearly positioned. Professionally presented.",
-secondaryCta:  "View Pricing",
+  secondaryCta: "View Pricing & Plans",
 generatorNoticeText:
   "CV, cover letter, ATS check and PDF export in just a few minutes.",
 generatorNoticeLink: "Open generator →",
@@ -446,6 +446,7 @@ export default function Home() {
   const [orderSubmitted, setOrderSubmitted] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [contactError, setContactError] = useState(false);
+  const [orderLoading, setOrderLoading] = useState(false);
 
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -460,6 +461,7 @@ export default function Home() {
 
   const onOrderSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setOrderLoading(true);
   
     const formData = new FormData(event.currentTarget);
   
@@ -515,15 +517,19 @@ export default function Home() {
     formData.append("addonsText", addonsText);
     formData.append("totalText", `CHF ${total}`);
   
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      body: formData,
-    });
-  
-    if (response.ok) {
-      setOrderSubmitted(true);
-      setSelectedFiles([]);
-      (event.target as HTMLFormElement).reset();
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+    
+      if (response.ok) {
+        setOrderSubmitted(true);
+        setSelectedFiles([]);
+        (event.target as HTMLFormElement).reset();
+      }
+    } finally {
+      setOrderLoading(false);
     }
   };
 
@@ -1192,12 +1198,41 @@ export default function Home() {
 /><span>{t.orderTerms}</span></label>
              
               </div>
-              <button
-             type="submit"
-            className="mt-6 w-full rounded-xl bg-[#0A1F44] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#12305f]"
-            >
-            Kostenpflichtig bestellen
-            </button>
+              {orderSubmitted ? (
+  <button
+    type="button"
+    disabled
+    className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white"
+  >
+    ✓ {lang === "de" ? "Bestellung erfolgreich gesendet" : "Order sent successfully"}
+  </button>
+) : (
+  <button
+    type="submit"
+    disabled={orderLoading}
+    className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl bg-[#0A1F44] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_-16px_rgba(10,31,68,0.65)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#12305f] disabled:cursor-not-allowed disabled:opacity-80"
+  >
+    {orderLoading ? (
+      <>
+        <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/20 border-t-white border-r-white" />
+        <span>
+          {lang === "de"
+            ? "Bestellung wird gesendet..."
+            : "Sending order..."}
+        </span>
+      </>
+    ) : (
+      <>
+        <span>🚀</span>
+        <span>
+          {lang === "de"
+            ? "Kostenpflichtig bestellen"
+            : "Place Binding Order"}
+        </span>
+      </>
+    )}
+  </button>
+)}
 
               {orderSubmitted ? <p className="mt-4 rounded-xl border border-emerald-600/25 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-800">{t.orderSuccess}</p> : null}
              </form>
@@ -1309,12 +1344,6 @@ export default function Home() {
         <section id="login" className="bg-[#0A1F44]">
           <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-6 px-6 py-16 text-center md:flex-row md:text-left">
             <div><h2 className="max-w-2xl text-3xl font-semibold text-white">{t.finalTitle}</h2><p className="mt-3 text-white/80">{t.finalText}</p><div className="mt-4"><EliteCVInlineCertified /></div></div>
-            <Link
-  href="/cv-generator"
-  className="inline-flex w-fit items-center justify-center rounded-lg bg-[#C9A95A] px-4 py-2 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_rgba(201,169,90,0.45)] transition-all hover:-translate-y-0.5 hover:brightness-105"
->
-  Zum CV-Generator →
-</Link>
           </div>
         </section>
       </main>
