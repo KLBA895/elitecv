@@ -1185,7 +1185,11 @@ export default function Home() {
 </div>
     
               <div className="mt-5 space-y-3 text-sm text-[#0A1F44]/80">
-              <label className="flex items-start gap-2"><input type="checkbox" required /><span>{t.orderTerms}</span></label>
+              <label className="flex items-start gap-2"><input
+  name="termsAccepted"
+  required
+  type="checkbox"
+/><span>{t.orderTerms}</span></label>
              
               </div>
               <button
