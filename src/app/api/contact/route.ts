@@ -8,10 +8,15 @@ export async function POST(request: Request) {
     const name = String(formData.get("name") || "");
     const email = String(formData.get("email") || "");
     const message = String(formData.get("message") || "");
+    
     const packageName = String(formData.get("package") || "");
     const linkedinUrl = String(formData.get("linkedinUrl") || "");
-    const addonsText = String(formData.get("addonsText") || "Keine Zusatzleistungen ausgewählt");
+    const addonsText = String(
+      formData.get("addonsText") || "Keine Zusatzleistungen ausgewählt"
+    );
     const totalText = String(formData.get("totalText") || "");
+    const languageText = String(formData.get("languageText") || "Deutsch");
+    const termsAccepted = formData.get("termsAccepted") ? "Ja" : "Nein";
     const type = String(formData.get("type") || "Kontakt");
 
     const files = formData
@@ -70,10 +75,24 @@ Typ: ${type}
 
 Name: ${name}
 E-Mail: ${email}
-Paket: ${packageName}
-LinkedIn Profil: ${linkedinUrl || "Nicht angegeben"}
+
+Paket:
+${packageName}
+
+Sprache:
+${languageText}
+
+LinkedIn Profil:
+${linkedinUrl || "Nicht angegeben"}
+
 Zusatzleistungen:
 ${addonsText}
+
+Gesamtpreis:
+${totalText}
+
+AGB akzeptiert:
+${termsAccepted}
 
 Auftragswert:
 ${totalText || "Nicht berechnet"}

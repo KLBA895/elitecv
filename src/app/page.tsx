@@ -5,24 +5,34 @@ import { FormEvent, useMemo, useState } from "react";
 import { FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 
 type Lang = "de" | "en";
-type PlanKey = "basic" | "standard" | "professional" | "premium" | "elite";
+type PlanKey =
+  | "basic"
+  | "generatorProfessional"
+  | "generatorExecutive"
+  | "professional"
+  | "premium"
+  | "elite";
 
 const content = {
   de: {
     nav: [
+      { label: "CV-Generator", href: "/cv-generator" },
       { label: "Leistungen", href: "#leistungen" },
-      { label: "Methode", href: "#methode" },
       { label: "Preise", href: "#preise" },
-      { label: "FAQ", href: "#faq" },
+      { label: "Ratgeber", href: "/ratgeber" },
       { label: "Kontakt", href: "#kontakt" },
     ],
     login: "Login",
     cta: "Jetzt starten",
     heroTag: "Premium Karrierepositionierung",
-    heroTitle: "Professionelle CV-Optimierung für den Schweizer Arbeitsmarkt.",
-    heroText:
-      "Individuelle CVs, LinkedIn-Profile und Bewerbungsunterlagen für Fach- und Führungskräfte. Klar positioniert. Professionell aufbereitet.",
-    secondaryCta: "Preise ansehen",
+heroTitle: "Professionelle CV-Optimierung für den Schweizer Arbeitsmarkt.",
+heroText:
+  "Individuelle CVs, LinkedIn-Profile und Bewerbungsunterlagen für Fach- und Führungskräfte. Klar positioniert. Professionell aufbereitet.",
+secondaryCta: "Preise ansehen",
+generatorNoticeTitle: "Neu: EliteCV Generator 1.0",
+generatorNoticeText:
+  "CV, Motivationsschreiben, ATS-Check und PDF-Export in wenigen Minuten.",
+generatorNoticeLink: "Generator öffnen →",
     visualTag: "EliteCV Insights",
     visualTitle: "Profil-Performance",
     visualGain: "+36% Klarheit",
@@ -77,9 +87,10 @@ const content = {
       "Wir verwandeln komplexe Karrierewege in klare, strukturierte und überzeugende Profile, die ihren Mehrwert innerhalb weniger Sekunden vermitteln.",
     leistungenTitle: "Leistungen",
     leistungen: [
+      "🚀 EliteCV Generator",
       "CV Optimierung",
+      "Motivationsschreiben",
       "LinkedIn Optimierung",
-      "Karrierepositionierung",
       "Karriereberatung",
     ],
     methodeTitle: "Methode WHY / HOW / WHAT",
@@ -102,11 +113,12 @@ orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zer
     orderMessagePlaceholder: "Zielrolle, Branche oder besondere Anforderungen...",
     orderTerms: "Ich akzeptiere die AGB, Datenschutzbestimmungen und das Widerrufsrecht.",
     orderSubmit: "Auftrag senden",
-    orderSuccess: "Vielen Dank. Wir prüfen Ihren Auftrag und melden uns per E-Mail.",
+    orderSuccess:
+  "Vielen Dank für Ihre Bestellung. Wir haben Ihre Anfrage erfolgreich erhalten. Sie erhalten in Kürze eine Bestätigung per E-Mail. Nach Zahlungseingang senden wir Ihnen Ihren persönlichen EliteCV-Zugangscode sowie alle weiteren Informationen.",
     paymentTitle: "Zahlung & Ablauf",
     paymentLead: "Nach dem Absenden Ihrer Anfrage prüfen wir Ihren Auftrag und senden Ihnen die nächsten Schritte per E-Mail. Die Zahlungsinformationen erhalten Sie nach der Auftragsbestätigung. Die Bearbeitung beginnt nach bestätigtem Zahlungseingang.",
     paymentItems: [
-      "eine Bestätigung Ihresgewählten Pakets",
+      "eine Bestätigung Ihres gewählten Pakets",
       "die nächsten Schritte",
       "die Zahlungsdetails",
       ],
@@ -144,18 +156,22 @@ orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zer
   },
   en: {
     nav: [
+      { label: "CV Generator", href: "/cv-generator" },
       { label: "Services", href: "#leistungen" },
-      { label: "Method", href: "#methode" },
       { label: "Pricing", href: "#preise" },
-      { label: "FAQ", href: "#faq" },
+      { label: "Guides", href: "/guides" },
       { label: "Contact", href: "#kontakt" },
     ],
     login: "Login",
     cta: "Start now",
     heroTag: "Premium Career Positioning",
-    heroTitle: "Professional CV optimization for the Swiss job market.",
-    heroText: "Individual CVs, LinkedIn profiles and application documents for professionals and executives. Clearly positioned. Professionally presented.",
-    secondaryCta: "View pricing",
+heroTitle: "Professional CV optimization for the Swiss job market.",
+heroText:
+  "Individual CVs, LinkedIn profiles and application documents for professionals and executives. Clearly positioned. Professionally presented.",
+secondaryCta: "View pricing",
+generatorNoticeText:
+  "CV, cover letter, ATS check and PDF export in just a few minutes.",
+generatorNoticeLink: "Open generator →",
     visualTag: "EliteCV Insights",
     visualTitle: "Profile Performance",
     visualGain: "+36% Clarity",
@@ -208,7 +224,13 @@ orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zer
     missionText:
       "We transform complex career histories into clear, structured and compelling profiles that communicate value within seconds.",
     leistungenTitle: "Services",
-    leistungen: ["CV Optimization", "LinkedIn Optimization", "Career Positioning", "Career Advisory"],
+    leistungen: [
+      "🚀 EliteCV Generator",
+      "CV Optimization",
+      "Cover Letter",
+      "LinkedIn Optimization",
+      "Career Advisory",
+    ],
     methodeTitle: "Method WHY / HOW / WHAT",
     methodeCards: [
       { title: "WHY", heading: "Motivation", text: "Define your target and narrative with precision." },
@@ -229,7 +251,8 @@ orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zer
     orderMessagePlaceholder: "Target role, industry, or specific requirements...",
     orderTerms: "I accept the Terms and Conditions, Privacy Policy and acknowledge the Right of Withdrawal.",
     orderSubmit: "Send request",
-    orderSuccess: "Thank you. We will review your request and get back to you by email.",
+    orderSuccess:
+  "Thank you for your order. We have successfully received your request. You will receive an order confirmation by email shortly. After payment has been received, we will send you your personal EliteCV access code together with all further information.",
     paymentTitle: "Payment & Process",
     paymentLead: "After submitting your request, we will review your order and send you the next steps by email. Payment information will be provided after order confirmation. Processing begins once payment has been confirmed.",
     paymentItems: [
@@ -274,7 +297,7 @@ orderAdditionalDocs: "Sie können Lebenslauf, Arbeitszeugnisse, Diplome oder Zer
 const pricingPlans = [
   {
     key: "basic" as const,
-    name: "Basic",
+    name: "CV Check",
     price: "CHF 79",
     detailsDe: [
       "Professionelle CV Analyse",
@@ -287,32 +310,55 @@ const pricingPlans = [
       "Optimization recommendations",
     ],
   },
-
   {
-    key: "standard" as const,
-    name: "Standard",
-    price: "CHF 129",
+    key: "generatorProfessional" as const,
+    name: "EliteCV Professional Generator",
+    price: "CHF 99",
     detailsDe: [
-      "Komplette CV Optimierung",
-      "Klare Struktur",
-      "Professionelle Formulierungen",
+      "EliteCV Professional Layout",
+      "PDF Export",
+      "3 Tage Zugang",
+      "Farbauswahl",
+      "Deutsch oder Englisch (+ CHF 29)",
     ],
     detailsEn: [
-      "Full CV optimization",
-      "Clear structure",
-      "Professional wording",
+      "EliteCV Professional Layout",
+      "PDF export",
+      "3 days access",
+      "Color selection",
+      "German or English (+ CHF 29)",
+    ]
+  },
+  
+  {
+    key: "generatorExecutive" as const,
+    name: "EliteCV Executive Generator",
+    price: "CHF 149",
+    detailsDe: [
+      "EliteCV Executive Layout",
+      "PDF Export",
+      "5 Tage Zugang",
+      "Farbauswahl",
+      "Deutsch oder Englisch (+ CHF 29)",
+    ],
+    detailsEn: [
+      "EliteCV Executive Layout",
+      "PDF export",
+      "5 days access",
+      "Color selection",
+      "German or English (+ CHF 29)",
     ],
   },
 
   {
     key: "professional" as const,
-    name: "Professional",
+    name: "CV Executive",
     price: "CHF 179",
     detailsDe: [
-      "Professionelle CV Optimierung",
-      "Neuerstellung oder Überarbeitung",
+      "Executive CV Optimierung",
       "Strategische Positionierung",
-      "Individuelles Layout",
+      "Executive Design",
+      "Persönliche Beratung",
     ],
     detailsEn: [
       "Professional CV optimization",
@@ -347,7 +393,7 @@ const pricingPlans = [
   {
     key: "elite" as const,
     name: "Elite",
-    price: "CHF 349–399",
+    price: "CHF 399",
     detailsDe: [
       "Executive Karrierepositionierung",
       "Individuelle Karrierestrategie",
@@ -385,7 +431,7 @@ function EliteCVCertifiedBadge() {
 
 function EliteCVInlineCertified() {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-[#C9A95A]/55 bg-white/95 px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-[#0A1F44] shadow-sm">
+    <span className="inline-flex items-center gap-2 rounded-full border border-[#C9A95A]/55 bg-white/95 px-2.5 py-0.5 text-[10px] font-semibold tracking-[0.08em] text-[#0A1F44] shadow-sm">
       <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-[#C9A95A]/75 text-[10px] leading-none text-[#9c7726]">
         ✓
       </span>
@@ -396,14 +442,14 @@ function EliteCVInlineCertified() {
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>("de");
-  const [activePlan, setActivePlan] = useState<PlanKey>("standard");
+  const [activePlan, setActivePlan] = useState<PlanKey>("generatorProfessional");
   const [orderSubmitted, setOrderSubmitted] = useState(false);
-const [contactSubmitted, setContactSubmitted] = useState(false);
-const [contactError, setContactError] = useState(false);
+  const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [contactError, setContactError] = useState(false);
 
-const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
-const t = content[lang];
+  const t = content[lang];
 
   const metrics = useMemo(
     () => (lang === "de" ? ["WHY · Positionierung", "HOW · Struktur", "WHAT · Wirkung"] : ["WHY · Positioning", "HOW · Structure", "WHAT · Impact"]),
@@ -421,6 +467,13 @@ const t = content[lang];
     formData.append("package", `${selectedPlan.name} - ${selectedPlan.price}`);
   
     const selectedAddonValues = formData.getAll("addons").map(String);
+    const selectedLanguage = String(formData.get("language") ?? "de");
+    const languagePrice = selectedLanguage === "en" ? 29 : 0;
+
+    formData.append(
+  "languageText",
+  selectedLanguage === "en" ? "English (+ CHF 29)" : "Deutsch"
+);
   
     const addonPriceByName = (addon: string) => {
       if (addon.includes("LinkedIn")) return 99;
@@ -431,9 +484,10 @@ const t = content[lang];
       return 0;
     };
   
-    const packagePrices: Record<string, number> = {
+    const packagePrices: Record<PlanKey, number> = {
       basic: 79,
-      standard: 129,
+      generatorProfessional: 99,
+      generatorExecutive: 149,
       professional: 179,
       premium: 249,
       elite: 399,
@@ -450,12 +504,13 @@ const t = content[lang];
             .join("\n")
         : "Keine Zusatzleistungen ausgewählt";
   
-    const total =
-      (packagePrices[selectedPlan.key] ?? 0) +
-      selectedAddonValues.reduce(
-        (sum, addon) => sum + addonPriceByName(addon),
-        0
-      );
+        const total =
+        (packagePrices[selectedPlan.key] ?? 0) +
+        languagePrice +
+        selectedAddonValues.reduce(
+          (sum, addon) => sum + addonPriceByName(addon),
+          0
+        );
   
     formData.append("addonsText", addonsText);
     formData.append("totalText", `CHF ${total}`);
@@ -478,9 +533,29 @@ const t = content[lang];
         <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
           <a href="#" className="shrink-0 rounded-md px-1 py-1 transition-opacity hover:opacity-90"><EliteCVLogo /></a>
           <div className="hidden items-center gap-1 lg:flex">
-            {t.nav.map((link) => (
-              <a key={link.label} href={link.href} className="rounded-md px-4 py-2 text-sm font-medium text-[#0A1F44]/76 transition-colors hover:text-[#0A1F44]">{link.label}</a>
-            ))}
+          {t.nav.map((link) =>
+  link.href.startsWith("/") ? (
+    <Link
+      key={link.label}
+      href={link.href}
+      className={`rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+        link.href === "/cv-generator"
+          ? "rounded-full bg-[#0A1F44] text-white hover:bg-[#12305f]"
+          : "text-[#0A1F44]/76 hover:text-[#0A1F44]"
+      }`}
+    >
+      {link.label}
+    </Link>
+  ) : (
+    <a
+      key={link.label}
+      href={link.href}
+      className="rounded-md px-4 py-2 text-sm font-medium text-[#0A1F44]/76 transition-colors hover:text-[#0A1F44]"
+    >
+      {link.label}
+    </a>
+  )
+)}
           </div>
           <div className="flex items-center gap-3">
             <div className="rounded-full border border-[#0A1F44]/12 bg-white p-1 text-xs font-semibold">
@@ -489,49 +564,159 @@ const t = content[lang];
               <button type="button" onClick={() => setLang("en")} className={`rounded-full px-3 py-1 transition ${lang === "en" ? "bg-[#0A1F44] text-white" : "text-[#0A1F44]/65 hover:text-[#0A1F44]"}`}>EN</button>
             </div>
             {/*<a href="#login" className="rounded-md px-3 py-2 text-sm font-medium text-[#0A1F44]/78">{t.login}</a>*/}
-            <a href="#preise" className="rounded-full bg-[#0A1F44] px-5 py-2 text-sm font-semibold text-white shadow-[0_10px_30px_-15px_rgba(10,31,68,0.9)] transition-all hover:-translate-y-0.5 hover:bg-[#102A5E]">{t.cta}</a>
-          </div>
+                      </div>
         </nav>
       </header>
 
       <main>
-        <section className="relative overflow-hidden border-b border-[#0A1F44]/10 bg-[radial-gradient(circle_at_top_right,_rgba(201,169,90,0.11),_transparent_44%),radial-gradient(circle_at_8%_18%,_rgba(10,31,68,0.09),_transparent_42%)]">
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.8),rgba(255,255,255,0.98))]" />
-          <div className="relative mx-auto grid w-full max-w-7xl gap-14 px-6 pb-24 pt-14 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] md:items-center md:pt-20">
-            <div>
-              <p className="mb-6 text-xs font-semibold uppercase tracking-[0.24em] text-[#C9A95A]">{t.heroTag}</p>
-              <h1 className="max-w-[13ch] text-4xl font-semibold leading-[1.04] tracking-[-0.03em] md:text-[3.5rem]">{t.heroTitle}</h1>
-              <p className="mt-7 max-w-[58ch] text-[1.05rem] leading-8 text-[#0A1F44]/72">{t.heroText}</p>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <a href="#preise" className="rounded-full bg-[#0A1F44] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_38px_-18px_rgba(10,31,68,0.9)] transition-all hover:-translate-y-0.5 hover:bg-[#102A5E]">{t.cta}</a>
-                <a href="#preise" className="rounded-full border border-[#0A1F44]/18 bg-white px-7 py-3 text-sm font-semibold text-[#0A1F44] transition-all hover:-translate-y-0.5 hover:border-[#C9A95A] hover:text-[#C9A95A]">{t.secondaryCta}</a>
-              </div>
-              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[#0A1F44]/60">{metrics.map((metric) => <span key={metric}>{metric}</span>)}</div>
-            </div>
-            <div className="relative mx-auto w-full max-w-[560px]">
-              <div className="relative overflow-hidden rounded-[1.55rem] border border-[#0A1F44]/10 bg-white/90 p-4 shadow-[0_40px_80px_-40px_rgba(10,31,68,0.7)] backdrop-blur">
-                <div className="rounded-2xl border border-[#0A1F44]/10 bg-[linear-gradient(160deg,rgba(10,31,68,0.05),rgba(255,255,255,0.96))] p-6">
-                  <div className="mb-5 flex items-center justify-between border-b border-[#0A1F44]/10 pb-4">
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">{t.visualTag}</p>
-                      <p className="mt-2 text-xl font-semibold tracking-[-0.02em]">{t.visualTitle}</p>
-                    </div>
-                    <span className="rounded-full border border-emerald-600/25 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-700">{t.visualGain}</span>
-                  </div>
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {t.methodeCards.map((item) => (
-                      <article key={item.title} className="rounded-xl border border-[#0A1F44]/10 bg-white p-4 shadow-sm">
-                        <p className="text-xs uppercase tracking-[0.15em] text-[#0A1F44]/60">{item.title}</p>
-                        <p className="mt-2 text-lg font-semibold">{item.heading}</p>
-                        <p className="mt-1 text-sm text-[#0A1F44]/62">{item.text}</p>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <section className="relative overflow-hidden border-b border-[#0A1F44]/10 bg-[radial-gradient(circle_at_top_right,_rgba(201,169,90,0.13),_transparent_42%),radial-gradient(circle_at_8%_18%,_rgba(10,31,68,0.1),_transparent_40%)]">
+  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.78),rgba(255,255,255,0.98))]" />
+
+  <div className="relative mx-auto grid w-full max-w-7xl gap-14 px-6 pb-24 pt-14 md:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] md:items-center md:pt-20">
+    <div>
+      <p className="mb-6 text-xs font-semibold uppercase tracking-[0.24em] text-[#C9A95A]">
+        {t.heroTag}
+      </p>
+
+      <h1 className="max-w-[14ch] text-4xl font-semibold leading-[1.04] tracking-[-0.03em] md:text-[3.7rem]">
+        {t.heroTitle}
+      </h1>
+
+      <p className="mt-7 max-w-[62ch] text-[1.05rem] leading-8 text-[#0A1F44]/72">
+        {t.heroText}
+      </p>
+      <div className="mt-8 max-w-[520px] rounded-2xl border border-[#C9A95A]/40 bg-gradient-to-r from-[#FFFCF5] to-white p-4 shadow-[0_10px_26px_-16px_rgba(201,169,90,0.25)]">
+      <div className="flex flex-col items-start gap-4">
+    <div>
+      <span className="inline-flex items-center rounded-full bg-[#C9A95A] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+      ✨ NEU BEI ELITECV
+      </span>
+
+      <h3 className="mt-3 text-[1.45rem] font-semibold tracking-[-0.02em] text-[#0A1F44]">
+        EliteCV Generator 1.0
+      </h3>
+
+      <p className="mt-2 text-sm leading-6 text-[#0A1F44]/72">
+      Erstellen Sie ATS-optimierte Lebensläufe und professionelle Motivationsschreiben – schnell, hochwertig und nach Schweizer Bewerbungsstandard.
+      </p>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {["ATS", "CV", "Motivationsschreiben", "PDF", "DE ↔ EN"].map((item) => (
+          <span
+            key={item}
+            className="rounded-full border border-[#C9A95A]/30 bg-white px-3 py-1 text-xs font-semibold text-[#0A1F44]"
+          >
+            ✓ {item}
+          </span>
+        ))}
+      </div>
+    </div>
+    <div className="h-1" />
+
+    <Link
+  href="/cv-generator"
+  className="inline-flex w-fit items-center justify-center rounded-lg bg-[#C9A95A] px-4 py-2 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_rgba(201,169,90,0.45)] transition-all hover:-translate-y-0.5 hover:brightness-105"
+>
+  Zum CV-Generator →
+</Link>
+  </div>
+</div>
+      <div className="mt-12 flex flex-wrap gap-4">
+        <Link
+          href="/cv-generator"
+          className="rounded-full bg-[#0A1F44] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_38px_-18px_rgba(10,31,68,0.9)] transition-all hover:-translate-y-0.5 hover:bg-[#102A5E]"
+        >
+          🚀 {t.cta}
+        </Link>
+
+        <a
+          href="#preise"
+          className="rounded-full border border-[#0A1F44]/18 bg-white px-7 py-3 text-sm font-semibold text-[#0A1F44] transition-all hover:-translate-y-0.5 hover:border-[#C9A95A] hover:text-[#C9A95A]"
+        >
+          {t.secondaryCta}
+        </a>
+      </div>
+
+      <div className="mt-10 flex flex-wrap items-center gap-3 text-sm text-[#0A1F44]/65">
+        {[
+          "ATS",
+          "KI",
+          "PDF",
+          "Executive",
+          "English",
+        ].map((item) => (
+          <span
+            key={item}
+            className="rounded-full border border-[#0A1F44]/10 bg-white px-4 py-2 shadow-sm"
+          >
+            ✓ {item}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <div className="relative mx-auto w-full max-w-[560px]">
+  <div className="relative overflow-hidden rounded-[1.55rem] border border-[#0A1F44]/10 bg-white/90 p-4 shadow-[0_40px_80px_-40px_rgba(10,31,68,0.7)] backdrop-blur">
+    <div className="rounded-2xl border border-[#0A1F44]/10 bg-[linear-gradient(160deg,rgba(10,31,68,0.05),rgba(255,255,255,0.96))] p-6">
+
+      <div className="mb-5 flex items-center justify-between border-b border-[#0A1F44]/10 pb-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
+            ELITECV INSIGHTS
+          </p>
+
+          <p className="mt-2 text-xl font-semibold tracking-[-0.02em]">
+            Profil-Performance
+          </p>
+        </div>
+
+        <span className="rounded-full border border-emerald-600/25 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-700">
+          +36% Klarheit
+        </span>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-3">
+        {[
+          {
+            title: "WHY",
+            heading: "Motivation",
+            text: "Karriereziel und berufliches Profil klar positionieren.",
+          },
+          {
+            title: "HOW",
+            heading: "Fähigkeiten & Stärken",
+            text: "Stärken strukturieren und strategisch sichtbar machen.",
+          },
+          {
+            title: "WHAT",
+            heading: "Erfahrung",
+            text: "Erfahrung in konkrete Ergebnisse übersetzen.",
+          },
+        ].map((item) => (
+          <article
+            key={item.title}
+            className="rounded-xl border border-[#0A1F44]/10 bg-white p-4 shadow-sm"
+          >
+            <p className="text-xs uppercase tracking-[0.15em] text-[#0A1F44]/60">
+              {item.title}
+            </p>
+
+            <p className="mt-2 text-lg font-semibold">
+              {item.heading}
+            </p>
+
+            <p className="mt-1 text-sm text-[#0A1F44]/62">
+              {item.text}
+            </p>
+          </article>
+        ))}
+      </div>
+
+      </div>
+  </div>
+</div>
+</div>
+</section>
 
         <section className="border-y border-[#0A1F44]/10 bg-[#0A1F44]/[0.02]">
           <div className="mx-auto grid w-full max-w-7xl gap-6 px-6 py-20 md:grid-cols-2">
@@ -580,7 +765,7 @@ const t = content[lang];
               </article>
             </div>
             <p className="mt-6 text-sm text-[#0A1F44]/62">{t.logosText}</p>
-            <div className="mt-8 rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
+            <div className="mt-8 max-w-[520px] rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
   <p className="text-lg font-semibold">
     ⭐⭐⭐⭐⭐ 5.0 – {t.googleReviewTitle}
   </p>
@@ -597,11 +782,64 @@ const t = content[lang];
         </section>
 
         <section id="leistungen" className="border-y border-[#0A1F44]/10 bg-white">
-          <div className="mx-auto w-full max-w-7xl px-6 py-20">
-            <h2 className="text-3xl font-semibold tracking-[-0.02em]">{t.leistungenTitle}</h2>
-            <div className="mt-9 grid gap-5 md:grid-cols-2">{t.leistungen.map((item) => <article key={item} className="rounded-2xl border border-[#0A1F44]/10 bg-[#FCFCFB] p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"><p className="text-lg font-medium">{item}</p></article>)}</div>
-          </div>
-        </section>
+  <div className="mx-auto w-full max-w-7xl px-6 py-20">
+    <h2 className="text-3xl font-semibold tracking-[-0.02em]">
+      {t.leistungenTitle}
+    </h2>
+
+    <div className="mt-9 grid gap-5 md:grid-cols-2">
+      {t.leistungen.map((item) => (
+        <article
+        key={item}
+        className={`rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
+          item.includes("Generator")
+            ? "border-2 border-[#C9A95A]/35 bg-[#FFFDF8] shadow-sm hover:shadow-[0_18px_40px_-20px_rgba(201,169,90,0.45)]"
+            : "border border-[#0A1F44]/10 bg-[#FCFCFB] shadow-sm hover:shadow-md"
+        }`}
+      >
+        {item.includes("Generator") && (
+          <span className="mb-3 inline-flex rounded-full bg-[#C9A95A] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
+            NEU
+          </span>
+        )}
+      
+        <h3 className="text-lg font-semibold">{item}</h3>
+      
+        <p className="mt-2 text-sm leading-6 text-[#0A1F44]/65">
+          {item.includes("Generator")
+            ? lang === "de"
+              ? "Erstellen Sie Ihren Lebenslauf und Ihr Motivationsschreiben in wenigen Minuten."
+              : "Create your CV and cover letter in minutes."
+            : item.includes("CV")
+            ? lang === "de"
+              ? "Professionelle Optimierung nach Schweizer Bewerbungsstandard."
+              : "Professional optimization according to Swiss application standards."
+            : item.includes("Motiv") || item.includes("Cover")
+            ? lang === "de"
+              ? "Überzeugende Anschreiben mit klarer Struktur und KI-Unterstützung."
+              : "Compelling cover letters with clear structure and AI support."
+            : item.includes("LinkedIn")
+            ? lang === "de"
+              ? "Optimieren Sie Ihr LinkedIn-Profil für Recruiter und passende Karrierechancen."
+              : "Optimize your LinkedIn profile for recruiters and relevant career opportunities."
+            : lang === "de"
+            ? "Persönliche Unterstützung für Ihre berufliche Positionierung."
+            : "Personal support for your career positioning."}
+        </p>
+      
+        {item.includes("Generator") && (
+          <Link
+            href="/cv-generator"
+            className="mt-5 inline-flex rounded-full bg-[#0A1F44] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#12305f]"
+          >
+            {lang === "de" ? "Zum CV-Generator →" : "Open CV Generator →"}
+          </Link>
+        )}
+      </article>
+      ))}
+    </div>
+  </div>
+</section>
 
         <section id="methode" className="mx-auto w-full max-w-7xl px-6 py-20">
           <h2 className="text-3xl font-semibold tracking-[-0.02em]">{t.methodeTitle}</h2>
@@ -616,36 +854,60 @@ const t = content[lang];
     ? "Alle Dienstleistungen werden individuell auf Branche, Position und Schweizer Arbeitsmarkt abgestimmt."
     : "All services are individually adapted to your industry, target role and the Swiss job market."}
 </p>
-          <div className="mt-9 grid gap-5 md:grid-cols-3">
-            {pricingPlans.map((plan) => {
-              const expanded = activePlan === plan.key;
-              const highlighted = plan.key === "standard";
-              const details = lang === "de" ? plan.detailsDe : plan.detailsEn;
-              return (
-                <button type="button" key={plan.key} onClick={() => {
-                  setActivePlan(plan.key);
-                  setOrderSubmitted(false);
-                  setTimeout(() => {
-                    document.getElementById("auftrag")?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                  }, 100);
-                }} className={`rounded-2xl border bg-white p-6 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${highlighted ? "border-[#C9A95A]/65 ring-1 ring-[#C9A95A]/40" : "border-[#0A1F44]/10"} ${expanded ? "md:col-span-2" : ""}`}>
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-sm uppercase tracking-[0.14em] text-[#0A1F44]/58">{plan.name}</p>
-                      <p className="mt-2 text-3xl font-semibold">{plan.price}</p>
-                    </div>
-                    {highlighted ? <span className="rounded-full bg-[#C9A95A]/15 px-3 py-1 text-xs font-semibold text-[#8a6a22]">{lang === "de" ? "Empfohlen" : "Recommended"}</span> : null}
-                  </div>
-                  <div className={`overflow-hidden transition-all duration-300 ${expanded ? "mt-4 max-h-64 opacity-100" : "max-h-0 opacity-0"}`}>
-                    <ul className="space-y-2 text-sm text-[#0A1F44]/75">{details.map((detail) => <li key={detail}>- {detail}</li>)}</ul>
-                  </div>
-                </button>
-              );
-            })}
+<div className="mt-9 grid gap-5 md:grid-cols-3">
+  {pricingPlans.map((plan) => {
+    const expanded = activePlan === plan.key;
+    const details = lang === "de" ? plan.detailsDe : plan.detailsEn;
+
+    return (
+      <button
+        type="button"
+        key={plan.key}
+        onClick={() => {
+          setActivePlan(plan.key);
+          setOrderSubmitted(false);
+
+          setTimeout(() => {
+            document.getElementById("auftrag")?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }, 100);
+        }}
+        className={`rounded-2xl border bg-white p-6 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
+          expanded
+            ? "border-[#C9A95A]/65 ring-1 ring-[#C9A95A]/40 md:col-span-2"
+            : "border-[#0A1F44]/10"
+        }`}
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-sm uppercase tracking-[0.14em] text-[#0A1F44]/58">
+              {plan.name}
+            </p>
+            <p className="mt-2 text-3xl font-semibold">
+              {plan.price}
+            </p>
           </div>
+        </div>
+
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            expanded
+              ? "mt-4 max-h-64 opacity-100"
+              : "max-h-0 opacity-0"
+          }`}
+        >
+          <ul className="space-y-2 text-sm text-[#0A1F44]/75">
+            {details.map((detail) => (
+              <li key={detail}>- {detail}</li>
+            ))}
+          </ul>
+        </div>
+      </button>
+    );
+  })}
+</div>
           <div className="mt-10 rounded-2xl border border-[#0A1F44]/10 bg-[#FCFCFB] p-7 shadow-sm">
   <h3 className="text-2xl font-semibold">
     {lang === "de" ? "Zusatzleistungen" : "Add-ons"}
@@ -702,7 +964,23 @@ const t = content[lang];
               <div className="mt-5 rounded-xl border border-[#C9A95A]/40 bg-[#C9A95A]/10 p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a6a22]">{t.selectedLabel}</p>
                 <p className="mt-1 text-lg font-bold text-[#0A1F44]">{selectedPlan.name} - {selectedPlan.price}</p>
+                <p className="mt-2 text-sm text-[#0A1F44]/70">
+  {selectedPlan.key === "generatorExecutive"
+    ? (lang === "de"
+        ? "Zugangsdauer: 5 Tage"
+        : "Access duration: 5 days")
+    : selectedPlan.key === "generatorProfessional"
+    ? (lang === "de"
+        ? "Zugangsdauer: 3 Tage"
+        : "Access duration: 3 days")
+    : ""}
+</p>
               </div>
+              <input
+  type="hidden"
+  name="selectedPackage"
+  value={`${selectedPlan.name} - ${selectedPlan.price}`}
+/>
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">
               <label className="text-sm font-medium text-[#0A1F44]/85">
@@ -724,6 +1002,32 @@ const t = content[lang];
   />
 </label>
 </div>
+<div className="mt-5">
+  <label className="text-sm font-medium text-[#0A1F44]/85">
+    Sprache
+
+    <select
+      name="language"
+      className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
+      defaultValue="de"
+    >
+      <option value="de">Deutsch</option>
+      <option value="en">English (+ CHF 29)</option>
+    </select>
+  </label>
+</div>
+<div className="mt-5">
+  <label className="text-sm font-medium text-[#0A1F44]/85">
+    Bemerkungen / Wünsche
+
+    <textarea
+      name="message"
+      rows={4}
+      className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
+      placeholder="z.B. Zielposition, Branche, gewünschte Sprache, besondere Hinweise..."
+    />
+  </label>
+</div>
 
 <label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
   {t.orderUpload}
@@ -736,7 +1040,7 @@ const t = content[lang];
     onChange={(e) => {
       setSelectedFiles(Array.from(e.target.files ?? []));
     }}
-    className="mt-2 block w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3"
+    className="mt-2 block w-full cursor-pointer rounded-xl border-2 border-dashed border-[#C9A95A]/40 bg-[#FFFCF5] px-4 py-6 text-sm text-[#0A1F44]/75 transition hover:border-[#C9A95A]/70 hover:bg-[#FFF8E8]"
   />
 
   <span className="mt-1 block text-xs text-[#0A1F44]/60">
@@ -786,13 +1090,13 @@ const t = content[lang];
 
 <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">
   {lang === "de"
-    ? "LinkedIn Profil URL (optional)"
+    ? "LinkedIn-Profil (optional)"
     : "LinkedIn Profile URL (optional)"}
 
   <input
     name="linkedinUrl"
     type="text"
-    placeholder="https://www.linkedin.com/in/..."
+    placeholder="https://linkedin.com/in/ihrprofil"
     className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
   />
 </label>
@@ -851,16 +1155,20 @@ const t = content[lang];
 
   </div>
 </div>
-              <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">{t.orderMessage}<textarea name="message" rows={4} placeholder={t.orderMessagePlaceholder} className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]" /></label>
-
+    
               <div className="mt-5 space-y-3 text-sm text-[#0A1F44]/80">
               <label className="flex items-start gap-2"><input type="checkbox" required /><span>{t.orderTerms}</span></label>
              
               </div>
+              <button
+             type="submit"
+            className="mt-6 w-full rounded-xl bg-[#0A1F44] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#12305f]"
+            >
+            Kostenpflichtig bestellen
+            </button>
 
-              <button type="submit" className="mt-6 rounded-full bg-[#0A1F44] px-7 py-3 text-sm font-semibold text-white shadow-[0_16px_38px_-18px_rgba(10,31,68,0.9)] transition-all hover:-translate-y-0.5 hover:bg-[#102A5E]">{t.orderSubmit}</button>
               {orderSubmitted ? <p className="mt-4 rounded-xl border border-emerald-600/25 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-800">{t.orderSuccess}</p> : null}
-            </form>
+             </form>
 
             <aside className="rounded-2xl border border-[#0A1F44]/10 bg-[#FCFCFB] p-7 shadow-sm">
               <h3 className="text-xl font-semibold">{t.paymentTitle}</h3>
@@ -870,6 +1178,18 @@ const t = content[lang];
               <p className="mt-4 text-sm font-medium text-[#0A1F44]/80">{t.paymentMethodsTitle}</p>
               <ul className="mt-2 space-y-2 text-sm text-[#0A1F44]/76">{t.paymentMethods.map((method) => <li key={method}>- {method}</li>)}</ul>
               <p className="mt-4 text-sm font-semibold text-[#0A1F44]/82">{t.paymentEnd}</p>
+              <div className="mt-5 rounded-xl border border-[#C9A95A]/35 bg-[#C9A95A]/10 p-4 text-sm text-[#0A1F44]/80">
+  <p className="font-semibold text-[#0A1F44]">
+    {lang === "de" ? "Nach der Bestellung" : "After your order"}
+  </p>
+
+  <ul className="mt-3 space-y-2">
+    <li>- {lang === "de" ? "Sie erhalten eine Bestätigung per E-Mail." : "You will receive an email confirmation."}</li>
+    <li>- {lang === "de" ? "Nach Zahlungseingang wird Ihr Zugangscode freigeschaltet." : "Your access code will be activated after payment."}</li>
+    <li>- {lang === "de" ? "Generator-Zugänge werden persönlich erstellt." : "Generator access codes are created individually."}</li>
+    <li>- {lang === "de" ? "Bei Fragen erhalten Sie Support per E-Mail." : "Email support is available if you have questions."}</li>
+  </ul>
+</div>
             </aside>
           </div>
         </section>
@@ -929,16 +1249,6 @@ const t = content[lang];
     </label>
   </div>
 
-  <label className="mt-4 block text-sm font-medium text-[#0A1F44]/85">
-    {t.contactFormMessage}
-    <textarea
-      name="message"
-      required
-      rows={5}
-      className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]"
-    />
-  </label>
-
   <button
     type="submit"
     className="mt-5 rounded-full border border-[#0A1F44]/20 px-6 py-2.5 text-sm font-semibold text-[#0A1F44] transition hover:border-[#C9A95A] hover:text-[#C9A95A]"
@@ -967,7 +1277,12 @@ const t = content[lang];
         <section id="login" className="bg-[#0A1F44]">
           <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-6 px-6 py-16 text-center md:flex-row md:text-left">
             <div><h2 className="max-w-2xl text-3xl font-semibold text-white">{t.finalTitle}</h2><p className="mt-3 text-white/80">{t.finalText}</p><div className="mt-4"><EliteCVInlineCertified /></div></div>
-            <a href="#preise" className="rounded-full bg-[#C9A95A] px-7 py-3 text-sm font-semibold text-[#0A1F44] transition hover:bg-[#d7ba72]">{t.cta}</a>
+            <Link
+  href="/cv-generator"
+  className="inline-flex w-fit items-center justify-center rounded-lg bg-[#C9A95A] px-4 py-2 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_rgba(201,169,90,0.45)] transition-all hover:-translate-y-0.5 hover:brightness-105"
+>
+  Zum CV-Generator →
+</Link>
           </div>
         </section>
       </main>

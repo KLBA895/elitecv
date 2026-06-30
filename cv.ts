@@ -21,7 +21,7 @@ export interface PersonalData {
   website?: string;
   photo?: string;
   iconStyle?: "professional" | "executive" | "modern" | "minimal";
-}
+  }
 
 // ─── Profil ──────────────────────────────────────────────────────────────────
 export interface ProfileSection {
@@ -113,6 +113,7 @@ export interface Achievement {
 // ─── Gesamt-CV ───────────────────────────────────────────────────────────────
 export interface CVData {
   layout: LayoutVariant;
+  themeColor: "gray" | "blue" | "navy" | "green" | "burgundy"| "teal"| "charcoal";
 
   personal: PersonalData;
   profile: ProfileSection;

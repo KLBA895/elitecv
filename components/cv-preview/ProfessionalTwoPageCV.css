@@ -23,9 +23,15 @@
     position: relative;
 }
   
-  .elitecv-main {
-    padding: 85px 26px 30px;
-  }
+.elitecv-main {
+  padding: 85.5px 26px 30px;
+  overflow: visible;
+}
+.elitecv-main-block,
+.elitecv-timeline,
+.elitecv-job {
+  overflow: visible;
+}
   
   .elitecv-photo {
     width: 180px;
@@ -199,7 +205,7 @@
   
   .elitecv-main-block h3 {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 8px;
   
     font-size: 17px;
@@ -240,7 +246,7 @@
   .elitecv-timeline::before {
     content: "";
     position: absolute;
-    left: 2px;
+    left: 5px;
     top: 2px;
     bottom: 8px;
     width: 2px;
@@ -254,7 +260,7 @@
   
   .elitecv-job-dot {
     position: absolute;
-    left: -27px;
+    left: -24px;
     top: 8.2px;
     width: 8px;
     height: 8px;
@@ -387,9 +393,8 @@
     }
   
     .elitecv-page + .elitecv-page {
-      page-break-before: always !important;
-      break-before: page !important;
-    }
+  padding-top: 18mm !important;
+}
   
     .elitecv-page:last-child {
       page-break-after: auto !important;
@@ -399,11 +404,12 @@
   .elitecv-page2-spacer {
     height: 19px;
   }
-  .elitecv-page2-header {
-    margin-top: 10px;
+  .elitecv-page2-header .elitecv-header h1 {
+    font-size: 40px;
+    line-height: 1.05;
   }
   .elitecv-sidebar-page2 {
-    padding-top: 130px;
+    padding-top: 0;
   }
   .elitecv-sidebar.elitecv-sidebar-page2 {
     padding-top: 150px !important;
@@ -442,7 +448,7 @@
   }
   
   .elitecv-job-label + ul {
-    margin-top: 4px;
+    margin-top: 2px;
     padding-left: 18px;
     list-style-type: disc;
   }
@@ -592,6 +598,24 @@
   font-size: 10px;
   line-height: 1.3;
   margin-bottom: 2px;
+}
+.cv-body {
+  align-items: start;
+}
+
+.cv-main > .cv-main-section:first-child {
+  transform: translateY(-8px);
+}
+.cv-body > .cv-main > .cv-main-section:first-child {
+  transform: translateY(-5px);
+}
+
+.cv-side-heading,
+.cv-main-heading {
+  margin-top: 3;
+}
+.elitecv-sidebar-page2 {
+  padding-top: 85px;
 }
 
   

@@ -5,6 +5,7 @@ import type { CVData } from "../../types/cv";
 
 interface ProfessionalCVProps {
   data: CVData;
+  language?: "de" | "en";
 }
 
 // ─── Sidebar Section Wrapper ─────────────────────────────────────────────────
@@ -28,7 +29,13 @@ function MainSection({ title, children }: { title: string; children: React.React
 }
 
 // ─── Work Experience Entry ────────────────────────────────────────────────────
-function WorkEntry({ job }: { job: CVData["workExperience"][0] }) {
+function WorkEntry({
+  job,
+  successLabel = "Key Achievements",
+}: {
+  job: CVData["workExperience"][0];
+  successLabel?: string;
+}) {
   return (
     <article className="cv-work-entry">
       <div className="cv-work-header">
@@ -36,6 +43,7 @@ function WorkEntry({ job }: { job: CVData["workExperience"][0] }) {
           <span className="cv-work-period">{job.from} – {job.to}</span>
           <span className="cv-work-location">{job.location}</span>
         </div>
+
         <div className="cv-work-info">
           <h3 className="cv-work-title">{job.functionTitle}</h3>
           <p className="cv-work-company">{job.company}</p>
@@ -44,29 +52,50 @@ function WorkEntry({ job }: { job: CVData["workExperience"][0] }) {
 
       {job.responsibilities.length > 0 && (
         <ul className="cv-work-list">
-          {job.responsibilities.map((r, i) => (
-            <li key={i}>{r}</li>
+          {job.responsibilities.map((item, index) => (
+            <li key={index}>{item}</li>
           ))}
         </ul>
       )}
 
       {job.achievements.length > 0 && (
-        <div className="cv-work-achievements">
-          <p className="cv-work-achievements-label">Erfolge:</p>
-          <ul className="cv-work-list cv-work-list--achievements">
-            {job.achievements.map((a, i) => (
-              <li key={i}>{a}</li>
+        <>
+          <p className="cv-work-achievements-title">{successLabel}</p>
+
+          <ul className="cv-work-achievements">
+            {job.achievements.map((item, index) => (
+              <li key={index}>{item}</li>
             ))}
           </ul>
-        </div>
+        </>
       )}
     </article>
   );
 }
 
 // ─── Main Preview Component ───────────────────────────────────────────────────
-export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
-  const { personal, profile, usps, strengths, achievements, workExperience, skillGroups, hardSkills, softSkills, itSkills, languages, education, certificates } = data;
+export function ProfessionalCVPreview({
+  data,
+  language = "de",
+}: ProfessionalCVProps) {
+  const {
+    personal,
+    profile,
+    usps,
+    strengths,
+    achievements,
+    workExperience,
+    skillGroups,
+    hardSkills,
+    softSkills,
+    itSkills,
+    languages,
+    education,
+    certificates,
+  } = data;
+
+  const firstPageJobs = workExperience.slice(0, 1);
+  const secondPageJobs = workExperience.slice(1);
 
   const itLevelDots = (level?: string) => {
     const levels = { "Grundkenntnisse": 1, "Gut": 2, "Sehr gut": 3, "Expertenwissen": 4 };
@@ -76,15 +105,57 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
     ));
   };
 
+  const labels = {
+    de: {
+      strengths: "Persönliche Kompetenzen",
+      achievements: "Erfolge",
+      education: "Ausbildung",
+      certificates: "Weiterbildungen",
+      languages: "Sprachen",
+      itSkills: "IT-Kenntnisse",
+      softSkills: "Soft Skills",
+      profile: "Profil",
+      experience: "Berufserfahrung",
+      moreExperience: "Weitere Berufserfahrungen",
+      skills: "Kompetenzen & Tools",
+      projects: "Projekte",
+      careerHighlights: "Karriere-Highlights",
+      expertise: "Fachkenntnisse",
+      successes: "Key Achievements",
+    },
+    en: {
+      strengths: "Strengths",
+      successes: "Key Achievements",
+      education: "Education",
+      certificates: "Certificates",
+      languages: "Languages",
+      itSkills: "IT Skills",
+      softSkills: "Soft Skills",
+      profile: "Profile",
+      experience: "Professional Experience",
+      moreExperience: "Additional Professional Experience",
+      skills: "Skills & Tools",
+      projects: "Projects",
+      careerHighlights: "Career Highlights",
+      expertise: "Expertise",
+    },
+  };
+  
+  const t = labels[language];
   return (
     <div className="cv-root">
-      {/* ── Header ─────────────────────────────────────────────────────── */}
-      <header className="cv-header">
+      <section className="cv-page cv-page-1">
+        {/* Header */}
+        <header className="cv-header">
   <div className="cv-header-left">
 
   <div className="cv-photo-placeholder">
   {personal.photo ? (
-    <img src={personal.photo} alt="Profilfoto" className="cv-photo-img" />
+    <img
+      src={personal.photo}
+      alt={`${personal.firstName} ${personal.lastName}`}
+      className="cv-photo-img"
+    />
   ) : (
     <span>FOTO</span>
   )}
@@ -118,7 +189,7 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
 
           {/* Stärken */}
           {strengths.length > 0 && (
-            <SideSection title="Stärken">
+            <SideSection title={t.strengths}>
               <ul className="cv-strengths-list">
                 {strengths.map((s) => (
                   <li key={s.id} className="cv-strength-item">
@@ -132,7 +203,7 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
 
           {/* Erfolge */}
           {achievements.length > 0 && (
-            <SideSection title="Erfolge">
+            <SideSection title={t.successes}>
               <ul className="cv-achievements-list">
                 {achievements.map((a) => (
                   <li key={a.id} className="cv-achievement-item">
@@ -155,7 +226,7 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
 
           {/* IT-Kenntnisse */}
           {itSkills.length > 0 && (
-            <SideSection title="IT-Kenntnisse">
+            <SideSection title={t.itSkills}>
               <ul className="cv-it-list">
                 {itSkills.map((it) => (
                   <li key={it.id} className="cv-it-item">
@@ -167,9 +238,53 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
             </SideSection>
           )}
 
-          {/* Sprachen */}
-          {languages.length > 0 && (
-            <SideSection title="Sprachen">
+        {/* ── MAIN CONTENT ─────────────────────────────────────────────── */}
+        </aside>
+
+<main className="cv-main">
+  {(profile.why || profile.how || profile.what || profile.rawText) && (
+    <MainSection title={t.profile}>
+      {profile.rawText && !profile.why && (
+        <p className="cv-profile-text">{profile.rawText}</p>
+      )}
+
+      {profile.why && <p className="cv-profile-text">{profile.why}</p>}
+      {profile.how && <p className="cv-profile-text">{profile.how}</p>}
+      {profile.what && <p className="cv-profile-text">{profile.what}</p>}
+    </MainSection>
+  )}
+
+          {/* USP */}
+          {usps.length > 0 && (
+            <MainSection title={t.careerHighlights}>
+              <div className="cv-usp-grid">
+                {usps.map((u) => (
+                  <div key={u.id} className="cv-usp-item">
+                    <p className="cv-usp-title">{u.title}</p>
+                    <p className="cv-usp-desc">{u.description}</p>
+                  </div>
+                ))}
+              </div>
+            </MainSection>
+          )}
+
+                    {/* Berufserfahrung Seite 1 */}
+                    {firstPageJobs.length > 0 && (
+            <MainSection title={t.experience}>
+              {firstPageJobs.map((job) => (
+                <WorkEntry key={job.id} job={job} />
+              ))}
+            </MainSection>
+          )}
+        </main>
+      </div>
+    </section>
+    <section className="cv-page cv-page-2">
+      <div className="cv-body">
+        <aside className="cv-sidebar cv-sidebar-page2">
+        {/* Sprachen */}
+        {languages.length > 0 && (
+            <SideSection title={t.languages}>
               <ul className="cv-language-list">
                 {languages.map((l) => (
                   <li key={l.id} className="cv-language-item">
@@ -180,10 +295,9 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
               </ul>
             </SideSection>
           )}
-
           {/* Ausbildung */}
           {education.length > 0 && (
-            <SideSection title="Ausbildung">
+            <SideSection title={t.education}>
               {education.map((edu) => (
                 <div key={edu.id} className="cv-edu-item">
                   <p className="cv-edu-degree">{edu.degree}</p>
@@ -197,7 +311,7 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
 
           {/* Weiterbildungen & Zertifikate */}
           {certificates.length > 0 && (
-            <SideSection title="Zertifikate">
+            <SideSection title={t.certificates}>
               {certificates.map((c) => (
                 <div key={c.id} className="cv-cert-item">
                   <p className="cv-cert-title">{c.title}</p>
@@ -210,63 +324,19 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
               ))}
             </SideSection>
           )}
-        </aside>
+                </aside>
 
-        {/* ── MAIN CONTENT ─────────────────────────────────────────────── */}
-        <main className="cv-main">
-
-          {/* Profil */}
-          {(profile.why || profile.how || profile.what || profile.rawText) && (
-            <MainSection title="Profil">
-              {profile.rawText && !profile.why && (
-                <p className="cv-profile-text">{profile.rawText}</p>
-              )}
-              {profile.why && (
-  <p className="cv-profile-text">
-    {profile.why}
-  </p>
-)}
-
-{profile.how && (
-  <p className="cv-profile-text">
-    {profile.how}
-  </p>
-)}
-
-{profile.what && (
-  <p className="cv-profile-text">
-    {profile.what}
-  </p>
-)}
-            </MainSection>
-          )}
-
-          {/* USP */}
-          {usps.length > 0 && (
-            <MainSection title="Karriere-Highlights">
-              <div className="cv-usp-grid">
-                {usps.map((u) => (
-                  <div key={u.id} className="cv-usp-item">
-                    <p className="cv-usp-title">{u.title}</p>
-                    <p className="cv-usp-desc">{u.description}</p>
-                  </div>
-                ))}
-              </div>
-            </MainSection>
-          )}
-
-          {/* Berufserfahrung */}
-          {workExperience.length > 0 && (
-            <MainSection title="Berufserfahrung">
-              {workExperience.map((job) => (
+<main className="cv-main">
+          {secondPageJobs.length > 0 && (
+            <MainSection title="Weitere Berufserfahrung">
+              {secondPageJobs.map((job) => (
                 <WorkEntry key={job.id} job={job} />
               ))}
             </MainSection>
           )}
 
-          {/* Fachkenntnisse */}
           {skillGroups.length > 0 && (
-            <MainSection title="Fachkenntnisse">
+            <MainSection title={t.expertise}>
               {skillGroups.map((sg) => (
                 <div key={sg.id} className="cv-skill-group">
                   <p className="cv-skill-group-category">{sg.category}</p>
@@ -276,17 +346,25 @@ export function ProfessionalCVPreview({ data }: ProfessionalCVProps) {
             </MainSection>
           )}
 
-          {/* Hard Skills */}
           {hardSkills.length > 0 && (
             <MainSection title="Hard Skills">
               <ul className="cv-tag-list cv-tag-list--main">
-                {hardSkills.map((s, i) => <li key={i} className="cv-tag cv-tag--hard">{s}</li>)}
+                {hardSkills.map((s, i) => (
+                  <li key={i} className="cv-tag cv-tag--hard">{s}</li>
+                ))}
               </ul>
             </MainSection>
           )}
-
-        </main>
+                        </main>
       </div>
-    </div>
-  );
+
+      <footer className="cv-footer cv-footer--page2">
+        <span>
+          {personal.firstName} {personal.lastName} · {personal.email} · {personal.phone}
+          {personal.linkedin && <> · {personal.linkedin}</>}
+        </span>
+      </footer>
+    </section>
+  </div>
+);
 }

@@ -211,3 +211,54 @@
 .cv-form-remove-btn:hover {
   background: #fcc;
 }
+.cv-form-field input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+}
+.cv-form-ai-btn {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #1E3A5F;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cv-form-ai-btn--inside {
+  width: 100%;
+  margin: 0 0 16px 0;
+}
+
+.cv-form-ai-btn:hover {
+  opacity: 0.9;
+}
+.cv-form-remove-photo {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.cv-form-remove-photo:hover {
+  background: #f3f4f6;
+}
+.cv-form-ai-btn {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #1E3A5F;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cv-form-ai-btn:hover {
+  opacity: 0.92;
+}
