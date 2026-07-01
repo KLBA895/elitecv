@@ -539,26 +539,26 @@ export default function Home() {
         <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
           <a href="#" className="shrink-0 rounded-md px-1 py-1 transition-opacity hover:opacity-90"><EliteCVLogo /></a>
           <div className="hidden items-center gap-1 lg:flex">
-          {t.nav.map((link) =>
-  link.href.startsWith("/") ? (
-    <Link
-      key={link.label}
-      href={link.href}
-      className="rounded-md px-4 py-2 text-sm font-medium text-[#0A1F44]/76 transition-colors hover:text-[#0A1F44]"
-    >
-      {link.label}
-    </Link>
-  ) : (
-    <a
-      key={link.label}
-      href={link.href}
-      className="rounded-md px-4 py-2 text-sm font-medium text-[#0A1F44]/76 transition-colors hover:text-[#0A1F44]"
-    >
-      {link.label}
-    </a>
-  )
-)}
-          </div>
+  {t.nav.map((link) =>
+    link.href.startsWith("/") ? (
+      <Link
+        key={link.label}
+        href={link.href}
+        className="rounded-full px-4 py-2 text-sm font-medium text-[#0A1F44]/76 transition-all duration-200 hover:bg-[#C9A95A]/12 hover:text-[#0A1F44] hover:shadow-sm"
+      >
+        {link.label}
+      </Link>
+    ) : (
+      <a
+        key={link.label}
+        href={link.href}
+        className="rounded-full px-4 py-2 text-sm font-medium text-[#0A1F44]/76 transition-all duration-200 hover:bg-[#C9A95A]/12 hover:text-[#0A1F44] hover:shadow-sm"
+      >
+        {link.label}
+      </a>
+    )
+  )}
+</div>
           <div className="flex items-center gap-3">
             <div className="rounded-full border border-[#0A1F44]/12 bg-white p-1 text-xs font-semibold">
               <button type="button" onClick={() => setLang("de")} className={`rounded-full px-3 py-1 transition ${lang === "de" ? "bg-[#0A1F44] text-white" : "text-[#0A1F44]/65 hover:text-[#0A1F44]"}`}>DE</button>
