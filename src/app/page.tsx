@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 
 type Lang = "de" | "en";
@@ -447,10 +447,37 @@ export default function Home() {
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [contactError, setContactError] = useState(false);
   const [orderLoading, setOrderLoading] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const t = content[lang];
+  useEffect(() => {
+    const sectionIds = ["leistungen", "preise", "kontakt"];
+  
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  
+        if (visible?.target?.id) {
+          setActiveSection(`#${visible.target.id}`);
+        }
+      },
+      {
+        rootMargin: "-30% 0px -55% 0px",
+        threshold: [0.15, 0.25, 0.5],
+      }
+    );
+  
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+  
+    return () => observer.disconnect();
+  }, []);
 
   const metrics = useMemo(
     () => (lang === "de" ? ["WHY · Positionierung", "HOW · Struktur", "WHAT · Wirkung"] : ["WHY · Positioning", "HOW · Structure", "WHAT · Impact"]),
@@ -539,8 +566,10 @@ export default function Home() {
         <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
           <a href="#" className="shrink-0 rounded-md px-1 py-1 transition-opacity hover:opacity-90"><EliteCVLogo /></a>
           <div className="hidden items-center gap-1 lg:flex">
-  {t.nav.map((link) =>
-    link.href.startsWith("/") ? (
+  {t.nav.map((link) => {
+    const isActive = link.href.startsWith("#") && activeSection === link.href;
+
+    return link.href.startsWith("/") ? (
       <Link
         key={link.label}
         href={link.href}
@@ -552,12 +581,16 @@ export default function Home() {
       <a
         key={link.label}
         href={link.href}
-        className="rounded-full px-4 py-2 text-sm font-medium text-[#0A1F44]/76 transition-all duration-200 hover:bg-[#C9A95A]/12 hover:text-[#0A1F44] hover:shadow-sm"
+        className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm ${
+          isActive
+            ? "bg-[#C9A95A]/15 text-[#0A1F44] shadow-sm"
+            : "text-[#0A1F44]/76 hover:bg-[#C9A95A]/12 hover:text-[#0A1F44]"
+        }`}
       >
         {link.label}
       </a>
-    )
-  )}
+    );
+  })}
 </div>
           <div className="flex items-center gap-3">
             <div className="rounded-full border border-[#0A1F44]/12 bg-white p-1 text-xs font-semibold">
