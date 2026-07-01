@@ -544,11 +544,7 @@ export default function Home() {
     <Link
       key={link.label}
       href={link.href}
-      className={`rounded-md px-4 py-2 text-sm font-medium transition-colors ${
-        link.href === "/cv-generator"
-          ? "rounded-full bg-[#0A1F44] text-white hover:bg-[#12305f]"
-          : "text-[#0A1F44]/76 hover:text-[#0A1F44]"
-      }`}
+      className="rounded-md px-4 py-2 text-sm font-medium text-[#0A1F44]/76 transition-colors hover:text-[#0A1F44]"
     >
       {link.label}
     </Link>
