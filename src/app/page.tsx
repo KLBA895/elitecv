@@ -447,34 +447,23 @@ export default function Home() {
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [contactError, setContactError] = useState(false);
   const [orderLoading, setOrderLoading] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeHash, setActiveHash] = useState("");
 
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const t = content[lang];
   useEffect(() => {
-    const sectionIds = ["leistungen", "preise", "kontakt"];
+    const updateHash = () => {
+      setActiveHash(window.location.hash);
+    };
   
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(`#${entry.target.id}`);
-          }
-        });
-      },
-      {
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: 0.1,
-      }
-    );
+    updateHash();
   
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
-    });
+    window.addEventListener("hashchange", updateHash);
   
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener("hashchange", updateHash);
+    };
   }, []);
 
   const metrics = useMemo(
@@ -565,7 +554,7 @@ export default function Home() {
           <a href="#" className="shrink-0 rounded-md px-1 py-1 transition-opacity hover:opacity-90"><EliteCVLogo /></a>
           <div className="hidden items-center gap-1 lg:flex">
   {t.nav.map((link) => {
-    const isActive = link.href.startsWith("#") && activeSection === link.href;
+    const isActive = link.href.startsWith("#") && activeHash === link.href;
 
     return link.href.startsWith("/") ? (
       <Link
@@ -577,16 +566,17 @@ export default function Home() {
       </Link>
     ) : (
       <a
-        key={link.label}
-        href={link.href}
-        className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm ${
-          isActive
-            ? "bg-[#C9A95A]/15 text-[#0A1F44] shadow-sm"
-            : "text-[#0A1F44]/76 hover:bg-[#C9A95A]/12 hover:text-[#0A1F44]"
-        }`}
-      >
-        {link.label}
-      </a>
+  key={link.label}
+  href={link.href}
+  onClick={() => setActiveHash(link.href)}
+  className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm ${
+    isActive
+      ? "bg-[#C9A95A]/15 text-[#0A1F44] shadow-sm"
+      : "text-[#0A1F44]/76 hover:bg-[#C9A95A]/12 hover:text-[#0A1F44]"
+  }`}
+>
+  {link.label}
+</a>
     );
   })}
 </div>
