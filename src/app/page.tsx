@@ -457,17 +457,15 @@ export default function Home() {
   
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-  
-        if (visible?.target?.id) {
-          setActiveSection(`#${visible.target.id}`);
-        }
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
       },
       {
-        rootMargin: "-30% 0px -55% 0px",
-        threshold: [0.15, 0.25, 0.5],
+        rootMargin: "-20% 0px -60% 0px",
+        threshold: 0.1,
       }
     );
   
