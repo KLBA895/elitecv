@@ -8,7 +8,7 @@ export const sampleCVData: CVData = {
   personal: {
     firstName: "Sandra",
     lastName: "Meier",
-    targetTitle: "Head of Operations / COO",
+    targetTitle: "Head of Operations | COO",
     targetPosition: "Process Excellence",
     targetIndustry: "Change Management",
     email: "sandra.meier@example.com",
@@ -21,7 +21,7 @@ export const sampleCVData: CVData = {
   },
 
   profile: {
-    rawText:"Operations-Führungskraft mit über 12 Jahren Erfahrung in der Finanzbranche. Spezialisiert auf Prozessoptimierung, Change Management und den Aufbau leistungsstarker Teams. Schafft nachhaltige Strukturen, steigert Effizienz und begleitet Organisationen erfolgreich durch Transformationsphasen.",
+    rawText: "Operations-Führungskraft mit über 12 Jahren Erfahrung in der Finanzbranche. Spezialisiert auf Prozessoptimierung, Change Management und den Aufbau leistungsstarker Teams. Schafft nachhaltige Strukturen, steigert Effizienz und begleitet Organisationen erfolgreich durch Transformationsphasen.",
     how: "",
     what: "",
   },

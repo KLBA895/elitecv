@@ -140,7 +140,7 @@ export function CVForm({
       successes: "Achievements",
     },
   };
-  
+
   const t = labels[language];
   const update = <K extends keyof CVData>(key: K, value: CVData[K]) =>
     onChange({ ...data, [key]: value });
@@ -190,9 +190,9 @@ export function CVForm({
       (data[listKey] as WorkExperience[]).map((w) =>
         w.id === id
           ? {
-              ...w,
-              [field]: (w[field] as string[]).map((v, i) => (i === index ? value : v)),
-            }
+            ...w,
+            [field]: (w[field] as string[]).map((v, i) => (i === index ? value : v)),
+          }
           : w
       )
     );
@@ -222,212 +222,215 @@ export function CVForm({
 
       {/* ── Layout ─────────────────────────────────────────────────────────── */}
       <div className="cv-form-field">
-  <FieldLabel>Layout-Vorlage</FieldLabel>
+        <FieldLabel>Layout-Vorlage</FieldLabel>
 
-  <select
-    className="cv-form-select"
-    value={data.layout}
-    onChange={(e) =>
-      update("layout", e.target.value as CVData["layout"])
-    }
-  >
-    <option value="professional">EliteCV Professional</option>
-    <option value="executive">EliteCV Executive</option>
-  </select>
-</div>
+        <select
+          className="cv-form-select"
+          value={data.layout}
+          onChange={(e) =>
+            update("layout", e.target.value as CVData["layout"])
+          }
+        >
+          <option value="professional">EliteCV Professional</option>
+          <option value="executive">EliteCV Executive</option>
+        </select>
+      </div>
       {/* ── Persönliche Daten ──────────────────────────────────────────────── */}
-<AccordionSection title="Persönliche Daten" badge={undefined}>
-  <div className="cv-form-grid2">
-    <div className="cv-form-field">
-      <FieldLabel>Vorname</FieldLabel>
-      <Input
-        value={data.personal.firstName}
-        onChange={(v) => updatePersonal("firstName", v)}
-        placeholder="Sandra"
-      />
-    </div>
+      <AccordionSection title="Persönliche Daten" badge={undefined}>
+        <div className="cv-form-grid2">
+          <div className="cv-form-field">
+            <FieldLabel>Vorname</FieldLabel>
+            <Input
+              value={data.personal.firstName}
+              onChange={(v) => updatePersonal("firstName", v)}
+              placeholder="Sandra"
+            />
+          </div>
 
-    <div className="cv-form-field">
-      <FieldLabel>Nachname</FieldLabel>
-      <Input
-        value={data.personal.lastName}
-        onChange={(v) => updatePersonal("lastName", v)}
-        placeholder="Meier"
-      />
-    </div>
+          <div className="cv-form-field">
+            <FieldLabel>Nachname</FieldLabel>
+            <Input
+              value={data.personal.lastName}
+              onChange={(v) => updatePersonal("lastName", v)}
+              placeholder="Meier"
+            />
+          </div>
 
-    <div className="cv-form-field cv-form-field--full">
-      <FieldLabel>Gewünschte Rollenbezeichnung (CV-Header)</FieldLabel>
-      <Input
-        value={data.personal.targetTitle}
-        onChange={(v) => updatePersonal("targetTitle", v)}
-        placeholder="Head of Operations"
-      />
-    </div>
+          <div className="cv-form-field cv-form-field--full">
+            <FieldLabel>Gewünschte Rollenbezeichnung (CV-Header)</FieldLabel>
+            <Input
+              value={data.personal.targetTitle
+                .replace(/\s*\/\s*/g, " | ")
+                .replace(/\|\s*\n/g, "\n")
+                .replace(/\s*\|\s*$/g, "")}
+              onChange={(v) => updatePersonal("targetTitle", v)}
+              placeholder="Head of Operations"
+            />
+          </div>
 
-    <div className="cv-form-field">
-      <FieldLabel>Zielposition (für Keywords)</FieldLabel>
-      <Input
-        value={data.personal.targetPosition}
-        onChange={(v) => updatePersonal("targetPosition", v)}
-        placeholder="Head of Operations / COO"
-      />
-    </div>
+          <div className="cv-form-field">
+            <FieldLabel>Zielposition (für Keywords)</FieldLabel>
+            <Input
+              value={data.personal.targetPosition}
+              onChange={(v) => updatePersonal("targetPosition", v)}
+              placeholder="Head of Operations / COO"
+            />
+          </div>
 
-    <div className="cv-form-field">
-      <FieldLabel>Branche</FieldLabel>
-      <Input
-        value={data.personal.targetIndustry}
-        onChange={(v) => updatePersonal("targetIndustry", v)}
-        placeholder="Finanzdienstleistungen"
-      />
-    </div>
+          <div className="cv-form-field">
+            <FieldLabel>Branche</FieldLabel>
+            <Input
+              value={data.personal.targetIndustry}
+              onChange={(v) => updatePersonal("targetIndustry", v)}
+              placeholder="Finanzdienstleistungen"
+            />
+          </div>
 
-    <div className="cv-form-field">
-      <FieldLabel>E-Mail</FieldLabel>
-      <Input
-        value={data.personal.email}
-        onChange={(v) => updatePersonal("email", v)}
-        type="email"
-        placeholder="name@example.com"
-      />
-    </div>
+          <div className="cv-form-field">
+            <FieldLabel>E-Mail</FieldLabel>
+            <Input
+              value={data.personal.email}
+              onChange={(v) => updatePersonal("email", v)}
+              type="email"
+              placeholder="name@example.com"
+            />
+          </div>
 
-    <div className="cv-form-field">
-      <FieldLabel>Telefon</FieldLabel>
-      <Input
-        value={data.personal.phone}
-        onChange={(v) => updatePersonal("phone", v)}
-        placeholder="+41 79 123 45 67"
-      />
-    </div>
+          <div className="cv-form-field">
+            <FieldLabel>Telefon</FieldLabel>
+            <Input
+              value={data.personal.phone}
+              onChange={(v) => updatePersonal("phone", v)}
+              placeholder="+41 79 123 45 67"
+            />
+          </div>
 
-    <div className="cv-form-field">
-      <FieldLabel>Standort</FieldLabel>
-      <Input
-        value={data.personal.location}
-        onChange={(v) => updatePersonal("location", v)}
-        placeholder="Zürich, Schweiz"
-      />
-    </div>
+          <div className="cv-form-field">
+            <FieldLabel>Standort</FieldLabel>
+            <Input
+              value={data.personal.location}
+              onChange={(v) => updatePersonal("location", v)}
+              placeholder="Zürich, Schweiz"
+            />
+          </div>
 
-    <div className="cv-form-field">
-      <FieldLabel>LinkedIn</FieldLabel>
-      <Input
-        value={data.personal.linkedin ?? ""}
-        onChange={(v) => updatePersonal("linkedin", v)}
-        placeholder="linkedin.com/in/name"
-      />
-    </div>
+          <div className="cv-form-field">
+            <FieldLabel>LinkedIn</FieldLabel>
+            <Input
+              value={data.personal.linkedin ?? ""}
+              onChange={(v) => updatePersonal("linkedin", v)}
+              placeholder="linkedin.com/in/name"
+            />
+          </div>
 
-    <div className="cv-form-field cv-form-field--full">
-  <FieldLabel>Foto hochladen</FieldLabel>
+          <div className="cv-form-field cv-form-field--full">
+            <FieldLabel>Foto hochladen</FieldLabel>
 
-  <input
-    type="file"
-    accept="image/png,image/jpeg,image/webp"
-    className="cv-form-input"
-    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
-      if (!file) return;
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              className="cv-form-input"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                const file = event.target.files?.[0];
+                if (!file) return;
 
-      const reader = new FileReader();
+                const reader = new FileReader();
 
-      reader.onload = () => {
-        updatePersonal("photo", String(reader.result));
-      };
+                reader.onload = () => {
+                  updatePersonal("photo", String(reader.result));
+                };
 
-      reader.readAsDataURL(file);
-    }}
-  />
+                reader.readAsDataURL(file);
+              }}
+            />
 
-  {data.personal.photo && (
-    <>
-      <img
-        src={data.personal.photo}
-        alt="Vorschau"
-        style={{
-          width: "80px",
-          height: "80px",
-          borderRadius: "50%",
-          objectFit: "cover",
-          marginTop: "12px",
-          display: "block",
-        }}
-      />
+            {data.personal.photo && (
+              <>
+                <img
+                  src={data.personal.photo}
+                  alt="Vorschau"
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    marginTop: "12px",
+                    display: "block",
+                  }}
+                />
 
-      <button
-        type="button"
-        className="cv-form-remove-photo"
-        onClick={() => updatePersonal("photo", "")}
-      >
-        Foto entfernen
-      </button>
-    </>
-  )}
-</div>
-  </div>
-</AccordionSection>
+                <button
+                  type="button"
+                  className="cv-form-remove-photo"
+                  onClick={() => updatePersonal("photo", "")}
+                >
+                  Foto entfernen
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </AccordionSection>
 
       {/* ── Profil ─────────────────────────────────────────────────────────── */}
       <AccordionSection title="Profiltext">
-  <div className="cv-form-field">
-    <FieldLabel>Rohtext (vom Kunden)</FieldLabel>
+        <div className="cv-form-field">
+          <FieldLabel>Rohtext (vom Kunden)</FieldLabel>
 
-    <Textarea
-      value={data.profile.rawText}
-      onChange={(v) => updateProfile("rawText", v)}
-      placeholder="Freitext über Motivation, Erfahrung, Arbeitsweise…"
-      rows={4}
-    />
+          <Textarea
+            value={data.profile.rawText}
+            onChange={(v) => updateProfile("rawText", v)}
+            placeholder="Freitext über Motivation, Erfahrung, Arbeitsweise…"
+            rows={4}
+          />
 
-    <button
-      type="button"
-      className="cv-form-ai-btn cv-form-ai-btn--inside"
-      onClick={() => {
-      
-        const role = data.personal.targetTitle || "Fach- und Führungskraft";
-        const industry = data.personal.targetIndustry || "der Zielbranche";
-      
-        const generatedText = `${role} mit fundierter Erfahrung in ${industry}, Prozessoptimierung und Projektumsetzung. Verbindet analytisches Denken mit Umsetzungsstärke und schafft klare Strukturen, effiziente Abläufe sowie nachhaltige Verbesserungen.`;
-      
-        updateProfile("rawText", generatedText);
-      }}
-    >
-      KI-Profiltext generieren
-    </button>
-  </div>
+          <button
+            type="button"
+            className="cv-form-ai-btn cv-form-ai-btn--inside"
+            onClick={() => {
 
-  <div className="cv-form-field">
-    <FieldLabel>WHY – Warum / Motivation</FieldLabel>
-    <Textarea
-      value={data.profile.why ?? ""}
-      onChange={(v) => updateProfile("why", v)}
-      rows={2}
-      placeholder="Was treibt mich an?"
-    />
-  </div>
+              const role = data.personal.targetTitle || "Fach- und Führungskraft";
+              const industry = data.personal.targetIndustry || "der Zielbranche";
 
-  <div className="cv-form-field">
-    <FieldLabel>HOW – Wie / Arbeitsweise</FieldLabel>
-    <Textarea
-      value={data.profile.how ?? ""}
-      onChange={(v) => updateProfile("how", v)}
-      rows={2}
-      placeholder="Wie gehe ich vor?"
-    />
-  </div>
+              const generatedText = `${role} mit fundierter Erfahrung in ${industry}, Prozessoptimierung und Projektumsetzung. Verbindet analytisches Denken mit Umsetzungsstärke und schafft klare Strukturen, effiziente Abläufe sowie nachhaltige Verbesserungen.`;
 
-  <div className="cv-form-field">
-    <FieldLabel>WHAT – Was / Kompetenzen</FieldLabel>
-    <Textarea
-      value={data.profile.what ?? ""}
-      onChange={(v) => updateProfile("what", v)}
-      rows={2}
-      placeholder="Was bringe ich konkret mit?"
-    />
-  </div>
-</AccordionSection>
+              updateProfile("rawText", generatedText);
+            }}
+          >
+            KI-Profiltext generieren
+          </button>
+        </div>
+
+        <div className="cv-form-field">
+          <FieldLabel>WHY – Warum / Motivation</FieldLabel>
+          <Textarea
+            value={data.profile.why ?? ""}
+            onChange={(v) => updateProfile("why", v)}
+            rows={2}
+            placeholder="Was treibt mich an?"
+          />
+        </div>
+
+        <div className="cv-form-field">
+          <FieldLabel>HOW – Wie / Arbeitsweise</FieldLabel>
+          <Textarea
+            value={data.profile.how ?? ""}
+            onChange={(v) => updateProfile("how", v)}
+            rows={2}
+            placeholder="Wie gehe ich vor?"
+          />
+        </div>
+
+        <div className="cv-form-field">
+          <FieldLabel>WHAT – Was / Kompetenzen</FieldLabel>
+          <Textarea
+            value={data.profile.what ?? ""}
+            onChange={(v) => updateProfile("what", v)}
+            rows={2}
+            placeholder="Was bringe ich konkret mit?"
+          />
+        </div>
+      </AccordionSection>
 
       {/* ── USP ────────────────────────────────────────────────────────────── */}
       <AccordionSection title="Alleinstellungsmerkmale (USP)" badge={data.usps.length}>
@@ -451,557 +454,557 @@ export function CVForm({
       </AccordionSection>
 
       {/* ── Stärken ────────────────────────────────────────────────────────── */}
-<AccordionSection title="Stärken" badge={data.strengths.length}>
-  <button
-    type="button"
-    className="cv-form-ai-btn cv-form-ai-btn--inside"
-    onClick={() => {
-      update("strengths", [
-        {
-          id: uid(),
-          label: "Analytisches Denken",
-          description: "Komplexe Zusammenhänge erkennen und strukturieren",
-        },
-        {
-          id: uid(),
-          label: "Projektmanagement",
-          description: "Projekte zielgerichtet planen und umsetzen",
-        },
-        {
-          id: uid(),
-          label: "Prozessoptimierung",
-          description: "Abläufe analysieren und nachhaltig verbessern",
-        },
-        {
-          id: uid(),
-          label: "Führungskompetenz",
-          description: "Teams motivieren und koordinieren",
-        },
-        {
-          id: uid(),
-          label: "Kommunikationsstärke",
-          description: "Adressatengerecht und lösungsorientiert kommunizieren",
-        },
-        {
-          id: uid(),
-          label: "Umsetzungsstärke",
-          description: "Ideen effizient in Ergebnisse überführen",
-        },
-      ]);
-    }}
-  >
-    ✨ Stärken generieren
-  </button>
+      <AccordionSection title="Stärken" badge={data.strengths.length}>
+        <button
+          type="button"
+          className="cv-form-ai-btn cv-form-ai-btn--inside"
+          onClick={() => {
+            update("strengths", [
+              {
+                id: uid(),
+                label: "Analytisches Denken",
+                description: "Komplexe Zusammenhänge erkennen und strukturieren",
+              },
+              {
+                id: uid(),
+                label: "Projektmanagement",
+                description: "Projekte zielgerichtet planen und umsetzen",
+              },
+              {
+                id: uid(),
+                label: "Prozessoptimierung",
+                description: "Abläufe analysieren und nachhaltig verbessern",
+              },
+              {
+                id: uid(),
+                label: "Führungskompetenz",
+                description: "Teams motivieren und koordinieren",
+              },
+              {
+                id: uid(),
+                label: "Kommunikationsstärke",
+                description: "Adressatengerecht und lösungsorientiert kommunizieren",
+              },
+              {
+                id: uid(),
+                label: "Umsetzungsstärke",
+                description: "Ideen effizient in Ergebnisse überführen",
+              },
+            ]);
+          }}
+        >
+          ✨ Stärken generieren
+        </button>
 
-  {data.strengths.map((s, idx) => (
-    <div key={s.id} className="cv-form-repeat-item">
-      <div className="cv-form-repeat-header">
-        <span className="cv-form-repeat-index">
-          Stärke {idx + 1}
-        </span>
+        {data.strengths.map((s, idx) => (
+          <div key={s.id} className="cv-form-repeat-item">
+            <div className="cv-form-repeat-header">
+              <span className="cv-form-repeat-index">
+                Stärke {idx + 1}
+              </span>
 
-        <RemoveButton
+              <RemoveButton
+                onClick={() =>
+                  update(
+                    "strengths",
+                    data.strengths.filter((x) => x.id !== s.id)
+                  )
+                }
+              />
+            </div>
+
+            <div className="cv-form-grid2">
+              <div className="cv-form-field">
+                <FieldLabel>Bezeichnung</FieldLabel>
+                <Input
+                  value={s.label}
+                  onChange={(v) =>
+                    update(
+                      "strengths",
+                      data.strengths.map((x) =>
+                        x.id === s.id ? { ...x, label: v } : x
+                      )
+                    )
+                  }
+                  placeholder="Führungsstärke"
+                />
+              </div>
+
+              <div className="cv-form-field">
+                <FieldLabel>Kurzbeschreibung</FieldLabel>
+                <Input
+                  value={s.description ?? ""}
+                  onChange={(v) =>
+                    update(
+                      "strengths",
+                      data.strengths.map((x) =>
+                        x.id === s.id
+                          ? { ...x, description: v }
+                          : x
+                      )
+                    )
+                  }
+                  placeholder="Teams motivieren und ausrichten"
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+
+        <AddButton
           onClick={() =>
-            update(
-              "strengths",
-              data.strengths.filter((x) => x.id !== s.id)
-            )
+            update("strengths", [
+              ...data.strengths,
+              {
+                id: uid(),
+                label: "",
+                description: "",
+              },
+            ])
           }
+          label="Stärke hinzufügen"
         />
-      </div>
-
-      <div className="cv-form-grid2">
-        <div className="cv-form-field">
-          <FieldLabel>Bezeichnung</FieldLabel>
-          <Input
-            value={s.label}
-            onChange={(v) =>
-              update(
-                "strengths",
-                data.strengths.map((x) =>
-                  x.id === s.id ? { ...x, label: v } : x
-                )
-              )
-            }
-            placeholder="Führungsstärke"
-          />
-        </div>
-
-        <div className="cv-form-field">
-          <FieldLabel>Kurzbeschreibung</FieldLabel>
-          <Input
-            value={s.description ?? ""}
-            onChange={(v) =>
-              update(
-                "strengths",
-                data.strengths.map((x) =>
-                  x.id === s.id
-                    ? { ...x, description: v }
-                    : x
-                )
-              )
-            }
-            placeholder="Teams motivieren und ausrichten"
-          />
-        </div>
-      </div>
-    </div>
-  ))}
-
-  <AddButton
-    onClick={() =>
-      update("strengths", [
-        ...data.strengths,
-        {
-          id: uid(),
-          label: "",
-          description: "",
-        },
-      ])
-    }
-    label="Stärke hinzufügen"
-  />
-</AccordionSection>
+      </AccordionSection>
       {/* ── Erfolge ────────────────────────────────────────────────────────── */}
-<AccordionSection title="Erfolge" badge={data.achievements.length}>
-  <button
-    type="button"
-    className="cv-form-ai-btn cv-form-ai-btn--inside"
-    onClick={() => {
-      update("achievements", [
-        {
-          id: uid(),
-          metric: "-15%",
-          text: "Durchlaufzeiten durch Prozessoptimierung reduziert",
-        },
-        {
-          id: uid(),
-          metric: "+10%",
-          text: "Umsatzsteigerung durch effizientere Abläufe erzielt",
-        },
-        {
-          id: uid(),
-          metric: "-20%",
-          text: "Reklamationsbearbeitungszeit nachhaltig verkürzt",
-        },
-        {
-          id: uid(),
-          metric: "6000+",
-          text: "Stammdaten erfolgreich migriert und harmonisiert",
-        },
-      ]);
-    }}
-  >
-    ✨ Highlights generieren
-  </button>
+      <AccordionSection title="Erfolge" badge={data.achievements.length}>
+        <button
+          type="button"
+          className="cv-form-ai-btn cv-form-ai-btn--inside"
+          onClick={() => {
+            update("achievements", [
+              {
+                id: uid(),
+                metric: "-15%",
+                text: "Durchlaufzeiten durch Prozessoptimierung reduziert",
+              },
+              {
+                id: uid(),
+                metric: "+10%",
+                text: "Umsatzsteigerung durch effizientere Abläufe erzielt",
+              },
+              {
+                id: uid(),
+                metric: "-20%",
+                text: "Reklamationsbearbeitungszeit nachhaltig verkürzt",
+              },
+              {
+                id: uid(),
+                metric: "6000+",
+                text: "Stammdaten erfolgreich migriert und harmonisiert",
+              },
+            ]);
+          }}
+        >
+          ✨ Highlights generieren
+        </button>
 
-  {data.achievements.map((a, idx) => (
-    <div key={a.id} className="cv-form-repeat-item">
-      <div className="cv-form-repeat-header">
-        <span className="cv-form-repeat-index">
-          Erfolg {idx + 1}
-        </span>
+        {data.achievements.map((a, idx) => (
+          <div key={a.id} className="cv-form-repeat-item">
+            <div className="cv-form-repeat-header">
+              <span className="cv-form-repeat-index">
+                Erfolg {idx + 1}
+              </span>
 
-        <RemoveButton
+              <RemoveButton
+                onClick={() =>
+                  update(
+                    "achievements",
+                    data.achievements.filter((x) => x.id !== a.id)
+                  )
+                }
+              />
+            </div>
+
+            <div className="cv-form-grid2">
+              <div className="cv-form-field">
+                <FieldLabel>Kennzahl / Metrik</FieldLabel>
+                <Input
+                  value={a.metric ?? ""}
+                  onChange={(v) =>
+                    update(
+                      "achievements",
+                      data.achievements.map((x) =>
+                        x.id === a.id ? { ...x, metric: v } : x
+                      )
+                    )
+                  }
+                  placeholder="–30% Kosten"
+                />
+              </div>
+
+              <div className="cv-form-field cv-form-field--full">
+                <FieldLabel>Beschreibung</FieldLabel>
+                <Input
+                  value={a.text}
+                  onChange={(v) =>
+                    update(
+                      "achievements",
+                      data.achievements.map((x) =>
+                        x.id === a.id ? { ...x, text: v } : x
+                      )
+                    )
+                  }
+                  placeholder="Operative Kosten um 30% reduziert durch Lean"
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+
+        <AddButton
           onClick={() =>
-            update(
-              "achievements",
-              data.achievements.filter((x) => x.id !== a.id)
-            )
+            update("achievements", [
+              ...data.achievements,
+              {
+                id: uid(),
+                text: "",
+                metric: "",
+              },
+            ])
           }
-        />
-      </div>
-
-      <div className="cv-form-grid2">
-        <div className="cv-form-field">
-          <FieldLabel>Kennzahl / Metrik</FieldLabel>
-          <Input
-            value={a.metric ?? ""}
-            onChange={(v) =>
-              update(
-                "achievements",
-                data.achievements.map((x) =>
-                  x.id === a.id ? { ...x, metric: v } : x
-                )
-              )
-            }
-            placeholder="–30% Kosten"
-          />
-        </div>
-
-        <div className="cv-form-field cv-form-field--full">
-          <FieldLabel>Beschreibung</FieldLabel>
-          <Input
-            value={a.text}
-            onChange={(v) =>
-              update(
-                "achievements",
-                data.achievements.map((x) =>
-                  x.id === a.id ? { ...x, text: v } : x
-                )
-              )
-            }
-            placeholder="Operative Kosten um 30% reduziert durch Lean"
-          />
-        </div>
-      </div>
-    </div>
-  ))}
-
-  <AddButton
-    onClick={() =>
-      update("achievements", [
-        ...data.achievements,
-        {
-          id: uid(),
-          text: "",
-          metric: "",
-        },
-      ])
-    }
-    label="Erfolg hinzufügen"
-  />
-</AccordionSection>
-
-      {/* ── Berufserfahrung ─────────────────────────────────────────────────── */}
-<AccordionSection title={t.experience} badge={data.workExperience.length}>
-  {data.workExperience.map((job, idx) => (
-    <div
-      key={job.id}
-      className="cv-form-repeat-item cv-form-repeat-item--major"
-    >
-      <div className="cv-form-repeat-header">
-        <span className="cv-form-repeat-index">
-          Position {idx + 1}
-          {job.company ? ` – ${job.company}` : ""}
-        </span>
-
-        <RemoveButton onClick={() => removeWork(job.id)} />
-      </div>
-
-      <div className="cv-form-grid2">
-        <div className="cv-form-field">
-          <FieldLabel>Unternehmen</FieldLabel>
-          <Input
-            value={job.company}
-            onChange={(v) => updateWork(job.id, "company", v)}
-            placeholder="Swiss Finance AG"
-          />
-        </div>
-
-        <div className="cv-form-field">
-          <FieldLabel>Ort</FieldLabel>
-          <Input
-            value={job.location}
-            onChange={(v) => updateWork(job.id, "location", v)}
-            placeholder="Zürich"
-          />
-        </div>
-
-        <div className="cv-form-field">
-          <FieldLabel>Von</FieldLabel>
-          <Input
-            value={job.from}
-            onChange={(v) => updateWork(job.id, "from", v)}
-            placeholder="03.2019"
-          />
-        </div>
-
-        <div className="cv-form-field">
-          <FieldLabel>Bis</FieldLabel>
-          <Input
-            value={job.to}
-            onChange={(v) => updateWork(job.id, "to", v)}
-            placeholder="heute"
-          />
-        </div>
-
-        <div className="cv-form-field cv-form-field--full">
-          <FieldLabel>Funktionsbezeichnung</FieldLabel>
-          <Input
-            value={job.functionTitle}
-            onChange={(v) => updateWork(job.id, "functionTitle", v)}
-            placeholder="Head of Operations"
-          />
-        </div>
-      </div>
-
-      <button
-        type="button"
-        className="cv-form-ai-btn cv-form-ai-btn--inside"
-        onClick={() => {
-          const title = job.functionTitle?.toLowerCase() ?? "";
-
-          let responsibilities: string[] = [];
-          let achievements: string[] = [];
-
-          if (title.includes("projekt")) {
-            responsibilities = [
-              "Leitung und Steuerung anspruchsvoller Projekte von der Planung bis zur Umsetzung",
-              "Koordination interner und externer Stakeholder",
-              "Verantwortung für Termine, Qualität und Budget",
-              "Sicherstellung einer erfolgreichen Projektabwicklung",
-            ];
-
-            achievements = [
-              "Projekte termingerecht und innerhalb des Budgets umgesetzt",
-              "Effizienzsteigerungen durch Prozessoptimierungen realisiert",
-              "Zusammenarbeit zwischen Fachbereichen nachhaltig verbessert",
-            ];
-          } else if (title.includes("manager")) {
-            responsibilities = [
-              "Führung und Weiterentwicklung von Teams und Prozessen",
-              "Verantwortung für operative und strategische Zielerreichung",
-              "Steuerung von Budgets und Ressourcen",
-              "Umsetzung von Veränderungs- und Optimierungsinitiativen",
-            ];
-
-            achievements = [
-              "Operative Abläufe nachhaltig optimiert",
-              "Leistungskennzahlen verbessert",
-              "Mitarbeiterentwicklung erfolgreich gefördert",
-            ];
-          } else {
-            responsibilities = [
-              "Verantwortung für operative Aufgaben und Projekte",
-              "Optimierung bestehender Prozesse",
-              "Zusammenarbeit mit internen und externen Stakeholdern",
-              "Sicherstellung hoher Qualitätsstandards",
-            ];
-
-            achievements = [
-              "Effizienzsteigerungen umgesetzt",
-              "Nachhaltige Verbesserungen erzielt",
-              "Wertvolle Beiträge zur Unternehmensentwicklung geleistet",
-            ];
-          }
-
-          updateWork(job.id, "responsibilities", responsibilities);
-          updateWork(job.id, "achievements", achievements);
-        }}
-      >
-        ✨ Berufserfahrung generieren
-      </button>
-
-      <div className="cv-form-field">
-        <FieldLabel>Aufgaben / Verantwortlichkeiten</FieldLabel>
-
-        {job.responsibilities.map((r, i) => (
-          <div key={i} className="cv-form-list-row">
-            <Input
-              value={r}
-              onChange={(v) =>
-                updateListField(
-                  job.id,
-                  "workExperience",
-                  "responsibilities",
-                  i,
-                  v
-                )
-              }
-              placeholder="Aufgabe beschreiben…"
-            />
-
-            <RemoveButton
-              onClick={() =>
-                removeListItem(job.id, "responsibilities", i)
-              }
-            />
-          </div>
-        ))}
-
-        <AddButton
-          onClick={() => addListItem(job.id, "responsibilities")}
-          label="Aufgabe hinzufügen"
-        />
-      </div>
-
-      <div className="cv-form-field">
-        <FieldLabel>Erfolge</FieldLabel>
-
-        {job.achievements.map((a, i) => (
-          <div key={i} className="cv-form-list-row">
-            <Input
-              value={a}
-              onChange={(v) =>
-                updateListField(
-                  job.id,
-                  "workExperience",
-                  "achievements",
-                  i,
-                  v
-                )
-              }
-              placeholder="Messbarer Erfolg…"
-            />
-
-            <RemoveButton
-              onClick={() => removeListItem(job.id, "achievements", i)}
-            />
-          </div>
-        ))}
-
-        <AddButton
-          onClick={() => addListItem(job.id, "achievements")}
           label="Erfolg hinzufügen"
         />
-      </div>
-    </div>
-  ))}
+      </AccordionSection>
 
-  <AddButton onClick={addWork} label="Position hinzufügen" />
-</AccordionSection>
+      {/* ── Berufserfahrung ─────────────────────────────────────────────────── */}
+      <AccordionSection title={t.experience} badge={data.workExperience.length}>
+        {data.workExperience.map((job, idx) => (
+          <div
+            key={job.id}
+            className="cv-form-repeat-item cv-form-repeat-item--major"
+          >
+            <div className="cv-form-repeat-header">
+              <span className="cv-form-repeat-index">
+                Position {idx + 1}
+                {job.company ? ` – ${job.company}` : ""}
+              </span>
 
-{/* ── Projekte ───────────────────────────────────────────────────────── */}
-<AccordionSection title="Projekte" badge={data.projects.length}>
-  {data.projects.map((project, idx) => (
-    <div key={project.id} className="cv-form-repeat-item">
-      <div className="cv-form-repeat-header">
-        <span className="cv-form-repeat-index">
-          Projekt {idx + 1}
-        </span>
+              <RemoveButton onClick={() => removeWork(job.id)} />
+            </div>
 
-        <RemoveButton
-          onClick={() =>
-            update(
-              "projects",
-              data.projects.filter((p) => p.id !== project.id)
-            )
-          }
-        />
-      </div>
+            <div className="cv-form-grid2">
+              <div className="cv-form-field">
+                <FieldLabel>Unternehmen</FieldLabel>
+                <Input
+                  value={job.company}
+                  onChange={(v) => updateWork(job.id, "company", v)}
+                  placeholder="Swiss Finance AG"
+                />
+              </div>
 
-      <div className="cv-form-field">
-        <FieldLabel>Projekttitel</FieldLabel>
-        <Input
-          value={project.title}
-          onChange={(v) =>
-            update(
-              "projects",
-              data.projects.map((p) =>
-                p.id === project.id ? { ...p, title: v } : p
-              )
-            )
-          }
-          placeholder="ERP-Migration Selectline → Infor COM"
-        />
-      </div>
+              <div className="cv-form-field">
+                <FieldLabel>Ort</FieldLabel>
+                <Input
+                  value={job.location}
+                  onChange={(v) => updateWork(job.id, "location", v)}
+                  placeholder="Zürich"
+                />
+              </div>
 
-      <div className="cv-form-field">
-        <FieldLabel>Rolle</FieldLabel>
-        <Input
-          value={project.role ?? ""}
-          onChange={(v) =>
-            update(
-              "projects",
-              data.projects.map((p) =>
-                p.id === project.id ? { ...p, role: v } : p
-              )
-            )
-          }
-          placeholder="Projektleitung"
-        />
-      </div>
+              <div className="cv-form-field">
+                <FieldLabel>Von</FieldLabel>
+                <Input
+                  value={job.from}
+                  onChange={(v) => updateWork(job.id, "from", v)}
+                  placeholder="03.2019"
+                />
+              </div>
 
-      <div className="cv-form-field">
-        <FieldLabel>Beschreibung</FieldLabel>
-        <Textarea
-          value={project.description ?? ""}
-          onChange={(v) =>
-            update(
-              "projects",
-              data.projects.map((p) =>
-                p.id === project.id
-                  ? { ...p, description: v }
-                  : p
-              )
-            )
-          }
-          rows={3}
-        />
-      </div>
+              <div className="cv-form-field">
+                <FieldLabel>Bis</FieldLabel>
+                <Input
+                  value={job.to}
+                  onChange={(v) => updateWork(job.id, "to", v)}
+                  placeholder="heute"
+                />
+              </div>
 
-      <div className="cv-form-field">
-        <FieldLabel>Ergebnisse</FieldLabel>
+              <div className="cv-form-field cv-form-field--full">
+                <FieldLabel>Funktionsbezeichnung</FieldLabel>
+                <Input
+                  value={job.functionTitle}
+                  onChange={(v) => updateWork(job.id, "functionTitle", v)}
+                  placeholder="Head of Operations"
+                />
+              </div>
+            </div>
 
-        {(project.results ?? []).map((result, i) => (
-          <div key={i} className="cv-form-list-row">
-            <Input
-              value={result}
-              onChange={(v) =>
-                update(
-                  "projects",
-                  data.projects.map((p) =>
-                    p.id === project.id
-                      ? {
-                          ...p,
-                          results: p.results.map((r, resultIndex) =>
-                            resultIndex === i ? v : r
-                          ),
-                        }
-                      : p
+            <button
+              type="button"
+              className="cv-form-ai-btn cv-form-ai-btn--inside"
+              onClick={() => {
+                const title = job.functionTitle?.toLowerCase() ?? "";
+
+                let responsibilities: string[] = [];
+                let achievements: string[] = [];
+
+                if (title.includes("projekt")) {
+                  responsibilities = [
+                    "Leitung und Steuerung anspruchsvoller Projekte von der Planung bis zur Umsetzung",
+                    "Koordination interner und externer Stakeholder",
+                    "Verantwortung für Termine, Qualität und Budget",
+                    "Sicherstellung einer erfolgreichen Projektabwicklung",
+                  ];
+
+                  achievements = [
+                    "Projekte termingerecht und innerhalb des Budgets umgesetzt",
+                    "Effizienzsteigerungen durch Prozessoptimierungen realisiert",
+                    "Zusammenarbeit zwischen Fachbereichen nachhaltig verbessert",
+                  ];
+                } else if (title.includes("manager")) {
+                  responsibilities = [
+                    "Führung und Weiterentwicklung von Teams und Prozessen",
+                    "Verantwortung für operative und strategische Zielerreichung",
+                    "Steuerung von Budgets und Ressourcen",
+                    "Umsetzung von Veränderungs- und Optimierungsinitiativen",
+                  ];
+
+                  achievements = [
+                    "Operative Abläufe nachhaltig optimiert",
+                    "Leistungskennzahlen verbessert",
+                    "Mitarbeiterentwicklung erfolgreich gefördert",
+                  ];
+                } else {
+                  responsibilities = [
+                    "Verantwortung für operative Aufgaben und Projekte",
+                    "Optimierung bestehender Prozesse",
+                    "Zusammenarbeit mit internen und externen Stakeholdern",
+                    "Sicherstellung hoher Qualitätsstandards",
+                  ];
+
+                  achievements = [
+                    "Effizienzsteigerungen umgesetzt",
+                    "Nachhaltige Verbesserungen erzielt",
+                    "Wertvolle Beiträge zur Unternehmensentwicklung geleistet",
+                  ];
+                }
+
+                updateWork(job.id, "responsibilities", responsibilities);
+                updateWork(job.id, "achievements", achievements);
+              }}
+            >
+              ✨ Berufserfahrung generieren
+            </button>
+
+            <div className="cv-form-field">
+              <FieldLabel>Aufgaben / Verantwortlichkeiten</FieldLabel>
+
+              {job.responsibilities.map((r, i) => (
+                <div key={i} className="cv-form-list-row">
+                  <Input
+                    value={r}
+                    onChange={(v) =>
+                      updateListField(
+                        job.id,
+                        "workExperience",
+                        "responsibilities",
+                        i,
+                        v
+                      )
+                    }
+                    placeholder="Aufgabe beschreiben…"
+                  />
+
+                  <RemoveButton
+                    onClick={() =>
+                      removeListItem(job.id, "responsibilities", i)
+                    }
+                  />
+                </div>
+              ))}
+
+              <AddButton
+                onClick={() => addListItem(job.id, "responsibilities")}
+                label="Aufgabe hinzufügen"
+              />
+            </div>
+
+            <div className="cv-form-field">
+              <FieldLabel>Erfolge</FieldLabel>
+
+              {job.achievements.map((a, i) => (
+                <div key={i} className="cv-form-list-row">
+                  <Input
+                    value={a}
+                    onChange={(v) =>
+                      updateListField(
+                        job.id,
+                        "workExperience",
+                        "achievements",
+                        i,
+                        v
+                      )
+                    }
+                    placeholder="Messbarer Erfolg…"
+                  />
+
+                  <RemoveButton
+                    onClick={() => removeListItem(job.id, "achievements", i)}
+                  />
+                </div>
+              ))}
+
+              <AddButton
+                onClick={() => addListItem(job.id, "achievements")}
+                label="Erfolg hinzufügen"
+              />
+            </div>
+          </div>
+        ))}
+
+        <AddButton onClick={addWork} label="Position hinzufügen" />
+      </AccordionSection>
+
+      {/* ── Projekte ───────────────────────────────────────────────────────── */}
+      <AccordionSection title="Projekte" badge={data.projects.length}>
+        {data.projects.map((project, idx) => (
+          <div key={project.id} className="cv-form-repeat-item">
+            <div className="cv-form-repeat-header">
+              <span className="cv-form-repeat-index">
+                Projekt {idx + 1}
+              </span>
+
+              <RemoveButton
+                onClick={() =>
+                  update(
+                    "projects",
+                    data.projects.filter((p) => p.id !== project.id)
                   )
-                )
-              }
-              placeholder="Ergebnis beschreiben…"
-            />
+                }
+              />
+            </div>
 
-            <RemoveButton
-              onClick={() =>
-                update(
-                  "projects",
-                  data.projects.map((p) =>
-                    p.id === project.id
-                      ? {
-                          ...p,
-                          results: p.results.filter(
-                            (_, resultIndex) => resultIndex !== i
-                          ),
-                        }
-                      : p
+            <div className="cv-form-field">
+              <FieldLabel>Projekttitel</FieldLabel>
+              <Input
+                value={project.title}
+                onChange={(v) =>
+                  update(
+                    "projects",
+                    data.projects.map((p) =>
+                      p.id === project.id ? { ...p, title: v } : p
+                    )
                   )
-                )
-              }
-            />
+                }
+                placeholder="ERP-Migration Selectline → Infor COM"
+              />
+            </div>
+
+            <div className="cv-form-field">
+              <FieldLabel>Rolle</FieldLabel>
+              <Input
+                value={project.role ?? ""}
+                onChange={(v) =>
+                  update(
+                    "projects",
+                    data.projects.map((p) =>
+                      p.id === project.id ? { ...p, role: v } : p
+                    )
+                  )
+                }
+                placeholder="Projektleitung"
+              />
+            </div>
+
+            <div className="cv-form-field">
+              <FieldLabel>Beschreibung</FieldLabel>
+              <Textarea
+                value={project.description ?? ""}
+                onChange={(v) =>
+                  update(
+                    "projects",
+                    data.projects.map((p) =>
+                      p.id === project.id
+                        ? { ...p, description: v }
+                        : p
+                    )
+                  )
+                }
+                rows={3}
+              />
+            </div>
+
+            <div className="cv-form-field">
+              <FieldLabel>Ergebnisse</FieldLabel>
+
+              {(project.results ?? []).map((result, i) => (
+                <div key={i} className="cv-form-list-row">
+                  <Input
+                    value={result}
+                    onChange={(v) =>
+                      update(
+                        "projects",
+                        data.projects.map((p) =>
+                          p.id === project.id
+                            ? {
+                              ...p,
+                              results: p.results.map((r, resultIndex) =>
+                                resultIndex === i ? v : r
+                              ),
+                            }
+                            : p
+                        )
+                      )
+                    }
+                    placeholder="Ergebnis beschreiben…"
+                  />
+
+                  <RemoveButton
+                    onClick={() =>
+                      update(
+                        "projects",
+                        data.projects.map((p) =>
+                          p.id === project.id
+                            ? {
+                              ...p,
+                              results: p.results.filter(
+                                (_, resultIndex) => resultIndex !== i
+                              ),
+                            }
+                            : p
+                        )
+                      )
+                    }
+                  />
+                </div>
+              ))}
+
+              <AddButton
+                onClick={() =>
+                  update(
+                    "projects",
+                    data.projects.map((p) =>
+                      p.id === project.id
+                        ? {
+                          ...p,
+                          results: [...p.results, ""],
+                        }
+                        : p
+                    )
+                  )
+                }
+                label="Ergebnis hinzufügen"
+              />
+            </div>
           </div>
         ))}
 
         <AddButton
           onClick={() =>
-            update(
-              "projects",
-              data.projects.map((p) =>
-                p.id === project.id
-                  ? {
-                      ...p,
-                      results: [...p.results, ""],
-                    }
-                  : p
-              )
-            )
+            update("projects", [
+              ...data.projects,
+              {
+                id: uid(),
+                title: "",
+                role: "",
+                description: "",
+                results: [""],
+              },
+            ])
           }
-          label="Ergebnis hinzufügen"
+          label="Projekt hinzufügen"
         />
-      </div>
-    </div>
-  ))}
-
-  <AddButton
-    onClick={() =>
-      update("projects", [
-        ...data.projects,
-        {
-          id: uid(),
-          title: "",
-          role: "",
-          description: "",
-          results: [""],
-        },
-      ])
-    }
-    label="Projekt hinzufügen"
-  />
-</AccordionSection>
+      </AccordionSection>
 
       {/* ── Skills ─────────────────────────────────────────────────────────── */}
       <AccordionSection title="Fachkenntnisse (Skill-Gruppen)">

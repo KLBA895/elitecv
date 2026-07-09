@@ -57,7 +57,7 @@
   border: none;
   background: transparent;
   color: rgba(255, 255, 255, 0.65);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 500;
   border-radius: 6px;
   cursor: pointer;
@@ -85,7 +85,7 @@
 .cvgen-btn {
   padding: 7px 14px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
   border: none;
@@ -173,6 +173,7 @@
   font-weight: 700;
   text-transform: uppercase;
 }
+
 .cvgen-color-picker {
   display: flex;
   gap: 8px;
@@ -272,7 +273,7 @@
 }
 
 /* Scale CV preview to fit available width */
-.cvgen-preview-scaler > div {
+.cvgen-preview-scaler>div {
   transform-origin: top center;
 }
 
@@ -295,15 +296,14 @@
     display: none;
   }
 }
+
 .cvgen-access {
   max-width: 660px;
   margin: 80px auto;
   padding: 40px;
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #f8fafc 100%
-  );
+  background: linear-gradient(180deg,
+      #ffffff 0%,
+      #f8fafc 100%);
   border: 1px solid #e2e8f0;
   border-radius: 20px;
   box-shadow:
@@ -353,6 +353,7 @@
   opacity: 0.92;
   transform: translateY(-1px);
 }
+
 .cvgen-access-badge {
   display: inline-block;
   margin-bottom: 20px;
@@ -362,4 +363,92 @@
   color: #1E3A5F;
   font-size: 12px;
   font-weight: 600;
+}
+
+.cvgen-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.cvgen-btn {
+  white-space: nowrap;
+}
+
+.cvgen-import-preview {
+  margin: 16px 24px;
+  padding: 18px;
+
+  background: #ffffff;
+  border: 1px solid #d9e3f0;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.cvgen-import-preview h3 {
+  margin: 0 0 14px;
+  color: #1E3A5F;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.cvgen-import-preview p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.cvgen-import-preview button {
+  margin-top: 16px;
+  margin-right: 10px;
+
+  padding: 10px 16px;
+
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cvgen-import-preview-actions button:first-child {
+  flex: 1;
+
+  background: #1E3A5F;
+  color: white;
+}
+
+.cvgen-import-preview-actions button:last-child {
+  background: #eef2f7;
+  color: #475467;
+}
+
+.cvgen-import-preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 14px 0 20px;
+}
+
+.cvgen-import-preview-list p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.cvgen-import-preview-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.cvgen-import-note {
+  margin: 8px 0 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.45;
 }

@@ -30,16 +30,18 @@ export default function CVGeneratorPage() {
   const [accessLevel, setAccessLevel] = useState<"professional" | "executive" | null>(null);
   const [hasEnglishAccess, setHasEnglishAccess] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
+  const [isParsingCV, setIsParsingCV] = useState(false);
+  const [importPreview, setImportPreview] = useState<any | null>(null);
 
   useEffect(() => {
     const storedAccess = localStorage.getItem("elitecv_access");
     const storedEnglish = localStorage.getItem("elitecv_english");
-  
+
     if (storedAccess === "professional" || storedAccess === "executive") {
       setAccessGranted(true);
       setAccessLevel(storedAccess);
     }
-  
+
     if (storedEnglish === "granted") {
       setHasEnglishAccess(true);
     }
@@ -50,11 +52,11 @@ export default function CVGeneratorPage() {
   const [tab, setTab] = useState<Tab>("split");
   const [layout, setLayout] = useState<"executive" | "classic">("executive");
   const previewRef = useRef<HTMLDivElement>(null);
- 
+
 
   const cvFileName = `${cvData.personal.firstName}_${cvData.personal.lastName}_EliteCV_${cvData.layout}`
-  .replace(/\s+/g, "_")
-  .replace(/[^a-zA-Z0-9_-]/g, "");
+    .replace(/\s+/g, "_")
+    .replace(/[^a-zA-Z0-9_-]/g, "");
   const handlePrint = () => {
     const printContent = previewRef.current?.innerHTML;
     if (!printContent) return;
@@ -304,105 +306,204 @@ body {
     teal: "#0F766E",
     charcoal: "#374151",
   };
-  
+
   const currentThemeColor = themeColors[cvData.themeColor] ?? "#1E3A5F";
 
-if (!accessGranted) {
-  return (
-    <div className="cvgen-access">
-      <h1>EliteCV Generator</h1>
+  if (!accessGranted) {
 
-<div className="cvgen-access-badge">
-EliteCV Premium
-</div>
+    return (
+      <div className="cvgen-access">
+        <h1>EliteCV Generator</h1>
 
-<p>
-  <strong>
-    Persönlicher Zugang erforderlich
-    <br />
-    Personal Access Required
-  </strong>
-</p>
+        <div className="cvgen-access-badge">
+          EliteCV Premium
+        </div>
 
-<p>
-  Dieser Zugangscode wird nach Zahlungseingang individuell erstellt.
-  <br />
-  Bitte geben Sie Ihren persönlichen EliteCV-Zugangscode ein.
-</p>
+        <p>
+          <strong>
+            Persönlicher Zugang erforderlich
+            <br />
+            Personal Access Required
+          </strong>
+        </p>
 
-<p>
-  This access code is generated individually after payment.
-  <br />
-  Please enter your personal EliteCV access code.
-</p>
+        <p>
+          Dieser Zugangscode wird nach Zahlungseingang individuell erstellt.
+          <br />
+          Bitte geben Sie Ihren persönlichen EliteCV-Zugangscode ein.
+        </p>
 
-      <input
-        type="password"
-        value={accessCode}
-        onChange={(e) => setAccessCode(e.target.value)}
-        placeholder="Persönlicher Zugangscode / Personal Access Code"
-      />
+        <p>
+          This access code is generated individually after payment.
+          <br />
+          Please enter your personal EliteCV access code.
+        </p>
 
-      <button
-        type="button"
-        onClick={() => {
-          const code = accessCode.trim().toUpperCase();
-          const access = ACCESS_CODES[code as keyof typeof ACCESS_CODES];
-        
-          if (!access) {
-            alert("Ungültiger Zugangscode.\n\nInvalid access code.");
-            return;
-          }
-        
-          localStorage.setItem("elitecv_access", access.level);
-          localStorage.setItem(
-            "elitecv_english",
-            access.english ? "granted" : "denied"
-          );
-        
-          setAccessLevel(access.level);
-          setHasEnglishAccess(access.english);
-          setAccessGranted(true);
-        }}
-      >
-        Zugang freischalten / Unlock Access
-      </button>
-    </div>
-  );
-}
+        <input
+          type="password"
+          value={accessCode}
+          onChange={(e) => setAccessCode(e.target.value)}
+          placeholder="Persönlicher Zugangscode / Personal Access Code"
+        />
 
-const translateCvToEnglish = async () => {
-  try {
-    setIsTranslating(true);
+        <button
+          type="button"
+          onClick={() => {
+            const code = accessCode.trim().toUpperCase();
+            const access = ACCESS_CODES[code as keyof typeof ACCESS_CODES];
 
-    const response = await fetch("/api/translate-cv", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ cvData }),
-    });
+            if (!access) {
+              alert("Ungültiger Zugangscode.\n\nInvalid access code.");
+              return;
+            }
 
-    if (!response.ok) {
+            localStorage.setItem("elitecv_access", access.level);
+            localStorage.setItem(
+              "elitecv_english",
+              access.english ? "granted" : "denied"
+            );
+
+            setAccessLevel(access.level);
+            setHasEnglishAccess(access.english);
+            setAccessGranted(true);
+          }}
+        >
+          Zugang freischalten / Unlock Access
+        </button>
+      </div>
+    );
+  }
+
+  const translateCvToEnglish = async () => {
+    try {
+      setIsTranslating(true);
+
+      const response = await fetch("/api/translate-cv", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ cvData }),
+      });
+
+      if (!response.ok) {
+        alert("Übersetzung fehlgeschlagen.");
+        return;
+      }
+
+      const result = await response.json();
+
+      if (result.cvData) {
+        setCVData(result.cvData);
+        setCvLanguage("en");
+      }
+    } catch (error) {
+      console.error(error);
       alert("Übersetzung fehlgeschlagen.");
+    } finally {
+      setIsTranslating(false);
+    }
+  };
+  const handleCVUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    if (
+      file.type !==
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ) {
+      alert("Bitte laden Sie zuerst nur eine Word-Datei (.docx) hoch.");
+      event.target.value = "";
       return;
     }
 
-    const result = await response.json();
+    try {
+      setIsParsingCV(true);
 
-    if (result.cvData) {
-      setCVData(result.cvData);
-      setCvLanguage("en");
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/parse-cv", {
+        method: "POST",
+        body: formData,
+      });
+
+      const text = await response.text();
+
+      let result: any = {};
+
+      try {
+        result = text ? JSON.parse(text) : {};
+      } catch {
+        result = {};
+      }
+
+      if (!response.ok) {
+        alert(result.error || `CV konnte nicht ausgelesen werden. Status: ${response.status}`);
+        return;
+      }
+      if (!result.cvData) {
+        alert("Es konnten keine CV-Daten erkannt werden.");
+        return;
+      }
+
+      setImportPreview(result.cvData);
+      console.log("Ausgelesener CV-Text:", result.extractedText);
+      console.log("Übernommene CV-Daten:", result.cvData);
+
+      setTab("split");
+
+      alert("Kontaktdaten wurden übernommen. Inhalte bitte prüfen und manuell ergänzen.");
+    } catch (error) {
+      console.error(error);
+      alert("Beim Hochladen ist ein Fehler aufgetreten.");
+    } finally {
+      setIsParsingCV(false);
+      event.target.value = "";
     }
-  } catch (error) {
-    console.error(error);
-    alert("Übersetzung fehlgeschlagen.");
-  } finally {
-    setIsTranslating(false);
-  }
-};
+  };
+  const applyImportPreview = () => {
+    if (!importPreview) return;
 
-return (
+    setCVData((current) => ({
+      ...current,
+
+      personal: {
+        ...current.personal,
+
+        firstName:
+          importPreview.personal?.firstName || current.personal.firstName,
+
+        lastName:
+          importPreview.personal?.lastName || current.personal.lastName,
+
+        email:
+          importPreview.personal?.email || current.personal.email,
+
+        phone:
+          importPreview.personal?.phone || current.personal.phone,
+
+        location:
+          importPreview.personal?.location || current.personal.location,
+
+        linkedin:
+          importPreview.personal?.linkedin || current.personal.linkedin,
+
+        targetTitle:
+          importPreview.personal?.targetTitle || current.personal.targetTitle,
+
+        targetPosition: current.personal.targetPosition,
+        targetIndustry: current.personal.targetIndustry,
+        photo: current.personal.photo,
+      },
+    }));
+
+    setImportPreview(null);
+    alert("Kontaktdaten wurden übernommen.");
+  };
+
+  return (
     <div className="cvgen-page">
       <header className="cvgen-topbar">
         <div className="cvgen-topbar-left">
@@ -411,80 +512,156 @@ return (
         </div>
 
         <nav className="cvgen-tabs">
-  <button
-    className={`cvgen-tab ${tab === "form" ? "cvgen-tab--active" : ""}`}
-    onClick={() => setTab("form")}
->
-  CV-Editor
-</button>
+          <button
+            className={`cvgen-tab ${tab === "form" ? "cvgen-tab--active" : ""}`}
+            onClick={() => setTab("form")}
+          >
+            CV-Editor
+          </button>
 
-<button
-  className={`cvgen-tab ${tab === "split" ? "cvgen-tab--active" : ""}`}
-  onClick={() => setTab("split")}
->
-  CV
-</button>
+          <button
+            className={`cvgen-tab ${tab === "split" ? "cvgen-tab--active" : ""}`}
+            onClick={() => setTab("split")}
+          >
+            CV
+          </button>
 
-<button
-  className={`cvgen-tab ${tab === "preview" ? "cvgen-tab--active" : ""}`}
-  onClick={() => setTab("preview")}
->
-  CV-Vorschau
-</button>
+          <button
+            className={`cvgen-tab ${tab === "preview" ? "cvgen-tab--active" : ""}`}
+            onClick={() => setTab("preview")}
+          >
+            CV-Vorschau
+          </button>
 
-<button
-  className={`cvgen-tab ${tab === "letter" ? "cvgen-tab--active" : ""}`}
-  onClick={() => setTab("letter")}
->
-  Motivationsschreiben
-</button>
-</nav>
+          <button
+            type="button"
+            className="cvgen-tab"
+            onClick={() =>
+              alert("🔒 Das Motivationsschreiben ist in diesem Paket nicht enthalten.")
+            }
+          >
+            🔒 Motivationsschreiben
+          </button>
+        </nav>
 
         <div className="cvgen-topbar-actions">
           <button
             className="cvgen-btn cvgen-btn--secondary"
             onClick={() => setCVData(sampleCVData)}
           >
-            Beispieldaten laden
+            Demo
           </button>
+          <input
+            id="existing-cv-upload"
+            type="file"
+            accept=".docx"
+            style={{ display: "none" }}
+            onChange={handleCVUpload}
+          />
+
+          <button
+            type="button"
+            className="cvgen-btn cvgen-btn--secondary"
+            disabled={isParsingCV}
+            onClick={() => document.getElementById("existing-cv-upload")?.click()}
+          >
+            {isParsingCV ? "CV wird ausgelesen..." : "CV importieren"}
+          </button>
+
           {hasEnglishAccess && (
-  <button
-    type="button"
-    className="cvgen-btn cvgen-btn--secondary"
-    disabled={isTranslating}
-    onClick={() => {
-      if (cvLanguage === "de") {
-        translateCvToEnglish();
-      } else {
-        setCVData(sampleCVData);
-        setCvLanguage("de");
-      }
-    }}
-  >
-    {isTranslating ? "Bitte warten..." : cvLanguage === "de" ? "EN Version" : "DE Version"}
-  </button>
-)}
+            <button
+              type="button"
+              className="cvgen-btn cvgen-btn--secondary"
+              disabled={isTranslating}
+              onClick={() => {
+                if (cvLanguage === "de") {
+                  translateCvToEnglish();
+                } else {
+                  setCVData(sampleCVData);
+                  setCvLanguage("de");
+                }
+              }}
+            >
+              {isTranslating ? "Bitte warten..." : cvLanguage === "de" ? "EN Version" : "DE Version"}
+            </button>
+          )}
 
           <button className="cvgen-btn cvgen-btn--primary" onClick={handlePrint}>
-          CV als PDF exportieren
+            CV als PDF exportieren
           </button>
         </div>
       </header>
 
+      {importPreview && (
+        <div className="cvgen-import-preview">
+          <h3>📄 Folgende Daten wurden erkannt</h3>
+
+          <div className="cvgen-import-preview-list">
+            <p>
+              ✅ <strong>Name:</strong>{" "}
+              {importPreview.personal?.firstName}{" "}
+              {importPreview.personal?.lastName}
+            </p>
+
+            <p>
+              ✅ <strong>Telefon:</strong>{" "}
+              {importPreview.personal?.phone || "Nicht erkannt"}
+            </p>
+
+            <p>
+              ✅ <strong>E-Mail:</strong>{" "}
+              {importPreview.personal?.email || "Nicht erkannt"}
+            </p>
+
+            <p>
+              ✅ <strong>Ort:</strong>{" "}
+              {importPreview.personal?.location || "Nicht erkannt"}
+            </p>
+
+            <p>
+              ✅ <strong>LinkedIn:</strong>{" "}
+              {importPreview.personal?.linkedin || "Nicht erkannt"}
+            </p>
+
+            <p>
+              ✅ <strong>Jobtitel:</strong>{" "}
+              {importPreview.personal?.targetTitle || "Nicht erkannt"}
+            </p>
+          </div>
+
+          <p className="cvgen-import-note">
+            Aktuell werden nur Kontaktdaten übernommen. Profil, Berufserfahrung, Ausbildung und weitere Inhalte können danach manuell ergänzt werden.
+          </p>
+          <div className="cvgen-import-preview-actions">
+            <button
+              type="button"
+              onClick={applyImportPreview}
+            >
+              ✓ Kontaktdaten übernehmen
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setImportPreview(null)}
+            >
+              Abbrechen
+            </button>
+          </div>
+        </div>
+      )}
       <div className="cvgen-layout-bar">
         <span className="cvgen-layout-label">Layout:</span>
 
         {(
-            [
-              ["professional", "EliteCV Professional"],
-              ["executive", "EliteCV Executive"],
-            ] as [CVData["layout"], string][]
-          ).map(([value, label]) => (
+          [
+            ["professional", "EliteCV Professional"],
+            ["executive", "EliteCV Executive"],
+          ] as [CVData["layout"], string][]
+        ).map(([value, label]) => (
           <button
             key={value}
-            className={`cvgen-layout-chip ${
-              cvData.layout === value ? "cvgen-layout-chip--active" : ""
-            }`}
+            className={`cvgen-layout-chip ${cvData.layout === value ? "cvgen-layout-chip--active" : ""
+              }`}
             onClick={() =>
               setCVData((currentData: CVData) => ({
                 ...currentData,
@@ -505,97 +682,95 @@ return (
         ))}
       </div>
       <div className="cvgen-color-picker">
-  {(
-    [
-  ["gray", "#7f7f7f"],
-  ["blue", "#1E3A5F"],
-  ["navy", "#0A1F44"],
-  ["green", "#2F5D50"],
-  ["burgundy", "#6B1F2B"],
-  ["teal", "#0F766E"],
-  ["charcoal", "#374151"],
-    ] as [CVData["themeColor"], string][]
-  ).map(([value, color]) => (
-    <button
-      key={value}
-      type="button"
-      className={`cvgen-color-dot ${
-        cvData.themeColor === value ? "cvgen-color-dot--active" : ""
-      }`}
-      style={{ backgroundColor: color }}
-      onClick={() =>
-        setCVData((currentData: CVData) => ({
-          ...currentData,
-          themeColor: value,
-        }))
-      }
-    />
-  ))}
-</div>
+        {(
+          [
+            ["gray", "#7f7f7f"],
+            ["blue", "#1E3A5F"],
+            ["navy", "#0A1F44"],
+            ["green", "#2F5D50"],
+            ["burgundy", "#6B1F2B"],
+            ["teal", "#0F766E"],
+            ["charcoal", "#374151"],
+          ] as [CVData["themeColor"], string][]
+        ).map(([value, color]) => (
+          <button
+            key={value}
+            type="button"
+            className={`cvgen-color-dot ${cvData.themeColor === value ? "cvgen-color-dot--active" : ""
+              }`}
+            style={{ backgroundColor: color }}
+            onClick={() =>
+              setCVData((currentData: CVData) => ({
+                ...currentData,
+                themeColor: value,
+              }))
+            }
+          />
+        ))}
+      </div>
       <main
-        className={`cvgen-main ${
-          tab === "split"
-            ? "cvgen-main--split"
-            : tab === "form"
+        className={`cvgen-main ${tab === "split"
+          ? "cvgen-main--split"
+          : tab === "form"
             ? "cvgen-main--form"
             : "cvgen-main--preview"
-        }`}
+          }`}
       >
         {(tab === "form" || tab === "split") && (
-  <div className="cvgen-form-panel">
-    <CVForm
-      data={cvData}
-      onChange={setCVData}
-      language={cvLanguage}
-    />
-  </div>
-)}
+          <div className="cvgen-form-panel">
+            <CVForm
+              data={cvData}
+              onChange={setCVData}
+              language={cvLanguage}
+            />
+          </div>
+        )}
 
-{tab === "letter" && (
-  <div className="cvgen-form-panel">
-    <CoverLetterGenerator
-  letterPreviewRef={previewRef}
-  initialThemeColor={cvData.themeColor}
-  initialLayout={cvData.layout === "executive" ? "executive" : "professional"}
-/>
-  </div>
-)}
+        {tab === "letter" && (
+          <div className="cvgen-form-panel">
+            <CoverLetterGenerator
+              letterPreviewRef={previewRef}
+              initialThemeColor={cvData.themeColor}
+              initialLayout={cvData.layout === "executive" ? "executive" : "professional"}
+            />
+          </div>
+        )}
 
-{(tab === "preview" || tab === "split") && (
-  <div className="cvgen-preview-panel">
-    <div className="cvgen-preview-toolbar">
-      <span className="cvgen-preview-label">
-        Live-Vorschau · A4
-      </span>
+        {(tab === "preview" || tab === "split") && (
+          <div className="cvgen-preview-panel">
+            <div className="cvgen-preview-toolbar">
+              <span className="cvgen-preview-label">
+                Live-Vorschau · A4
+              </span>
 
-      <span className="cvgen-preview-hint">
-        {cvData.personal.firstName} {cvData.personal.lastName} –{" "}
-        {cvData.personal.targetTitle}
-      </span>
-    </div>
+              <span className="cvgen-preview-hint">
+                {cvData.personal.firstName} {cvData.personal.lastName} –{" "}
+                {cvData.personal.targetTitle}
+              </span>
+            </div>
 
             <div className="cvgen-preview-scaler">
-            <div
-  ref={previewRef}
-  style={{ ["--cv-theme-color" as string]: currentThemeColor }}
->
-{cvData.layout === "professional" ? (
-  <ProfessionalTwoPageCV
-    data={cvData}
-    language={cvLanguage}
-  />
-) : (
-  <ProfessionalCVPreview
-    data={cvData}
-    language={cvLanguage}
-  />
-)}
+              <div
+                ref={previewRef}
+                style={{ ["--cv-theme-color" as string]: currentThemeColor }}
+              >
+                {cvData.layout === "professional" ? (
+                  <ProfessionalTwoPageCV
+                    data={cvData}
+                    language={cvLanguage}
+                  />
+                ) : (
+                  <ProfessionalCVPreview
+                    data={cvData}
+                    language={cvLanguage}
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-    </main>
-  </div>
-);
+      </main>
+    </div>
+  );
 }

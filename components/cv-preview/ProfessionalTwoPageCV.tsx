@@ -30,9 +30,9 @@ export function ProfessionalTwoPageCV({
   data,
   language = "de",
 }: ProfessionalTwoPageCVProps) {
-  
+
   const themeColor =
-  THEME_COLORS[data.themeColor] ?? THEME_COLORS.gray;
+    THEME_COLORS[data.themeColor] ?? THEME_COLORS.gray;
 
   const labels = {
     de: {
@@ -50,7 +50,7 @@ export function ProfessionalTwoPageCV({
       projects: "Projekte",
       careerHighlights: "Karriere-Highlights",
       expertise: "Fachkenntnisse",
-      successes: "Erfolge",
+      successes: "Resultate",
     },
     en: {
       strengths: "Strengths",
@@ -70,7 +70,7 @@ export function ProfessionalTwoPageCV({
       successes: "Achievements",
     },
   };
-  
+
   const t = labels[language];
   const {
     personal,
@@ -123,24 +123,24 @@ export function ProfessionalTwoPageCV({
         </aside>
 
         <main className="elitecv-main">
-  <Header personal={personal} />
+          <Header personal={personal} />
 
-  <MainBlock title={t.profile}>
-    <p>{profileText}</p>
-  </MainBlock>
+          <MainBlock title={t.profile}>
+            <p>{profileText}</p>
+          </MainBlock>
 
-  <MainBlock title={t.experience}>
-    <div className="elitecv-timeline">
-      {firstPageJobs.map((job) => (
-        <JobEntry
-          key={job.id}
-          job={job}
-          successLabel={t.successes}
-        />
-      ))}
-    </div>
-  </MainBlock>
-</main>
+          <MainBlock title={t.experience}>
+            <div className="elitecv-timeline">
+              {firstPageJobs.map((job) => (
+                <JobEntry
+                  key={job.id}
+                  job={job}
+                  successLabel={t.successes}
+                />
+              ))}
+            </div>
+          </MainBlock>
+        </main>
       </section>
 
       <section className="elitecv-page" lang="de">
@@ -184,11 +184,11 @@ export function ProfessionalTwoPageCV({
 
         <main className="elitecv-main">
           <div className="elitecv-page2-header">
-          <Header personal={personal} />
+            <Header personal={personal} />
           </div>
 
           {secondPageJobs.length > 0 && (
-           <MainBlock title={t.moreExperience}>
+            <MainBlock title={t.moreExperience}>
               <div className="elitecv-timeline">
                 {secondPageJobs.map((job) => (
                   <JobEntry key={job.id} job={job} successLabel={t.successes} />
@@ -227,7 +227,7 @@ export function ProfessionalTwoPageCV({
             </MainBlock>
           )}
 
-<MainBlock title={t.skills} icon={<Monitor />}>
+          <MainBlock title={t.skills} icon={<Monitor />}>
             <ul className="elitecv-tools-list">
               {itSkills.map((it) => (
                 <li key={it.id}>
@@ -340,12 +340,12 @@ function SideBlock({
 }
 
 const skillIcons: Record<string, React.ReactNode> = {
-  brain: <Brain size={16} />,
-  users: <Users size={16} />,
-  settings: <Cog size={16} />,
-  message: <MessageCircle size={16} />,
-  shield: <Shield size={16} />,
-  chart: <BarChart3 size={16} />,
+  brain: <Brain size={17} />,
+  users: <Users size={17} />,
+  settings: <Cog size={17} />,
+  message: <MessageCircle size={17} />,
+  shield: <Shield size={17} />,
+  chart: <BarChart3 size={17} />,
 };
 
 function SideItem({
