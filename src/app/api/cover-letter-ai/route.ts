@@ -1,16 +1,16 @@
 import { NextResponse } from "next/server";
 
 type RequestBody = {
-    action: string;
-    field?: string;
-    text?: string;
-    data?: {
-      language?: "de" | "en";
-      position?: string;
-      company?: string;
-      jobAd?: string;
-    };
+  action: string;
+  field?: string;
+  text?: string;
+  data?: {
+    language?: "de" | "en";
+    position?: string;
+    company?: string;
+    jobAd?: string;
   };
+};
 
 const actionLabels: Record<string, string> = {
   professional: "Formuliere den Abschnitt professioneller.",
@@ -39,8 +39,8 @@ export async function POST(request: Request) {
     const language = body.data?.language ?? "de";
     const instruction =
       actionLabels[body.action] ?? "Überarbeite den Abschnitt professionell.";
-      if (body.action === "generateFullLetter") {
-        const prompt = `
+    if (body.action === "generateFullLetter") {
+      const prompt = `
       Du bist ein erfahrener Bewerbungsberater für den Schweizer Arbeitsmarkt.
       - Erfinde niemals Kennzahlen, Projekte, Ergebnisse, Technologien oder Arbeitgebererfahrungen.
       - Verwende keine Prozentzahlen, wenn sie nicht ausdrücklich vom Benutzer genannt wurden.
@@ -79,51 +79,51 @@ export async function POST(request: Request) {
         "whatClosing": "..."
       }
       `.trim();
-      
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${apiKey}`,
-          },
-          body: JSON.stringify({
-            model: "gpt-4o-mini",
-            temperature: 0.35,
-            messages: [
-              {
-                role: "system",
-                content:
-                  "Du erstellst hochwertige Motivationsschreiben für den Schweizer Arbeitsmarkt. Du gibst nur gültiges JSON zurück.",
-              },
-              {
-                role: "user",
-                content: prompt,
-              },
-            ],
-            response_format: { type: "json_object" },
-          }),
-        });
-      
-        if (!response.ok) {
-          const errorText = await response.text();
-          return NextResponse.json(
-            { error: errorText },
-            { status: response.status }
-          );
-        }
-      
-        const result = await response.json();
-        const content = result.choices?.[0]?.message?.content;
-      
-        if (!content) {
-          return NextResponse.json(
-            { error: "No AI response" },
-            { status: 500 }
-          );
-        }
-      
-        return NextResponse.json(JSON.parse(content));
+
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-4o-mini",
+          temperature: 0.35,
+          messages: [
+            {
+              role: "system",
+              content:
+                "Du erstellst hochwertige Motivationsschreiben für den Schweizer Arbeitsmarkt. Du gibst nur gültiges JSON zurück.",
+            },
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+          response_format: { type: "json_object" },
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        return NextResponse.json(
+          { error: errorText },
+          { status: response.status }
+        );
       }
+
+      const result = await response.json();
+      const content = result.choices?.[0]?.message?.content;
+
+      if (!content) {
+        return NextResponse.json(
+          { error: "No AI response" },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json(JSON.parse(content));
+    }
 
     const prompt = `
 Du bist ein erfahrener Bewerbungsberater für den Schweizer Arbeitsmarkt.

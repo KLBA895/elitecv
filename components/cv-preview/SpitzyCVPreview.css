@@ -578,13 +578,18 @@
 }
 
 .cv-work-list {
-  margin: 8px 0 0 0;
-  padding-left: 18px;
+  margin: 10px 0 14px 20px;
+  padding-left: 0;
+  list-style-type: disc;
+  list-style-position: outside;
 }
 
 .cv-work-list li {
-  margin-bottom: 3px;
-  line-height: 1.45;
+  display: list-item;
+  margin-bottom: 5px;
+  padding-left: 3px;
+  font-size: 12.4px;
+  line-height: 1.5;
 }
 
 .cv-work-achievements-label {
@@ -692,4 +697,17 @@
   font-size: 12.5px;
   line-height: 1.45;
   margin-bottom: 3px;
+}
+
+.cv-root .cv-work-entry .cv-work-list {
+  margin: 10px 0 14px 20px !important;
+  padding-left: 0 !important;
+  list-style: disc outside !important;
+}
+
+.cv-root .cv-work-entry .cv-work-list>li {
+  display: list-item !important;
+  list-style-type: disc !important;
+  margin-bottom: 5px !important;
+  padding-left: 3px !important;
 }

@@ -108,7 +108,8 @@ export function ProfessionalCVPreview({
   const labels = {
     de: {
       strengths: "Persönliche Kompetenzen",
-      achievements: "Erfolge",
+      sidebarAchievements: "Top-Erfolge",
+      jobAchievements: "Resultate",
       education: "Ausbildung",
       certificates: "Weiterbildungen",
       languages: "Sprachen",
@@ -126,6 +127,8 @@ export function ProfessionalCVPreview({
     en: {
       strengths: "Strengths",
       successes: "Key Achievements",
+      sidebarAchievements: "Top Achievements",
+      jobAchievements: "Key Achievements",
       education: "Education",
       certificates: "Certificates",
       languages: "Languages",
@@ -206,12 +209,24 @@ export function ProfessionalCVPreview({
 
             {/* Erfolge */}
             {achievements.length > 0 && (
-              <SideSection title={t.successes}>
+              <SideSection title={t.sidebarAchievements}>
                 <ul className="cv-achievements-list">
-                  {achievements.map((a) => (
-                    <li key={a.id} className="cv-achievement-item">
-                      {a.metric && <span className="cv-achievement-metric">{a.metric}</span>}
-                      <span className="cv-achievement-text">{a.text}</span>
+                  {achievements.map((achievement) => (
+                    <li
+                      key={achievement.id}
+                      className="cv-achievement-item"
+                    >
+                      {achievement.metric && (
+                        <span className="cv-achievement-metric">
+                          {achievement.metric}
+                        </span>
+                      )}
+
+                      {achievement.text && (
+                        <span className="cv-achievement-text">
+                          {achievement.text}
+                        </span>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -275,7 +290,11 @@ export function ProfessionalCVPreview({
             {firstPageJobs.length > 0 && (
               <MainSection title={t.experience}>
                 {firstPageJobs.map((job) => (
-                  <WorkEntry key={job.id} job={job} />
+                  <WorkEntry
+                    key={job.id}
+                    job={job}
+                    successLabel={t.jobAchievements}
+                  />
                 ))}
               </MainSection>
             )}
@@ -306,7 +325,13 @@ export function ProfessionalCVPreview({
                     <p className="cv-edu-degree">{edu.degree}</p>
                     {edu.field && <p className="cv-edu-field">{edu.field}</p>}
                     <p className="cv-edu-institution">{edu.institution}</p>
-                    <p className="cv-edu-period">{edu.from} – {edu.to}</p>
+                    {(edu.from || edu.to) && (
+                      <p className="cv-edu-period">
+                        {edu.from === edu.to
+                          ? edu.from
+                          : [edu.from, edu.to].filter(Boolean).join(" – ")}
+                      </p>
+                    )}
                   </div>
                 ))}
               </SideSection>
@@ -318,9 +343,15 @@ export function ProfessionalCVPreview({
                 {certificates.map((c) => (
                   <div key={c.id} className="cv-cert-item">
                     <p className="cv-cert-title">{c.title}</p>
-                    {(c.issuer || c.year) && (
+                    {(c.issuer || c.date || c.from || c.to) && (
                       <p className="cv-cert-meta">
-                        {[c.issuer, c.year].filter(Boolean).join(", ")}
+                        {[
+                          c.issuer,
+                          c.date ||
+                          [c.from, c.to].filter(Boolean).join(" – "),
+                        ]
+                          .filter(Boolean)
+                          .join(" · ")}
                       </p>
                     )}
                   </div>
@@ -333,8 +364,13 @@ export function ProfessionalCVPreview({
             {secondPageJobs.length > 0 && (
               <MainSection title="Weitere Berufserfahrung">
                 {secondPageJobs.map((job) => (
-                  <WorkEntry key={job.id} job={job} />
-                ))}
+                  <WorkEntry
+                    key={job.id}
+                    job={job}
+                    successLabel={t.jobAchievements}
+                  />
+                ))
+                }
               </MainSection>
             )}
 

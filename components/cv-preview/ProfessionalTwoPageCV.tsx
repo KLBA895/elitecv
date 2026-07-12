@@ -9,7 +9,6 @@ import {
   GraduationCap,
   Award,
   Languages,
-  Monitor,
   Briefcase,
   Phone,
   Mail,
@@ -48,7 +47,7 @@ export function ProfessionalTwoPageCV({
       moreExperience: "Weitere Berufserfahrungen",
       skills: "Kompetenzen & Tools",
       projects: "Projekte",
-      careerHighlights: "Karriere-Highlights",
+      careerHighlights: "Erfolge",
       expertise: "Fachkenntnisse",
       successes: "Resultate",
     },
@@ -65,7 +64,7 @@ export function ProfessionalTwoPageCV({
       moreExperience: "Additional Professional Experience",
       skills: "Skills & Tools",
       projects: "Projects",
-      careerHighlights: "Career Highlights",
+      careerHighlights: "Achievements",
       expertise: "Expertise",
       successes: "Achievements",
     },
@@ -88,36 +87,46 @@ export function ProfessionalTwoPageCV({
   const firstPageJobs = workExperience.slice(0, 2);
   const secondPageJobs = workExperience.slice(2);
 
-  const profileText = [profile.rawText, profile.why, profile.how, profile.what]
-    .filter(Boolean)
-    .join(" ");
+  const profileText =
+    profile.rawText?.trim() ||
+    [profile.why, profile.how, profile.what]
+      .filter(Boolean)
+      .join(" ")
+      .trim();
 
   return (
     <div className="elitecv-doc">
-      <section className="elitecv-page" lang="de">
+      <section
+        className="elitecv-page"
+        lang={language}
+      >
         <aside className="elitecv-sidebar" style={{ backgroundColor: themeColor }}>
           <Photo personal={personal} />
 
-          <SideBlock title={t.strengths} icon={<Star />}>
-            {strengths.map((item) => (
-              <SideItem
-                key={item.id}
-                icon={item.icon}
-                title={item.label}
-                text={item.description}
-              />
-            ))}
-          </SideBlock>
+          {strengths.length > 0 && (
+            <SideBlock title={t.strengths} icon={<Star />}>
+              {strengths.map((item) => (
+                <SideItem
+                  key={item.id}
+                  icon={item.icon}
+                  title={item.label}
+                  text={item.description}
+                />
+              ))}
+            </SideBlock>
+          )}
 
-          <SideBlock title={t.achievements} icon={<Award />}>
-            {achievements.map((item) => (
-              <SideItem
-                key={item.id}
-                title={item.metric ?? ""}
-                text={item.text}
-              />
-            ))}
-          </SideBlock>
+          {achievements.length > 0 && (
+            <SideBlock title={t.achievements} icon={<Award />}>
+              {achievements.map((item) => (
+                <SideItem
+                  key={item.id}
+                  title={item.metric ?? ""}
+                  text={item.text}
+                />
+              ))}
+            </SideBlock>
+          )}
 
           <SidebarFooter personal={personal} />
         </aside>
@@ -126,7 +135,7 @@ export function ProfessionalTwoPageCV({
           <Header personal={personal} />
 
           <MainBlock title={t.profile}>
-            <p>{profileText}</p>
+            <p className="elitecv-profile-text">{profileText}</p>
           </MainBlock>
 
           <MainBlock title={t.experience}>
@@ -143,7 +152,10 @@ export function ProfessionalTwoPageCV({
         </main>
       </section>
 
-      <section className="elitecv-page" lang="de">
+      <section
+        className="elitecv-page"
+        lang={language}
+      >
         <aside
           className="elitecv-sidebar elitecv-sidebar-page2"
           style={{ backgroundColor: themeColor }}
@@ -153,7 +165,15 @@ export function ProfessionalTwoPageCV({
               <SideItem
                 key={edu.id}
                 title={edu.degree}
-                text={[edu.field, edu.institution, `${edu.from} – ${edu.to}`]
+                text={[
+                  edu.field,
+                  edu.institution,
+                  edu.from || edu.to
+                    ? edu.from === edu.to
+                      ? edu.from
+                      : [edu.from, edu.to].filter(Boolean).join(" – ")
+                    : "",
+                ]
                   .filter(Boolean)
                   .join(" · ")}
               />
@@ -165,7 +185,13 @@ export function ProfessionalTwoPageCV({
               <SideItem
                 key={cert.id}
                 title={cert.title}
-                text={[cert.issuer, cert.year].filter(Boolean).join(", ")}
+                text={[
+                  cert.issuer,
+                  cert.date ||
+                  [cert.from, cert.to].filter(Boolean).join(" – "),
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
               />
             ))}
           </SideBlock>
@@ -227,19 +253,21 @@ export function ProfessionalTwoPageCV({
             </MainBlock>
           )}
 
-          <MainBlock title={t.skills} icon={<Monitor />}>
+          <MainBlock title={t.itSkills}>
             <ul className="elitecv-tools-list">
-              {itSkills.map((it) => (
-                <li key={it.id}>
-                  <strong>{it.name}</strong>
-                  {it.level && <span> – {it.level}</span>}
-                </li>
-              ))}
+              {itSkills
+                .filter((it) => it.name?.trim())
+                .map((it) => (
+                  <li key={it.id}>
+                    <strong>{it.name}</strong>
+                    {it.level && <span> – {it.level}</span>}
+                  </li>
+                ))}
             </ul>
           </MainBlock>
         </main>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }
 
@@ -411,9 +439,15 @@ function JobEntry({
             <p>{job.company}</p>
           </div>
 
-          <span>
-            {job.from} – {job.to}
-          </span>
+          {job.showPeriod !== false && (job.from || job.to) && (
+            <span>
+              {job.from && job.to
+                ? job.from === job.to
+                  ? job.from
+                  : `${job.from} – ${job.to}`
+                : job.from || job.to}
+            </span>
+          )}
         </div>
 
         {job.responsibilities.length > 0 && (
@@ -426,7 +460,7 @@ function JobEntry({
 
         {job.achievements.length > 0 && (
           <>
-            <p className="elitecv-job-label">{successLabel}:</p>
+            <p className="elitecv-job-label">{successLabel}</p>
             <ul>
               {job.achievements.map((item, index) => (
                 <li key={index}>{item}</li>

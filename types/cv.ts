@@ -56,6 +56,9 @@ export interface WorkExperience {
   responsibilities: string[];
   achievements: string[];
   keywords?: string[];
+
+  periodGroup?: string;
+  showPeriod?: boolean;
 }
 
 // ─── Ausbildung ──────────────────────────────────────────────────────────────
@@ -73,8 +76,11 @@ export interface Education {
 export interface Certificate {
   id: string;
   title: string;
-  issuer?: string;
+  issuer: string;
   year?: string;
+  date?: string;
+  from?: string;
+  to?: string;
 }
 
 // ─── Skills ──────────────────────────────────────────────────────────────────

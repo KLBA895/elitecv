@@ -134,7 +134,7 @@
   background: #f8faff;
   border: 1px solid #e0eaf8;
   border-radius: 6px;
-  padding: 12px;
+  padding: 15px;
   margin-bottom: 10px;
 }
 
@@ -211,6 +211,7 @@
 .cv-form-remove-btn:hover {
   background: #fcc;
 }
+
 .cv-form-field input[type="file"] {
   width: 100%;
   padding: 10px;
@@ -218,6 +219,7 @@
   border-radius: 10px;
   background: #ffffff;
 }
+
 .cv-form-ai-btn {
   margin-top: 12px;
   padding: 10px 14px;
@@ -228,6 +230,7 @@
   font-weight: 600;
   cursor: pointer;
 }
+
 .cv-form-ai-btn--inside {
   width: 100%;
   margin: 0 0 16px 0;
@@ -236,6 +239,7 @@
 .cv-form-ai-btn:hover {
   opacity: 0.9;
 }
+
 .cv-form-remove-photo {
   margin-top: 10px;
   padding: 8px 12px;
@@ -248,6 +252,7 @@
 .cv-form-remove-photo:hover {
   background: #f3f4f6;
 }
+
 .cv-form-ai-btn {
   margin-top: 12px;
   padding: 10px 14px;

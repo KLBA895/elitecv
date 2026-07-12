@@ -452,3 +452,161 @@
   font-size: 13px;
   line-height: 1.45;
 }
+
+/* Projektbereich sauber darstellen */
+.elitecv-projects .elitecv-project-description {
+  text-align: left !important;
+  word-spacing: normal !important;
+  letter-spacing: normal !important;
+}
+
+.elitecv-projects ul {
+  margin: 6px 0 0 18px !important;
+  padding-left: 0 !important;
+  list-style-type: disc !important;
+}
+
+.elitecv-projects li {
+  list-style-type: disc !important;
+  font-size: 12.4px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 3px !important;
+}
+
+/* Resultate dezenter */
+.elitecv-job-label {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  color: #173a56 !important;
+  margin: 10px 0 4px !important;
+}
+
+.cvgen-import-sections {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cvgen-import-sections p {
+  margin: 5px 0;
+  font-size: 13.5px;
+  color: #475467;
+}
+
+.cvgen-import-sections {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cvgen-import-sections p {
+  margin: 5px 0;
+  font-size: 13.5px;
+  color: #475467;
+}
+
+.cvgen-import-analysis {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cvgen-import-analysis h4 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1E3A5F;
+}
+
+.cvgen-analysis-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 8px 0;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  font-size: 13.5px;
+}
+
+.cvgen-analysis-row:last-child {
+  border-bottom: none;
+}
+
+.cvgen-import-analysis {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cvgen-import-analysis h4 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1E3A5F;
+}
+
+.cvgen-analysis-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13.5px;
+}
+
+.cvgen-analysis-row:last-child {
+  border-bottom: none;
+}
+
+.cvgen-analysis-row--clickable {
+  width: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.cvgen-analysis-row--clickable:hover {
+  background: #f8fafc;
+}
+
+.cvgen-import-work-list {
+  margin: 8px 0 12px;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.cvgen-import-work-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 9px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.cvgen-import-work-item:last-child {
+  border-bottom: none;
+}
+
+.cvgen-import-work-item strong {
+  color: #1e3a5f;
+  font-size: 13.5px;
+}
+
+.cvgen-import-work-item span,
+.cvgen-import-work-item small {
+  color: #475467;
+  font-size: 13px;
+}
+
+.company {
+  display: inline-block;
+  white-space: nowrap;
+}

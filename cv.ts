@@ -21,7 +21,7 @@ export interface PersonalData {
   website?: string;
   photo?: string;
   iconStyle?: "professional" | "executive" | "modern" | "minimal";
-  }
+}
 
 // ─── Profil ──────────────────────────────────────────────────────────────────
 export interface ProfileSection {
@@ -56,6 +56,9 @@ export interface WorkExperience {
   responsibilities: string[];
   achievements: string[];
   keywords?: string[];
+
+  periodGroup?: string;
+  showPeriod?: boolean;
 }
 
 // ─── Ausbildung ──────────────────────────────────────────────────────────────
@@ -70,12 +73,14 @@ export interface Education {
 }
 
 // ─── Weiterbildung / Zertifikat ──────────────────────────────────────────────
-export interface Certificate {
+export type Certificate = {
   id: string;
   title: string;
-  issuer?: string;
-  year?: string;
-}
+  issuer: string;
+  date: string;
+  from: string;
+  to: string;
+};
 
 // ─── Skills ──────────────────────────────────────────────────────────────────
 export interface SkillGroup {
@@ -113,7 +118,7 @@ export interface Achievement {
 // ─── Gesamt-CV ───────────────────────────────────────────────────────────────
 export interface CVData {
   layout: LayoutVariant;
-  themeColor: "gray" | "blue" | "navy" | "green" | "burgundy"| "teal"| "charcoal";
+  themeColor: "gray" | "blue" | "navy" | "green" | "burgundy" | "teal" | "charcoal";
 
   personal: PersonalData;
   profile: ProfileSection;
