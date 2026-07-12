@@ -322,10 +322,12 @@ function Header({
       {!compact && titleParts.length > 0 && (
         <div className="elitecv-title-line">
           {titleParts.map((item, index) => (
-            <React.Fragment key={`${item}-${index}`}>
-              {index > 0 && <span className="elitecv-separator">|</span>}
-              <span>{item}</span>
-            </React.Fragment>
+            <span
+              key={`${item}-${index}`}
+              className="elitecv-title-part"
+            >
+              {item}
+            </span>
           ))}
         </div>
       )}

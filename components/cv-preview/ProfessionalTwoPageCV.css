@@ -20,7 +20,7 @@
 
 .elitecv-sidebar {
   position: relative;
-  padding: 30px 22px;
+  padding: 76px 22px;
   background: #7f7f7f;
   color: #ffffff;
 }
@@ -37,7 +37,7 @@
 .elitecv-photo {
   width: 180px;
   height: 180px;
-  margin: 0 auto 40px;
+  margin: 0 auto 52px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +62,9 @@
 /* Kopfbereich */
 
 .elitecv-header {
-  margin-bottom: 26px;
+  min-height: 205px;
+  margin-bottom: 18px;
+  box-sizing: border-box;
 }
 
 .elitecv-header h1 {
@@ -83,19 +85,25 @@
 }
 
 .elitecv-title-line {
+  width: 100%;
+  max-width: 520px;
+  margin-bottom: 14px;
+
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
 
-  font-size: 14.5px;
-  line-height: 1.28;
+  font-size: 14px;
+  line-height: 1.22;
   font-weight: 800;
-
   text-transform: uppercase;
-  color: #151922;
 
-  margin-bottom: 8px;
+  color: #151922;
+}
+
+.elitecv-title-part {
+  display: block;
   max-width: 100%;
 }
 
@@ -155,11 +163,6 @@
 
 .elitecv-side-block {
   margin-bottom: 34px;
-}
-
-/* Nur den ersten Block der linken Spalte leicht anheben */
-.elitecv-sidebar>.elitecv-side-block:first-of-type {
-  margin-top: -1px;
 }
 
 .elitecv-side-block h3 {
@@ -513,7 +516,7 @@
 }
 
 .elitecv-sidebar.elitecv-sidebar-page2 {
-  padding-top: 140px;
+  padding-top: 135px;
 }
 
 /* Footer der Seitenleiste */
@@ -562,11 +565,6 @@
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
-}
-
-/* Erste Überschrift links mit PROFIL ausrichten */
-.elitecv-sidebar>.elitecv-side-block:first-of-type {
-  transform: translateY(-2px);
 }
 
 /* Profiltext über die ganze verfügbare Breite verteilen */
