@@ -386,13 +386,27 @@ body {
     try {
       setIsTranslating(true);
 
+      /*
+       * Das Foto kann als sehr langer Base64-String gespeichert sein.
+       * Es wird für die Übersetzung nicht benötigt und deshalb nicht
+       * an die API geschickt.
+       */
+      const cvDataForTranslation = {
+        ...cvData,
+
+        personal: {
+          ...cvData.personal,
+          photo: "",
+        },
+      };
+
       const response = await fetch("/api/translate-cv", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          cvData,
+          cvData: cvDataForTranslation,
           targetLanguage,
         }),
       });
@@ -400,14 +414,37 @@ body {
       const result = await response.json();
 
       if (!response.ok) {
-        alert(result.error || "Übersetzung fehlgeschlagen.");
+        console.error("CV translation failed:", result);
+        alert(
+          typeof result.error === "string"
+            ? result.error
+            : "Übersetzung fehlgeschlagen."
+        );
         return;
       }
 
-      if (result.cvData) {
-        setCVData(result.cvData);
-        setCvLanguage(targetLanguage);
+      if (!result.cvData) {
+        alert("Es wurde keine übersetzte CV-Version zurückgegeben.");
+        return;
       }
+
+      setCVData((current) => ({
+        ...result.cvData,
+
+        /*
+         * Nicht sprachabhängige Einstellungen und das Foto
+         * aus dem bisherigen CV beibehalten.
+         */
+        layout: current.layout,
+        themeColor: current.themeColor,
+
+        personal: {
+          ...result.cvData.personal,
+          photo: current.personal.photo,
+        },
+      }));
+
+      setCvLanguage(targetLanguage);
     } catch (error) {
       console.error("CV translation failed:", error);
       alert("Übersetzung fehlgeschlagen.");
@@ -416,7 +453,9 @@ body {
     }
   };
 
-  const handleCVUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCVUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
 
     if (!file) return;
@@ -440,11 +479,8 @@ body {
         method: "POST",
         body: formData,
       });
-      console.log("parse-cv-ai status:", response.status);
 
       const text = await response.text();
-      console.log("Antwort von parse-cv-ai:", text);
-      console.log("parse-cv-ai response:", text);
 
       let result: any = {};
 
@@ -466,143 +502,134 @@ body {
         return;
       }
 
-      console.log("KI-CV-Daten:", result.cvData);
-      setImportPreview(result.cvData);
-      console.log("Ausgelesener CV-Text:", result.extractedText);
-      console.log("Übernommene CV-Daten:", result.cvData);
+      if (!result.cvData) {
+        alert("Es konnten keine CV-Daten erkannt werden.");
+        return;
+      }
 
+      setImportPreview(result.cvData);
       setTab("split");
 
       alert("CV wurde analysiert. Bitte prüfen Sie die erkannten Daten.");
     } catch (error) {
-      console.error(error);
+      console.error("CV upload failed:", error);
       alert("Beim Hochladen ist ein Fehler aufgetreten.");
     } finally {
       setIsParsingCV(false);
       event.target.value = "";
     }
   };
+
   const applyImportPreview = () => {
     if (!importPreview) return;
 
-    setCVData((current) => {
-      const importedAchievements = (
-        importPreview.achievements || []
-      ).filter(
-        (item: any) =>
-          item?.metric?.trim() || item?.text?.trim()
-      );
+    const importedAchievements = (
+      importPreview.achievements || []
+    ).filter(
+      (item: any) =>
+        item?.metric?.trim() || item?.text?.trim()
+    );
 
-      const importedStrengths = (
-        importPreview.strengths || []
-      ).filter(
-        (item: any) =>
-          item?.label?.trim() || item?.description?.trim()
-      );
+    const importedStrengths = (
+      importPreview.strengths || []
+    ).filter(
+      (item: any) =>
+        item?.label?.trim() || item?.description?.trim()
+    );
 
-      return {
-        ...current,
+    setCVData((current) => ({
+      ...current,
 
-        personal: {
-          ...current.personal,
+      personal: {
+        ...current.personal,
 
-          firstName:
-            importPreview.personal?.firstName ||
-            current.personal.firstName,
+        firstName:
+          importPreview.personal?.firstName ||
+          current.personal.firstName,
 
-          lastName:
-            importPreview.personal?.lastName ||
-            current.personal.lastName,
+        lastName:
+          importPreview.personal?.lastName ||
+          current.personal.lastName,
 
-          email:
-            importPreview.personal?.email ||
-            current.personal.email,
+        email:
+          importPreview.personal?.email ||
+          current.personal.email,
 
-          phone:
-            importPreview.personal?.phone ||
-            current.personal.phone,
+        phone:
+          importPreview.personal?.phone ||
+          current.personal.phone,
 
-          location:
-            importPreview.personal?.location ||
-            current.personal.location,
+        location:
+          importPreview.personal?.location ||
+          current.personal.location,
 
-          linkedin:
-            importPreview.personal?.linkedin ||
-            current.personal.linkedin,
+        linkedin:
+          importPreview.personal?.linkedin ||
+          current.personal.linkedin,
 
-          targetTitle:
-            importPreview.personal?.targetTitle ||
-            current.personal.targetTitle,
-
-          targetPosition:
-            importPreview.personal?.targetPosition || "",
-
-          targetIndustry:
-            importPreview.personal?.targetIndustry || "",
-
-          photo: current.personal.photo,
-        },
-
-        profile: importPreview.profile || {
-          rawText: "",
-          why: "",
-          how: "",
-          what: "",
-        },
-
-        strengths: importedStrengths,
-
-        achievements: importedAchievements,
-
-        workExperience:
-          importPreview.workExperience || [],
-
-        education:
-          importPreview.education || [],
-
-        certificates:
-          importPreview.certificates || [],
-
-        languages:
-          importPreview.languages || [],
-
-        itSkills:
-          importPreview.itSkills || [],
-
-        projects:
-          importPreview.projects || [],
+        targetTitle:
+          importPreview.personal?.targetTitle ||
+          current.personal.targetTitle,
 
         /*
-         * Executive-Karriere-Highlights:
-         * Die erkannten übergreifenden Erfolge werden zusätzlich
-         * in das USP-Format des Executive-Layouts umgewandelt.
+         * Zusatzpositionen und Branchenlisten werden beim Import
+         * nicht automatisch in den Header übernommen.
          */
-        usps: importedAchievements.map(
-          (
-            achievement: {
-              id?: string;
-              metric?: string;
-              text?: string;
-            },
-            index: number
-          ) => ({
-            id: achievement.id || `usp-${index + 1}`,
-            title:
-              achievement.metric ||
-              `Karriere-Highlight ${index + 1}`,
-            description: achievement.text || "",
-          })
-        ),
+        targetPosition: "",
+        targetIndustry: "",
 
-        /*
-         * Demo-Inhalte entfernen, damit keine fremden Angaben
-         * im importierten CV verbleiben.
-         */
-        skillGroups: [],
-        hardSkills: [],
-        softSkills: [],
-      };
-    });
+        photo: current.personal.photo,
+      },
+
+      profile: importPreview.profile || {
+        rawText: "",
+        why: "",
+        how: "",
+        what: "",
+      },
+
+      strengths: importedStrengths,
+      achievements: importedAchievements,
+
+      workExperience:
+        importPreview.workExperience || [],
+
+      education:
+        importPreview.education || [],
+
+      certificates:
+        importPreview.certificates || [],
+
+      languages:
+        importPreview.languages || [],
+
+      itSkills:
+        importPreview.itSkills || [],
+
+      projects:
+        importPreview.projects || [],
+
+      usps: importedAchievements.map(
+        (
+          achievement: {
+            id?: string;
+            metric?: string;
+            text?: string;
+          },
+          index: number
+        ) => ({
+          id: achievement.id || `usp-${index + 1}`,
+          title:
+            achievement.metric ||
+            `Karriere-Highlight ${index + 1}`,
+          description: achievement.text || "",
+        })
+      ),
+
+      skillGroups: [],
+      hardSkills: [],
+      softSkills: [],
+    }));
 
     setImportPreview(null);
     setShowImportedWork(false);
@@ -610,6 +637,7 @@ body {
     setShowImportedLanguages(false);
     setShowImportedITSkills(false);
     setShowImportedCertificates(false);
+    setShowImportedProjects(false);
 
     alert(
       "Die erkannten CV-Daten wurden übernommen. Bitte alle Inhalte und Zeiträume sorgfältig prüfen."

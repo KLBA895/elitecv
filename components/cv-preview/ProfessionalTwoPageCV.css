@@ -184,9 +184,9 @@
 }
 
 .elitecv-side-icon {
-  width: 26px;
-  min-width: 26px;
-  height: 26px;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
 
   display: inline-flex;
   align-items: center;
@@ -196,11 +196,11 @@
 }
 
 .elitecv-side-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 
   stroke: #ffffff;
-  stroke-width: 2.4;
+  stroke-width: 2.3;
   color: #ffffff;
 
   display: block;
@@ -229,21 +229,23 @@
 }
 
 .elitecv-item-icon {
-  width: 18px;
-  min-width: 18px;
-  margin-right: 5px;
+  width: 20px;
+  min-width: 20px;
+
+  margin-right: 6px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   color: #ffffff;
+
   flex-shrink: 0;
 }
 
 .elitecv-item-icon svg {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   stroke: #ffffff;
 }
 

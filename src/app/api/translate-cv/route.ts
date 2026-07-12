@@ -36,6 +36,19 @@ export async function POST(request: Request) {
     const targetLanguageName =
       targetLanguage === "de" ? "German" : "English";
 
+    const cleanCV = {
+      ...cvData,
+      personal: {
+        ...cvData.personal,
+        photo: "",
+      },
+    };
+
+    console.log(
+      "Translation JSON size:",
+      JSON.stringify(cleanCV).length
+    );
+
     const response = await fetch(
       "https://api.openai.com/v1/chat/completions",
       {
@@ -89,7 +102,7 @@ Rules:
             },
             {
               role: "user",
-              content: JSON.stringify(cvData),
+              content: JSON.stringify(cleanCV),
             },
           ],
 
