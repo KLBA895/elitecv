@@ -708,6 +708,7 @@ function JobEntry({
     </article>
   );
 }
+
 function CompactJobEntry({
   job,
 }: {

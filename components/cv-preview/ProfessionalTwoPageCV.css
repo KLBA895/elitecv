@@ -362,15 +362,19 @@
 
 .elitecv-job-dot {
   position: absolute;
+  left: -25px;
+  top: 7px;
 
-  left: -24px;
-  top: 8px;
+  width: 10px;
+  height: 10px;
 
-  width: 8px;
-  height: 8px;
-
+  border: 2px solid #173a56;
   border-radius: 50%;
-  background: #173a56;
+  background-color: #173a56;
+
+  box-sizing: border-box;
+  z-index: 5;
+  flex: none;
 }
 
 .elitecv-job-content {
@@ -472,7 +476,7 @@
   font-size: 12px;
   line-height: 1.2;
   font-weight: 800;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
 
   color: #173a56;
@@ -636,10 +640,10 @@
 
 .elitecv-certificate-details {
   margin-top: 1px;
-  font-size: 8.9px;
+  font-size: 8.5px;
   font-weight: 400;
-  line-height: 1.18;
-  opacity: .82;
+  line-height: 1.15;
+  opacity: 0.72;
 }
 
 .elitecv-it-skills-sidebar {
@@ -674,12 +678,37 @@
     margin: 0;
   }
 
+  .elitecv-job-dot {
+    display: block !important;
+    visibility: visible !important;
+
+    width: 10px !important;
+    height: 10px !important;
+
+    background-color: #173a56 !important;
+    border: 2px solid #173a56 !important;
+    border-radius: 50% !important;
+
+    opacity: 1 !important;
+    z-index: 10 !important;
+
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   html,
   body {
     width: 210mm !important;
     margin: 0 !important;
     padding: 0 !important;
     background: #ffffff !important;
+  }
+
+  .elitecv-job-dot {
+    background: #173a56 !important;
+    border: 2px solid #173a56 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .elitecv-doc {
@@ -741,10 +770,13 @@
   }
 
   .elitecv-main-block,
-  .elitecv-timeline,
-  .elitecv-job,
   .elitecv-job-content {
     overflow: hidden !important;
+  }
+
+  .elitecv-timeline,
+  .elitecv-job {
+    overflow: visible !important;
   }
 
   .elitecv-sidebar,
