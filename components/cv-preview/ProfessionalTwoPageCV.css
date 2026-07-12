@@ -212,7 +212,7 @@
 }
 
 .elitecv-side-item {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-size: 11.5px;
   line-height: 1.42;
 }
@@ -491,7 +491,8 @@
   align-items: start;
   gap: 14px;
 
-  padding-bottom: 7px;
+  padding-top: 2px;
+  padding-bottom: 6px;
   border-bottom: 1px solid rgba(21, 25, 34, 0.1);
 }
 
@@ -508,17 +509,16 @@
 }
 
 .elitecv-career-details strong {
-  font-size: 12.8px;
-  line-height: 1.25;
+  font-size: 12.7px;
   font-weight: 700;
   color: #173a56;
+  line-height: 1.2;
 }
 
 .elitecv-career-details span {
-  font-size: 12px;
-  line-height: 1.25;
+  font-size: 11.8px;
+  line-height: 1.2;
   font-weight: 600;
-  color: #151922;
 }
 
 .elitecv-career-period {
@@ -615,6 +615,56 @@
   font-weight: 500;
 
   color: rgba(255, 255, 255, 0.72);
+}
+
+.elitecv-certificates-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.elitecv-certificate-row {
+  margin: 0;
+  padding: 0;
+  line-height: 1.12;
+}
+
+.elitecv-certificate-title {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.elitecv-certificate-details {
+  margin-top: 1px;
+  font-size: 8.9px;
+  font-weight: 400;
+  line-height: 1.18;
+  opacity: .82;
+}
+
+.elitecv-it-skills-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.elitecv-it-skill-row {
+  display: block;
+  font-size: 10px;
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+
+.elitecv-it-skill-level {
+  margin-left: 4px;
+  font-size: 9px;
+  opacity: 0.85;
+}
+
+.elitecv-sidebar-page2 .elitecv-side-block h3 {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
 }
 
 /* Druck */
@@ -727,7 +777,7 @@
 }
 
 .elitecv-sidebar-page2 .elitecv-side-block {
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .elitecv-sidebar-page2 .elitecv-side-item {

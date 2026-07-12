@@ -197,19 +197,34 @@ export function ProfessionalTwoPageCV({
           </SideBlock>
 
           <SideBlock title={t.certificates} icon={<Award />}>
-            {certificates.map((cert) => (
-              <SideItem
-                key={cert.id}
-                title={cert.title}
-                text={[
-                  cert.issuer,
+            <div className="elitecv-certificates-compact">
+              {certificates.map((cert) => {
+                const period =
                   cert.date ||
-                  [cert.from, cert.to].filter(Boolean).join(" – "),
-                ]
-                  .filter(Boolean)
-                  .join(" · ")}
-              />
-            ))}
+                  [cert.from, cert.to]
+                    .filter(Boolean)
+                    .join(" – ");
+
+                return (
+                  <div
+                    key={cert.id}
+                    className="elitecv-certificate-row"
+                  >
+                    <div className="elitecv-certificate-title">
+                      {cert.title}
+                    </div>
+
+                    {(cert.issuer || period) && (
+                      <div className="elitecv-certificate-details">
+                        {[cert.issuer, period]
+                          .filter(Boolean)
+                          .join(" · ")}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </SideBlock>
 
           <SideBlock title={t.languages} icon={<Languages />}>
@@ -220,6 +235,29 @@ export function ProfessionalTwoPageCV({
               </div>
             ))}
           </SideBlock>
+
+          {itSkills.filter((it) => it.name?.trim()).length > 0 && (
+            <SideBlock title={t.itSkills} icon={<Cog />}>
+              <div className="elitecv-it-skills-sidebar">
+                {itSkills
+                  .filter((it) => it.name?.trim())
+                  .map((it) => (
+                    <div
+                      key={it.id}
+                      className="elitecv-it-skill-row"
+                    >
+                      <span>{it.name}</span>
+
+                      {it.level && (
+                        <span className="elitecv-it-skill-level">
+                          {it.level}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+              </div>
+            </SideBlock>
+          )}
 
           <SidebarFooter personal={personal} />
         </aside>
@@ -287,19 +325,6 @@ export function ProfessionalTwoPageCV({
               </div>
             </MainBlock>
           )}
-
-          <MainBlock title={t.itSkills}>
-            <ul className="elitecv-tools-list">
-              {itSkills
-                .filter((it) => it.name?.trim())
-                .map((it) => (
-                  <li key={it.id}>
-                    <strong>{it.name}</strong>
-                    {it.level && <span> – {it.level}</span>}
-                  </li>
-                ))}
-            </ul>
-          </MainBlock>
         </main>
       </section >
     </div >
