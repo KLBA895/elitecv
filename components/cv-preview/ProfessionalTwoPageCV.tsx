@@ -44,7 +44,8 @@ export function ProfessionalTwoPageCV({
       softSkills: "Soft Skills",
       profile: "Profil",
       experience: "Berufserfahrung",
-      moreExperience: "Weitere Berufserfahrungen",
+      moreExperience: "Weitere Erfahrung",
+      careerHistory: "Frühere Stationen",
       skills: "Kompetenzen & Tools",
       projects: "Projekte",
       careerHighlights: "Erfolge",
@@ -61,7 +62,8 @@ export function ProfessionalTwoPageCV({
       softSkills: "Soft Skills",
       profile: "Profile",
       experience: "Professional Experience",
-      moreExperience: "Additional Professional Experience",
+      moreExperience: "Earlier Experience",
+      careerHistory: "Career History",
       skills: "Skills & Tools",
       projects: "Projects",
       careerHighlights: "Achievements",
@@ -224,20 +226,30 @@ export function ProfessionalTwoPageCV({
 
           {(secondPageDetailedJobs.length > 0 || olderJobs.length > 0) && (
             <MainBlock title={t.moreExperience}>
-              <div className="elitecv-timeline">
-                {secondPageDetailedJobs.map((job, index) => (
-                  <JobEntry
-                    key={job.id}
-                    job={job}
-                    jobIndex={index + 2}
-                    successLabel={t.successes}
-                  />
-                ))}
+              {secondPageDetailedJobs.length > 0 && (
+                <div className="elitecv-timeline elitecv-timeline-detailed">
+                  {secondPageDetailedJobs.map((job, index) => (
+                    <JobEntry
+                      key={job.id}
+                      job={job}
+                      jobIndex={index + 2}
+                      successLabel={t.successes}
+                    />
+                  ))}
+                </div>
+              )}
 
-                {olderJobs.map((job) => (
-                  <CompactJobEntry key={job.id} job={job} />
-                ))}
-              </div>
+              {olderJobs.length > 0 && (
+                <section className="elitecv-career-history">
+                  <h4>{t.careerHistory}</h4>
+
+                  <div className="elitecv-career-list">
+                    {olderJobs.map((job) => (
+                      <CompactJobEntry key={job.id} job={job} />
+                    ))}
+                  </div>
+                </section>
+              )}
             </MainBlock>
           )}
 
@@ -527,28 +539,27 @@ function CompactJobEntry({
 }: {
   job: CVData["workExperience"][0];
 }) {
+  const period =
+    job.showPeriod !== false && (job.from || job.to)
+      ? job.from && job.to
+        ? job.from === job.to
+          ? job.from
+          : `${job.from} – ${job.to}`
+        : job.from || job.to
+      : "";
+
   return (
-    <article className="elitecv-job elitecv-job-compact">
-      <div className="elitecv-job-dot" />
-
-      <div className="elitecv-job-content">
-        <div className="elitecv-job-head">
-          <div>
-            <strong>{job.functionTitle}</strong>
-            <p>{job.company}</p>
-          </div>
-
-          {job.showPeriod !== false && (job.from || job.to) && (
-            <span>
-              {job.from && job.to
-                ? job.from === job.to
-                  ? job.from
-                  : `${job.from} – ${job.to}`
-                : job.from || job.to}
-            </span>
-          )}
-        </div>
+    <article className="elitecv-career-row">
+      <div className="elitecv-career-details">
+        <strong>{job.company}</strong>
+        <span>{job.functionTitle}</span>
       </div>
+
+      {period && (
+        <span className="elitecv-career-period">
+          {period}
+        </span>
+      )}
     </article>
   );
 }
