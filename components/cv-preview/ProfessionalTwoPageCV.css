@@ -462,9 +462,8 @@
 }
 
 .elitecv-career-history {
-  margin-top: 8px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(23, 58, 86, 0.35);
+  margin-top: 6px;
+  padding-top: 4px;
 }
 
 .elitecv-career-history h4 {
@@ -482,7 +481,7 @@
 .elitecv-career-list {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 6px;
 }
 
 .elitecv-career-row {
@@ -491,8 +490,8 @@
   align-items: start;
   gap: 14px;
 
-  padding-top: 2px;
-  padding-bottom: 6px;
+  padding-top: 1px;
+  padding-bottom: 4px;
   border-bottom: 1px solid rgba(21, 25, 34, 0.1);
 }
 

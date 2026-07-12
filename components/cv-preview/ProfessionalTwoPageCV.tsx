@@ -25,6 +25,139 @@ interface ProfessionalTwoPageCVProps {
   data: CVData;
   language?: "de" | "en";
 }
+const DUPLICATE_STOP_WORDS = new Set([
+  "the",
+  "and",
+  "for",
+  "with",
+  "from",
+  "into",
+  "across",
+  "through",
+  "that",
+  "this",
+  "their",
+  "business",
+  "project",
+  "system",
+]);
+
+function normalizeWords(text: string): string[] {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(
+      (word) =>
+        word.length >= 4 &&
+        !DUPLICATE_STOP_WORDS.has(word)
+    );
+}
+
+function isNearDuplicate(first: string, second: string): boolean {
+  const firstWords = new Set(normalizeWords(first));
+  const secondWords = new Set(normalizeWords(second));
+
+  if (firstWords.size === 0 || secondWords.size === 0) {
+    return false;
+  }
+
+  const sharedWords = [...firstWords].filter((word) =>
+    secondWords.has(word)
+  ).length;
+
+  const smallerSetSize = Math.min(
+    firstWords.size,
+    secondWords.size
+  );
+
+  return sharedWords / smallerSetSize >= 0.65;
+}
+
+function compactCertificateTitle(title: string): string {
+  const replacements: Array<[RegExp, string]> = [
+    [
+      /Business Analysis Certificate Program,\s*IIBA-?BABOK/i,
+      "Business Analysis (IIBA-BABOK)",
+    ],
+    [
+      /Business Process Management Professional Certificate/i,
+      "Business Process Management",
+    ],
+    [
+      /Business Architecture Best Practices/i,
+      "Business Architecture",
+    ],
+    [
+      /Building and Using Business Process Architecture/i,
+      "Business Process Architecture",
+    ],
+    [
+      /Business-Oriented\s*\/\s*Advanced Data Modelling/i,
+      "Advanced Data Modelling",
+    ],
+    [
+      /Data Modelling Fundamentals\s*\/\s*Masterclass/i,
+      "Data Modelling Masterclass",
+    ],
+    [
+      /Business Rules and Decision Analysis Masterclass/i,
+      "Business Rules & Decision Analysis",
+    ],
+  ];
+
+  return replacements.reduce(
+    (currentTitle, [pattern, replacement]) =>
+      currentTitle.replace(pattern, replacement),
+    title.trim()
+  );
+}
+
+function compactIssuer(issuer: string): string {
+  const normalized = issuer.trim();
+
+  if (/Digicomp/i.test(normalized)) return "Digicomp";
+  if (/Boston University/i.test(normalized)) return "Boston University";
+  if (/Zühlke/i.test(normalized)) return "Zühlke";
+  if (/IRM UK/i.test(normalized)) return "IRM UK";
+  if (/Tobias Beck/i.test(normalized)) return "Tobias Beck Academy";
+
+  return normalized;
+}
+
+function compactCompanyName(company: string): string {
+  const replacements: Array<[RegExp, string]> = [
+    [
+      /Allianz Suisse Versicherungsgesellschaft AG/i,
+      "Allianz Suisse",
+    ],
+    [
+      /Systor AG\s*\/\s*Accenture Technology Solutions AG/i,
+      "Systor / Accenture",
+    ],
+    [
+      /Conexus AG\s*\(Ex Logical Solutions AG\)/i,
+      "Conexus",
+    ],
+  ];
+
+  return replacements.reduce(
+    (currentCompany, [pattern, replacement]) =>
+      currentCompany.replace(pattern, replacement),
+    company.trim()
+  );
+}
+
+function compactToolName(name: string): string {
+  return name
+    .replace(
+      /Thomson Reuters Accelus Risk Manager/i,
+      "Accelus Risk Manager"
+    )
+    .trim();
+}
 export function ProfessionalTwoPageCV({
   data,
   language = "de",
@@ -196,36 +329,45 @@ export function ProfessionalTwoPageCV({
             ))}
           </SideBlock>
 
-          <SideBlock title={t.certificates} icon={<Award />}>
-            <div className="elitecv-certificates-compact">
-              {certificates.map((cert) => {
-                const period =
-                  cert.date ||
-                  [cert.from, cert.to]
-                    .filter(Boolean)
-                    .join(" – ");
+          {certificates.length > 0 && (
+            <SideBlock title={t.certificates} icon={<Award />}>
+              <div className="elitecv-certificates-compact">
+                {certificates
+                  .filter((cert) => cert.title?.trim())
+                  .map((cert) => {
+                    const date =
+                      cert.date ||
+                      [cert.from, cert.to].filter(Boolean).join(" – ");
 
-                return (
-                  <div
-                    key={cert.id}
-                    className="elitecv-certificate-row"
-                  >
-                    <div className="elitecv-certificate-title">
-                      {cert.title}
-                    </div>
+                    const details = [
+                      cert.issuer
+                        ? compactIssuer(cert.issuer)
+                        : "",
+                      date,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ");
 
-                    {(cert.issuer || period) && (
-                      <div className="elitecv-certificate-details">
-                        {[cert.issuer, period]
-                          .filter(Boolean)
-                          .join(" · ")}
+                    return (
+                      <div
+                        key={cert.id}
+                        className="elitecv-certificate-row"
+                      >
+                        <div className="elitecv-certificate-title">
+                          {compactCertificateTitle(cert.title)}
+                        </div>
+
+                        {details && (
+                          <div className="elitecv-certificate-details">
+                            {details}
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </SideBlock>
+                    );
+                  })}
+              </div>
+            </SideBlock>
+          )}
 
           <SideBlock title={t.languages} icon={<Languages />}>
             {languages.map((lang) => (
@@ -246,7 +388,7 @@ export function ProfessionalTwoPageCV({
                       key={it.id}
                       className="elitecv-it-skill-row"
                     >
-                      <span>{it.name}</span>
+                      <span>{compactToolName(it.name)}</span>
 
                       {it.level && (
                         <span className="elitecv-it-skill-level">
@@ -503,20 +645,22 @@ function JobEntry({
     .filter((item) => item?.trim())
     .slice(0, maxResponsibilities);
 
-  const responsibilityTexts = new Set(
-    visibleResponsibilities.map((item) =>
-      item.trim().toLowerCase()
-    )
+  const allResponsibilities = job.responsibilities.filter(
+    (item) => item?.trim()
   );
 
   const visibleAchievements =
     jobIndex < 3
       ? job.achievements
-        .filter(
-          (item) =>
-            item?.trim() &&
-            !responsibilityTexts.has(item.trim().toLowerCase())
-        )
+        .filter((achievement) => {
+          if (!achievement?.trim()) {
+            return false;
+          }
+
+          return !allResponsibilities.some((responsibility) =>
+            isNearDuplicate(achievement, responsibility)
+          );
+        })
         .slice(0, 1)
       : [];
 
@@ -581,7 +725,7 @@ function CompactJobEntry({
   return (
     <article className="elitecv-career-row">
       <div className="elitecv-career-details">
-        <strong>{job.company}</strong>
+        <strong>{compactCompanyName(job.company)}</strong>
         <span>{job.functionTitle}</span>
       </div>
 
