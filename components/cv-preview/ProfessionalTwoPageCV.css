@@ -164,11 +164,6 @@
   margin-bottom: 28px;
 }
 
-.elitecv-header-compact h1 {
-  margin-bottom: 8px;
-  font-size: 24px;
-}
-
 /* Linke Spalte */
 
 .elitecv-side-block {
@@ -725,17 +720,6 @@
   min-height: 54px;
   box-sizing: border-box;
   align-items: center;
-}
-
-.elitecv-page2-header .elitecv-header {
-  min-height: 125px;
-  margin-bottom: 12px;
-}
-
-.elitecv-page2-header .elitecv-header-compact h1 {
-  margin-bottom: 8px;
-  font-size: 28px;
-  line-height: 1.05;
 }
 
 .elitecv-page2-header .elitecv-header-mark {

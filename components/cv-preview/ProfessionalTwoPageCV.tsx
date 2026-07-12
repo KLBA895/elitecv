@@ -92,7 +92,12 @@ export function ProfessionalTwoPageCV({
   const secondPageDetailedJobs = workExperience.slice(2, 5);
 
   // Alle älteren Stellen nur noch kompakt
-  const olderJobs = workExperience.slice(5);
+  const MAX_CAREER_HISTORY = 5;
+
+  const olderJobs = workExperience.slice(
+    5,
+    5 + MAX_CAREER_HISTORY
+  );
 
   const profileText =
     profile.rawText?.trim() ||
@@ -221,7 +226,7 @@ export function ProfessionalTwoPageCV({
 
         <main className="elitecv-main">
           <div className="elitecv-page2-header">
-            <Header personal={personal} compact />
+            <Header personal={personal} />
           </div>
 
           {(secondPageDetailedJobs.length > 0 || olderJobs.length > 0) && (
