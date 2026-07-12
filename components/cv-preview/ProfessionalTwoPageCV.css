@@ -522,13 +522,9 @@
 
 /* Zweite Seite */
 
-.elitecv-page2-header .elitecv-header h1 {
-  font-size: 40px;
-  line-height: 1.05;
-}
-
 .elitecv-sidebar.elitecv-sidebar-page2 {
-  padding-top: 135px;
+  padding-top: 90px;
+  padding-bottom: 65px;
 }
 
 /* Footer der Seitenleiste */
@@ -648,4 +644,54 @@
   min-height: 54px;
   box-sizing: border-box;
   align-items: center;
+}
+
+.elitecv-page2-header .elitecv-header {
+  min-height: 125px;
+  margin-bottom: 12px;
+}
+
+.elitecv-page2-header .elitecv-header-compact h1 {
+  margin-bottom: 8px;
+  font-size: 28px;
+  line-height: 1.05;
+}
+
+.elitecv-page2-header .elitecv-header-mark {
+  margin-top: 12px;
+}
+
+.elitecv-sidebar-page2 .elitecv-side-block {
+  margin-bottom: 24px;
+}
+
+.elitecv-sidebar-page2 .elitecv-side-item {
+  margin-bottom: 7px;
+}
+
+.elitecv-sidebar-page2 .elitecv-side-item p,
+.elitecv-sidebar-page2 .elitecv-side-block p {
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.elitecv-sidebar-page2 .elitecv-side-line {
+  margin-bottom: 8px;
+}
+.elitecv-job-compact {
+  margin-bottom: 15px;
+}
+
+.elitecv-job-compact .elitecv-job-head {
+  margin-bottom: 0;
+}
+
+.elitecv-job-compact .elitecv-job-head strong {
+  font-size: 13.5px;
+}
+
+.elitecv-job-compact .elitecv-job-head p {
+  margin-top: 2px;
+  font-size: 12.5px;
+  white-space: normal;
 }

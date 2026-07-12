@@ -85,7 +85,12 @@ export function ProfessionalTwoPageCV({
   } = data;
 
   const firstPageJobs = workExperience.slice(0, 2);
-  const secondPageJobs = workExperience.slice(2);
+
+  // Auf Seite 2 noch drei Stellen mit Beschreibung
+  const secondPageDetailedJobs = workExperience.slice(2, 5);
+
+  // Alle älteren Stellen nur noch kompakt
+  const olderJobs = workExperience.slice(5);
 
   const profileText =
     profile.rawText?.trim() ||
@@ -118,13 +123,16 @@ export function ProfessionalTwoPageCV({
 
           {achievements.length > 0 && (
             <SideBlock title={t.achievements} icon={<Award />}>
-              {achievements.map((item) => (
-                <SideItem
-                  key={item.id}
-                  title={item.metric ?? ""}
-                  text={item.text}
-                />
-              ))}
+              {achievements
+                .filter((item) => item.text?.trim())
+                .slice(0, 4)
+                .map((item) => (
+                  <SideItem
+                    key={item.id}
+                    title={item.metric ?? ""}
+                    text={item.text}
+                  />
+                ))}
             </SideBlock>
           )}
 
@@ -140,10 +148,11 @@ export function ProfessionalTwoPageCV({
 
           <MainBlock title={t.experience}>
             <div className="elitecv-timeline">
-              {firstPageJobs.map((job) => (
+              {firstPageJobs.map((job, index) => (
                 <JobEntry
                   key={job.id}
                   job={job}
+                  jobIndex={index}
                   successLabel={t.successes}
                 />
               ))}
@@ -210,14 +219,23 @@ export function ProfessionalTwoPageCV({
 
         <main className="elitecv-main">
           <div className="elitecv-page2-header">
-            <Header personal={personal} />
+            <Header personal={personal} compact />
           </div>
 
-          {secondPageJobs.length > 0 && (
+          {(secondPageDetailedJobs.length > 0 || olderJobs.length > 0) && (
             <MainBlock title={t.moreExperience}>
               <div className="elitecv-timeline">
-                {secondPageJobs.map((job) => (
-                  <JobEntry key={job.id} job={job} successLabel={t.successes} />
+                {secondPageDetailedJobs.map((job, index) => (
+                  <JobEntry
+                    key={job.id}
+                    job={job}
+                    jobIndex={index + 2}
+                    successLabel={t.successes}
+                  />
+                ))}
+
+                {olderJobs.map((job) => (
+                  <CompactJobEntry key={job.id} job={job} />
                 ))}
               </div>
             </MainBlock>
@@ -425,11 +443,41 @@ function MainBlock({
 
 function JobEntry({
   job,
+  jobIndex,
   successLabel,
 }: {
   job: CVData["workExperience"][0];
+  jobIndex: number;
   successLabel: string;
 }) {
+  const maxResponsibilities =
+    jobIndex === 0
+      ? 3
+      : jobIndex <= 2
+        ? 2
+        : 1;
+
+  const visibleResponsibilities = job.responsibilities
+    .filter((item) => item?.trim())
+    .slice(0, maxResponsibilities);
+
+  const responsibilityTexts = new Set(
+    visibleResponsibilities.map((item) =>
+      item.trim().toLowerCase()
+    )
+  );
+
+  const visibleAchievements =
+    jobIndex < 3
+      ? job.achievements
+        .filter(
+          (item) =>
+            item?.trim() &&
+            !responsibilityTexts.has(item.trim().toLowerCase())
+        )
+        .slice(0, 1)
+      : [];
+
   return (
     <article className="elitecv-job">
       <div className="elitecv-job-dot" />
@@ -452,24 +500,54 @@ function JobEntry({
           )}
         </div>
 
-        {job.responsibilities.length > 0 && (
+        {visibleResponsibilities.length > 0 && (
           <ul>
-            {job.responsibilities.map((item, index) => (
+            {visibleResponsibilities.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
         )}
 
-        {job.achievements.length > 0 && (
+        {visibleAchievements.length > 0 && (
           <>
             <p className="elitecv-job-label">{successLabel}</p>
             <ul>
-              {job.achievements.map((item, index) => (
+              {visibleAchievements.map((item, index) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
           </>
         )}
+      </div>
+    </article>
+  );
+}
+function CompactJobEntry({
+  job,
+}: {
+  job: CVData["workExperience"][0];
+}) {
+  return (
+    <article className="elitecv-job elitecv-job-compact">
+      <div className="elitecv-job-dot" />
+
+      <div className="elitecv-job-content">
+        <div className="elitecv-job-head">
+          <div>
+            <strong>{job.functionTitle}</strong>
+            <p>{job.company}</p>
+          </div>
+
+          {job.showPeriod !== false && (job.from || job.to) && (
+            <span>
+              {job.from && job.to
+                ? job.from === job.to
+                  ? job.from
+                  : `${job.from} – ${job.to}`
+                : job.from || job.to}
+            </span>
+          )}
+        </div>
       </div>
     </article>
   );

@@ -211,22 +211,10 @@ export function ProfessionalCVPreview({
             {achievements.length > 0 && (
               <SideSection title={t.sidebarAchievements}>
                 <ul className="cv-achievements-list">
-                  {achievements.map((achievement) => (
-                    <li
-                      key={achievement.id}
-                      className="cv-achievement-item"
-                    >
-                      {achievement.metric && (
-                        <span className="cv-achievement-metric">
-                          {achievement.metric}
-                        </span>
-                      )}
-
-                      {achievement.text && (
-                        <span className="cv-achievement-text">
-                          {achievement.text}
-                        </span>
-                      )}
+                  {achievements.map((a) => (
+                    <li key={a.id} className="cv-achievement-item">
+                      {a.metric && <span className="cv-achievement-metric">{a.metric}</span>}
+                      <span className="cv-achievement-text">{a.text}</span>
                     </li>
                   ))}
                 </ul>
@@ -325,13 +313,7 @@ export function ProfessionalCVPreview({
                     <p className="cv-edu-degree">{edu.degree}</p>
                     {edu.field && <p className="cv-edu-field">{edu.field}</p>}
                     <p className="cv-edu-institution">{edu.institution}</p>
-                    {(edu.from || edu.to) && (
-                      <p className="cv-edu-period">
-                        {edu.from === edu.to
-                          ? edu.from
-                          : [edu.from, edu.to].filter(Boolean).join(" – ")}
-                      </p>
-                    )}
+                    <p className="cv-edu-period">{edu.from} – {edu.to}</p>
                   </div>
                 ))}
               </SideSection>
@@ -343,15 +325,9 @@ export function ProfessionalCVPreview({
                 {certificates.map((c) => (
                   <div key={c.id} className="cv-cert-item">
                     <p className="cv-cert-title">{c.title}</p>
-                    {(c.issuer || c.date || c.from || c.to) && (
+                    {(c.issuer || c.year) && (
                       <p className="cv-cert-meta">
-                        {[
-                          c.issuer,
-                          c.date ||
-                          [c.from, c.to].filter(Boolean).join(" – "),
-                        ]
-                          .filter(Boolean)
-                          .join(" · ")}
+                        {[c.issuer, c.year].filter(Boolean).join(", ")}
                       </p>
                     )}
                   </div>
