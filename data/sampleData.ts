@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export const sampleCVData: CVData = {
   layout: "professional",
   themeColor: "gray",
+  firstPageExperienceCount: 3,
 
   personal: {
     firstName: "Sandra",

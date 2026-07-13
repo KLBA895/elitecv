@@ -257,10 +257,10 @@ export function ProfessionalTwoPageCV({
     projects,
   } = data;
 
-  const firstPageJobs = workExperience.slice(0, 2);
+  const firstPageJobs = workExperience.slice(0, 3);
 
   // Auf Seite 2 noch drei Stellen mit Beschreibung
-  const secondPageDetailedJobs = workExperience.slice(2, 6);
+  const secondPageDetailedJobs = workExperience.slice(3, 6);
 
   // Alle älteren Stellen nur noch kompakt
   const MAX_CAREER_HISTORY = 6;

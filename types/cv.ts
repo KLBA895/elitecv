@@ -119,6 +119,7 @@ export interface Achievement {
 // ─── Gesamt-CV ───────────────────────────────────────────────────────────────
 export interface CVData {
   layout: LayoutVariant;
+
   themeColor:
   | "gray"
   | "blue"
@@ -127,6 +128,8 @@ export interface CVData {
   | "burgundy"
   | "teal"
   | "charcoal";
+
+  firstPageExperienceCount?: 2 | 3 | 4;
 
   personal: PersonalData;
   profile: ProfileSection;
@@ -146,6 +149,7 @@ export interface CVData {
   languages: Language[];
   education: Education[];
   certificates: Certificate[];
+
   projects: {
     id: string;
     title: string;

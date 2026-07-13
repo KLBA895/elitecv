@@ -344,6 +344,50 @@ export function CVForm({
         </select>
       </div>
       {/* ── Persönliche Daten ──────────────────────────────────────────────── */}
+      <div className="cv-form-settings-box">
+
+        <div className="cv-form-field">
+          <FieldLabel>Layout Template</FieldLabel>
+
+          <select
+            className="cv-form-select"
+            value={data.layout}
+            onChange={(e) =>
+              update("layout", e.target.value as CVData["layout"])
+            }
+          >
+            <option value="professional">EliteCV Professional</option>
+            <option value="executive">EliteCV Executive</option>
+          </select>
+        </div>
+
+        <div className="cv-form-field">
+          <FieldLabel>CV Length</FieldLabel>
+
+          <select
+            className="cv-form-select"
+            value={data.firstPageExperienceCount ?? 3}
+            onChange={(e) =>
+              update(
+                "firstPageExperienceCount",
+                Number(e.target.value) as 2 | 3 | 4
+              )
+            }
+          >
+            <option value={2}>Compact</option>
+            <option value={3}>Balanced</option>
+            <option value={4}>Detailed</option>
+          </select>
+
+          <small className="cv-form-field-hint">
+            Choose how much professional experience should be highlighted in your CV.
+          </small>
+        </div>
+
+      </div>
+
+      {/* ── Persönliche Daten ──────────────────────────────────────────────── */}
+
       <AccordionSection title="Persönliche Daten" badge={undefined}>
         <div className="cv-form-grid2">
           <div className="cv-form-field">

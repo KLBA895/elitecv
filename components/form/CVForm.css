@@ -362,3 +362,43 @@
   cursor: not-allowed;
   opacity: 0.3;
 }
+
+.cv-form-settings-box {
+  margin-bottom: 16px;
+  padding: 14px;
+
+  border: 1px solid #dbe3ea;
+  border-radius: 10px;
+
+  background: #f8fafc;
+}
+
+.cv-form-select {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 12px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #1f2937;
+
+  font: inherit;
+  cursor: pointer;
+}
+
+.cv-form-select:focus {
+  border-color: #173a56;
+  outline: 2px solid rgba(23, 58, 86, 0.12);
+  outline-offset: 1px;
+}
+
+.cv-form-field-hint {
+  display: block;
+  margin-top: 6px;
+
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.4;
+}
