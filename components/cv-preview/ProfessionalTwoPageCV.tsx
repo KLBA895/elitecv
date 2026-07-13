@@ -269,7 +269,7 @@ export function ProfessionalTwoPageCV({
                 .map((item) => (
                   <SideItem
                     key={item.id}
-                    title={item.metric ?? ""}
+                    subtitle={item.metric ?? ""}
                     text={item.text}
                   />
                 ))}
@@ -556,7 +556,7 @@ function SideBlock({
   icon,
   children,
 }: {
-  title: string;
+  title?: string;
   icon?: React.ReactNode;
   children: React.ReactNode;
 }) {
@@ -584,23 +584,42 @@ function SideItem({
   icon,
   title,
   text,
+  subtitle,
 }: {
   icon?: string;
-  title: string;
+  title?: string;
   text?: string;
+  subtitle?: string;
 }) {
   const displayIcon = icon ? skillIcons[icon] : null;
 
   return (
     <div className="elitecv-side-item">
-      <strong>
-        {displayIcon && (
-          <span className="elitecv-item-icon">{displayIcon}</span>
-        )}
-        {title}
-      </strong>
+      {subtitle ? (
+        <>
+          <h4 className="elitecv-side-subtitle">
+            {subtitle}
+          </h4>
 
-      {text && <p>{text}</p>}
+          {text && <p>{text}</p>}
+        </>
+      ) : (
+        <>
+          {title && (
+            <strong>
+              {displayIcon && (
+                <span className="elitecv-item-icon">
+                  {displayIcon}
+                </span>
+              )}
+
+              {title}
+            </strong>
+          )}
+
+          {text && <p>{text}</p>}
+        </>
+      )}
     </div>
   );
 }

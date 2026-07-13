@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
         .filter((item) => item.text?.trim())
         .slice(0, 5)
         .map((item) => ({
-          metric: item.metric?.trim(),
+          headline: item.metric?.trim(),
           text: item.text?.trim(),
         })),
 

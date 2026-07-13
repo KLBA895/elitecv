@@ -855,3 +855,19 @@
   min-height: 155px;
   margin-bottom: 8px;
 }
+
+.elitecv-side-subtitle {
+
+  margin: 0 0 6px;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  color: #ffffff;
+
+  letter-spacing: .3px;
+
+  line-height: 1.2;
+
+}

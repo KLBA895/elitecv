@@ -112,8 +112,8 @@ export interface Strength {
 
 export interface Achievement {
   id: string;
-  text: string;
   metric?: string;
+  text: string;
 }
 
 // ─── Gesamt-CV ───────────────────────────────────────────────────────────────

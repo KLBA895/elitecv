@@ -750,38 +750,33 @@ export function CVForm({
                 Erfolg {idx + 1}
               </span>
 
-              <div className="cv-form-repeat-header">
-                <span className="cv-form-repeat-index">
-                  Erfolg {idx + 1}
-                </span>
+              <div className="cv-form-repeat-actions">
+                <MoveButtons
+                  index={idx}
+                  length={data.achievements.length}
+                  onMove={(direction) =>
+                    update(
+                      "achievements",
+                      moveItem(data.achievements, idx, direction)
+                    )
+                  }
+                />
 
-                <div className="cv-form-repeat-actions">
-                  <MoveButtons
-                    index={idx}
-                    length={data.achievements.length}
-                    onMove={(direction) =>
-                      update(
-                        "achievements",
-                        moveItem(data.achievements, idx, direction)
-                      )
-                    }
-                  />
-
-                  <RemoveButton
-                    onClick={() =>
-                      update(
-                        "achievements",
-                        data.achievements.filter((x) => x.id !== a.id)
-                      )
-                    }
-                  />
-                </div>
+                <RemoveButton
+                  onClick={() =>
+                    update(
+                      "achievements",
+                      data.achievements.filter((x) => x.id !== a.id)
+                    )
+                  }
+                />
               </div>
             </div>
 
             <div className="cv-form-grid2">
               <div className="cv-form-field">
-                <FieldLabel>Kennzahl / Metrik</FieldLabel>
+                <FieldLabel>Projekt / Überschrift</FieldLabel>
+
                 <Input
                   value={a.metric ?? ""}
                   onChange={(v) =>
@@ -792,12 +787,13 @@ export function CVForm({
                       )
                     )
                   }
-                  placeholder="–30% Kosten"
+                  placeholder="Innosuisse"
                 />
               </div>
 
               <div className="cv-form-field cv-form-field--full">
                 <FieldLabel>Beschreibung</FieldLabel>
+
                 <Input
                   value={a.text}
                   onChange={(v) =>
@@ -808,7 +804,7 @@ export function CVForm({
                       )
                     )
                   }
-                  placeholder="Operative Kosten um 30% reduziert durch Lean"
+                  placeholder="Led business analysis for..."
                 />
               </div>
             </div>

@@ -102,7 +102,7 @@ const cvImportSchema = {
 
         properties: {
           id: { type: "string" },
-          metric: { type: "string" },
+          headline: { type: "string" },
           text: { type: "string" },
         },
       },
