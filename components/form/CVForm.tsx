@@ -10,6 +10,26 @@ interface CVFormProps {
 }
 // ─── Small helpers ────────────────────────────────────────────────────────────
 const uid = () => Math.random().toString(36).slice(2, 9);
+const moveItem = <T,>(
+  items: T[],
+  index: number,
+  direction: "up" | "down"
+): T[] => {
+  const targetIndex = direction === "up" ? index - 1 : index + 1;
+
+  if (targetIndex < 0 || targetIndex >= items.length) {
+    return items;
+  }
+
+  const updatedItems = [...items];
+
+  [updatedItems[index], updatedItems[targetIndex]] = [
+    updatedItems[targetIndex],
+    updatedItems[index],
+  ];
+
+  return updatedItems;
+};
 
 const FieldLabel = ({ children }: { children: React.ReactNode }) => (
   <label className="cv-form-label">{children}</label>
@@ -97,6 +117,39 @@ const RemoveButton = ({ onClick }: { onClick: () => void }) => (
     ✕
   </button>
 );
+const MoveButtons = ({
+  index,
+  length,
+  onMove,
+}: {
+  index: number;
+  length: number;
+  onMove: (direction: "up" | "down") => void;
+}) => (
+  <div className="cv-form-move-actions">
+    <button
+      type="button"
+      className="cv-form-move-btn"
+      onClick={() => onMove("up")}
+      disabled={index === 0}
+      title="Nach oben verschieben"
+      aria-label="Nach oben verschieben"
+    >
+      ↑
+    </button>
+
+    <button
+      type="button"
+      className="cv-form-move-btn"
+      onClick={() => onMove("down")}
+      disabled={index === length - 1}
+      title="Nach unten verschieben"
+      aria-label="Nach unten verschieben"
+    >
+      ↓
+    </button>
+  </div>
+);
 
 // ─── Main Form ────────────────────────────────────────────────────────────────
 export function CVForm({
@@ -104,6 +157,8 @@ export function CVForm({
   onChange,
   language = "de",
 }: CVFormProps) {
+  const [isGeneratingProfile, setIsGeneratingProfile] = useState(false);
+  const [profileAiMessage, setProfileAiMessage] = useState("");
   const labels = {
     de: {
       strengths: "Persönliche Kompetenzen",
@@ -150,6 +205,59 @@ export function CVForm({
 
   const updateProfile = (field: keyof CVData["profile"], value: string) =>
     update("profile", { ...data.profile, [field]: value });
+  const handleGenerateProfile = async () => {
+    try {
+      setIsGeneratingProfile(true);
+      setProfileAiMessage("");
+
+      const response = await fetch("/api/generate-profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          language,
+          personal: data.personal,
+          workExperience: data.workExperience,
+          strengths: data.strengths,
+          achievements: data.achievements,
+          skillGroups: data.skillGroups,
+          hardSkills: data.hardSkills,
+          itSkills: data.itSkills,
+          education: data.education,
+          certificates: data.certificates,
+          languages: data.languages,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result.error || "Profiltext konnte nicht erstellt werden."
+        );
+      }
+
+      const profileText = String(result.profileText || "").trim();
+
+      if (!profileText) {
+        throw new Error("Die KI hat keinen Profiltext zurückgegeben.");
+      }
+
+      updateProfile("rawText", profileText);
+      setProfileAiMessage("Profiltext erfolgreich erstellt.");
+    } catch (error) {
+      console.error("Profiltext-Generierung fehlgeschlagen:", error);
+
+      setProfileAiMessage(
+        error instanceof Error
+          ? error.message
+          : "Profiltext konnte nicht erstellt werden."
+      );
+    } finally {
+      setIsGeneratingProfile(false);
+    }
+  };
 
   // ── Work Experience helpers ───────────────────────────────────────────────
   const addWork = () =>
@@ -387,18 +495,19 @@ export function CVForm({
           <button
             type="button"
             className="cv-form-ai-btn cv-form-ai-btn--inside"
-            onClick={() => {
-
-              const role = data.personal.targetTitle || "Fach- und Führungskraft";
-              const industry = data.personal.targetIndustry || "der Zielbranche";
-
-              const generatedText = `${role} mit fundierter Erfahrung in ${industry}, Prozessoptimierung und Projektumsetzung. Verbindet analytisches Denken mit Umsetzungsstärke und schafft klare Strukturen, effiziente Abläufe sowie nachhaltige Verbesserungen.`;
-
-              updateProfile("rawText", generatedText);
-            }}
+            onClick={handleGenerateProfile}
+            disabled={isGeneratingProfile}
           >
-            KI-Profiltext generieren
+            {isGeneratingProfile
+              ? "⏳ Profiltext wird erstellt..."
+              : "✨ KI-Profiltext generieren"}
           </button>
+
+          {profileAiMessage && (
+            <p className="cv-form-ai-message">
+              {profileAiMessage}
+            </p>
+          )}
         </div>
 
         <div className="cv-form-field">
@@ -437,8 +546,31 @@ export function CVForm({
         {data.usps.map((usp, idx) => (
           <div key={usp.id} className="cv-form-repeat-item">
             <div className="cv-form-repeat-header">
-              <span className="cv-form-repeat-index">USP {idx + 1}</span>
-              <RemoveButton onClick={() => update("usps", data.usps.filter((u) => u.id !== usp.id))} />
+              <span className="cv-form-repeat-index">
+                USP {idx + 1}
+              </span>
+
+              <div className="cv-form-repeat-actions">
+                <MoveButtons
+                  index={idx}
+                  length={data.usps.length}
+                  onMove={(direction) =>
+                    update(
+                      "usps",
+                      moveItem(data.usps, idx, direction)
+                    )
+                  }
+                />
+
+                <RemoveButton
+                  onClick={() =>
+                    update(
+                      "usps",
+                      data.usps.filter((u) => u.id !== usp.id)
+                    )
+                  }
+                />
+              </div>
             </div>
             <div className="cv-form-field">
               <FieldLabel>Titel</FieldLabel>
@@ -503,14 +635,27 @@ export function CVForm({
                 Stärke {idx + 1}
               </span>
 
-              <RemoveButton
-                onClick={() =>
-                  update(
-                    "strengths",
-                    data.strengths.filter((x) => x.id !== s.id)
-                  )
-                }
-              />
+              <div className="cv-form-repeat-actions">
+                <MoveButtons
+                  index={idx}
+                  length={data.strengths.length}
+                  onMove={(direction) =>
+                    update(
+                      "strengths",
+                      moveItem(data.strengths, idx, direction)
+                    )
+                  }
+                />
+
+                <RemoveButton
+                  onClick={() =>
+                    update(
+                      "strengths",
+                      data.strengths.filter((x) => x.id !== s.id)
+                    )
+                  }
+                />
+              </div>
             </div>
 
             <div className="cv-form-grid2">
@@ -605,14 +750,33 @@ export function CVForm({
                 Erfolg {idx + 1}
               </span>
 
-              <RemoveButton
-                onClick={() =>
-                  update(
-                    "achievements",
-                    data.achievements.filter((x) => x.id !== a.id)
-                  )
-                }
-              />
+              <div className="cv-form-repeat-header">
+                <span className="cv-form-repeat-index">
+                  Erfolg {idx + 1}
+                </span>
+
+                <div className="cv-form-repeat-actions">
+                  <MoveButtons
+                    index={idx}
+                    length={data.achievements.length}
+                    onMove={(direction) =>
+                      update(
+                        "achievements",
+                        moveItem(data.achievements, idx, direction)
+                      )
+                    }
+                  />
+
+                  <RemoveButton
+                    onClick={() =>
+                      update(
+                        "achievements",
+                        data.achievements.filter((x) => x.id !== a.id)
+                      )
+                    }
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="cv-form-grid2">
@@ -679,7 +843,27 @@ export function CVForm({
                 {job.company ? ` – ${job.company}` : ""}
               </span>
 
-              <RemoveButton onClick={() => removeWork(job.id)} />
+              <div className="cv-form-repeat-header">
+                <span className="cv-form-repeat-index">
+                  Position {idx + 1}
+                  {job.company ? ` – ${job.company}` : ""}
+                </span>
+
+                <div className="cv-form-repeat-actions">
+                  <MoveButtons
+                    index={idx}
+                    length={data.workExperience.length}
+                    onMove={(direction) =>
+                      update(
+                        "workExperience",
+                        moveItem(data.workExperience, idx, direction)
+                      )
+                    }
+                  />
+
+                  <RemoveButton onClick={() => removeWork(job.id)} />
+                </div>
+              </div>
             </div>
 
             <div className="cv-form-grid2">
@@ -805,9 +989,29 @@ export function CVForm({
                     placeholder="Aufgabe beschreiben…"
                   />
 
+                  <MoveButtons
+                    index={i}
+                    length={job.responsibilities.length}
+                    onMove={(direction) =>
+                      updateWork(
+                        job.id,
+                        "responsibilities",
+                        moveItem(
+                          job.responsibilities,
+                          i,
+                          direction
+                        )
+                      )
+                    }
+                  />
+
                   <RemoveButton
                     onClick={() =>
-                      removeListItem(job.id, "responsibilities", i)
+                      removeListItem(
+                        job.id,
+                        "responsibilities",
+                        i
+                      )
                     }
                   />
                 </div>
@@ -838,8 +1042,30 @@ export function CVForm({
                     placeholder="Messbarer Erfolg…"
                   />
 
+                  <MoveButtons
+                    index={i}
+                    length={job.achievements.length}
+                    onMove={(direction) =>
+                      updateWork(
+                        job.id,
+                        "achievements",
+                        moveItem(
+                          job.achievements,
+                          i,
+                          direction
+                        )
+                      )
+                    }
+                  />
+
                   <RemoveButton
-                    onClick={() => removeListItem(job.id, "achievements", i)}
+                    onClick={() =>
+                      removeListItem(
+                        job.id,
+                        "achievements",
+                        i
+                      )
+                    }
                   />
                 </div>
               ))}
@@ -864,14 +1090,27 @@ export function CVForm({
                 Projekt {idx + 1}
               </span>
 
-              <RemoveButton
-                onClick={() =>
-                  update(
-                    "projects",
-                    data.projects.filter((p) => p.id !== project.id)
-                  )
-                }
-              />
+              <div className="cv-form-repeat-actions">
+                <MoveButtons
+                  index={idx}
+                  length={data.projects.length}
+                  onMove={(direction) =>
+                    update(
+                      "projects",
+                      moveItem(data.projects, idx, direction)
+                    )
+                  }
+                />
+
+                <RemoveButton
+                  onClick={() =>
+                    update(
+                      "projects",
+                      data.projects.filter((p) => p.id !== project.id)
+                    )
+                  }
+                />
+              </div>
             </div>
 
             <div className="cv-form-field">
@@ -949,6 +1188,28 @@ export function CVForm({
                     placeholder="Ergebnis beschreiben…"
                   />
 
+                  <MoveButtons
+                    index={i}
+                    length={project.results.length}
+                    onMove={(direction) =>
+                      update(
+                        "projects",
+                        data.projects.map((p) =>
+                          p.id === project.id
+                            ? {
+                              ...p,
+                              results: moveItem(
+                                p.results,
+                                i,
+                                direction
+                              ),
+                            }
+                            : p
+                        )
+                      )
+                    }
+                  />
+
                   <RemoveButton
                     onClick={() =>
                       update(
@@ -1011,8 +1272,31 @@ export function CVForm({
         {data.skillGroups.map((sg, idx) => (
           <div key={sg.id} className="cv-form-repeat-item">
             <div className="cv-form-repeat-header">
-              <span className="cv-form-repeat-index">Gruppe {idx + 1}</span>
-              <RemoveButton onClick={() => update("skillGroups", data.skillGroups.filter((x) => x.id !== sg.id))} />
+              <span className="cv-form-repeat-index">
+                Gruppe {idx + 1}
+              </span>
+
+              <div className="cv-form-repeat-actions">
+                <MoveButtons
+                  index={idx}
+                  length={data.skillGroups.length}
+                  onMove={(direction) =>
+                    update(
+                      "skillGroups",
+                      moveItem(data.skillGroups, idx, direction)
+                    )
+                  }
+                />
+
+                <RemoveButton
+                  onClick={() =>
+                    update(
+                      "skillGroups",
+                      data.skillGroups.filter((x) => x.id !== sg.id)
+                    )
+                  }
+                />
+              </div>
             </div>
             <div className="cv-form-field">
               <FieldLabel>Kategorie</FieldLabel>
@@ -1022,140 +1306,241 @@ export function CVForm({
               <FieldLabel>Skills (kommagetrennt)</FieldLabel>
               <Input value={sg.skills.join(", ")} onChange={(v) => update("skillGroups", data.skillGroups.map((x) => x.id === sg.id ? { ...x, skills: v.split(",").map((s) => s.trim()).filter(Boolean) } : x))} placeholder="Lean, Six Sigma, BPMN…" />
             </div>
-          </div>
-        ))}
+          </div >
+        ))
+        }
         <AddButton onClick={() => update("skillGroups", [...data.skillGroups, { id: uid(), category: "", skills: [] }])} label="Gruppe hinzufügen" />
-      </AccordionSection>
+      </AccordionSection >
 
       {/* ── Hard Skills ────────────────────────────────────────────────────── */}
-      <AccordionSection title="Hard Skills">
+      < AccordionSection title="Hard Skills" >
         <div className="cv-form-field">
           <FieldLabel>Hard Skills (kommagetrennt)</FieldLabel>
           <Textarea value={data.hardSkills.join(", ")} onChange={(v) => update("hardSkills", v.split(",").map((s) => s.trim()).filter(Boolean))} placeholder="Lean Management, Six Sigma, PMP…" rows={2} />
         </div>
-      </AccordionSection>
+      </AccordionSection >
 
       {/* ── Soft Skills ────────────────────────────────────────────────────── */}
-      <AccordionSection title="Soft Skills">
+      < AccordionSection title="Soft Skills" >
         <div className="cv-form-field">
           <FieldLabel>Soft Skills (kommagetrennt)</FieldLabel>
           <Textarea value={data.softSkills.join(", ")} onChange={(v) => update("softSkills", v.split(",").map((s) => s.trim()).filter(Boolean))} placeholder="Führungsstärke, Kommunikation…" rows={2} />
         </div>
-      </AccordionSection>
+      </AccordionSection >
 
       {/* ── IT Skills ──────────────────────────────────────────────────────── */}
-      <AccordionSection title="IT-Kenntnisse" badge={data.itSkills.length}>
-        {data.itSkills.map((it, idx) => (
-          <div key={it.id} className="cv-form-repeat-item">
-            <div className="cv-form-repeat-header">
-              <span className="cv-form-repeat-index">{it.name || `Tool ${idx + 1}`}</span>
-              <RemoveButton onClick={() => update("itSkills", data.itSkills.filter((x) => x.id !== it.id))} />
-            </div>
-            <div className="cv-form-grid2">
-              <div className="cv-form-field">
-                <FieldLabel>Tool / Software</FieldLabel>
-                <Input value={it.name} onChange={(v) => update("itSkills", data.itSkills.map((x) => x.id === it.id ? { ...x, name: v } : x))} placeholder="Microsoft Office 365" />
+      < AccordionSection title="IT-Kenntnisse" badge={data.itSkills.length} >
+        {
+          data.itSkills.map((it, idx) => (
+            <div key={it.id} className="cv-form-repeat-item">
+              <div className="cv-form-repeat-header">
+                <span className="cv-form-repeat-index">
+                  {it.name || `Tool ${idx + 1}`}
+                </span>
+
+                <div className="cv-form-repeat-actions">
+                  <MoveButtons
+                    index={idx}
+                    length={data.itSkills.length}
+                    onMove={(direction) =>
+                      update(
+                        "itSkills",
+                        moveItem(data.itSkills, idx, direction)
+                      )
+                    }
+                  />
+
+                  <RemoveButton
+                    onClick={() =>
+                      update(
+                        "itSkills",
+                        data.itSkills.filter((x) => x.id !== it.id)
+                      )
+                    }
+                  />
+                </div>
               </div>
-              <div className="cv-form-field">
-                <FieldLabel>Niveau</FieldLabel>
-                <select className="cv-form-select" value={it.level ?? ""} onChange={(e) => update("itSkills", data.itSkills.map((x) => x.id === it.id ? { ...x, level: e.target.value as ITSkill["level"] } : x))}>
-                  <option value="">– auswählen –</option>
-                  <option>Grundkenntnisse</option>
-                  <option>Gut</option>
-                  <option>Sehr gut</option>
-                  <option>Expertenwissen</option>
-                </select>
+              <div className="cv-form-grid2">
+                <div className="cv-form-field">
+                  <FieldLabel>Tool / Software</FieldLabel>
+                  <Input value={it.name} onChange={(v) => update("itSkills", data.itSkills.map((x) => x.id === it.id ? { ...x, name: v } : x))} placeholder="Microsoft Office 365" />
+                </div>
+                <div className="cv-form-field">
+                  <FieldLabel>Niveau</FieldLabel>
+                  <select className="cv-form-select" value={it.level ?? ""} onChange={(e) => update("itSkills", data.itSkills.map((x) => x.id === it.id ? { ...x, level: e.target.value as ITSkill["level"] } : x))}>
+                    <option value="">– auswählen –</option>
+                    <option>Grundkenntnisse</option>
+                    <option>Gut</option>
+                    <option>Sehr gut</option>
+                    <option>Expertenwissen</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-        <AddButton onClick={() => update("itSkills", [...data.itSkills, { id: uid(), name: "", level: "Gut" }])} label="Tool hinzufügen" />
-      </AccordionSection>
+          ))
+        }
+        < AddButton onClick={() => update("itSkills", [...data.itSkills, { id: uid(), name: "", level: "Gut" }])} label="Tool hinzufügen" />
+      </AccordionSection >
 
       {/* ── Sprachen ───────────────────────────────────────────────────────── */}
-      <AccordionSection title="Sprachen" badge={data.languages.length}>
-        {data.languages.map((l, idx) => (
-          <div key={l.id} className="cv-form-repeat-item">
-            <div className="cv-form-repeat-header">
-              <span className="cv-form-repeat-index">{l.language || `Sprache ${idx + 1}`}</span>
-              <RemoveButton onClick={() => update("languages", data.languages.filter((x) => x.id !== l.id))} />
-            </div>
-            <div className="cv-form-grid2">
-              <div className="cv-form-field">
-                <FieldLabel>Sprache</FieldLabel>
-                <Input value={l.language} onChange={(v) => update("languages", data.languages.map((x) => x.id === l.id ? { ...x, language: v } : x))} placeholder="Deutsch" />
+      < AccordionSection title="Sprachen" badge={data.languages.length} >
+        {
+          data.languages.map((l, idx) => (
+            <div key={l.id} className="cv-form-repeat-item">
+              <div className="cv-form-repeat-header">
+                <span className="cv-form-repeat-index">
+                  {l.language || `Sprache ${idx + 1}`}
+                </span>
+
+                <div className="cv-form-repeat-actions">
+                  <MoveButtons
+                    index={idx}
+                    length={data.languages.length}
+                    onMove={(direction) =>
+                      update(
+                        "languages",
+                        moveItem(data.languages, idx, direction)
+                      )
+                    }
+                  />
+
+                  <RemoveButton
+                    onClick={() =>
+                      update(
+                        "languages",
+                        data.languages.filter((x) => x.id !== l.id)
+                      )
+                    }
+                  />
+                </div>
               </div>
-              <div className="cv-form-field">
-                <FieldLabel>Niveau</FieldLabel>
-                <Input value={l.level} onChange={(v) => update("languages", data.languages.map((x) => x.id === l.id ? { ...x, level: v } : x))} placeholder="Muttersprache / C1 / B2" />
+              <div className="cv-form-grid2">
+                <div className="cv-form-field">
+                  <FieldLabel>Sprache</FieldLabel>
+                  <Input value={l.language} onChange={(v) => update("languages", data.languages.map((x) => x.id === l.id ? { ...x, language: v } : x))} placeholder="Deutsch" />
+                </div>
+                <div className="cv-form-field">
+                  <FieldLabel>Niveau</FieldLabel>
+                  <Input value={l.level} onChange={(v) => update("languages", data.languages.map((x) => x.id === l.id ? { ...x, level: v } : x))} placeholder="Muttersprache / C1 / B2" />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-        <AddButton onClick={() => update("languages", [...data.languages, { id: uid(), language: "", level: "" }])} label="Sprache hinzufügen" />
-      </AccordionSection>
+          ))
+        }
+        < AddButton onClick={() => update("languages", [...data.languages, { id: uid(), language: "", level: "" }])} label="Sprache hinzufügen" />
+      </AccordionSection >
 
       {/* ── Ausbildung ─────────────────────────────────────────────────────── */}
-      <AccordionSection title={t.education} badge={data.education.length}>
-        {data.education.map((edu, idx) => (
-          <div key={edu.id} className="cv-form-repeat-item">
-            <div className="cv-form-repeat-header">
-              <span className="cv-form-repeat-index">{edu.institution || `Ausbildung ${idx + 1}`}</span>
-              <RemoveButton onClick={() => update("education", data.education.filter((x) => x.id !== edu.id))} />
+      < AccordionSection title={t.education} badge={data.education.length} >
+        {
+          data.education.map((edu, idx) => (
+            <div key={edu.id} className="cv-form-repeat-item">
+              <div className="cv-form-repeat-header">
+                <span className="cv-form-repeat-index">
+                  {edu.institution || `Ausbildung ${idx + 1}`}
+                </span>
+
+                <div className="cv-form-repeat-actions">
+                  <MoveButtons
+                    index={idx}
+                    length={data.education.length}
+                    onMove={(direction) =>
+                      update(
+                        "education",
+                        moveItem(data.education, idx, direction)
+                      )
+                    }
+                  />
+
+                  <RemoveButton
+                    onClick={() =>
+                      update(
+                        "education",
+                        data.education.filter((x) => x.id !== edu.id)
+                      )
+                    }
+                  />
+                </div>
+              </div>
+              <div className="cv-form-grid2">
+                <div className="cv-form-field cv-form-field--full">
+                  <FieldLabel>Institution</FieldLabel>
+                  <Input value={edu.institution} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, institution: v } : x))} placeholder="Universität St. Gallen" />
+                </div>
+                <div className="cv-form-field">
+                  <FieldLabel>Abschluss</FieldLabel>
+                  <Input value={edu.degree} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, degree: v } : x))} placeholder="Master of Science" />
+                </div>
+                <div className="cv-form-field">
+                  <FieldLabel>Studienrichtung</FieldLabel>
+                  <Input value={edu.field ?? ""} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, field: v } : x))} placeholder="Business Administration" />
+                </div>
+                <div className="cv-form-field">
+                  <FieldLabel>Von</FieldLabel>
+                  <Input value={edu.from} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, from: v } : x))} placeholder="2007" />
+                </div>
+                <div className="cv-form-field">
+                  <FieldLabel>Bis</FieldLabel>
+                  <Input value={edu.to} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, to: v } : x))} placeholder="2011" />
+                </div>
+              </div>
             </div>
-            <div className="cv-form-grid2">
-              <div className="cv-form-field cv-form-field--full">
-                <FieldLabel>Institution</FieldLabel>
-                <Input value={edu.institution} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, institution: v } : x))} placeholder="Universität St. Gallen" />
-              </div>
-              <div className="cv-form-field">
-                <FieldLabel>Abschluss</FieldLabel>
-                <Input value={edu.degree} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, degree: v } : x))} placeholder="Master of Science" />
-              </div>
-              <div className="cv-form-field">
-                <FieldLabel>Studienrichtung</FieldLabel>
-                <Input value={edu.field ?? ""} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, field: v } : x))} placeholder="Business Administration" />
-              </div>
-              <div className="cv-form-field">
-                <FieldLabel>Von</FieldLabel>
-                <Input value={edu.from} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, from: v } : x))} placeholder="2007" />
-              </div>
-              <div className="cv-form-field">
-                <FieldLabel>Bis</FieldLabel>
-                <Input value={edu.to} onChange={(v) => update("education", data.education.map((x) => x.id === edu.id ? { ...x, to: v } : x))} placeholder="2011" />
-              </div>
-            </div>
-          </div>
-        ))}
-        <AddButton onClick={() => update("education", [...data.education, { id: uid(), institution: "", degree: "", field: "", from: "", to: "", location: "" }])} label="Ausbildung hinzufügen" />
-      </AccordionSection>
+          ))
+        }
+        < AddButton onClick={() => update("education", [...data.education, { id: uid(), institution: "", degree: "", field: "", from: "", to: "", location: "" }])} label="Ausbildung hinzufügen" />
+      </AccordionSection >
 
       {/* ── Zertifikate ────────────────────────────────────────────────────── */}
-      <AccordionSection title="Weiterbildungen & Zertifikate" badge={data.certificates.length}>
-        {data.certificates.map((c, idx) => (
-          <div key={c.id} className="cv-form-repeat-item">
-            <div className="cv-form-repeat-header">
-              <span className="cv-form-repeat-index">{c.title || `Zertifikat ${idx + 1}`}</span>
-              <RemoveButton onClick={() => update("certificates", data.certificates.filter((x) => x.id !== c.id))} />
+      < AccordionSection title="Weiterbildungen & Zertifikate" badge={data.certificates.length} >
+        {
+          data.certificates.map((c, idx) => (
+            <div key={c.id} className="cv-form-repeat-item">
+              <div className="cv-form-repeat-header">
+                <span className="cv-form-repeat-index">
+                  {c.title || `Zertifikat ${idx + 1}`}
+                </span>
+
+                <div className="cv-form-repeat-actions">
+                  <MoveButtons
+                    index={idx}
+                    length={data.certificates.length}
+                    onMove={(direction) =>
+                      update(
+                        "certificates",
+                        moveItem(data.certificates, idx, direction)
+                      )
+                    }
+                  />
+
+                  <RemoveButton
+                    onClick={() =>
+                      update(
+                        "certificates",
+                        data.certificates.filter((x) => x.id !== c.id)
+                      )
+                    }
+                  />
+                </div>
+              </div>
+              <div className="cv-form-grid2">
+                <div className="cv-form-field cv-form-field--full">
+                  <FieldLabel>Titel</FieldLabel>
+                  <Input value={c.title} onChange={(v) => update("certificates", data.certificates.map((x) => x.id === c.id ? { ...x, title: v } : x))} placeholder="Project Management Professional (PMP)" />
+                </div>
+                <div className="cv-form-field">
+                  <FieldLabel>Aussteller</FieldLabel>
+                  <Input value={c.issuer ?? ""} onChange={(v) => update("certificates", data.certificates.map((x) => x.id === c.id ? { ...x, issuer: v } : x))} placeholder="PMI" />
+                </div>
+                <div className="cv-form-field">
+                  <FieldLabel>Jahr</FieldLabel>
+                  <Input value={c.year ?? ""} onChange={(v) => update("certificates", data.certificates.map((x) => x.id === c.id ? { ...x, year: v } : x))} placeholder="2023" />
+                </div>
+              </div>
             </div>
-            <div className="cv-form-grid2">
-              <div className="cv-form-field cv-form-field--full">
-                <FieldLabel>Titel</FieldLabel>
-                <Input value={c.title} onChange={(v) => update("certificates", data.certificates.map((x) => x.id === c.id ? { ...x, title: v } : x))} placeholder="Project Management Professional (PMP)" />
-              </div>
-              <div className="cv-form-field">
-                <FieldLabel>Aussteller</FieldLabel>
-                <Input value={c.issuer ?? ""} onChange={(v) => update("certificates", data.certificates.map((x) => x.id === c.id ? { ...x, issuer: v } : x))} placeholder="PMI" />
-              </div>
-              <div className="cv-form-field">
-                <FieldLabel>Jahr</FieldLabel>
-                <Input value={c.year ?? ""} onChange={(v) => update("certificates", data.certificates.map((x) => x.id === c.id ? { ...x, year: v } : x))} placeholder="2023" />
-              </div>
-            </div>
-          </div>
-        ))}
-        <AddButton onClick={() => update("certificates", [...data.certificates, { id: uid(), title: "", issuer: "", year: "" }])} label="Zertifikat hinzufügen" />
-      </AccordionSection>
-    </div>
+          ))
+        }
+        < AddButton onClick={() => update("certificates", [...data.certificates, { id: uid(), title: "", issuer: "", year: "" }])} label="Zertifikat hinzufügen" />
+      </AccordionSection >
+    </div >
   );
 }

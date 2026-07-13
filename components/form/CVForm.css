@@ -192,6 +192,57 @@
   background: #eef4ff;
 }
 
+.cv-form-repeat-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cv-form-move-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cv-form-move-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+
+  background: #ffffff;
+  color: #173a56;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.cv-form-move-btn:hover:not(:disabled) {
+  background: #eef4f8;
+  border-color: #173a56;
+}
+
+.cv-form-move-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.cv-form-list-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+}
+
 .cv-form-remove-btn {
   flex-shrink: 0;
   width: 26px;
@@ -266,4 +317,48 @@
 
 .cv-form-ai-btn:hover {
   opacity: 0.92;
+}
+
+.cv-form-repeat-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cv-form-move-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cv-form-move-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+
+  background: #ffffff;
+  color: #173a56;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.cv-form-move-btn:hover:not(:disabled) {
+  background: #eef4f8;
+  border-color: #173a56;
+}
+
+.cv-form-move-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
 }

@@ -672,7 +672,16 @@ function JobEntry({
         <div className="elitecv-job-head">
           <div>
             <strong>{job.functionTitle}</strong>
-            <p>{job.company}</p>
+
+            <p className="elitecv-job-company">
+              {job.company}
+            </p>
+
+            {job.location?.trim() && (
+              <p className="elitecv-job-location">
+                {job.location.trim()}
+              </p>
+            )}
           </div>
 
           {job.showPeriod !== false && (job.from || job.to) && (
@@ -727,7 +736,12 @@ function CompactJobEntry({
     <article className="elitecv-career-row">
       <div className="elitecv-career-details">
         <strong>{compactCompanyName(job.company)}</strong>
-        <span>{job.functionTitle}</span>
+        <span>
+          {job.functionTitle}
+          {job.location?.trim()
+            ? ` · ${job.location.trim()}`
+            : ""}
+        </span>
       </div>
 
       {period && (
