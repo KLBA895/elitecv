@@ -158,6 +158,44 @@ function compactToolName(name: string): string {
     )
     .trim();
 }
+
+function formatJobLocation(
+  location: string | undefined,
+  language: "de" | "en"
+): string {
+  const value = location?.trim();
+
+  if (!value) {
+    return "";
+  }
+
+  if (language === "de") {
+    return value;
+  }
+
+  const withoutCountryPrefix = value
+    .replace(/^CH[-\s]+/i, "")
+    .trim();
+
+  const englishCityNames: Record<string, string> = {
+    Zürich: "Zurich",
+    Genf: "Geneva",
+    Genève: "Geneva",
+    Luzern: "Lucerne",
+    "St. Gallen": "St. Gallen",
+  };
+
+  const city =
+    englishCityNames[withoutCountryPrefix] ??
+    withoutCountryPrefix;
+
+  if (/switzerland$/i.test(city)) {
+    return city;
+  }
+
+  return `${city}, Switzerland`;
+}
+
 export function ProfessionalTwoPageCV({
   data,
   language = "de",
@@ -294,6 +332,7 @@ export function ProfessionalTwoPageCV({
                   job={job}
                   jobIndex={index}
                   successLabel={t.successes}
+                  language={language}
                 />
               ))}
             </div>
@@ -419,6 +458,7 @@ export function ProfessionalTwoPageCV({
                       job={job}
                       jobIndex={index + 2}
                       successLabel={t.successes}
+                      language={language}
                     />
                   ))}
                 </div>
@@ -430,7 +470,11 @@ export function ProfessionalTwoPageCV({
 
                   <div className="elitecv-career-list">
                     {olderJobs.map((job) => (
-                      <CompactJobEntry key={job.id} job={job} />
+                      <CompactJobEntry
+                        key={job.id}
+                        job={job}
+                        language={language}
+                      />
                     ))}
                   </div>
                 </section>
@@ -648,11 +692,18 @@ function JobEntry({
   job,
   jobIndex,
   successLabel,
+  language,
 }: {
   job: CVData["workExperience"][0];
   jobIndex: number;
   successLabel: string;
+  language: "de" | "en";
 }) {
+  const formattedLocation = formatJobLocation(
+    job.location,
+    language
+  );
+
   const maxResponsibilities =
     jobIndex === 0
       ? 3
@@ -694,13 +745,13 @@ function JobEntry({
 
             <p className="elitecv-job-company">
               {job.company}
-            </p>
 
-            {job.location?.trim() && (
-              <p className="elitecv-job-location">
-                {job.location.trim()}
-              </p>
-            )}
+              {formattedLocation && (
+                <span className="elitecv-job-location-inline">
+                  · {formattedLocation}
+                </span>
+              )}
+            </p>
           </div>
 
           {job.showPeriod !== false && (job.from || job.to) && (
@@ -739,9 +790,16 @@ function JobEntry({
 
 function CompactJobEntry({
   job,
+  language,
 }: {
   job: CVData["workExperience"][0];
+  language: "de" | "en";
 }) {
+  const formattedLocation = formatJobLocation(
+    job.location,
+    language
+  );
+
   const period =
     job.showPeriod !== false && (job.from || job.to)
       ? job.from && job.to
@@ -757,8 +815,8 @@ function CompactJobEntry({
         <strong>{compactCompanyName(job.company)}</strong>
         <span>
           {job.functionTitle}
-          {job.location?.trim()
-            ? ` · ${job.location.trim()}`
+          {formattedLocation
+            ? ` · ${formattedLocation}`
             : ""}
         </span>
       </div>

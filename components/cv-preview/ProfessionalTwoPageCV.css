@@ -404,13 +404,20 @@
 
 .elitecv-job-company {
   margin: 3px 0 0;
-
   font-size: 13.5px;
   line-height: 1.3;
   font-weight: 700;
-
   color: #173a56;
-  white-space: normal;
+}
+
+.elitecv-job-location-inline {
+  display: inline-block;
+  margin-left: 4px;
+  white-space: nowrap;
+
+  font-weight: 400;
+  color: #7a7a7a;
+  font-size: 0.95em;
 }
 
 .elitecv-job-location {
@@ -857,17 +864,9 @@
 }
 
 .elitecv-side-subtitle {
-
-  margin: 0 0 6px;
-
-  font-size: 15px;
-
+  margin: 0 0 3px;
+  font-size: 13px;
   font-weight: 700;
-
-  color: #ffffff;
-
-  letter-spacing: .3px;
-
   line-height: 1.2;
-
+  color: #ffffff;
 }

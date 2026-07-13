@@ -93,18 +93,15 @@ const cvImportSchema = {
 
     achievements: {
       type: "array",
-
       items: {
         type: "object",
-        additionalProperties: false,
-
-        required: ["id", "metric", "text"],
-
         properties: {
           id: { type: "string" },
-          headline: { type: "string" },
+          metric: { type: "string" },
           text: { type: "string" },
         },
+        required: ["id", "metric", "text"],
+        additionalProperties: false,
       },
     },
 
