@@ -260,14 +260,14 @@ export function ProfessionalTwoPageCV({
   const firstPageJobs = workExperience.slice(0, 2);
 
   // Auf Seite 2 noch drei Stellen mit Beschreibung
-  const secondPageDetailedJobs = workExperience.slice(2, 5);
+  const secondPageDetailedJobs = workExperience.slice(2, 6);
 
   // Alle älteren Stellen nur noch kompakt
-  const MAX_CAREER_HISTORY = 5;
+  const MAX_CAREER_HISTORY = 6;
 
   const olderJobs = workExperience.slice(
-    5,
-    5 + MAX_CAREER_HISTORY
+    6,
+    6 + MAX_CAREER_HISTORY
   );
 
   const profileText =
@@ -705,11 +705,9 @@ function JobEntry({
   );
 
   const maxResponsibilities =
-    jobIndex === 0
+    jobIndex <= 5
       ? 3
-      : jobIndex <= 2
-        ? 2
-        : 1;
+      : 1;
 
   const visibleResponsibilities = job.responsibilities
     .filter((item) => item?.trim())
