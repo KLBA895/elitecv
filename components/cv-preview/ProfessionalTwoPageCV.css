@@ -26,7 +26,7 @@
   position: relative;
   height: 297mm;
   max-height: 297mm;
-  padding: 76px 22px;
+  padding: 66px 22px;
   background: #7f7f7f;
   color: #ffffff;
   box-sizing: border-box;
@@ -38,7 +38,7 @@
   height: 297mm;
   max-height: 297mm;
   box-sizing: border-box;
-  padding: 85.5px 32px 30px 26px;
+  padding: 75.5px 32px 30px 26px;
   overflow: hidden;
 }
 
