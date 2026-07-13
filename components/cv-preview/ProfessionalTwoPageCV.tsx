@@ -740,22 +740,12 @@ function JobEntry({
 
       <div className="elitecv-job-content">
         <div className="elitecv-job-head">
-          <div>
-            <strong>{job.functionTitle}</strong>
-
-            <p className="elitecv-job-company">
-              {job.company}
-
-              {formattedLocation && (
-                <span className="elitecv-job-location-inline">
-                  · {formattedLocation}
-                </span>
-              )}
-            </p>
-          </div>
+          <strong className="elitecv-job-title">
+            {job.functionTitle}
+          </strong>
 
           {job.showPeriod !== false && (job.from || job.to) && (
-            <span>
+            <span className="elitecv-job-period">
               {job.from && job.to
                 ? job.from === job.to
                   ? job.from
@@ -763,6 +753,17 @@ function JobEntry({
                 : job.from || job.to}
             </span>
           )}
+
+          <p className="elitecv-job-company">
+            {job.company}
+
+            {formattedLocation && (
+              <span className="elitecv-job-location-inline">
+                {"\u00A0·\u00A0"}
+                {formattedLocation}
+              </span>
+            )}
+          </p>
         </div>
 
         {visibleResponsibilities.length > 0 && (
@@ -784,7 +785,7 @@ function JobEntry({
           </>
         )}
       </div>
-    </article>
+    </article >
   );
 }
 
