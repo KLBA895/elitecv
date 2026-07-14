@@ -206,7 +206,7 @@ export function ProfessionalTwoPageCV({
 
   const labels = {
     de: {
-      strengths: "Persönliche Kompetenzen",
+      strengths: "Stärken",
       achievements: "Erfolge",
       education: "Ausbildung",
       certificates: "Weiterbildungen",

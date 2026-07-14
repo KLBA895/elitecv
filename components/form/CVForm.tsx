@@ -161,7 +161,7 @@ export function CVForm({
   const [profileAiMessage, setProfileAiMessage] = useState("");
   const labels = {
     de: {
-      strengths: "Persönliche Kompetenzen",
+      strengths: "Stärken",
       achievements: "Erfolge",
       education: "Ausbildung",
       certificates: "Weiterbildungen",

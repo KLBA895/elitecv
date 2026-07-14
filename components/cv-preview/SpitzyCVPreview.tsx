@@ -107,7 +107,7 @@ export function ProfessionalCVPreview({
 
   const labels = {
     de: {
-      strengths: "Persönliche Kompetenzen",
+      strengths: "Stärken",
       sidebarAchievements: "Top-Erfolge",
       jobAchievements: "Resultate",
       education: "Ausbildung",
