@@ -128,7 +128,6 @@ export function parseBasicCVText(text: string) {
 
       "strengths",
       "personal strengths",
-      "persönliche kompetenzen",
       "stärken",
 
       "projects",
