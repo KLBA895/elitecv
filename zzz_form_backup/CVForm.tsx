@@ -189,11 +189,11 @@ export function CVForm({ data, onChange }: CVFormProps) {
       data.workExperience.map((work: WorkExperience) =>
         work.id === id
           ? {
-              ...work,
-              [field]: work[field].map((item: string, itemIndex: number) =>
-                itemIndex === index ? value : item
-              ),
-            }
+            ...work,
+            [field]: work[field].map((item: string, itemIndex: number) =>
+              itemIndex === index ? value : item
+            ),
+          }
           : work
       )
     );
@@ -221,11 +221,11 @@ export function CVForm({ data, onChange }: CVFormProps) {
       data.workExperience.map((work: WorkExperience) =>
         work.id === id
           ? {
-              ...work,
-              [field]: work[field].filter(
-                (_item: string, itemIndex: number) => itemIndex !== index
-              ),
-            }
+            ...work,
+            [field]: work[field].filter(
+              (_item: string, itemIndex: number) => itemIndex !== index
+            ),
+          }
           : work
       )
     );
@@ -843,9 +843,9 @@ export function CVForm({ data, onChange }: CVFormProps) {
                       data.itSkills.map((item: ITSkill) =>
                         item.id === itSkill.id
                           ? {
-                              ...item,
-                              level: event.target.value as ITSkill["level"],
-                            }
+                            ...item,
+                            level: event.target.value as ITSkill["level"],
+                          }
                           : item
                       )
                     )
