@@ -367,7 +367,7 @@ Halte dich strikt an folgende Regeln:
 - Fülle why, how und what nur, wenn diese Inhalte im Lebenslauf ausdrücklich
   getrennt vorhanden sind. Sonst verwende leere Strings.
 
-- Persönliche Kompetenzen gehören in strengths.
+- Stärken gehören in strengths.
 - Falls kein eigener Abschnitt "Erfolge", "Achievements",
   "Key Achievements" oder "Resultate" vorhanden ist,
   extrahiere die 3 bis 6 stärksten nachweisbaren Resultate
@@ -424,7 +424,7 @@ Halte dich strikt an folgende Regeln:
   in den Header.
 
   - Inhalte aus Abschnitten wie "Strengths", "Expertise",
-  "Essential Skills", "Persönliche Kompetenzen" oder "Stärken"
+  "Essential Skills", "Stärken"
   gehören in strengths.
 - Jeder Strength-Eintrag benötigt:
   - label: kurze Kompetenzbezeichnung
