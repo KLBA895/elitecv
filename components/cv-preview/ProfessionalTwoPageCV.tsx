@@ -118,11 +118,25 @@ function compactCertificateTitle(title: string): string {
 function compactIssuer(issuer: string): string {
   const normalized = issuer.trim();
 
-  if (/Digicomp/i.test(normalized)) return "Digicomp";
-  if (/Boston University/i.test(normalized)) return "Boston University";
-  if (/Zühlke/i.test(normalized)) return "Zühlke";
-  if (/IRM UK/i.test(normalized)) return "IRM UK";
-  if (/Tobias Beck/i.test(normalized)) return "Tobias Beck Academy";
+  if (/Digicomp/i.test(normalized)) {
+    return "Digicomp Academy AG, CH";
+  }
+
+  if (/Boston University/i.test(normalized)) {
+    return "Boston University";
+  }
+
+  if (/Zühlke/i.test(normalized)) {
+    return "Zühlke, CH";
+  }
+
+  if (/IRM UK/i.test(normalized)) {
+    return "IRM UK";
+  }
+
+  if (/Tobias Beck/i.test(normalized)) {
+    return "Tobias Beck Academy";
+  }
 
   return normalized;
 }
@@ -717,20 +731,7 @@ function JobEntry({
     (item) => item?.trim()
   );
 
-  const visibleAchievements =
-    jobIndex < 3
-      ? job.achievements
-        .filter((achievement) => {
-          if (!achievement?.trim()) {
-            return false;
-          }
-
-          return !allResponsibilities.some((responsibility) =>
-            isNearDuplicate(achievement, responsibility)
-          );
-        })
-        .slice(0, 1)
-      : [];
+  const visibleAchievements: string[] = [];
 
   return (
     <article className="elitecv-job">

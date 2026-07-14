@@ -199,6 +199,7 @@
 /* ─── Main Layout ─────────────────────────────────────────────────────────── */
 .cvgen-main {
   flex: 1;
+  min-height: 0;
   overflow: hidden;
   display: flex;
 }
@@ -235,6 +236,7 @@
 .cvgen-preview-panel {
   display: flex;
   flex-direction: column;
+  min-height: 0;
   overflow: hidden;
   background: #e8eef8;
   height: 100%;
@@ -265,8 +267,10 @@
 
 .cvgen-preview-scaler {
   flex: 1;
+  min-height: 0;
   overflow: auto;
   padding: 24px;
+
   display: flex;
   justify-content: center;
   align-items: flex-start;

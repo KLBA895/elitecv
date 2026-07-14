@@ -38,7 +38,7 @@
   height: 297mm;
   max-height: 297mm;
   box-sizing: border-box;
-  padding: 69.5px 32px 30px 26px;
+  padding: 73px 32px 30px 26px;
   overflow: hidden;
 }
 
@@ -48,9 +48,11 @@
   width: 180px;
   height: 180px;
   margin: 0 auto 52px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   overflow: hidden;
 
   border: 3px solid #ffffff;
@@ -73,7 +75,7 @@
 
 .elitecv-header {
   min-height: 205px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
   box-sizing: border-box;
 }
 
@@ -126,7 +128,7 @@
 .elitecv-contact-line {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   gap: 0;
 
   font-size: 12.5px;
@@ -136,13 +138,13 @@
 
 .elitecv-contact-item {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
 }
 
 .elitecv-contact-icon {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -171,8 +173,8 @@
 }
 
 .elitecv-side-block h3 {
-  margin: 0 0 14px;
-  padding-bottom: 10px;
+  margin: 0 0 12px;
+  padding-bottom: 6px;
 
   display: grid;
   grid-template-columns: 26px 1fr;
@@ -194,10 +196,13 @@
   height: 28px;
 
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   color: #ffffff;
+
+  align-self: center;
+  transform: translateY(-1px);
 }
 
 .elitecv-side-icon svg {
@@ -219,7 +224,7 @@
 
 .elitecv-side-item strong {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 
   font-size: 13.5px;
   line-height: 1.25;
@@ -240,7 +245,7 @@
   margin-right: 6px;
 
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   color: #ffffff;
@@ -274,12 +279,17 @@
   overflow: visible;
 }
 
+/* Seite 2 etwas kompakter */
+.elitecv-page:nth-of-type(2) .elitecv-main-block {
+  margin-bottom: 16px;
+}
+
 .elitecv-main-block h3 {
-  margin: 0 0 16px;
-  padding-bottom: 7px;
+  margin: 0 0 12px;
+  padding-bottom: 5px;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
 
   border-bottom: 2px solid #173a56;
@@ -294,7 +304,7 @@
 
 .elitecv-main-icon {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -589,7 +599,7 @@
   margin-bottom: 4px;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
 
   font-size: 13.5px;
@@ -644,7 +654,7 @@
 /* Zweite Seite */
 
 .elitecv-sidebar.elitecv-sidebar-page2 {
-  padding-top: 90px;
+  padding-top: 80px;
   padding-bottom: 65px;
 }
 
@@ -705,11 +715,6 @@
   margin-left: 4px;
   font-size: 9px;
   opacity: 0.85;
-}
-
-.elitecv-sidebar-page2 .elitecv-side-block h3 {
-  margin-bottom: 10px;
-  padding-bottom: 8px;
 }
 
 /* Druck */
@@ -837,10 +842,11 @@
   text-align-last: left;
 }
 
-/* Erste Überschriften auf Seite 1 erhalten dieselbe Höhe */
+/* Erste Überschriften auf Seite 1 auf gleicher Flucht */
 .elitecv-sidebar>.elitecv-side-block:first-of-type>h3,
 .elitecv-main>.elitecv-main-block:first-of-type>h3 {
-  min-height: 54px;
+  height: 38px;
+  min-height: 38px;
   box-sizing: border-box;
   align-items: center;
 }
@@ -850,7 +856,7 @@
 }
 
 .elitecv-sidebar-page2 .elitecv-side-block {
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .elitecv-sidebar-page2 .elitecv-side-item {
