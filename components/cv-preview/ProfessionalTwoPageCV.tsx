@@ -247,7 +247,7 @@ export function ProfessionalTwoPageCV({
       softSkills: "Soft Skills",
       profile: "Profile",
       experience: "Professional Experience",
-      moreExperience: "Earlier Experience",
+      moreExperience: "Additional Experience",
       careerHistory: "Earlier Professional Experience",
       skills: "Skills & Tools",
       projects: "Projects",

@@ -224,7 +224,7 @@ export function parseBasicCVText(text: string) {
     "professional experience",
     "professional background",
     "employment history",
-    "earlier Professional Experience",
+    "earlier professional experience",
     "berufserfahrung",
     "arbeitserfahrung",
     "weitere berufserfahrungen",
