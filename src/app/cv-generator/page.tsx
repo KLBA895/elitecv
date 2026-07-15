@@ -85,216 +85,127 @@ export default function CVGeneratorPage() {
       .join("\n");
 
     printWindow.document.write(`
-      <!DOCTYPE html>
-      <html lang="de">
-        <head>
-          <meta charset="UTF-8" />
-         <title>${cvFileName}</title>
-          <style>
-  @page {
-    size: A4;
-    margin: 0;
-  }
-    .elitecv-timeline {
-  position: relative !important;
-  margin-left: 0 !important;
-  padding-left: 26px !important;
-  overflow: visible !important;
-}
-
-.elitecv-timeline::before {
-  content: "" !important;
-  position: absolute !important;
-  left: 5px !important;
-  top: 2px !important;
-  bottom: 8px !important;
-  width: 2px !important;
-  background: #173a56 !important;
-  display: block !important;
-  z-index: 1 !important;
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
-
-.elitecv-job {
-  position: relative !important;
-  overflow: visible !important;
-}
-
-.elitecv-job-dot {
-  position: absolute !important;
-  left: -25px !important;
-  top: 7px !important;
-  width: 10px !important;
-  height: 10px !important;
-  border-radius: 50% !important;
-  background: #173a56 !important;
-  border: 2px solid #173a56 !important;
-  z-index: 999 !important;
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
-
-.elitecv-job-dot {
-  z-index: 2 !important;
-}
-.elitecv-timeline::before {
-  content: "" !important;
-  position: absolute !important;
-  left: 5px !important;
-  top: 2px !important;
-  bottom: 8px !important;
-  width: 2px !important;
-  background: #173a56 !important;
-  display: block !important;
-}
-
-.elitecv-job {
-  position: relative !important;
-}
-
-.elitecv-job-dot {
-  position: absolute !important;
-  left: -25px !important;
-  top: 7px !important;
-
-  width: 10px !important;
-  height: 10px !important;
-
-  border-radius: 50% !important;
-
-  background: #173a56 !important;
-  border: 2px solid #173a56 !important;
-
-  z-index: 999 !important;
-
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
-
-.elitecv-timeline::before {
-  z-index: 1 !important;
-}
-
-  html,
-body {
-  margin: 0;
-  padding: 0;
-  background: #ffffff;
-  width: 210mm;
-}
-
-  ${styles}
-
-  .cv-root {
-  box-shadow: none !important;
-  width: 210mm !important;
-  min-height: 297mm !important;
-  margin: 0 auto !important;
-  transform: none !important;
-}
-
-.cv-header {
-  background: var(--cv-theme-color, #1E3A5F) !important;
-  color: #ffffff !important;
-  padding: 28px 32px 22px !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: flex-end !important;
-  gap: 24px !important;
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
-
-.cv-name,
-.cv-target-title,
-.cv-header-contact {
-  color: #ffffff !important;
-}
-
-.cv-photo-placeholder {
-  width: 38mm !important;
-  height: 38mm !important;
-  border-radius: 50% !important;
-}
-
-.cv-photo-img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  border-radius: 50% !important;
-}
-
-.cv-body {
-  display: grid !important;
-  grid-template-columns: 72mm 1fr !important;
-}
-
-.cv-sidebar {
-  background: #f1f5f9 !important;
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
-
-.cv-main {
-  background: white !important;
-}
-
-.cv-root * {
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
-}
-
-.elitecv-doc {
-  display: block !important;
-  gap: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.elitecv-page {
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-  .elitecv-page:last-child {
-    page-break-after: auto;
-    break-after: auto;
-  }
-
-  .elitecv-sidebar {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-    .cv-side-section,
-.cv-usp-item,
-.cv-skill-group,
-.cv-cert-item {
-  break-inside: avoid !important;
-  page-break-inside: avoid !important;
-}
-
-.cv-work-entry {
-  break-inside: auto !important;
-  page-break-inside: auto !important;
-}
-
-.cv-main-section {
-  break-inside: auto !important;
-  page-break-inside: auto !important;
-}
-
-.cv-footer {
-  break-inside: avoid !important;
-  page-break-inside: avoid !important;
-}
-</style>
-        </head>
-        <body style="--cv-theme-color: ${currentThemeColor};">
-  ${printContent}
-</body>
-      </html>
-    `);
+        <!DOCTYPE html>
+        <html lang="de">
+          <head>
+            <meta charset="UTF-8" />
+            <title>${cvFileName}</title>
+      
+            <style>
+      ${styles}
+      
+      .cv-root {
+        box-shadow: none !important;
+        width: 210mm !important;
+        min-height: 297mm !important;
+        margin: 0 auto !important;
+        transform: none !important;
+      }
+      
+      .cv-header {
+        background: var(--cv-theme-color, #1E3A5F) !important;
+        color: #ffffff !important;
+        padding: 28px 32px 22px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+        gap: 24px !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .cv-name,
+      .cv-target-title,
+      .cv-header-contact {
+        color: #ffffff !important;
+      }
+      
+      .cv-photo-placeholder {
+        width: 38mm !important;
+        height: 38mm !important;
+        border-radius: 50% !important;
+      }
+      
+      .cv-photo-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 50% !important;
+      }
+      
+      .cv-body {
+        display: grid !important;
+        grid-template-columns: 72mm 1fr !important;
+      }
+      
+      .cv-sidebar {
+        background: #f1f5f9 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .cv-main {
+        background: white !important;
+      }
+      
+      .cv-root * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .elitecv-doc {
+        display: block !important;
+        gap: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      
+      .elitecv-page {
+        box-shadow: none !important;
+        transform: none !important;
+      }
+      
+      .elitecv-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+      
+      .elitecv-sidebar {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      
+      .cv-side-section,
+      .cv-usp-item,
+      .cv-skill-group,
+      .cv-cert-item {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+      
+      .cv-work-entry {
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+      }
+      
+      .cv-main-section {
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+      }
+      
+      .cv-footer {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+            </style>
+      
+          </head>
+      
+          <body style="--cv-theme-color: ${currentThemeColor};">
+            ${printContent}
+          </body>
+        </html>
+      `);
 
     printWindow.document.close();
     printWindow.focus();
