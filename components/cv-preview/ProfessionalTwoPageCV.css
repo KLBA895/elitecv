@@ -349,18 +349,16 @@
   position: relative;
   margin-left: 0;
   padding-left: 26px;
-  padding-top: 5px;
+  padding-top: 6px;
   overflow: visible;
 }
 
 .elitecv-timeline::before {
   content: "";
   position: absolute;
-
   left: 5px;
-  top: -1px;
+  top: 5px;
   bottom: 1px;
-
   width: 2px;
   background: #173a56;
 }
