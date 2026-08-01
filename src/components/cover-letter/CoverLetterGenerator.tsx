@@ -35,23 +35,50 @@ export function CoverLetterGenerator({
     themeColor: initialThemeColor,
     layout: initialLayout,
   }));
+  const [storageLoaded, setStorageLoaded] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("elitecv-current");
+
+    if (saved) {
+      try {
+        const parsedData = JSON.parse(saved) as CoverLetterData;
+
+        setData({
+          ...parsedData,
+          themeColor: initialThemeColor,
+          layout: initialLayout,
+        });
+      } catch (error) {
+        console.error(
+          "Gespeichertes Motivationsschreiben konnte nicht geladen werden:",
+          error
+        );
+      }
+    }
+
+    setStorageLoaded(true);
+  }, []);
+
   useEffect(() => {
     setData((current) => ({
       ...current,
       themeColor: initialThemeColor,
+      layout: initialLayout,
     }));
-    useEffect(() => {
-      localStorage.setItem(
-        "elitecv-current",
-        JSON.stringify(data)
-      );
-      const saved = localStorage.getItem("elitecv-current");
+  }, [initialThemeColor, initialLayout]);
 
-      if (saved) {
-        setData(JSON.parse(saved));
-      }
-    }, [data]);
-  }, [initialThemeColor]);
+  useEffect(() => {
+    if (!storageLoaded) {
+      return;
+    }
+
+    localStorage.setItem(
+      "elitecv-current",
+      JSON.stringify(data)
+    );
+  }, [data, storageLoaded]);
+
   const handleGenerateFullLetter = async () => {
     try {
       setIsGeneratingLetter(true);
@@ -442,8 +469,11 @@ export function CoverLetterGenerator({
         onChange={setData}
       />
 
-      <div className="mt-6">
-      </div>
+      <WhySection
+        data={data}
+        onChange={setData}
+        onAiAction={handleAiAction}
+      />
 
       <HowSection
         data={data}

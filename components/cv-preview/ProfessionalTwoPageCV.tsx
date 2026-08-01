@@ -347,6 +347,7 @@ export function ProfessionalTwoPageCV({
                   jobIndex={index}
                   successLabel={t.successes}
                   language={language}
+                  bulletPointCount={data.bulletPointCount ?? 3}
                 />
               ))}
             </div>
@@ -470,9 +471,10 @@ export function ProfessionalTwoPageCV({
                     <JobEntry
                       key={job.id}
                       job={job}
-                      jobIndex={index + 2}
+                      jobIndex={index + 3}
                       successLabel={t.successes}
                       language={language}
+                      bulletPointCount={data.bulletPointCount ?? 3}
                     />
                   ))}
                 </div>
@@ -707,11 +709,13 @@ function JobEntry({
   jobIndex,
   successLabel,
   language,
+  bulletPointCount,
 }: {
   job: CVData["workExperience"][0];
   jobIndex: number;
   successLabel: string;
   language: "de" | "en";
+  bulletPointCount: 2 | 3 | 4 | 5;
 }) {
   const formattedLocation = formatJobLocation(
     job.location,
@@ -720,7 +724,7 @@ function JobEntry({
 
   const maxResponsibilities =
     jobIndex <= 5
-      ? 3
+      ? bulletPointCount
       : 1;
 
   const visibleResponsibilities = job.responsibilities

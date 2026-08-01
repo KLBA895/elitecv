@@ -130,6 +130,7 @@ export interface CVData {
   | "charcoal";
 
   firstPageExperienceCount?: 2 | 3 | 4;
+  bulletPointCount?: 2 | 3 | 4 | 5;
 
   personal: PersonalData;
   profile: ProfileSection;

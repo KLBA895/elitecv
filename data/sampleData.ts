@@ -5,6 +5,7 @@ export const sampleCVData: CVData = {
   layout: "professional",
   themeColor: "gray",
   firstPageExperienceCount: 3,
+  bulletPointCount: 3,
 
   personal: {
     firstName: "Sandra",

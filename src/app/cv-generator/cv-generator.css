@@ -614,3 +614,76 @@
   display: inline-block;
   white-space: nowrap;
 }
+
+.cvgen-language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cvgen-language-option {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cvgen-language-option--active {
+  background: #ffffff;
+  color: #0a1f44;
+}
+
+.cvgen-language-switch {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cvgen-language-option {
+  min-width: 38px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  padding: 7px 9px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.cvgen-language-option:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.cvgen-language-option:active {
+  transform: translateY(1px);
+}
+
+.cvgen-language-option--active {
+  background: #ffffff;
+  color: #0a1f44;
+}
+
+.cvgen-language-option:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}

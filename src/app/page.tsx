@@ -5,6 +5,11 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 
 type Lang = "de" | "en";
+type CheckoutResponse = {
+  success: boolean;
+  checkoutUrl?: string;
+  error?: string;
+};
 type PlanKey =
   | "basic"
   | "generatorProfessional"
@@ -87,7 +92,7 @@ const content = {
       "Wir verwandeln komplexe Karrierewege in klare, strukturierte und überzeugende Profile, die ihren Mehrwert innerhalb weniger Sekunden vermitteln.",
     leistungenTitle: "Leistungen",
     leistungen: [
-      "🚀 EliteCV Generator",
+      "🚀 EliteCV Professional CV Generator",
       "CV Optimierung",
       "Motivationsschreiben",
       "LinkedIn Optimierung",
@@ -115,20 +120,22 @@ const content = {
     orderSubmit: "Auftrag senden",
     orderSuccess:
       "Vielen Dank für Ihre Bestellung. Wir haben Ihre Anfrage erfolgreich erhalten. Sie erhalten in Kürze eine Bestätigung per E-Mail. Nach Zahlungseingang senden wir Ihnen Ihren persönlichen EliteCV-Zugangscode sowie alle weiteren Informationen.",
-    paymentTitle: "Zahlung & Ablauf",
-    paymentLead: "Nach dem Absenden Ihrer Anfrage prüfen wir Ihren Auftrag und senden Ihnen die nächsten Schritte per E-Mail. Die Zahlungsinformationen erhalten Sie nach der Auftragsbestätigung. Die Bearbeitung beginnt nach bestätigtem Zahlungseingang.",
+    paymentTitle: "Sichere Zahlung & Freischaltung",
+    paymentLead:
+      "Nach dem Absenden Ihrer Bestellung werden Sie direkt zur sicheren Zahlungsseite von Stripe weitergeleitet. Nach erfolgreicher Zahlung erhalten Sie automatisch eine Bestätigung per E-Mail.",
     paymentItems: [
-      "eine Bestätigung Ihres gewählten Pakets",
-      "die nächsten Schritte",
-      "die Zahlungsdetails",
+      "eine Bestätigung Ihrer Bestellung",
+      "eine Übersicht über Paket, Zusatzleistungen und Gesamtbetrag",
+      "bei Generator-Paketen Ihren persönlichen Zugangscode",
     ],
-    paymentMethodsTitle: "Mögliche Zahlungsmethoden:",
+    paymentMethodsTitle: "Verfügbare Zahlungsmethoden:",
     paymentMethods: [
       "TWINT",
-      "Banküberweisung",
-      "PayPal",
+      "Kredit- und Debitkarte",
+      "Apple Pay und weitere von Stripe angebotene Zahlungsmethoden",
     ],
-    paymentEnd: "Die Bearbeitung erfolgt nach bestätigtem Zahlungseingang.",
+    paymentEnd:
+      "Die Bearbeitung beziehungsweise Freischaltung beginnt nach erfolgreicher Zahlungsbestätigung.",
     faqTitle: "FAQ",
     faqs: [
       { q: "Wie schnell erhalte ich meine neue Version?", a: "In der Regel innerhalb von 2 bis 5 Arbeitstagen, abhängig vom Umfang des Auftrags." },
@@ -253,20 +260,22 @@ const content = {
     orderSubmit: "Send request",
     orderSuccess:
       "Thank you for your order. We have successfully received your request. You will receive an order confirmation by email shortly. After payment has been received, we will send you your personal EliteCV access code together with all further information.",
-    paymentTitle: "Payment & Process",
-    paymentLead: "After submitting your request, we will review your order and send you the next steps by email. Payment information will be provided after order confirmation. Processing begins once payment has been confirmed.",
+    paymentTitle: "Secure Payment & Access",
+    paymentLead:
+      "After submitting your order, you will be redirected to Stripe's secure payment page. Once payment has been completed successfully, you will automatically receive a confirmation by email.",
     paymentItems: [
-      "confirmation of your selected package",
-      "the next steps",
-      "the payment details",
+      "confirmation of your order",
+      "an overview of the selected package, add-ons and total amount",
+      "your personal access code for generator packages",
     ],
     paymentMethodsTitle: "Available payment methods:",
     paymentMethods: [
       "TWINT",
-      "Bank transfer",
-      "PayPal",
+      "Credit and debit card",
+      "Apple Pay and other payment methods offered by Stripe",
     ],
-    paymentEnd: "Work will commence after confirmed payment has been received.",
+    paymentEnd:
+      "Processing or access activation begins once payment has been successfully confirmed.",
     faqTitle: "FAQ",
     faqs: [
       { q: "How fast can I receive the revised version?", a: "Usually within 2 to 5 business days, depending on the scope of the project." },
@@ -473,77 +482,192 @@ export default function Home() {
   );
 
   const selectedPlan = pricingPlans.find((plan) => plan.key === activePlan) ?? pricingPlans[1];
+  const planPrices: Record<PlanKey, number> = {
+    basic: 79,
+    generatorProfessional: 99,
+    generatorExecutive: 149,
+    professional: 179,
+    premium: 249,
+    elite: 399,
+  };
 
-  const onOrderSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const addonPrices: Record<string, number> = {
+    linkedin: 99,
+    coverLetter: 89,
+    translation: 59,
+    referenceAnalysis: 39,
+    express: 59,
+  };
+
+  const onOrderSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
     setOrderLoading(true);
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
-    formData.append("type", "Auftrag");
-    formData.append("package", `${selectedPlan.name} - ${selectedPlan.price}`);
+    const customerName = String(
+      formData.get("name") ?? ""
+    ).trim();
 
-    const selectedAddonValues = formData.getAll("addons").map(String);
-    const selectedLanguage = String(formData.get("language") ?? "de");
-    const languagePrice = selectedLanguage === "en" ? 29 : 0;
+    const customerEmail = String(
+      formData.get("email") ?? ""
+    )
+      .trim()
+      .toLowerCase();
 
-    formData.append(
-      "languageText",
-      selectedLanguage === "en" ? "English (+ CHF 29)" : "Deutsch"
-    );
+    const selectedLanguage = String(
+      formData.get("language") ?? "de"
+    ) as "de" | "en";
 
-    const addonPriceByName = (addon: string) => {
-      if (addon.includes("LinkedIn")) return 99;
-      if (addon.includes("Motivationsschreiben")) return 89;
-      if (addon.includes("CV Übersetzung")) return 59;
-      if (addon.includes("Arbeitszeugnis")) return 39;
-      if (addon.includes("Express")) return 59;
-      return 0;
-    };
-
-    const packagePrices: Record<PlanKey, number> = {
-      basic: 79,
-      generatorProfessional: 99,
-      generatorExecutive: 149,
-      professional: 179,
-      premium: 249,
-      elite: 399,
-    };
-
-    const addonsText =
-      selectedAddonValues.length > 0
-        ? selectedAddonValues
-          .map((addon) =>
-            addon.includes("CHF")
-              ? addon
-              : `${addon} (+ CHF ${addonPriceByName(addon)})`
-          )
-          .join("\n")
-        : "Keine Zusatzleistungen ausgewählt";
-
-    const total =
-      (packagePrices[selectedPlan.key] ?? 0) +
-      languagePrice +
-      selectedAddonValues.reduce(
-        (sum, addon) => sum + addonPriceByName(addon),
+    const addonKeys = formData
+      .getAll("addons")
+      .map(String);
+    const totalPrice =
+      planPrices[selectedPlan.key] +
+      (selectedLanguage === "en" ? 29 : 0) +
+      addonKeys.reduce(
+        (sum, addon) => sum + (addonPrices[addon] ?? 0),
         0
       );
 
-    formData.append("addonsText", addonsText);
-    formData.append("totalText", `CHF ${total}`);
+    const message = String(
+      formData.get("message") ?? ""
+    ).trim();
+
+    const linkedinUrl = String(
+      formData.get("linkedinUrl") ?? ""
+    ).trim();
+
+    const termsAccepted =
+      formData.get("termsAccepted") === "on";
+
+    if (!termsAccepted) {
+      alert(
+        lang === "de"
+          ? "Bitte akzeptieren Sie die AGB, Datenschutzbestimmungen und das Widerrufsrecht."
+          : "Please accept the Terms and Conditions, Privacy Policy and Right of Withdrawal."
+      );
+
+      setOrderLoading(false);
+      return;
+    }
+
+    formData.append("type", "Auftrag");
+    formData.append(
+      "package",
+      `${selectedPlan.name} - ${selectedPlan.price}`
+    );
+
+    formData.append(
+      "languageText",
+      selectedLanguage === "en"
+        ? "English (+ CHF 29)"
+        : "Deutsch"
+    );
+
+    const addonLabels: Record<string, string> = {
+      linkedin: "LinkedIn-Profil Optimierung (+ CHF 99)",
+      coverLetter: "Motivationsschreiben Erstellung (+ CHF 89)",
+      translation: "CV Übersetzung DE ↔ EN (+ CHF 59)",
+      referenceAnalysis: "Arbeitszeugnis Analyse (+ CHF 39)",
+      express: "Express-Bearbeitung 24h (+ CHF 59)",
+    };
+
+    formData.append(
+      "addonsText",
+      addonKeys.length > 0
+        ? addonKeys
+          .map((key) => addonLabels[key] ?? key)
+          .join("\n")
+        : "Keine Zusatzleistungen ausgewählt"
+    );
+    formData.append(
+      "totalText",
+      `CHF ${totalPrice.toFixed(2)}`
+    );
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        body: formData,
-      });
+      const isGeneratorPlan =
+        selectedPlan.key === "generatorProfessional" ||
+        selectedPlan.key === "generatorExecutive";
 
-      if (response.ok) {
-        setOrderSubmitted(true);
-        setSelectedFiles([]);
-        (event.target as HTMLFormElement).reset();
+      /*
+       * Übergangslösung:
+       *
+       * Generator-Pakete benötigen keinen Dokumentenversand.
+       * Deshalb wird für sie keine Bestell-E-Mail vor der
+       * Zahlung über /api/contact ausgelöst.
+       *
+       * Bei persönlichen Dienstleistungen bleibt der
+       * bestehende Dokumentenversand vorläufig erhalten,
+       * bis wir den sicheren Upload-Prozess eingerichtet haben.
+       */
+      if (!isGeneratorPlan) {
+        const orderResponse = await fetch("/api/contact", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!orderResponse.ok) {
+          throw new Error(
+            lang === "de"
+              ? "Die Bestellung und die Dokumente konnten nicht übermittelt werden."
+              : "The order and documents could not be submitted."
+          );
+        }
       }
-    } finally {
+
+      const checkoutResponse = await fetch(
+        "/api/stripe/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            customerName,
+            customerEmail,
+            planKey: selectedPlan.key,
+            language: selectedLanguage,
+            addons: addonKeys,
+            message,
+            linkedinUrl,
+            termsAccepted,
+          }),
+        }
+      );
+
+      const checkoutData =
+        (await checkoutResponse.json()) as CheckoutResponse;
+
+      if (
+        !checkoutResponse.ok ||
+        !checkoutData.success ||
+        !checkoutData.checkoutUrl
+      ) {
+        throw new Error(
+          checkoutData.error ??
+          (lang === "de"
+            ? "Die Zahlungsseite konnte nicht geöffnet werden."
+            : "The payment page could not be opened.")
+        );
+      }
+
+      window.location.href = checkoutData.checkoutUrl;
+    } catch (error) {
+      console.error("Bestell- und Zahlungsfehler:", error);
+
+      alert(
+        error instanceof Error
+          ? error.message
+          : lang === "de"
+            ? "Die Bestellung konnte nicht verarbeitet werden."
+            : "The order could not be processed."
+      );
+
       setOrderLoading(false);
     }
   };
@@ -1150,7 +1274,11 @@ export default function Home() {
                 <div className="space-y-2">
 
                   <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" name="addons" value="LinkedIn-Profil Optimierung (+ CHF 99)" />
+                    <input
+                      type="checkbox"
+                      name="addons"
+                      value="linkedin"
+                    />
                     <span>
                       {lang === "de"
                         ? "LinkedIn-Profil Optimierung (+ CHF 99)"
@@ -1159,7 +1287,11 @@ export default function Home() {
                   </label>
 
                   <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" name="addons" value="Motivationsschreiben Erstellung (+ CHF 89)" />
+                    <input
+                      type="checkbox"
+                      name="addons"
+                      value="coverLetter"
+                    />
                     <span>
                       {lang === "de"
                         ? "Motivationsschreiben Erstellung (+ CHF 89)"
@@ -1168,7 +1300,11 @@ export default function Home() {
                   </label>
 
                   <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" name="addons" value="CV Übersetzung DE ↔ EN (+ CHF 59)" />
+                    <input
+                      type="checkbox"
+                      name="addons"
+                      value="translation"
+                    />
                     <span>
                       {lang === "de"
                         ? "CV Übersetzung DE ↔ EN (+ CHF 59)"
@@ -1177,7 +1313,11 @@ export default function Home() {
                   </label>
 
                   <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" name="addons" value="Arbeitszeugnis Analyse (+ CHF 39)" />
+                    <input
+                      type="checkbox"
+                      name="addons"
+                      value="referenceAnalysis"
+                    />
                     <span>
                       {lang === "de"
                         ? "Arbeitszeugnis Analyse (+ CHF 39)"
@@ -1186,7 +1326,11 @@ export default function Home() {
                   </label>
 
                   <label className="flex items-center gap-2 text-sm">
-                    <input type="checkbox" name="addons" value="Express-Bearbeitung 24h (+ CHF 59)" />
+                    <input
+                      type="checkbox"
+                      name="addons"
+                      value="express"
+                    />
                     <span>
                       {lang === "de"
                         ? "Express-Bearbeitung 24h (+ CHF 59)"
@@ -1254,14 +1398,67 @@ export default function Home() {
               <p className="mt-4 text-sm font-semibold text-[#0A1F44]/82">{t.paymentEnd}</p>
               <div className="mt-5 rounded-xl border border-[#C9A95A]/35 bg-[#C9A95A]/10 p-4 text-sm text-[#0A1F44]/80">
                 <p className="font-semibold text-[#0A1F44]">
-                  {lang === "de" ? "Nach der Bestellung" : "After your order"}
+                  {lang === "de"
+                    ? "So geht es nach der Bestellung weiter"
+                    : "What happens after your order"}
                 </p>
 
                 <ul className="mt-3 space-y-2">
-                  <li>- {lang === "de" ? "Sie erhalten eine Bestätigung per E-Mail." : "You will receive an email confirmation."}</li>
-                  <li>- {lang === "de" ? "Nach Zahlungseingang wird Ihr Zugangscode freigeschaltet." : "Your access code will be activated after payment."}</li>
-                  <li>- {lang === "de" ? "Generator-Zugänge werden persönlich erstellt." : "Generator access codes are created individually."}</li>
-                  <li>- {lang === "de" ? "Bei Fragen erhalten Sie Support per E-Mail." : "Email support is available if you have questions."}</li>
+                  <li>
+                    -{" "}
+                    {lang === "de"
+                      ? "Sie werden direkt zur sicheren Zahlungsseite von Stripe weitergeleitet."
+                      : "You will be redirected directly to Stripe's secure payment page."}
+                  </li>
+
+                  <li>
+                    -{" "}
+                    {lang === "de"
+                      ? "Die Zahlung erfolgt mit TWINT, Karte oder einer weiteren verfügbaren Stripe-Zahlungsmethode."
+                      : "Payment can be completed with TWINT, card or another available Stripe payment method."}
+                  </li>
+
+                  <li>
+                    -{" "}
+                    {lang === "de"
+                      ? "Nach erfolgreicher Zahlung erhalten Sie automatisch Ihre Bestellbestätigung per E-Mail."
+                      : "After successful payment, you will automatically receive your order confirmation by email."}
+                  </li>
+
+                  {selectedPlan.key === "generatorProfessional" && (
+                    <li>
+                      -{" "}
+                      {lang === "de"
+                        ? "Ihr persönlicher Generator-Zugangscode wird automatisch erstellt und ist ab Zahlung 3 Kalendertage gültig."
+                        : "Your personal generator access code is created automatically and is valid for 3 calendar days from payment."}
+                    </li>
+                  )}
+
+                  {selectedPlan.key === "generatorExecutive" && (
+                    <li>
+                      -{" "}
+                      {lang === "de"
+                        ? "Ihr persönlicher Generator-Zugangscode wird automatisch erstellt und ist ab Zahlung 5 Kalendertage gültig."
+                        : "Your personal generator access code is created automatically and is valid for 5 calendar days from payment."}
+                    </li>
+                  )}
+
+                  {selectedPlan.key !== "generatorProfessional" &&
+                    selectedPlan.key !== "generatorExecutive" && (
+                      <li>
+                        -{" "}
+                        {lang === "de"
+                          ? "Bei persönlichen Dienstleistungen beginnt die Bearbeitung nach bestätigtem Zahlungseingang."
+                          : "For personal services, processing begins after payment has been confirmed."}
+                      </li>
+                    )}
+
+                  <li>
+                    -{" "}
+                    {lang === "de"
+                      ? "Bei Fragen oder technischen Problemen erhalten Sie Support per E-Mail."
+                      : "Email support is available for questions or technical problems."}
+                  </li>
                 </ul>
               </div>
             </aside>

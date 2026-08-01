@@ -18,17 +18,14 @@ import "../../../components/cv-preview/ProfessionalTwoPageCV.css";
 type Tab = "form" | "split" | "letter" | "preview";
 
 export default function CVGeneratorPage() {
-  const ACCESS_CODES = {
-    "PRO-7K92A": { level: "professional", english: false },
-    "PRO-9MXT1": { level: "professional", english: true },
-    "EXEC-5TYL8": { level: "executive", english: false },
-    "EXEC-8RPA2": { level: "executive", english: true },
-  } as const;
+
 
   const [accessGranted, setAccessGranted] = useState(false);
   const [accessCode, setAccessCode] = useState("");
   const [accessLevel, setAccessLevel] = useState<"professional" | "executive" | null>(null);
   const [hasEnglishAccess, setHasEnglishAccess] = useState(false);
+  const [hasCoverLetterAccess, setHasCoverLetterAccess] =
+    useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
   const [isParsingCV, setIsParsingCV] = useState(false);
   const [importPreview, setImportPreview] = useState<any | null>(null);
@@ -38,29 +35,100 @@ export default function CVGeneratorPage() {
   const [showImportedITSkills, setShowImportedITSkills] = useState(false);
   const [showImportedCertificates, setShowImportedCertificates] =
     useState(false);
+  const [accessEmail, setAccessEmail] = useState("");
+  const [isCheckingAccess, setIsCheckingAccess] = useState(false);
+  const [accessError, setAccessError] = useState("");
+  const [accessExpiresAt, setAccessExpiresAt] = useState<string | null>(null);
+
+  const [cvData, setCVData] =
+    useState<CVData>(sampleCVData);
+
+  const [cvLanguage, setCvLanguage] =
+    useState<"de" | "en">("de");
+
+  const [uiLanguage, setUiLanguage] =
+    useState<"de" | "en">("de");
+
+  const [tab, setTab] =
+    useState<Tab>("split");
+
+  const previewRef =
+    useRef<HTMLDivElement>(null);
+
+  const [showImportedProjects, setShowImportedProjects] =
+    useState(false);
 
   useEffect(() => {
     const storedAccess = localStorage.getItem("elitecv_access");
     const storedEnglish = localStorage.getItem("elitecv_english");
+    const storedCoverLetter = localStorage.getItem(
+      "elitecv_cover_letter"
+    );
+    const storedExpiresAt = localStorage.getItem(
+      "elitecv_access_expires_at"
+    );
+    const storedUiLanguage = localStorage.getItem(
+      "elitecv_ui_language"
+    );
 
-    if (storedAccess === "professional" || storedAccess === "executive") {
-      setAccessGranted(true);
-      setAccessLevel(storedAccess);
+    if (
+      storedUiLanguage === "de" ||
+      storedUiLanguage === "en"
+    ) {
+      setUiLanguage(storedUiLanguage);
     }
 
-    if (storedEnglish === "granted") {
-      setHasEnglishAccess(true);
+    if (!storedAccess || !storedExpiresAt) {
+      return;
+    }
+
+    const expiresAt = new Date(storedExpiresAt);
+
+    const isExpired =
+      Number.isNaN(expiresAt.getTime()) ||
+      expiresAt.getTime() <= Date.now();
+
+    if (isExpired) {
+      localStorage.removeItem("elitecv_access");
+      localStorage.removeItem("elitecv_english");
+      localStorage.removeItem("elitecv_cover_letter");
+      localStorage.removeItem("elitecv_access_email");
+      localStorage.removeItem("elitecv_access_expires_at");
+      return;
+    }
+
+    if (
+      storedAccess === "professional" ||
+      storedAccess === "executive"
+    ) {
+      setAccessGranted(true);
+      setAccessLevel(storedAccess);
+
+      if (storedAccess !== "executive") {
+        setCVData((current) => ({
+          ...current,
+          layout: "professional",
+        }));
+      }
+
+      setHasEnglishAccess(
+        storedEnglish === "granted"
+      );
+
+      setHasCoverLetterAccess(
+        storedCoverLetter === "granted"
+      );
+
+      setAccessExpiresAt(storedExpiresAt);
     }
   }, []);
 
-  const [cvData, setCVData] = useState<CVData>(sampleCVData);
-  const [cvLanguage, setCvLanguage] = useState<"de" | "en">("de");
-  const [tab, setTab] = useState<Tab>("split");
-  const [layout, setLayout] = useState<"executive" | "classic">("executive");
-  const previewRef = useRef<HTMLDivElement>(null);
-  const [showImportedProjects, setShowImportedProjects] = useState(false);
-
-
+  useEffect(() => {
+    localStorage.setItem(
+      "elitecv_ui_language",
+      uiLanguage
+    );
+  }, [uiLanguage]);
 
   const cvFileName = `${cvData.personal.firstName}_${cvData.personal.lastName}_EliteCV_${cvData.layout}`
     .replace(/\s+/g, "_")
@@ -85,127 +153,127 @@ export default function CVGeneratorPage() {
       .join("\n");
 
     printWindow.document.write(`
-        <!DOCTYPE html>
-        <html lang="de">
-          <head>
-            <meta charset="UTF-8" />
-            <title>${cvFileName}</title>
-      
-            <style>
-      ${styles}
-      
-      .cv-root {
-        box-shadow: none !important;
-        width: 210mm !important;
-        min-height: 297mm !important;
-        margin: 0 auto !important;
-        transform: none !important;
-      }
-      
-      .cv-header {
-        background: var(--cv-theme-color, #1E3A5F) !important;
-        color: #ffffff !important;
-        padding: 28px 32px 22px !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: flex-end !important;
-        gap: 24px !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      
-      .cv-name,
-      .cv-target-title,
-      .cv-header-contact {
-        color: #ffffff !important;
-      }
-      
-      .cv-photo-placeholder {
-        width: 38mm !important;
-        height: 38mm !important;
-        border-radius: 50% !important;
-      }
-      
-      .cv-photo-img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        border-radius: 50% !important;
-      }
-      
-      .cv-body {
-        display: grid !important;
-        grid-template-columns: 72mm 1fr !important;
-      }
-      
-      .cv-sidebar {
-        background: #f1f5f9 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      
-      .cv-main {
-        background: white !important;
-      }
-      
-      .cv-root * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-      
-      .elitecv-doc {
-        display: block !important;
-        gap: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-      
-      .elitecv-page {
-        box-shadow: none !important;
-        transform: none !important;
-      }
-      
-      .elitecv-page:last-child {
-        page-break-after: auto;
-        break-after: auto;
-      }
-      
-      .elitecv-sidebar {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      
-      .cv-side-section,
-      .cv-usp-item,
-      .cv-skill-group,
-      .cv-cert-item {
-        break-inside: avoid !important;
-        page-break-inside: avoid !important;
-      }
-      
-      .cv-work-entry {
-        break-inside: auto !important;
-        page-break-inside: auto !important;
-      }
-      
-      .cv-main-section {
-        break-inside: auto !important;
-        page-break-inside: auto !important;
-      }
-      
-      .cv-footer {
-        break-inside: avoid !important;
-        page-break-inside: avoid !important;
-      }
-            </style>
-      
-          </head>
-      
-          <body style="--cv-theme-color: ${currentThemeColor};">
-            ${printContent}
-          </body>
-        </html>
-      `);
+          <!DOCTYPE html>
+          <html lang="de">
+            <head>
+              <meta charset="UTF-8" />
+              <title>${cvFileName}</title>
+        
+              <style>
+        ${styles}
+        
+        .cv-root {
+          box-shadow: none !important;
+          width: 210mm !important;
+          min-height: 297mm !important;
+          margin: 0 auto !important;
+          transform: none !important;
+        }
+        
+        .cv-header {
+          background: var(--cv-theme-color, #1E3A5F) !important;
+          color: #ffffff !important;
+          padding: 28px 32px 22px !important;
+          display: flex !important;
+          justify-content: space-between !important;
+          align-items: flex-end !important;
+          gap: 24px !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        
+        .cv-name,
+        .cv-target-title,
+        .cv-header-contact {
+          color: #ffffff !important;
+        }
+        
+        .cv-photo-placeholder {
+          width: 38mm !important;
+          height: 38mm !important;
+          border-radius: 50% !important;
+        }
+        
+        .cv-photo-img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+          border-radius: 50% !important;
+        }
+        
+        .cv-body {
+          display: grid !important;
+          grid-template-columns: 72mm 1fr !important;
+        }
+        
+        .cv-sidebar {
+          background: #f1f5f9 !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        
+        .cv-main {
+          background: white !important;
+        }
+        
+        .cv-root * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        
+        .elitecv-doc {
+          display: block !important;
+          gap: 0 !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        
+        .elitecv-page {
+          box-shadow: none !important;
+          transform: none !important;
+        }
+        
+        .elitecv-page:last-child {
+          page-break-after: auto;
+          break-after: auto;
+        }
+        
+        .elitecv-sidebar {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        
+        .cv-side-section,
+        .cv-usp-item,
+        .cv-skill-group,
+        .cv-cert-item {
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+        }
+        
+        .cv-work-entry {
+          break-inside: auto !important;
+          page-break-inside: auto !important;
+        }
+        
+        .cv-main-section {
+          break-inside: auto !important;
+          page-break-inside: auto !important;
+        }
+        
+        .cv-footer {
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+        }
+              </style>
+        
+            </head>
+        
+            <body style="--cv-theme-color: ${currentThemeColor};">
+              ${printContent}
+            </body>
+          </html>
+        `);
 
     printWindow.document.close();
     printWindow.focus();
@@ -227,8 +295,138 @@ export default function CVGeneratorPage() {
   };
 
   const currentThemeColor = themeColors[cvData.themeColor] ?? "#1E3A5F";
+  const uiText = {
+    de: {
+      editor: "CV-Editor",
+      cv: "CV",
+      preview: "CV-Vorschau",
+      coverLetter: "Motivationsschreiben",
+      coverLetterLocked:
+        "Das Motivationsschreiben ist in diesem Paket nicht enthalten.",
+      demo: "Demo",
+      importCv: "CV importieren",
+      importingCv: "CV wird ausgelesen...",
+      translateToEnglish: "🇬🇧 CV auf Englisch",
+      translateToGerman: "🇩🇪 CV auf Deutsch",
+      translating: "Bitte warten...",
+      exportPdf: "CV als PDF exportieren",
+      layout: "Layout:",
+      available: "Verfügbar",
+      executiveLocked:
+        "Executive nur mit Executive-Zugang",
+      livePreview: "Live-Vorschau · A4",
+    },
+
+    en: {
+      editor: "CV Editor",
+      cv: "CV",
+      preview: "CV Preview",
+      coverLetter: "Cover Letter",
+      coverLetterLocked:
+        "The cover letter is not included in this package.",
+      demo: "Demo",
+      importCv: "Import CV",
+      importingCv: "Importing CV...",
+      translateToEnglish: "🇬🇧 Translate CV to English",
+      translateToGerman: "🇩🇪 Translate CV to German",
+      translating: "Please wait...",
+      exportPdf: "Export CV as PDF",
+      layout: "Layout:",
+      available: "Available",
+      executiveLocked:
+        "Executive requires Executive access",
+      livePreview: "Live Preview · A4",
+    },
+  }[uiLanguage];
 
   if (!accessGranted) {
+    const validateAccess = async () => {
+      const normalizedCode = accessCode.trim();
+      const normalizedEmail = accessEmail.trim().toLowerCase();
+
+      if (!normalizedCode || !normalizedEmail) {
+        setAccessError(
+          "Bitte Zugangscode und E-Mail-Adresse vollständig eingeben."
+        );
+        return;
+      }
+
+      try {
+        setIsCheckingAccess(true);
+        setAccessError("");
+
+        const response = await fetch("/api/access/validate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            code: normalizedCode,
+            email: normalizedEmail,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          setAccessError(
+            typeof result.error === "string"
+              ? result.error
+              : "Der Zugang konnte nicht freigeschaltet werden."
+          );
+          return;
+        }
+
+        localStorage.setItem(
+          "elitecv_access",
+          result.accessLevel
+        );
+
+        localStorage.setItem(
+          "elitecv_english",
+          result.englishAccess ? "granted" : "denied"
+        );
+
+        localStorage.setItem(
+          "elitecv_cover_letter",
+          result.coverLetterAccess
+            ? "granted"
+            : "denied"
+        );
+
+        localStorage.setItem(
+          "elitecv_access_email",
+          normalizedEmail
+        );
+
+        localStorage.setItem(
+          "elitecv_access_expires_at",
+          result.expiresAt
+        );
+
+        setAccessLevel(result.accessLevel);
+        if (result.accessLevel !== "executive") {
+          setCVData((current) => ({
+            ...current,
+            layout: "professional",
+          }));
+        }
+        setHasEnglishAccess(result.englishAccess);
+        setHasCoverLetterAccess(
+          Boolean(result.coverLetterAccess)
+        );
+        setAccessExpiresAt(result.expiresAt);
+        setAccessGranted(true);
+      } catch (error) {
+        console.error("Zugangsprüfung fehlgeschlagen:", error);
+
+        setAccessError(
+          "Die Zugangsprüfung ist fehlgeschlagen. Bitte erneut versuchen."
+        );
+      } finally {
+        setIsCheckingAccess(false);
+      }
+    };
 
     return (
       <div className="cvgen-access">
@@ -259,36 +457,35 @@ export default function CVGeneratorPage() {
         </p>
 
         <input
+          type="email"
+          value={accessEmail}
+          onChange={(event) => setAccessEmail(event.target.value)}
+          placeholder="E-Mail-Adresse / Email address"
+          autoComplete="email"
+        />
+
+        <input
           type="password"
           value={accessCode}
-          onChange={(e) => setAccessCode(e.target.value)}
+          onChange={(event) => setAccessCode(event.target.value)}
           placeholder="Persönlicher Zugangscode / Personal Access Code"
+          autoComplete="one-time-code"
         />
 
         <button
           type="button"
-          onClick={() => {
-            const code = accessCode.trim().toUpperCase();
-            const access = ACCESS_CODES[code as keyof typeof ACCESS_CODES];
-
-            if (!access) {
-              alert("Ungültiger Zugangscode.\n\nInvalid access code.");
-              return;
-            }
-
-            localStorage.setItem("elitecv_access", access.level);
-            localStorage.setItem(
-              "elitecv_english",
-              access.english ? "granted" : "denied"
-            );
-
-            setAccessLevel(access.level);
-            setHasEnglishAccess(access.english);
-            setAccessGranted(true);
-          }}
+          disabled={isCheckingAccess}
+          onClick={validateAccess}
         >
-          Zugang freischalten / Unlock Access
+          {isCheckingAccess
+            ? "Zugang wird geprüft..."
+            : "Zugang freischalten / Unlock Access"}
         </button>
+        {accessError && (
+          <p className="cvgen-access-error" role="alert">
+            {accessError}
+          </p>
+        )}
       </div>
     );
   }
@@ -298,10 +495,10 @@ export default function CVGeneratorPage() {
       setIsTranslating(true);
 
       /*
-       * Das Foto kann als sehr langer Base64-String gespeichert sein.
-       * Es wird für die Übersetzung nicht benötigt und deshalb nicht
-       * an die API geschickt.
-       */
+      * Das Foto kann als sehr langer Base64-String gespeichert sein.
+      * Es wird für die Übersetzung nicht benötigt und deshalb nicht
+      * an die API geschickt.
+      */
       const cvDataForTranslation = {
         ...cvData,
 
@@ -342,12 +539,12 @@ export default function CVGeneratorPage() {
       setCVData((current) => ({
         ...result.cvData,
 
-        /*
-         * Nicht sprachabhängige Einstellungen und das Foto
-         * aus dem bisherigen CV beibehalten.
-         */
         layout: current.layout,
         themeColor: current.themeColor,
+        firstPageExperienceCount:
+          current.firstPageExperienceCount,
+        bulletPointCount:
+          current.bulletPointCount,
 
         personal: {
           ...result.cvData.personal,
@@ -483,9 +680,9 @@ export default function CVGeneratorPage() {
           current.personal.targetTitle,
 
         /*
-         * Zusatzpositionen und Branchenlisten werden beim Import
-         * nicht automatisch in den Header übernommen.
-         */
+        * Zusatzpositionen und Branchenlisten werden beim Import
+        * nicht automatisch in den Header übernommen.
+        */
         targetPosition: "",
         targetIndustry: "",
 
@@ -559,50 +756,123 @@ export default function CVGeneratorPage() {
     <div className="cvgen-page">
       <header className="cvgen-topbar">
         <div className="cvgen-topbar-left">
-          <span className="cvgen-logo">EliteCV Generator</span>
-          <span className="cvgen-badge">Beta</span>
+          <span className="cvgen-logo">
+            EliteCV Generator
+          </span>
+
+          <span className="cvgen-badge">
+            Beta
+          </span>
         </div>
 
-        <nav className="cvgen-tabs">
+        <div
+          className="cvgen-language-switch"
+          aria-label="Interface language"
+        >
           <button
-            className={`cvgen-tab ${tab === "form" ? "cvgen-tab--active" : ""}`}
-            onClick={() => setTab("form")}
+            type="button"
+            className={`cvgen-language-option ${uiLanguage === "de"
+              ? "cvgen-language-option--active"
+              : ""
+              }`}
+            onClick={() => setUiLanguage("de")}
+            aria-pressed={uiLanguage === "de"}
+            title="Deutsch"
           >
-            CV-Editor
-          </button>
-
-          <button
-            className={`cvgen-tab ${tab === "split" ? "cvgen-tab--active" : ""}`}
-            onClick={() => setTab("split")}
-          >
-            CV
-          </button>
-
-          <button
-            className={`cvgen-tab ${tab === "preview" ? "cvgen-tab--active" : ""}`}
-            onClick={() => setTab("preview")}
-          >
-            CV-Vorschau
+            DE
           </button>
 
           <button
             type="button"
-            className="cvgen-tab"
-            onClick={() =>
-              alert("🔒 Das Motivationsschreiben ist in diesem Paket nicht enthalten.")
-            }
+            className={`cvgen-language-option ${uiLanguage === "en"
+              ? "cvgen-language-option--active"
+              : ""
+              }`}
+            onClick={() => setUiLanguage("en")}
+            aria-pressed={uiLanguage === "en"}
+            title="English"
           >
-            🔒 Motivationsschreiben
+            EN
           </button>
+        </div>
+
+        <nav className="cvgen-tabs">
+          <button
+            type="button"
+            className={`cvgen-tab ${tab === "form"
+              ? "cvgen-tab--active"
+              : ""
+              }`}
+            onClick={() => setTab("form")}
+          >
+            {uiText.editor}
+          </button>
+
+          <button
+            type="button"
+            className={`cvgen-tab ${tab === "split"
+              ? "cvgen-tab--active"
+              : ""
+              }`}
+            onClick={() => setTab("split")}
+          >
+            {uiText.cv}
+          </button>
+
+          <button
+            type="button"
+            className={`cvgen-tab ${tab === "preview"
+              ? "cvgen-tab--active"
+              : ""
+              }`}
+            onClick={() => setTab("preview")}
+          >
+            {uiText.preview}
+          </button>
+
+          {hasCoverLetterAccess ? (
+            <button
+              type="button"
+              className={`cvgen-tab ${tab === "letter"
+                ? "cvgen-tab--active"
+                : ""
+                }`}
+              onClick={() => setTab("letter")}
+            >
+              {uiText.coverLetter}
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="cvgen-tab"
+              onClick={() =>
+                alert(
+                  `🔒 ${uiText.coverLetterLocked}`
+                )
+              }
+            >
+              🔒 {uiText.coverLetter}
+            </button>
+          )}
         </nav>
 
         <div className="cvgen-topbar-actions">
           <button
+            type="button"
             className="cvgen-btn cvgen-btn--secondary"
-            onClick={() => setCVData(sampleCVData)}
+            onClick={() =>
+              setCVData({
+                ...sampleCVData,
+                layout:
+                  accessLevel === "executive"
+                    ? sampleCVData.layout
+                    : "professional",
+              })
+            }
           >
-            Demo
+            {uiText.demo}
           </button>
+
           <input
             id="existing-cv-upload"
             type="file"
@@ -615,9 +885,17 @@ export default function CVGeneratorPage() {
             type="button"
             className="cvgen-btn cvgen-btn--secondary"
             disabled={isParsingCV}
-            onClick={() => document.getElementById("existing-cv-upload")?.click()}
+            onClick={() =>
+              document
+                .getElementById(
+                  "existing-cv-upload"
+                )
+                ?.click()
+            }
           >
-            {isParsingCV ? "CV wird ausgelesen..." : "CV importieren"}
+            {isParsingCV
+              ? uiText.importingCv
+              : uiText.importCv}
           </button>
 
           {hasEnglishAccess && (
@@ -627,23 +905,30 @@ export default function CVGeneratorPage() {
               disabled={isTranslating}
               onClick={() =>
                 translateCv(
-                  cvLanguage === "de" ? "en" : "de"
+                  cvLanguage === "de"
+                    ? "en"
+                    : "de"
                 )
               }
             >
               {isTranslating
-                ? "Bitte warten..."
+                ? uiText.translating
                 : cvLanguage === "de"
-                  ? "🇬🇧 Auf Englisch"
-                  : "🇩🇪 Auf Deutsch"}
+                  ? uiText.translateToEnglish
+                  : uiText.translateToGerman}
             </button>
           )}
 
-          <button className="cvgen-btn cvgen-btn--primary" onClick={handlePrint}>
-            CV als PDF exportieren
+          <button
+            type="button"
+            className="cvgen-btn cvgen-btn--primary"
+            onClick={handlePrint}
+          >
+            {uiText.exportPdf}
           </button>
         </div>
       </header>
+
       {importPreview && (
         <div className="cvgen-import-preview">
           <h3>📄 Folgende Daten wurden erkannt</h3>
@@ -963,7 +1248,9 @@ export default function CVGeneratorPage() {
 
 
       <div className="cvgen-layout-bar">
-        <span className="cvgen-layout-label">Layout:</span>
+        <span className="cvgen-layout-label">
+          {uiText.layout}
+        </span>
 
         {(
           [
@@ -975,19 +1262,25 @@ export default function CVGeneratorPage() {
             key={value}
             className={`cvgen-layout-chip ${cvData.layout === value ? "cvgen-layout-chip--active" : ""
               }`}
-            onClick={() =>
+            onClick={() => {
+              if (
+                value === "executive" &&
+                accessLevel !== "executive"
+              ) {
+                return;
+              }
+
               setCVData((currentData: CVData) => ({
                 ...currentData,
                 layout: value,
-              }))
-            }
+              }));
+            }}
+
             title={
-              value === "executive" && accessLevel !== "executive"
-                ? "Executive nur mit Executive-Zugang"
-                : "Verfügbar"
-            }
-            disabled={
-              value === "executive" && accessLevel !== "executive"
+              value === "executive" &&
+                accessLevel !== "executive"
+                ? uiText.executiveLocked
+                : uiText.available
             }
           >
             {label}
@@ -1009,7 +1302,9 @@ export default function CVGeneratorPage() {
           <button
             key={value}
             type="button"
-            className={`cvgen-color-dot ${cvData.themeColor === value ? "cvgen-color-dot--active" : ""
+            className={`cvgen-color-dot ${cvData.themeColor === value
+              ? "cvgen-color-dot--active"
+              : ""
               }`}
             style={{ backgroundColor: color }}
             onClick={() =>
@@ -1018,9 +1313,11 @@ export default function CVGeneratorPage() {
                 themeColor: value,
               }))
             }
+            aria-label={`Farbe ${value} auswählen`}
           />
         ))}
       </div>
+
       <main
         className={`cvgen-main ${tab === "split"
           ? "cvgen-main--split"
@@ -1034,17 +1331,21 @@ export default function CVGeneratorPage() {
             <CVForm
               data={cvData}
               onChange={setCVData}
-              language={cvLanguage}
+              language={uiLanguage}
             />
           </div>
         )}
 
-        {tab === "letter" && (
+        {tab === "letter" && hasCoverLetterAccess && (
           <div className="cvgen-form-panel">
             <CoverLetterGenerator
               letterPreviewRef={previewRef}
               initialThemeColor={cvData.themeColor}
-              initialLayout={cvData.layout === "executive" ? "executive" : "professional"}
+              initialLayout={
+                cvData.layout === "executive"
+                  ? "executive"
+                  : "professional"
+              }
             />
           </div>
         )}
@@ -1053,11 +1354,12 @@ export default function CVGeneratorPage() {
           <div className="cvgen-preview-panel">
             <div className="cvgen-preview-toolbar">
               <span className="cvgen-preview-label">
-                Live-Vorschau · A4
+                {uiText.livePreview}
               </span>
 
               <span className="cvgen-preview-hint">
-                {cvData.personal.firstName} {cvData.personal.lastName} –{" "}
+                {cvData.personal.firstName}{" "}
+                {cvData.personal.lastName} –{" "}
                 {cvData.personal.targetTitle}
               </span>
             </div>
@@ -1065,7 +1367,10 @@ export default function CVGeneratorPage() {
             <div className="cvgen-preview-scaler">
               <div
                 ref={previewRef}
-                style={{ ["--cv-theme-color" as string]: currentThemeColor }}
+                style={{
+                  ["--cv-theme-color" as string]:
+                    currentThemeColor,
+                }}
               >
                 {cvData.layout === "professional" ? (
                   <ProfessionalTwoPageCV
@@ -1082,7 +1387,6 @@ export default function CVGeneratorPage() {
             </div>
           </div>
         )}
-
       </main>
     </div>
   );
