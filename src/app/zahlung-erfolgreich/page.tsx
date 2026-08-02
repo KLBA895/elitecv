@@ -247,15 +247,20 @@ export default async function PaymentSuccessPage({
       </main>
     );
   } catch (error) {
-    console.error(
-      "Erfolgsseite konnte Bestellung nicht laden:",
-      error
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Unbekannter Fehler";
+
+    console.warn(
+      "Erfolgsseite: Bestelldaten momentan nicht verfügbar:",
+      errorMessage
     );
 
     return (
       <PaymentMessage
         title="Zahlung wurde übermittelt"
-        text="Die Bestelldaten konnten momentan nicht geladen werden. Bitte laden Sie die Seite erneut oder kontaktieren Sie EliteCV unter info@elitecv.ch."
+        text="Ihre Zahlung wurde übermittelt. Die Bestelldaten werden momentan noch verarbeitet. Bitte laden Sie diese Seite in einigen Augenblicken erneut. Falls die Anzeige bestehen bleibt, kontaktieren Sie EliteCV unter info@elitecv.ch."
         showReload
       />
     );
