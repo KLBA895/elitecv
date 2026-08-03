@@ -21,7 +21,7 @@ export function WhySection({ data, onChange, onAiAction }: Props) {
       </p>
 
       <textarea
-        rows={7}
+        rows={9}
         value={data.why}
         onChange={(e) =>
           onChange({

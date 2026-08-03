@@ -3,6 +3,14 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  User,
+  Clock,
+  Briefcase,
+} from "lucide-react";
 
 type Lang = "de" | "en";
 type CheckoutResponse = {
@@ -25,7 +33,7 @@ const content = {
       { label: "Leistungen", href: "#leistungen" },
       { label: "Preise", href: "#preise" },
       { label: "Ratgeber", href: "/ratgeber" },
-      { label: "Kontakt", href: "kontakt" },
+      { label: "Kontakt", href: "/kontakt" },
     ],
     login: "Login",
     cta: "Jetzt starten",
@@ -157,7 +165,7 @@ const content = {
       { label: "AGB", href: "/agb" },
       { label: "Widerrufsrecht", href: "/widerrufsrecht" },
       { label: "Ratgeber", href: "/ratgeber" },
-      { label: "Kontakt", href: "kontakt" },
+      { label: "Kontakt", href: "/kontakt" },
     ],
     footer: "Alle Rechte vorbehalten.",
   },
@@ -167,7 +175,7 @@ const content = {
       { label: "Services", href: "#leistungen" },
       { label: "Pricing", href: "#preise" },
       { label: "Guides", href: "/guides" },
-      { label: "Contact", href: "kontakt" },
+      { label: "Contact", href: "/kontakt" },
     ],
     login: "Login",
     cta: "Start now",
@@ -297,7 +305,7 @@ const content = {
       { label: "Terms & Conditions", href: "/agb" },
       { label: "Right of Withdrawal", href: "/widerrufsrecht" },
       { label: "Guides", href: "/guides" },
-      { label: "Contact", href: "kontakt" },
+      { label: "Contact", href: "/kontakt" },
     ],
     footer: "All rights reserved.",
   },
@@ -1473,7 +1481,147 @@ export default function Home() {
         </section>
         <section id="kontakt" className="mx-auto w-full max-w-7xl px-6 py-20">
           <div className="grid gap-6 lg:grid-cols-2">
-            <article className="rounded-2xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm"><h2 className="text-3xl font-semibold tracking-[-0.02em]">{t.contactTitle}</h2><p className="mt-3 text-[#0A1F44]/72">{t.contactText}</p><p className="mt-5 text-sm uppercase tracking-[0.15em] text-[#C9A95A]">{t.contactEmailLabel}</p><a href="mailto:info@elitecv.ch" className="mt-1 inline-block text-lg font-semibold text-[#0A1F44] transition hover:text-[#C9A95A]">info@elitecv.ch</a></article>
+            <article className="rounded-2xl border border-[#0A1F44]/10 bg-white p-8 shadow-sm">
+
+              <span className="inline-flex rounded-full bg-[#C9A95A]/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#8A6A22]">
+                EliteCV
+              </span>
+
+              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.02em]">
+                {t.contactTitle}
+              </h2>
+
+              <p className="mt-4 leading-7 text-[#0A1F44]/72">
+                {t.contactText}
+              </p>
+
+              <div className="mt-8 space-y-5">
+
+                <div className="flex items-start gap-4">
+                  <User className="mt-1 h-5 w-5 text-[#C9A95A]" />
+
+                  <div>
+                    <p className="font-semibold">
+                      {lang === "de"
+                        ? "Ansprechpartner"
+                        : "Contact Person"}
+                    </p>
+
+                    <p className="text-[#0A1F44]/70">
+                      Klaudio Batinić
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Mail className="mt-1 h-5 w-5 text-[#C9A95A]" />
+
+                  <div>
+                    <p className="font-semibold">
+                      E-Mail
+                    </p>
+
+                    <a
+                      href="mailto:info@elitecv.ch"
+                      className="text-[#0A1F44]/70 hover:text-[#C9A95A]"
+                    >
+                      info@elitecv.ch
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Phone className="mt-1 h-5 w-5 text-[#C9A95A]" />
+
+                  <div>
+                    <p className="font-semibold">
+                      {lang === "de"
+                        ? "Telefon"
+                        : "Phone"}
+                    </p>
+
+                    <a
+                      href="tel:+41763314624"
+                      className="text-[#0A1F44]/70 hover:text-[#C9A95A]"
+                    >
+                      +41 76 331 46 24
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <MapPin className="mt-1 h-5 w-5 text-[#C9A95A]" />
+
+                  <div>
+                    <p className="font-semibold">
+                      {lang === "de"
+                        ? "Geschäftsadresse"
+                        : "Business Address"}
+                    </p>
+
+                    <p className="text-[#0A1F44]/70">
+                      Schulgutstrasse 1
+                      <br />
+                      8953 Dietikon
+                      <br />
+                      Schweiz
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Clock className="mt-1 h-5 w-5 text-[#C9A95A]" />
+
+                  <div>
+                    <p className="font-semibold">
+                      {lang === "de"
+                        ? "Antwortzeit"
+                        : "Response Time"}
+                    </p>
+
+                    <p className="text-[#0A1F44]/70">
+                      {lang === "de"
+                        ? "In der Regel innerhalb von 1–2 Werktagen."
+                        : "Usually within 1–2 business days."}
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="mt-8 rounded-xl border border-[#C9A95A]/30 bg-[#FFFDF7] p-5">
+
+                <div className="flex items-center gap-3">
+
+                  <Briefcase className="h-5 w-5 text-[#C9A95A]" />
+
+                  <h3 className="font-semibold">
+                    {lang === "de"
+                      ? "Unsere Dienstleistungen"
+                      : "Our Services"}
+                  </h3>
+
+                </div>
+
+                <ul className="mt-4 space-y-2 text-sm text-[#0A1F44]/75">
+
+                  <li>✓ ATS-optimierte Lebensläufe</li>
+
+                  <li>✓ CV-Optimierung</li>
+
+                  <li>✓ LinkedIn-Profil Optimierung</li>
+
+                  <li>✓ Motivationsschreiben</li>
+
+                  <li>✓ Arbeitszeugnis Analyse</li>
+
+                  <li>✓ EliteCV Generator</li>
+
+                </ul>
+
+              </div>
+
+            </article>
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
@@ -1499,6 +1647,7 @@ export default function Home() {
               className="rounded-2xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm"
             >
               <div className="grid gap-4 md:grid-cols-2">
+
                 <label className="text-sm font-medium text-[#0A1F44]/85">
                   {t.contactFormName}
                   <input
@@ -1518,14 +1667,91 @@ export default function Home() {
                     className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
                   />
                 </label>
+
+                <label className="text-sm font-medium text-[#0A1F44]/85">
+                  Telefon (optional)
+                  <input
+                    name="phone"
+                    type="tel"
+                    placeholder="+41 79 123 45 67"
+                    className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
+                  />
+                </label>
+
+                <label className="text-sm font-medium text-[#0A1F44]/85">
+                  Betreff
+                  <select
+                    name="subject"
+                    required
+                    className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-white px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
+                  >
+                    <option value="">Bitte auswählen</option>
+                    <option>Allgemeine Anfrage</option>
+                    <option>EliteCV Generator</option>
+                    <option>CV Optimierung</option>
+                    <option>LinkedIn Optimierung</option>
+                    <option>Motivationsschreiben</option>
+                    <option>Arbeitszeugnis Analyse</option>
+                    <option>Technischer Support</option>
+                    <option>Sonstiges</option>
+                  </select>
+                </label>
+
+                <label className="md:col-span-2 text-sm font-medium text-[#0A1F44]/85">
+                  {t.contactFormMessage}
+
+                  <textarea
+                    name="message"
+                    required
+                    rows={6}
+                    placeholder="Wie können wir Ihnen helfen?"
+                    className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]"
+                  />
+                </label>
+
               </div>
+
+              <label className="mt-5 flex items-start gap-3 text-sm text-[#0A1F44]/75">
+                <input
+                  name="privacyAccepted"
+                  type="checkbox"
+                  required
+                  className="mt-1 h-4 w-4 shrink-0"
+                />
+
+                <span>
+                  {lang === "de"
+                    ? "Ich habe die "
+                    : "I have read the "}
+
+                  <Link
+                    href="/datenschutz"
+                    className="font-semibold text-[#C9A95A] hover:underline"
+                  >
+                    {lang === "de"
+                      ? "Datenschutzerklärung"
+                      : "Privacy Policy"}
+                  </Link>
+
+                  {lang === "de"
+                    ? " gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu."
+                    : " and agree to the processing of my information for the purpose of handling my request."}
+                </span>
+              </label>
 
               <button
                 type="submit"
-                className="mt-5 rounded-full border border-[#0A1F44]/20 px-6 py-2.5 text-sm font-semibold text-[#0A1F44] transition hover:border-[#C9A95A] hover:text-[#C9A95A]"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#0A1F44] px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_-16px_rgba(10,31,68,0.65)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#12305F]"
               >
-                {t.contactFormSubmit}
+                <span>📩</span>
+
+                <span>
+                  {lang === "de"
+                    ? "Anfrage senden"
+                    : "Send Request"}
+                </span>
               </button>
+
               {contactSubmitted && (
                 <p className="mt-4 rounded-xl border border-emerald-600/25 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-800">
                   {lang === "de"

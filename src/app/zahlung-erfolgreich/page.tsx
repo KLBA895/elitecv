@@ -303,6 +303,27 @@ function PaymentMessage({
           >
             Zurück zu EliteCV
           </Link>
+          <Link
+            href="/ratgeber/ats-lebenslauf-schweiz-2026"
+            className="block rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+          >
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#8A6A22]">
+              CV & ATS
+            </p>
+
+            <h2 className="mt-3 text-2xl font-bold text-[#0A1F44]">
+              ATS-Lebenslauf Schweiz 2026
+            </h2>
+
+            <p className="mt-3 leading-7 text-[#0A1F44]/70">
+              So erstellen Sie einen strukturierten und ATS-optimierten Lebenslauf
+              für moderne Bewerbungsportale.
+            </p>
+
+            <span className="mt-5 inline-block font-semibold text-[#8A6A22]">
+              Ratgeber lesen →
+            </span>
+          </Link>
         </div>
       </div>
     </main>
