@@ -146,9 +146,42 @@ const content = {
       "Die Bearbeitung beziehungsweise Freischaltung beginnt nach erfolgreicher Zahlungsbestätigung.",
     faqTitle: "FAQ",
     faqs: [
-      { q: "Wie schnell erhalte ich meine neue Version?", a: "In der Regel innerhalb von 2 bis 5 Arbeitstagen, abhängig vom Umfang des Auftrags." },
-      { q: "Ist EliteCV für verschiedene Branchen geeignet?", a: "Ja. Sprache, Fokus und Struktur werden auf Ihre Zielrolle angepasst." },
-      { q: "Kann ich eine Korrekturrunde anfordern?", a: "Ja, alle Pakete enthalten mindestens eine strukturierte Revision." },
+      {
+        q: "Wie schnell erhalte ich meine neue Version?",
+        a: "In der Regel innerhalb von 2 bis 5 Arbeitstagen, abhängig vom Umfang des Auftrags. Bei Express-Bearbeitung gelten die vereinbarten kürzeren Lieferfristen.",
+      },
+      {
+        q: "Ist EliteCV für verschiedene Branchen geeignet?",
+        a: "Ja. Sprache, Fokus, Keywords und Struktur werden auf Ihre Zielrolle, Branche und den Schweizer Arbeitsmarkt abgestimmt.",
+      },
+      {
+        q: "Kann ich eine Korrekturrunde anfordern?",
+        a: "Ja. Die persönlichen CV-Pakete enthalten mindestens eine strukturierte Korrekturrunde. Änderungswünsche sollten innerhalb der in den AGB genannten Frist eingereicht werden.",
+      },
+      {
+        q: "Ist der EliteCV Generator ATS-optimiert?",
+        a: "Ja. Der EliteCV Generator unterstützt eine klare, strukturierte und ATS-orientierte Darstellung Ihrer Berufserfahrung, Kompetenzen und Ausbildung. Eine vollständige Garantie für die Verarbeitung durch jedes einzelne ATS-System kann jedoch nicht gegeben werden.",
+      },
+      {
+        q: "Kann ich meinen bestehenden Lebenslauf hochladen?",
+        a: "Ja. Sie können Ihren bestehenden Lebenslauf hochladen und als Grundlage für die weitere Bearbeitung oder für die Nutzung des EliteCV Generators verwenden.",
+      },
+      {
+        q: "In welchen Sprachen ist EliteCV verfügbar?",
+        a: "EliteCV ist auf Deutsch und Englisch verfügbar. Je nach gewähltem Paket können Übersetzungen oder zweisprachige Bewerbungsunterlagen ergänzt werden.",
+      },
+      {
+        q: "Was ist der Unterschied zwischen dem Generator und der persönlichen CV-Optimierung?",
+        a: "Mit dem EliteCV Generator erstellen Sie Ihren Lebenslauf selbst mit strukturierten Eingabefeldern, professionellen Layouts und ausgewählten KI-Funktionen. Bei der persönlichen CV-Optimierung wird Ihr Lebenslauf individuell geprüft, überarbeitet und strategisch auf Ihre Zielposition ausgerichtet.",
+      },
+      {
+        q: "Werden meine Daten und Unterlagen vertraulich behandelt?",
+        a: "Ja. Ihre persönlichen Angaben und Bewerbungsunterlagen werden vertraulich behandelt und ausschliesslich zur Bearbeitung Ihrer Anfrage oder Ihres Auftrags verwendet. Weitere Informationen finden Sie in der Datenschutzerklärung.",
+      },
+      {
+        q: "Für wen eignet sich EliteCV?",
+        a: "EliteCV eignet sich für Berufseinsteiger, Fachkräfte, Projektleiter, Ingenieure, Business Analysten, Führungskräfte und weitere Personen, die ihre Bewerbungsunterlagen professionell und zielgerichtet gestalten möchten.",
+      },
     ],
     contactTitle: "Kontakt",
     contactText: "Fragen zu Paketen, Abläufen oder Ihrem Profil? Kontaktieren Sie uns unverbindlich.",
@@ -286,9 +319,42 @@ const content = {
       "Processing or access activation begins once payment has been successfully confirmed.",
     faqTitle: "FAQ",
     faqs: [
-      { q: "How fast can I receive the revised version?", a: "Usually within 2 to 5 business days, depending on the scope of the project." },
-      { q: "Is EliteCV suitable for different industries?", a: "Yes. Language, focus and structure are adapted to your target role." },
-      { q: "Can I request a revision?", a: "Yes, all packages include at least one structured revision." },
+      {
+        q: "How quickly will I receive my revised version?",
+        a: "Usually within 2 to 5 business days, depending on the scope of the order. Shorter delivery times apply when express processing has been agreed.",
+      },
+      {
+        q: "Is EliteCV suitable for different industries?",
+        a: "Yes. Language, focus, keywords and structure are adapted to your target role, industry and the Swiss job market.",
+      },
+      {
+        q: "Can I request a revision?",
+        a: "Yes. Personal CV packages include at least one structured revision. Revision requests should be submitted within the period specified in the Terms and Conditions.",
+      },
+      {
+        q: "Is the EliteCV Generator ATS-optimised?",
+        a: "Yes. The EliteCV Generator supports a clear, structured and ATS-oriented presentation of your professional experience, skills and education. However, complete compatibility with every individual ATS platform cannot be guaranteed.",
+      },
+      {
+        q: "Can I upload my existing CV?",
+        a: "Yes. You can upload your existing CV and use it as the basis for further editing or for creating your CV with the EliteCV Generator.",
+      },
+      {
+        q: "Which languages are available?",
+        a: "EliteCV is available in German and English. Depending on the selected package, translations or bilingual application documents can also be added.",
+      },
+      {
+        q: "What is the difference between the Generator and personal CV optimisation?",
+        a: "With the EliteCV Generator, you create your CV yourself using structured input fields, professional layouts and selected AI-assisted features. With personal CV optimisation, your CV is individually reviewed, revised and strategically aligned with your target position.",
+      },
+      {
+        q: "Are my personal data and documents treated confidentially?",
+        a: "Yes. Your personal information and application documents are treated confidentially and used solely to process your enquiry or order. Further information is available in our Privacy Policy.",
+      },
+      {
+        q: "Who is EliteCV suitable for?",
+        a: "EliteCV is suitable for graduates, professionals, project managers, engineers, business analysts, executives and other applicants who want to present their experience professionally and strategically.",
+      },
     ],
     contactTitle: "Contact",
     contactText: "Questions about packages, process or your profile? Contact us without obligation.",
