@@ -226,6 +226,7 @@ export function ProfessionalTwoPageCV({
       certificates: "Weiterbildungen",
       languages: "Sprachen",
       itSkills: "IT-Kenntnisse",
+      volunteering: "Ehrenamtliches Engagement",
       softSkills: "Soft Skills",
       profile: "Profil",
       experience: "Berufserfahrung",
@@ -244,6 +245,7 @@ export function ProfessionalTwoPageCV({
       certificates: "Certificates",
       languages: "Languages",
       itSkills: "IT Skills",
+      volunteering: "Volunteer Experience",
       softSkills: "Soft Skills",
       profile: "Profile",
       experience: "Professional Experience",
@@ -264,6 +266,7 @@ export function ProfessionalTwoPageCV({
     strengths,
     achievements,
     workExperience,
+    volunteerExperience,
     education,
     certificates,
     languages,
@@ -471,6 +474,74 @@ export function ProfessionalTwoPageCV({
           <div className="elitecv-page2-header">
             <Header personal={personal} />
           </div>
+
+          {volunteerExperience?.length > 0 && (
+            <MainBlock title={t.volunteering}>
+              <div className="elitecv-timeline elitecv-timeline-detailed">
+                {volunteerExperience.map((item) => {
+                  const period =
+                    item.from && item.to
+                      ? item.from === item.to
+                        ? item.from
+                        : `${item.from} – ${item.to}`
+                      : item.from || item.to || "";
+
+                  const visibleResponsibilities =
+                    item.responsibilities
+                      ?.filter((responsibility) =>
+                        responsibility?.trim()
+                      )
+                      .slice(0, 3) ?? [];
+
+                  return (
+                    <article
+                      key={item.id}
+                      className="elitecv-job"
+                    >
+                      <div className="elitecv-job-dot" />
+
+                      <div className="elitecv-job-content">
+                        <div className="elitecv-job-head">
+                          <strong className="elitecv-job-title">
+                            {item.role}
+                          </strong>
+
+                          {period && (
+                            <span className="elitecv-job-period">
+                              {period}
+                            </span>
+                          )}
+
+                          <p className="elitecv-job-company">
+                            {item.organization}
+
+                            {item.location && (
+                              <span className="elitecv-job-location-inline">
+                                {"\u00A0·\u00A0"}
+                                {item.location}
+                              </span>
+                            )}
+                          </p>
+                        </div>
+
+                        {visibleResponsibilities.length > 0 && (
+                          <ul>
+                            {visibleResponsibilities.map(
+                              (responsibility, index) => (
+                                <li key={index}>
+                                  {responsibility}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        )}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </MainBlock>
+          )}
 
           {(secondPageDetailedJobs.length > 0 || olderJobs.length > 0) && (
             <MainBlock title={t.moreExperience}>
