@@ -687,3 +687,31 @@
   outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
+
+/* ==========================================
+   Automatische Zwischenspeicherung
+========================================== */
+
+.cvgen-save-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 24px;
+  border-bottom: 1px solid #dbe3ef;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.cvgen-save-status span:first-child {
+  color: #15803d;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .cvgen-save-status {
+    padding: 7px 14px;
+    font-size: 11px;
+  }
+}

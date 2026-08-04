@@ -1,47 +1,236 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { CVForm } from "../../../components/form/CVForm";
 import { ProfessionalCVPreview } from "../../../components/cv-preview/SpitzyCVPreview";
+import { ProfessionalTwoPageCV } from "../../../components/cv-preview/ProfessionalTwoPageCV";
 import { sampleCVData } from "../../../data/sampleData";
 import type { CVData } from "../../../types/cv";
 import { CoverLetterGenerator } from "../../components/cover-letter/CoverLetterGenerator";
 
 import "../../../components/form/CVForm.css";
 import "../../../components/cv-preview/SpitzyCVPreview.css";
-import "./cv-generator.css";
-import { ProfessionalTwoPageCV } from "../../../components/cv-preview/ProfessionalTwoPageCV";
 import "../../../components/cv-preview/ProfessionalTwoPageCV.css";
+import "./cv-generator.css";
 
+type Tab =
+  | "form"
+  | "split"
+  | "letter"
+  | "preview";
 
-type Tab = "form" | "split" | "letter" | "preview";
+const ELITECV_STORAGE_KEY =
+  "elitecv-generator-draft-v1";
 
 export default function CVGeneratorPage() {
-
-
-  const [accessGranted, setAccessGranted] = useState(false);
-  const [accessCode, setAccessCode] = useState("");
-  const [accessLevel, setAccessLevel] = useState<"professional" | "executive" | null>(null);
-  const [hasEnglishAccess, setHasEnglishAccess] = useState(false);
-  const [hasCoverLetterAccess, setHasCoverLetterAccess] =
+  const [accessGranted, setAccessGranted] =
     useState(false);
-  const [isTranslating, setIsTranslating] = useState(false);
-  const [isParsingCV, setIsParsingCV] = useState(false);
-  const [importPreview, setImportPreview] = useState<any | null>(null);
-  const [showImportedWork, setShowImportedWork] = useState(false);
-  const [showImportedEducation, setShowImportedEducation] = useState(false);
-  const [showImportedLanguages, setShowImportedLanguages] = useState(false);
-  const [showImportedITSkills, setShowImportedITSkills] = useState(false);
-  const [showImportedCertificates, setShowImportedCertificates] =
-    useState(false);
-  const [accessEmail, setAccessEmail] = useState("");
-  const [isCheckingAccess, setIsCheckingAccess] = useState(false);
-  const [accessError, setAccessError] = useState("");
-  const [accessExpiresAt, setAccessExpiresAt] = useState<string | null>(null);
+
+  const [accessCode, setAccessCode] =
+    useState("");
+
+  const [accessLevel, setAccessLevel] =
+    useState<
+      "professional" | "executive" | null
+    >(null);
+
+  const [
+    hasEnglishAccess,
+    setHasEnglishAccess,
+  ] = useState(false);
+
+  const [
+    hasCoverLetterAccess,
+    setHasCoverLetterAccess,
+  ] = useState(false);
+
+  const [
+    isTranslating,
+    setIsTranslating,
+  ] = useState(false);
+
+  const [
+    isParsingCV,
+    setIsParsingCV,
+  ] = useState(false);
+
+  const [
+    importPreview,
+    setImportPreview,
+  ] = useState<any | null>(null);
+
+  const [
+    showImportedWork,
+    setShowImportedWork,
+  ] = useState(false);
+
+  const [
+    showImportedEducation,
+    setShowImportedEducation,
+  ] = useState(false);
+
+  const [
+    showImportedLanguages,
+    setShowImportedLanguages,
+  ] = useState(false);
+
+  const [
+    showImportedITSkills,
+    setShowImportedITSkills,
+  ] = useState(false);
+
+  const [
+    showImportedCertificates,
+    setShowImportedCertificates,
+  ] = useState(false);
+
+  const [
+    accessEmail,
+    setAccessEmail,
+  ] = useState("");
+
+  const [
+    isCheckingAccess,
+    setIsCheckingAccess,
+  ] = useState(false);
+
+  const [
+    accessError,
+    setAccessError,
+  ] = useState("");
+
+  const [
+    accessExpiresAt,
+    setAccessExpiresAt,
+  ] = useState<string | null>(null);
 
   const [cvData, setCVData] =
     useState<CVData>(sampleCVData);
+
+  const [
+    draftLoaded,
+    setDraftLoaded,
+  ] = useState(false);
+
+  /*
+   * Gespeicherten CV-Entwurf beim Öffnen laden.
+   */
+  useEffect(() => {
+    try {
+      const savedDraft =
+        window.localStorage.getItem(
+          ELITECV_STORAGE_KEY
+        );
+
+      if (savedDraft) {
+        const parsedDraft =
+          JSON.parse(savedDraft) as Partial<CVData>;
+
+        setCVData((currentData) => ({
+          ...currentData,
+          ...parsedDraft,
+
+          personal: {
+            ...currentData.personal,
+            ...(parsedDraft.personal ?? {}),
+          },
+
+          profile: {
+            ...currentData.profile,
+            ...(parsedDraft.profile ?? {}),
+          },
+
+          workExperience:
+            parsedDraft.workExperience ??
+            currentData.workExperience,
+
+          strengths:
+            parsedDraft.strengths ??
+            currentData.strengths,
+
+          achievements:
+            parsedDraft.achievements ??
+            currentData.achievements,
+
+          projects:
+            parsedDraft.projects ??
+            currentData.projects,
+
+          education:
+            parsedDraft.education ??
+            currentData.education,
+
+          certificates:
+            parsedDraft.certificates ??
+            currentData.certificates,
+
+          languages:
+            parsedDraft.languages ??
+            currentData.languages,
+
+          itSkills:
+            parsedDraft.itSkills ??
+            currentData.itSkills,
+
+          skillGroups:
+            parsedDraft.skillGroups ??
+            currentData.skillGroups,
+
+          hardSkills:
+            parsedDraft.hardSkills ??
+            currentData.hardSkills,
+
+          softSkills:
+            parsedDraft.softSkills ??
+            currentData.softSkills,
+
+          usps:
+            parsedDraft.usps ??
+            currentData.usps,
+        }));
+      }
+    } catch (error) {
+      console.error(
+        "Gespeicherter EliteCV-Entwurf konnte nicht geladen werden:",
+        error
+      );
+    } finally {
+      setDraftLoaded(true);
+    }
+  }, []);
+
+  /*
+   * CV-Daten nach Änderungen automatisch lokal speichern.
+   */
+  useEffect(() => {
+    if (!draftLoaded) {
+      return;
+    }
+
+    const saveTimer =
+      window.setTimeout(() => {
+        try {
+          window.localStorage.setItem(
+            ELITECV_STORAGE_KEY,
+            JSON.stringify(cvData)
+          );
+        } catch (error) {
+          console.error(
+            "EliteCV-Entwurf konnte nicht gespeichert werden:",
+            error
+          );
+        }
+      }, 600);
+
+    return () => {
+      window.clearTimeout(saveTimer);
+    };
+  }, [cvData, draftLoaded]);
 
   const [cvLanguage, setCvLanguage] =
     useState<"de" | "en">("de");
@@ -876,10 +1065,53 @@ export default function CVGeneratorPage() {
                   accessLevel === "executive"
                     ? sampleCVData.layout
                     : "professional",
+                volunteerExperience:
+                  sampleCVData.volunteerExperience ?? [],
               })
             }
           >
             {uiText.demo}
+          </button>
+
+          <button
+            type="button"
+            className="cvgen-btn cvgen-btn--secondary"
+            onClick={() => {
+              const confirmed = window.confirm(
+                uiLanguage === "de"
+                  ? "Möchten Sie den gespeicherten CV-Entwurf wirklich löschen? Alle aktuell eingegebenen Daten werden zurückgesetzt."
+                  : "Do you really want to delete the saved CV draft? All current entries will be reset."
+              );
+
+              if (!confirmed) {
+                return;
+              }
+
+              window.localStorage.removeItem(
+                ELITECV_STORAGE_KEY
+              );
+
+              setCVData({
+                ...sampleCVData,
+                layout:
+                  accessLevel === "executive"
+                    ? sampleCVData.layout
+                    : "professional",
+                volunteerExperience:
+                  sampleCVData.volunteerExperience ?? [],
+              });
+
+              setImportPreview(null);
+              setShowImportedWork(false);
+              setShowImportedEducation(false);
+              setShowImportedLanguages(false);
+              setShowImportedITSkills(false);
+              setShowImportedCertificates(false);
+            }}
+          >
+            {uiLanguage === "de"
+              ? "Entwurf löschen"
+              : "Delete draft"}
           </button>
 
           <input
@@ -937,6 +1169,16 @@ export default function CVGeneratorPage() {
           </button>
         </div>
       </header>
+
+      <div className="cvgen-save-status">
+        <span>✓</span>
+
+        <span>
+          {uiLanguage === "de"
+            ? "Ihre Eingaben werden automatisch auf diesem Gerät gespeichert."
+            : "Your entries are saved automatically on this device."}
+        </span>
+      </div>
 
       <div
         style={{

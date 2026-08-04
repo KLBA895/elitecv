@@ -46,6 +46,7 @@ export interface KeyAchievement {
 }
 
 // ─── Berufserfahrung ─────────────────────────────────────────────────────────
+
 export interface WorkExperience {
   id: string;
   company: string;
@@ -59,6 +60,18 @@ export interface WorkExperience {
 
   periodGroup?: string;
   showPeriod?: boolean;
+}
+
+// ─── Ehrenamtliches Engagement ───────────────────────────────────────────────
+
+export interface VolunteerExperience {
+  id: string;
+  organization: string;
+  location: string;
+  from: string;
+  to: string;
+  role: string;
+  responsibilities: string[];
 }
 
 // ─── Ausbildung ──────────────────────────────────────────────────────────────
@@ -129,6 +142,7 @@ export interface CVData {
   achievements: Achievement[];
 
   workExperience: WorkExperience[];
+  volunteerExperience: VolunteerExperience[];
 
   skillGroups: SkillGroup[];
   hardSkills: string[];

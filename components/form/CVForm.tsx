@@ -1,6 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import type {
   Achievement,
   Certificate,
@@ -11,12 +15,15 @@ import type {
   SkillGroup,
   Strength,
   USP,
+  VolunteerExperience,
   WorkExperience,
 } from "../../types/cv";
 import {
   cvFormTranslations,
   type UILanguage,
 } from "./cv-form-translations";
+
+const ELITECV_STORAGE_KEY = "elitecv-generator-draft-v1";
 
 interface CVFormProps {
   data: CVData;
@@ -519,6 +526,109 @@ export function CVForm({
                 ),
             }
             : work
+      )
+    );
+  };
+
+  const addVolunteerExperience = () => {
+    update("volunteerExperience", [
+      ...(data.volunteerExperience ?? []),
+      {
+        id: uid(),
+        organization: "",
+        location: "",
+        from: "",
+        to: "",
+        role: "",
+        responsibilities: [""],
+      },
+    ]);
+  };
+
+  const updateVolunteerExperience = (
+    id: string,
+    field: keyof VolunteerExperience,
+    value: unknown
+  ) => {
+    update(
+      "volunteerExperience",
+      (data.volunteerExperience ?? []).map((item) =>
+        item.id === id
+          ? {
+            ...item,
+            [field]: value,
+          }
+          : item
+      )
+    );
+  };
+
+  const removeVolunteerExperience = (id: string) => {
+    update(
+      "volunteerExperience",
+      (data.volunteerExperience ?? []).filter(
+        (item) => item.id !== id
+      )
+    );
+  };
+
+  const updateVolunteerResponsibility = (
+    id: string,
+    index: number,
+    value: string
+  ) => {
+    update(
+      "volunteerExperience",
+      (data.volunteerExperience ?? []).map((item) =>
+        item.id === id
+          ? {
+            ...item,
+            responsibilities: item.responsibilities.map(
+              (responsibility, responsibilityIndex) =>
+                responsibilityIndex === index
+                  ? value
+                  : responsibility
+            ),
+          }
+          : item
+      )
+    );
+  };
+
+  const addVolunteerResponsibility = (id: string) => {
+    update(
+      "volunteerExperience",
+      (data.volunteerExperience ?? []).map((item) =>
+        item.id === id
+          ? {
+            ...item,
+            responsibilities: [
+              ...item.responsibilities,
+              "",
+            ],
+          }
+          : item
+      )
+    );
+  };
+
+  const removeVolunteerResponsibility = (
+    id: string,
+    index: number
+  ) => {
+    update(
+      "volunteerExperience",
+      (data.volunteerExperience ?? []).map((item) =>
+        item.id === id
+          ? {
+            ...item,
+            responsibilities:
+              item.responsibilities.filter(
+                (_, responsibilityIndex) =>
+                  responsibilityIndex !== index
+              ),
+          }
+          : item
       )
     );
   };
@@ -1852,6 +1962,253 @@ export function CVForm({
           label={t.addProject}
         />
       </AccordionSection>
+
+      <AccordionSection
+        title={
+          language === "de"
+            ? "Ehrenamtliches Engagement"
+            : "Volunteer Experience"
+        }
+        badge={(data.volunteerExperience ?? []).length}
+      >
+        {(data.volunteerExperience ?? []).map(
+          (item: VolunteerExperience, index: number) => (
+            <div
+              key={item.id}
+              className="cv-form-repeat-item cv-form-repeat-item--major"
+            >
+              <div className="cv-form-repeat-header">
+                <span className="cv-form-repeat-index">
+                  {language === "de"
+                    ? `Engagement ${index + 1}`
+                    : `Volunteer role ${index + 1}`}
+                  {item.organization
+                    ? ` – ${item.organization}`
+                    : ""}
+                </span>
+
+                <div className="cv-form-repeat-actions">
+                  <MoveButtons
+                    index={index}
+                    length={
+                      (data.volunteerExperience ?? []).length
+                    }
+                    onMove={(direction) =>
+                      update(
+                        "volunteerExperience",
+                        moveItem(
+                          data.volunteerExperience ?? [],
+                          index,
+                          direction
+                        )
+                      )
+                    }
+                    {...moveProps}
+                  />
+
+                  <RemoveButton
+                    label={t.remove}
+                    onClick={() =>
+                      removeVolunteerExperience(item.id)
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="cv-form-grid2">
+                <div className="cv-form-field">
+                  <FieldLabel>
+                    {language === "de"
+                      ? "Organisation / Verein"
+                      : "Organisation"}
+                  </FieldLabel>
+
+                  <Input
+                    value={item.organization}
+                    onChange={(value) =>
+                      updateVolunteerExperience(
+                        item.id,
+                        "organization",
+                        value
+                      )
+                    }
+                    placeholder="FC Biel Academy"
+                  />
+                </div>
+
+                <div className="cv-form-field">
+                  <FieldLabel>
+                    {language === "de"
+                      ? "Ort"
+                      : "Location"}
+                  </FieldLabel>
+
+                  <Input
+                    value={item.location}
+                    onChange={(value) =>
+                      updateVolunteerExperience(
+                        item.id,
+                        "location",
+                        value
+                      )
+                    }
+                    placeholder="Biel"
+                  />
+                </div>
+
+                <div className="cv-form-field">
+                  <FieldLabel>
+                    {language === "de"
+                      ? "Von"
+                      : "From"}
+                  </FieldLabel>
+
+                  <Input
+                    value={item.from}
+                    onChange={(value) =>
+                      updateVolunteerExperience(
+                        item.id,
+                        "from",
+                        value
+                      )
+                    }
+                    placeholder="08.2016"
+                  />
+                </div>
+
+                <div className="cv-form-field">
+                  <FieldLabel>
+                    {language === "de"
+                      ? "Bis"
+                      : "To"}
+                  </FieldLabel>
+
+                  <Input
+                    value={item.to}
+                    onChange={(value) =>
+                      updateVolunteerExperience(
+                        item.id,
+                        "to",
+                        value
+                      )
+                    }
+                    placeholder={
+                      language === "de"
+                        ? "heute"
+                        : "present"
+                    }
+                  />
+                </div>
+
+                <div className="cv-form-field cv-form-field--full">
+                  <FieldLabel>
+                    {language === "de"
+                      ? "Funktion / Rolle"
+                      : "Role"}
+                  </FieldLabel>
+
+                  <Input
+                    value={item.role}
+                    onChange={(value) =>
+                      updateVolunteerExperience(
+                        item.id,
+                        "role",
+                        value
+                      )
+                    }
+                    placeholder={
+                      language === "de"
+                        ? "Haupttrainer FE12"
+                        : "Head Coach U12"
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="cv-form-field">
+                <FieldLabel>
+                  {language === "de"
+                    ? "Aufgaben und Engagement"
+                    : "Responsibilities"}
+                </FieldLabel>
+
+                {item.responsibilities.map(
+                  (responsibility, responsibilityIndex) => (
+                    <div
+                      key={responsibilityIndex}
+                      className="cv-form-list-row"
+                    >
+                      <Input
+                        value={responsibility}
+                        onChange={(value) =>
+                          updateVolunteerResponsibility(
+                            item.id,
+                            responsibilityIndex,
+                            value
+                          )
+                        }
+                        placeholder={
+                          language === "de"
+                            ? "Aufgabe oder Beitrag beschreiben"
+                            : "Describe the responsibility or contribution"
+                        }
+                      />
+
+                      <MoveButtons
+                        index={responsibilityIndex}
+                        length={item.responsibilities.length}
+                        onMove={(direction) =>
+                          updateVolunteerExperience(
+                            item.id,
+                            "responsibilities",
+                            moveItem(
+                              item.responsibilities,
+                              responsibilityIndex,
+                              direction
+                            )
+                          )
+                        }
+                        {...moveProps}
+                      />
+
+                      <RemoveButton
+                        label={t.remove}
+                        onClick={() =>
+                          removeVolunteerResponsibility(
+                            item.id,
+                            responsibilityIndex
+                          )
+                        }
+                      />
+                    </div>
+                  )
+                )}
+
+                <AddButton
+                  onClick={() =>
+                    addVolunteerResponsibility(item.id)
+                  }
+                  label={
+                    language === "de"
+                      ? "Aufgabe hinzufügen"
+                      : "Add responsibility"
+                  }
+                />
+              </div>
+            </div>
+          )
+        )}
+
+        <AddButton
+          onClick={addVolunteerExperience}
+          label={
+            language === "de"
+              ? "Engagement hinzufügen"
+              : "Add volunteer role"
+          }
+        />
+      </AccordionSection>
+
       <AccordionSection
         title={t.expertise}
         badge={data.skillGroups.length}

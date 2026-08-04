@@ -20,7 +20,11 @@ export interface PersonalData {
   linkedin?: string;
   website?: string;
   photo?: string;
-  iconStyle?: "professional" | "executive" | "modern" | "minimal";
+  iconStyle?:
+  | "professional"
+  | "executive"
+  | "modern"
+  | "minimal";
 }
 
 // ─── Profil ──────────────────────────────────────────────────────────────────
@@ -56,9 +60,19 @@ export interface WorkExperience {
   responsibilities: string[];
   achievements: string[];
   keywords?: string[];
-
   periodGroup?: string;
   showPeriod?: boolean;
+}
+
+// ─── Ehrenamtliches Engagement ───────────────────────────────────────────────
+export interface VolunteerExperience {
+  id: string;
+  organization: string;
+  location: string;
+  from: string;
+  to: string;
+  role: string;
+  responsibilities: string[];
 }
 
 // ─── Ausbildung ──────────────────────────────────────────────────────────────
@@ -77,10 +91,10 @@ export interface Certificate {
   id: string;
   title: string;
   issuer: string;
-  year?: string;
   date?: string;
   from?: string;
   to?: string;
+  year?: string;
 }
 
 // ─── Skills ──────────────────────────────────────────────────────────────────
@@ -93,7 +107,11 @@ export interface SkillGroup {
 export interface ITSkill {
   id: string;
   name: string;
-  level?: "Grundkenntnisse" | "Gut" | "Sehr gut" | "Expertenwissen";
+  level?:
+  | "Grundkenntnisse"
+  | "Gut"
+  | "Sehr gut"
+  | "Expertenwissen";
 }
 
 export interface Language {
@@ -114,6 +132,15 @@ export interface Achievement {
   id: string;
   metric?: string;
   text: string;
+}
+
+// ─── Projekte ────────────────────────────────────────────────────────────────
+export interface Project {
+  id: string;
+  title: string;
+  role?: string;
+  description?: string;
+  results: string[];
 }
 
 // ─── Gesamt-CV ───────────────────────────────────────────────────────────────
@@ -141,6 +168,8 @@ export interface CVData {
   achievements: Achievement[];
 
   workExperience: WorkExperience[];
+  volunteerExperience: VolunteerExperience[];
+  projects: Project[];
 
   skillGroups: SkillGroup[];
   hardSkills: string[];
@@ -150,12 +179,4 @@ export interface CVData {
   languages: Language[];
   education: Education[];
   certificates: Certificate[];
-
-  projects: {
-    id: string;
-    title: string;
-    role?: string;
-    description?: string;
-    results: string[];
-  }[];
 }

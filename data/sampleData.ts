@@ -141,6 +141,21 @@ export const sampleCVData: CVData = {
     },
   ],
 
+  volunteerExperience: [
+    {
+      id: "vol-1",
+      organization: "FC Biel Academy",
+      location: "Biel",
+      from: "08.2016",
+      to: "heute",
+      role: "Haupttrainer FE12",
+      responsibilities: [
+        "Planung und Durchführung altersgerechter Trainingseinheiten.",
+        "Förderung von Teamgeist, Disziplin und persönlicher Entwicklung junger Talente.",
+      ],
+    },
+  ],
+
   skillGroups: [
     {
       id: "sg-1",

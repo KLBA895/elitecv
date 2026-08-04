@@ -45,8 +45,8 @@
 /* Foto */
 
 .elitecv-photo {
-  width: 180px;
-  height: 180px;
+  width: 195px;
+  height: 195px;
   margin: 0 auto 52px;
 
   display: flex;
@@ -899,11 +899,13 @@
   line-height: 1.2;
   color: #ffffff;
 }
+
 .cvgen-upload-hint {
   margin: 4px 0 0;
   font-size: 12px;
   color: rgba(10, 31, 68, 0.58);
 }
+
 .cvgen-import-summary {
   margin-bottom: 24px;
 }
