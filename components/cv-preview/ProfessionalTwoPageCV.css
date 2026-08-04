@@ -841,11 +841,16 @@
   text-align-last: left;
 }
 
-/* Erste Überschriften auf Seite 1 auf gleicher Flucht */
+/* Erste Trennlinien auf Seite 1 exakt auf gleicher Höhe */
+.elitecv-sidebar>.elitecv-side-block:first-of-type {
+  margin-top: -12px;
+}
+
 .elitecv-sidebar>.elitecv-side-block:first-of-type>h3,
 .elitecv-main>.elitecv-main-block:first-of-type>h3 {
-  height: auto;
-  min-height: 0;
+  min-height: 34px;
+  margin-top: 0;
+  padding-bottom: 5px;
   box-sizing: border-box;
   align-items: center;
 }
