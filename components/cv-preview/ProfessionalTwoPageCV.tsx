@@ -271,18 +271,27 @@ export function ProfessionalTwoPageCV({
     projects,
   } = data;
 
-  const firstPageJobs = workExperience.slice(0, 3);
+  const firstPageCount =
+    data.firstPageExperienceCount ?? 3;
 
-  // Auf Seite 2 noch drei Stellen mit Beschreibung
-  const secondPageDetailedJobs = workExperience.slice(3, 6);
+  const firstPageJobs =
+    workExperience.slice(0, firstPageCount);
+
+  // Auf Seite 2 noch maximal drei Stellen ausführlich
+  const secondPageDetailedJobs =
+    workExperience.slice(
+      firstPageCount,
+      firstPageCount + 3
+    );
 
   // Alle älteren Stellen nur noch kompakt
   const MAX_CAREER_HISTORY = 6;
 
-  const olderJobs = workExperience.slice(
-    6,
-    6 + MAX_CAREER_HISTORY
-  );
+  const olderJobs =
+    workExperience.slice(
+      firstPageCount + 3,
+      firstPageCount + 3 + MAX_CAREER_HISTORY
+    );
 
   const profileText =
     profile.rawText?.trim() ||
@@ -471,7 +480,7 @@ export function ProfessionalTwoPageCV({
                     <JobEntry
                       key={job.id}
                       job={job}
-                      jobIndex={index + 3}
+                      jobIndex={index + firstPageCount}
                       successLabel={t.successes}
                       language={language}
                       bulletPointCount={data.bulletPointCount ?? 3}

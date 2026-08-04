@@ -899,3 +899,85 @@
   line-height: 1.2;
   color: #ffffff;
 }
+.cvgen-upload-hint {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: rgba(10, 31, 68, 0.58);
+}
+.cvgen-import-summary {
+  margin-bottom: 24px;
+}
+
+.cvgen-import-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.cvgen-summary-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.cvgen-summary-card strong {
+  display: block;
+  font-size: 24px;
+  color: #0a1f44;
+}
+
+.cvgen-summary-card span {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* ==========================================
+   EliteCV KI-Import Analyse
+========================================== */
+.cvgen-import-summary {
+  margin-bottom: 24px;
+}
+
+.cvgen-import-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.cvgen-summary-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.cvgen-summary-card strong {
+  display: block;
+  font-size: 24px;
+  color: #0a1f44;
+}
+
+.cvgen-summary-card span {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.cvgen-import-success {
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  color: #166534;
+  font-size: 14px;
+  line-height: 1.6;
+}

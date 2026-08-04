@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import mammoth from "mammoth";
+import { getPath } from "pdf-parse/worker";
+import { PDFParse } from "pdf-parse";
 import OpenAI from "openai";
 
 export const runtime = "nodejs";
+PDFParse.setWorker(getPath());
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -295,29 +298,65 @@ export async function POST(req: NextRequest) {
     const docxMime =
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
+    const pdfMime = "application/pdf";
+
     const isDocx =
       file.type === docxMime ||
       file.name.toLowerCase().endsWith(".docx");
 
-    if (!isDocx) {
+    const isPdf =
+      file.type === pdfMime ||
+      file.name.toLowerCase().endsWith(".pdf");
+
+    if (!isDocx && !isPdf) {
       return NextResponse.json(
-        { error: "Bitte eine Word-Datei im DOCX-Format hochladen." },
+        {
+          error:
+            "Bitte laden Sie eine DOCX- oder PDF-Datei hoch.",
+        },
         { status: 400 }
       );
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    const extracted = await mammoth.extractRawText({
-      buffer,
-    });
+    let cvText = "";
 
-    const cvText = extracted.value.trim();
+    if (isDocx) {
+      const extracted = await mammoth.extractRawText({
+        buffer,
+      });
+
+      cvText = extracted.value;
+    }
+
+    if (isPdf) {
+      const parser = new PDFParse({
+        data: buffer,
+      });
+
+      const result = await parser.getText();
+
+      await parser.destroy();
+
+      cvText = result.text;
+    }
+
+    cvText = cvText
+      .replace(/\u0000/g, "")
+      .replace(/\r\n/g, "\n")
+      .replace(/[ \t]+\n/g, "\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
 
     if (!cvText) {
       return NextResponse.json(
-        { error: "Im Dokument wurde kein Text erkannt." },
-        { status: 400 }
+        {
+          error: isPdf
+            ? "In dieser PDF-Datei wurde kein auslesbarer Text erkannt. Bitte verwenden Sie eine digital erstellte PDF- oder DOCX-Datei. Eingescannte PDFs werden derzeit nicht unterstützt."
+            : "Im Word-Dokument wurde kein auslesbarer Text erkannt.",
+        },
+        { status: 422 }
       );
     }
 
@@ -515,15 +554,26 @@ ${cvText}
             status >= 500
               ? "Der KI-Dienst ist vorübergehend nicht erreichbar. Bitte nochmals versuchen."
               : error.message || "KI-Analyse fehlgeschlagen.",
+          details:
+            process.env.NODE_ENV === "development"
+              ? error.message
+              : undefined,
         },
         { status }
       );
     }
 
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : String(error);
+
     return NextResponse.json(
       {
         error:
-          "CV konnte nicht mit KI analysiert werden. Bitte nochmals versuchen.",
+          process.env.NODE_ENV === "development"
+            ? `CV-Analyse fehlgeschlagen: ${errorMessage}`
+            : "CV konnte nicht mit KI analysiert werden. Bitte nochmals versuchen.",
       },
       { status: 500 }
     );

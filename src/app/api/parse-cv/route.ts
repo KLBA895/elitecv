@@ -14,6 +14,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        {
+          error:
+            "Die Datei ist zu gross. Bitte verwenden Sie eine Datei mit maximal 10 MB.",
+        },
+        { status: 413 }
+      );
+    }
+
     if (
       file.type !==
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document"

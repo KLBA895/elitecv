@@ -568,11 +568,20 @@ export default function CVGeneratorPage() {
 
     if (!file) return;
 
-    if (
-      file.type !==
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ) {
-      alert("Bitte laden Sie zuerst nur eine Word-Datei (.docx) hoch.");
+    const isDocx =
+      file.type ===
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+      file.name.toLowerCase().endsWith(".docx");
+
+    const isPdf =
+      file.type === "application/pdf" ||
+      file.name.toLowerCase().endsWith(".pdf");
+
+    if (!isDocx && !isPdf) {
+      alert(
+        "Bitte laden Sie einen Lebenslauf als Word-Datei (.docx) oder PDF hoch."
+      );
+
       event.target.value = "";
       return;
     }
@@ -599,7 +608,7 @@ export default function CVGeneratorPage() {
       }
 
       if (!response.ok) {
-        console.error("parse-cv-ai Fehler:", text);
+        console.warn("parse-cv-ai Fehler:", text);
 
         alert(
           result.error ||
@@ -876,7 +885,7 @@ export default function CVGeneratorPage() {
           <input
             id="existing-cv-upload"
             type="file"
-            accept=".docx"
+            accept=".docx,.pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf"
             style={{ display: "none" }}
             onChange={handleCVUpload}
           />
@@ -929,9 +938,25 @@ export default function CVGeneratorPage() {
         </div>
       </header>
 
+      <div
+        style={{
+          marginTop: "10px",
+          marginBottom: "16px",
+          fontSize: "13px",
+          color: "#64748b",
+        }}
+      >
+        📄 Unterstützte Formate: <strong>DOCX</strong> und <strong>PDF</strong>
+        (max. 10 MB)
+      </div>
+
       {importPreview && (
         <div className="cvgen-import-preview">
-          <h3>📄 Folgende Daten wurden erkannt</h3>
+          <h3>✅ Lebenslauf erfolgreich analysiert</h3>
+          <p className="cvgen-import-note">
+            Bitte prüfen Sie die automatisch erkannten Informationen sorgfältig, bevor
+            Sie diese in Ihren Lebenslauf übernehmen.
+          </p>
 
           <div className="cvgen-import-preview-list">
             <p>
@@ -967,6 +992,60 @@ export default function CVGeneratorPage() {
           </div>
 
           <div className="cvgen-import-analysis">
+            <div className="cvgen-import-summary">
+              <h4>🤖 EliteCV KI-Analyse</h4>
+
+              <div className="cvgen-import-summary-grid">
+                <div className="cvgen-summary-card">
+                  <strong>
+                    {importPreview.workExperience?.length || 0}
+                  </strong>
+                  <span>Berufsstationen</span>
+                </div>
+
+                <div className="cvgen-summary-card">
+                  <strong>
+                    {importPreview.education?.length || 0}
+                  </strong>
+                  <span>Ausbildungen</span>
+                </div>
+
+                <div className="cvgen-summary-card">
+                  <strong>
+                    {importPreview.certificates?.length || 0}
+                  </strong>
+                  <span>Zertifikate</span>
+                </div>
+
+                <div className="cvgen-summary-card">
+                  <strong>
+                    {importPreview.languages?.length || 0}
+                  </strong>
+                  <span>Sprachen</span>
+                </div>
+
+                <div className="cvgen-summary-card">
+                  <strong>
+                    {importPreview.itSkills?.length || 0}
+                  </strong>
+                  <span>IT-Kenntnisse</span>
+                </div>
+
+                <div className="cvgen-summary-card">
+                  <strong>
+                    {importPreview.projects?.length || 0}
+                  </strong>
+                  <span>Projekte</span>
+                </div>
+              </div>
+
+              <div className="cvgen-import-success">
+                ✅ Die KI hat Ihren Lebenslauf erfolgreich analysiert und die erkannten Daten
+                automatisch strukturiert.
+              </div>
+            </div>
+
+            <h4>Detailanalyse</h4>
             <h4>CV-Analyse</h4>
 
             <div className="cvgen-analysis-row">
