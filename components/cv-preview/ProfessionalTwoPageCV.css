@@ -275,13 +275,13 @@
   min-width: 0;
   height: auto;
   max-height: none;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   overflow: visible;
 }
 
 /* Seite 2 etwas kompakter */
 .elitecv-page:nth-of-type(2) .elitecv-main-block {
-  margin-bottom: 16px;
+  margin-bottom: 22px;
 }
 
 .elitecv-main-block h3 {
@@ -855,11 +855,11 @@
 }
 
 .elitecv-sidebar-page2 .elitecv-side-block {
-  margin-bottom: 10px;
+  margin-bottom: 22px;
 }
 
 .elitecv-sidebar-page2 .elitecv-side-item {
-  margin-bottom: 7px;
+  margin-bottom: 10px;
 }
 
 .elitecv-sidebar-page2 .elitecv-side-item p,
@@ -869,7 +869,7 @@
 }
 
 .elitecv-sidebar-page2 .elitecv-side-line {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .elitecv-job-compact .elitecv-job-head {
