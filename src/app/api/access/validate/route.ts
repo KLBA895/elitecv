@@ -30,28 +30,66 @@ export async function POST(request: Request) {
       );
     }
 
+    /*
+     * Persönlicher EliteCV-Admin-Zugang
+     *
+     * Dieser Zugang wird nicht in Supabase gesucht,
+     * läuft nicht ab und erhöht keinen Nutzungszähler.
+     */
+    const adminEmail = normalizeEmail(
+      process.env.ELITECV_ADMIN_EMAIL ?? ""
+    );
+
+    const adminCode = normalizeAccessCode(
+      process.env.ELITECV_ADMIN_CODE ?? ""
+    );
+
+    const isAdmin =
+      Boolean(adminEmail) &&
+      Boolean(adminCode) &&
+      email === adminEmail &&
+      code === adminCode;
+
+    if (isAdmin) {
+      return NextResponse.json({
+        valid: true,
+        accessLevel: "executive",
+        englishAccess: true,
+        coverLetterAccess: true,
+        expiresAt: null,
+        isAdmin: true,
+      });
+    }
+
+    /*
+     * Ab hier bleibt der normale Kundenzugang
+     * über Supabase unverändert.
+     */
     const codeHash = hashAccessCode(code);
     const now = new Date();
 
     const { data: access, error } = await supabaseAdmin
       .from("cv_access_codes")
       .select(`
-    id,
-    customer_email,
-    access_level,
-    english_access,
-    cover_letter_access,
-    expires_at,
-    is_active,
-    usage_count,
-    max_usage_count,
-    activated_at
-  `)
+        id,
+        customer_email,
+        access_level,
+        english_access,
+        cover_letter_access,
+        expires_at,
+        is_active,
+        usage_count,
+        max_usage_count,
+        activated_at
+      `)
       .eq("code_hash", codeHash)
       .maybeSingle();
 
     if (error) {
-      console.error("Zugangscode-Abfrage fehlgeschlagen:", error);
+      console.error(
+        "Zugangscode-Abfrage fehlgeschlagen:",
+        error
+      );
 
       return NextResponse.json(
         {
@@ -85,7 +123,9 @@ export async function POST(request: Request) {
       );
     }
 
-    if (normalizeEmail(access.customer_email) !== email) {
+    if (
+      normalizeEmail(access.customer_email) !== email
+    ) {
       return NextResponse.json(
         {
           error:
@@ -120,10 +160,13 @@ export async function POST(request: Request) {
       );
     }
 
-    if (access.usage_count >= access.max_usage_count) {
+    if (
+      access.usage_count >= access.max_usage_count
+    ) {
       return NextResponse.json(
         {
-          error: "Das Nutzungslimit dieses Zugangs wurde erreicht.",
+          error:
+            "Das Nutzungslimit dieses Zugangs wurde erreicht.",
         },
         {
           status: 403,
@@ -131,14 +174,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const { error: updateError } = await supabaseAdmin
-      .from("cv_access_codes")
-      .update({
-        activated_at: access.activated_at ?? now.toISOString(),
-        last_used_at: now.toISOString(),
-        usage_count: access.usage_count + 1,
-      })
-      .eq("id", access.id);
+    const { error: updateError } =
+      await supabaseAdmin
+        .from("cv_access_codes")
+        .update({
+          activated_at:
+            access.activated_at ??
+            now.toISOString(),
+          last_used_at: now.toISOString(),
+          usage_count:
+            access.usage_count + 1,
+        })
+        .eq("id", access.id);
 
     if (updateError) {
       console.error(
@@ -150,19 +197,25 @@ export async function POST(request: Request) {
     return NextResponse.json({
       valid: true,
       accessLevel: access.access_level,
-      englishAccess: Boolean(access.english_access),
+      englishAccess: Boolean(
+        access.english_access
+      ),
       coverLetterAccess: Boolean(
         access.cover_letter_access
       ),
       expiresAt: access.expires_at,
+      isAdmin: false,
     });
-
   } catch (error) {
-    console.error("Zugangscode-Validierung fehlgeschlagen:", error);
+    console.error(
+      "Zugangscode-Validierung fehlgeschlagen:",
+      error
+    );
 
     return NextResponse.json(
       {
-        error: "Unerwarteter Fehler bei der Zugangsprüfung.",
+        error:
+          "Unerwarteter Fehler bei der Zugangsprüfung.",
       },
       {
         status: 500,

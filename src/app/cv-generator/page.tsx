@@ -117,6 +117,8 @@ export default function CVGeneratorPage() {
     setDraftLoaded,
   ] = useState(false);
 
+  const [isAdmin, setIsAdmin] = useState(false);
+
   /*
    * Gespeicherten CV-Entwurf beim Öffnen laden.
    */
@@ -149,6 +151,10 @@ export default function CVGeneratorPage() {
             parsedDraft.workExperience ??
             currentData.workExperience,
 
+          volunteerExperience:
+            parsedDraft.volunteerExperience ??
+            currentData.volunteerExperience,
+
           strengths:
             parsedDraft.strengths ??
             currentData.strengths,
@@ -156,6 +162,10 @@ export default function CVGeneratorPage() {
           achievements:
             parsedDraft.achievements ??
             currentData.achievements,
+
+          keyAchievements:
+            parsedDraft.keyAchievements ??
+            currentData.keyAchievements,
 
           projects:
             parsedDraft.projects ??
@@ -248,67 +258,49 @@ export default function CVGeneratorPage() {
     useState(false);
 
   useEffect(() => {
-    const storedAccess = localStorage.getItem("elitecv_access");
-    const storedEnglish = localStorage.getItem("elitecv_english");
-    const storedCoverLetter = localStorage.getItem(
-      "elitecv_cover_letter"
-    );
-    const storedExpiresAt = localStorage.getItem(
-      "elitecv_access_expires_at"
-    );
-    const storedUiLanguage = localStorage.getItem(
-      "elitecv_ui_language"
-    );
+    const savedAccess =
+      localStorage.getItem("elitecv_access");
+
+    const savedEnglish =
+      localStorage.getItem("elitecv_english");
+
+    const savedCoverLetter =
+      localStorage.getItem(
+        "elitecv_cover_letter"
+      );
+
+    const savedAdmin =
+      localStorage.getItem("elitecv_admin");
+
+    const savedEmail =
+      localStorage.getItem(
+        "elitecv_access_email"
+      );
+
+    const savedExpiresAt =
+      localStorage.getItem(
+        "elitecv_access_expires_at"
+      );
 
     if (
-      storedUiLanguage === "de" ||
-      storedUiLanguage === "en"
+      savedAccess === "professional" ||
+      savedAccess === "executive"
     ) {
-      setUiLanguage(storedUiLanguage);
-    }
-
-    if (!storedAccess || !storedExpiresAt) {
-      return;
-    }
-
-    const expiresAt = new Date(storedExpiresAt);
-
-    const isExpired =
-      Number.isNaN(expiresAt.getTime()) ||
-      expiresAt.getTime() <= Date.now();
-
-    if (isExpired) {
-      localStorage.removeItem("elitecv_access");
-      localStorage.removeItem("elitecv_english");
-      localStorage.removeItem("elitecv_cover_letter");
-      localStorage.removeItem("elitecv_access_email");
-      localStorage.removeItem("elitecv_access_expires_at");
-      return;
-    }
-
-    if (
-      storedAccess === "professional" ||
-      storedAccess === "executive"
-    ) {
-      setAccessGranted(true);
-      setAccessLevel(storedAccess);
-
-      if (storedAccess !== "executive") {
-        setCVData((current) => ({
-          ...current,
-          layout: "professional",
-        }));
-      }
-
+      setAccessLevel(savedAccess);
       setHasEnglishAccess(
-        storedEnglish === "granted"
+        savedEnglish === "granted"
       );
-
       setHasCoverLetterAccess(
-        storedCoverLetter === "granted"
+        savedCoverLetter === "granted"
       );
-
-      setAccessExpiresAt(storedExpiresAt);
+      setIsAdmin(
+        savedAdmin === "granted"
+      );
+      setAccessEmail(savedEmail ?? "");
+      setAccessExpiresAt(
+        savedExpiresAt ?? null
+      );
+      setAccessGranted(true);
     }
   }, []);
 
@@ -566,19 +558,39 @@ export default function CVGeneratorPage() {
           return;
         }
 
+        const accessLevel =
+          result.accessLevel === "executive"
+            ? "executive"
+            : "professional";
+
+        const englishAccess =
+          Boolean(result.englishAccess);
+
+        const coverLetterAccess =
+          Boolean(result.coverLetterAccess);
+
+        const adminAccess =
+          result.isAdmin === true;
+
+        const expiresAt =
+          typeof result.expiresAt === "string" &&
+            result.expiresAt.trim()
+            ? result.expiresAt
+            : null;
+
         localStorage.setItem(
           "elitecv_access",
-          result.accessLevel
+          accessLevel
         );
 
         localStorage.setItem(
           "elitecv_english",
-          result.englishAccess ? "granted" : "denied"
+          englishAccess ? "granted" : "denied"
         );
 
         localStorage.setItem(
           "elitecv_cover_letter",
-          result.coverLetterAccess
+          coverLetterAccess
             ? "granted"
             : "denied"
         );
@@ -589,22 +601,34 @@ export default function CVGeneratorPage() {
         );
 
         localStorage.setItem(
-          "elitecv_access_expires_at",
-          result.expiresAt
+          "elitecv_admin",
+          adminAccess ? "granted" : "denied"
         );
 
-        setAccessLevel(result.accessLevel);
-        if (result.accessLevel !== "executive") {
+        if (expiresAt) {
+          localStorage.setItem(
+            "elitecv_access_expires_at",
+            expiresAt
+          );
+        } else {
+          localStorage.removeItem(
+            "elitecv_access_expires_at"
+          );
+        }
+
+        setAccessLevel(accessLevel);
+
+        if (accessLevel !== "executive") {
           setCVData((current) => ({
             ...current,
             layout: "professional",
           }));
         }
-        setHasEnglishAccess(result.englishAccess);
-        setHasCoverLetterAccess(
-          Boolean(result.coverLetterAccess)
-        );
-        setAccessExpiresAt(result.expiresAt);
+
+        setHasEnglishAccess(englishAccess);
+        setHasCoverLetterAccess(coverLetterAccess);
+        setAccessExpiresAt(expiresAt);
+        setIsAdmin(adminAccess);
         setAccessGranted(true);
       } catch (error) {
         console.error("Zugangsprüfung fehlgeschlagen:", error);
@@ -900,6 +924,9 @@ export default function CVGeneratorPage() {
       workExperience:
         importPreview.workExperience || [],
 
+      volunteerExperience:
+        importPreview.volunteerExperience || [],
+
       education:
         importPreview.education || [],
 
@@ -1055,6 +1082,11 @@ export default function CVGeneratorPage() {
         </nav>
 
         <div className="cvgen-topbar-actions">
+          {isAdmin && (
+            <span className="cvgen-admin-badge">
+              👑 Administrator ▾
+            </span>
+          )}
           <button
             type="button"
             className="cvgen-btn cvgen-btn--secondary"
@@ -1097,8 +1129,6 @@ export default function CVGeneratorPage() {
                   accessLevel === "executive"
                     ? sampleCVData.layout
                     : "professional",
-                volunteerExperience:
-                  sampleCVData.volunteerExperience ?? [],
               });
 
               setImportPreview(null);
@@ -1288,7 +1318,6 @@ export default function CVGeneratorPage() {
             </div>
 
             <h4>Detailanalyse</h4>
-            <h4>CV-Analyse</h4>
 
             <div className="cvgen-analysis-row">
               <span>🟢 Kontaktdaten</span>
@@ -1558,6 +1587,9 @@ export default function CVGeneratorPage() {
                   setShowImportedWork(false);
                   setShowImportedEducation(false);
                   setShowImportedLanguages(false);
+                  setShowImportedITSkills(false);
+                  setShowImportedCertificates(false);
+                  setShowImportedProjects(false);
                 }}
               >
                 Abbrechen

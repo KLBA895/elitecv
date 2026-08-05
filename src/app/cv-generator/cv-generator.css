@@ -715,3 +715,40 @@
     font-size: 11px;
   }
 }
+
+.cvgen-admin-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #D4AF37 0%, #F5D67A 100%);
+  color: #1f2937;
+
+  border: 1px solid rgba(212, 175, 55, 0.45);
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .2px;
+
+  white-space: nowrap;
+
+  margin-right: 12px;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .35);
+
+  transition: all .2s ease;
+}
+
+.cvgen-admin-badge:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 5px 16px rgba(212, 175, 55, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .45);
+}
