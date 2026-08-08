@@ -378,6 +378,7 @@
 }
 
 /* ─── Main Content ────────────────────────────────────────────────────────── */
+
 .cv-main {
   padding: 24px 28px;
   background: #ffffff;
@@ -385,6 +386,12 @@
 
 .cv-main-section {
   margin-bottom: 16px;
+}
+
+/* PROFIL auf Seite 1 etwas höher setzen,
+   damit die Linie mit STÄRKEN links auf gleicher Höhe liegt */
+.cv-main>.cv-main-section:first-child {
+  margin-top: -8px;
 }
 
 .cv-main-section:last-child {
@@ -397,7 +404,9 @@
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: var(--cv-theme-color, #1E3A5F);
+
   border-bottom: 2px solid var(--cv-theme-color, #1E3A5F);
+
   padding-bottom: 5px;
   margin: 0 0 12px;
 }

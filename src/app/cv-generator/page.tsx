@@ -1079,14 +1079,26 @@ export default function CVGeneratorPage() {
               🔒 {uiText.coverLetter}
             </button>
           )}
+
         </nav>
 
         <div className="cvgen-topbar-actions">
           {isAdmin && (
-            <span className="cvgen-admin-badge">
-              👑 Administrator ▾
-            </span>
+            <div className="cvgen-admin-area">
+              <span className="cvgen-admin-badge">
+                👑 Administrator
+              </span>
+
+              <button
+                type="button"
+                className="cvgen-admin-settings"
+                title="Administrator-Einstellungen"
+              >
+                ⚙️
+              </button>
+            </div>
           )}
+
           <button
             type="button"
             className="cvgen-btn cvgen-btn--secondary"
@@ -1097,8 +1109,6 @@ export default function CVGeneratorPage() {
                   accessLevel === "executive"
                     ? sampleCVData.layout
                     : "professional",
-                volunteerExperience:
-                  sampleCVData.volunteerExperience ?? [],
               })
             }
           >
@@ -1137,6 +1147,7 @@ export default function CVGeneratorPage() {
               setShowImportedLanguages(false);
               setShowImportedITSkills(false);
               setShowImportedCertificates(false);
+              setShowImportedProjects(false);
             }}
           >
             {uiLanguage === "de"
@@ -1158,9 +1169,7 @@ export default function CVGeneratorPage() {
             disabled={isParsingCV}
             onClick={() =>
               document
-                .getElementById(
-                  "existing-cv-upload"
-                )
+                .getElementById("existing-cv-upload")
                 ?.click()
             }
           >
@@ -1222,382 +1231,384 @@ export default function CVGeneratorPage() {
         (max. 10 MB)
       </div>
 
-      {importPreview && (
-        <div className="cvgen-import-preview">
-          <h3>✅ Lebenslauf erfolgreich analysiert</h3>
-          <p className="cvgen-import-note">
-            Bitte prüfen Sie die automatisch erkannten Informationen sorgfältig, bevor
-            Sie diese in Ihren Lebenslauf übernehmen.
-          </p>
-
-          <div className="cvgen-import-preview-list">
-            <p>
-              ✅ <strong>Name:</strong>{" "}
-              {importPreview.personal?.firstName}{" "}
-              {importPreview.personal?.lastName}
+      {
+        importPreview && (
+          <div className="cvgen-import-preview">
+            <h3>✅ Lebenslauf erfolgreich analysiert</h3>
+            <p className="cvgen-import-note">
+              Bitte prüfen Sie die automatisch erkannten Informationen sorgfältig, bevor
+              Sie diese in Ihren Lebenslauf übernehmen.
             </p>
 
-            <p>
-              ✅ <strong>Telefon:</strong>{" "}
-              {importPreview.personal?.phone || "Nicht erkannt"}
-            </p>
+            <div className="cvgen-import-preview-list">
+              <p>
+                ✅ <strong>Name:</strong>{" "}
+                {importPreview.personal?.firstName}{" "}
+                {importPreview.personal?.lastName}
+              </p>
 
-            <p>
-              ✅ <strong>E-Mail:</strong>{" "}
-              {importPreview.personal?.email || "Nicht erkannt"}
-            </p>
+              <p>
+                ✅ <strong>Telefon:</strong>{" "}
+                {importPreview.personal?.phone || "Nicht erkannt"}
+              </p>
 
-            <p>
-              ✅ <strong>Ort:</strong>{" "}
-              {importPreview.personal?.location || "Nicht erkannt"}
-            </p>
+              <p>
+                ✅ <strong>E-Mail:</strong>{" "}
+                {importPreview.personal?.email || "Nicht erkannt"}
+              </p>
 
-            <p>
-              ✅ <strong>LinkedIn:</strong>{" "}
-              {importPreview.personal?.linkedin || "Nicht erkannt"}
-            </p>
+              <p>
+                ✅ <strong>Ort:</strong>{" "}
+                {importPreview.personal?.location || "Nicht erkannt"}
+              </p>
 
-            <p>
-              ✅ <strong>Jobtitel:</strong>{" "}
-              {importPreview.personal?.targetTitle || "Nicht erkannt"}
-            </p>
-          </div>
+              <p>
+                ✅ <strong>LinkedIn:</strong>{" "}
+                {importPreview.personal?.linkedin || "Nicht erkannt"}
+              </p>
 
-          <div className="cvgen-import-analysis">
-            <div className="cvgen-import-summary">
-              <h4>🤖 EliteCV KI-Analyse</h4>
-
-              <div className="cvgen-import-summary-grid">
-                <div className="cvgen-summary-card">
-                  <strong>
-                    {importPreview.workExperience?.length || 0}
-                  </strong>
-                  <span>Berufsstationen</span>
-                </div>
-
-                <div className="cvgen-summary-card">
-                  <strong>
-                    {importPreview.education?.length || 0}
-                  </strong>
-                  <span>Ausbildungen</span>
-                </div>
-
-                <div className="cvgen-summary-card">
-                  <strong>
-                    {importPreview.certificates?.length || 0}
-                  </strong>
-                  <span>Zertifikate</span>
-                </div>
-
-                <div className="cvgen-summary-card">
-                  <strong>
-                    {importPreview.languages?.length || 0}
-                  </strong>
-                  <span>Sprachen</span>
-                </div>
-
-                <div className="cvgen-summary-card">
-                  <strong>
-                    {importPreview.itSkills?.length || 0}
-                  </strong>
-                  <span>IT-Kenntnisse</span>
-                </div>
-
-                <div className="cvgen-summary-card">
-                  <strong>
-                    {importPreview.projects?.length || 0}
-                  </strong>
-                  <span>Projekte</span>
-                </div>
-              </div>
-
-              <div className="cvgen-import-success">
-                ✅ Die KI hat Ihren Lebenslauf erfolgreich analysiert und die erkannten Daten
-                automatisch strukturiert.
-              </div>
+              <p>
+                ✅ <strong>Jobtitel:</strong>{" "}
+                {importPreview.personal?.targetTitle || "Nicht erkannt"}
+              </p>
             </div>
 
-            <h4>Detailanalyse</h4>
+            <div className="cvgen-import-analysis">
+              <div className="cvgen-import-summary">
+                <h4>🤖 EliteCV KI-Analyse</h4>
 
-            <div className="cvgen-analysis-row">
-              <span>🟢 Kontaktdaten</span>
-              <span>Vollständig erkannt</span>
-            </div>
-
-            <button
-              type="button"
-              className="cvgen-analysis-row cvgen-analysis-row--clickable"
-              onClick={() => setShowImportedWork((value) => !value)}
-            >
-              <span>🟡 Berufserfahrung</span>
-              <span>
-                {importPreview.workExperience?.length || 0} Stellen erkannt{" "}
-                {showImportedWork ? "▲" : "▼"}
-              </span>
-            </button>
-
-            {showImportedWork && importPreview.workExperience?.length > 0 && (
-              <div className="cvgen-import-work-list">
-                {importPreview.workExperience.map((job: any, index: number) => (
-                  <div
-                    key={job.id || index}
-                    className="cvgen-import-work-item"
-                  >
+                <div className="cvgen-import-summary-grid">
+                  <div className="cvgen-summary-card">
                     <strong>
-                      {job.functionTitle || "Funktion nicht erkannt"}
+                      {importPreview.workExperience?.length || 0}
                     </strong>
-
-                    <span>
-                      {job.company || "Unternehmen nicht erkannt"}
-                    </span>
-
-                    <small>
-                      {job.from || "?"} – {job.to || "?"}
-                    </small>
+                    <span>Berufsstationen</span>
                   </div>
-                ))}
+
+                  <div className="cvgen-summary-card">
+                    <strong>
+                      {importPreview.education?.length || 0}
+                    </strong>
+                    <span>Ausbildungen</span>
+                  </div>
+
+                  <div className="cvgen-summary-card">
+                    <strong>
+                      {importPreview.certificates?.length || 0}
+                    </strong>
+                    <span>Zertifikate</span>
+                  </div>
+
+                  <div className="cvgen-summary-card">
+                    <strong>
+                      {importPreview.languages?.length || 0}
+                    </strong>
+                    <span>Sprachen</span>
+                  </div>
+
+                  <div className="cvgen-summary-card">
+                    <strong>
+                      {importPreview.itSkills?.length || 0}
+                    </strong>
+                    <span>IT-Kenntnisse</span>
+                  </div>
+
+                  <div className="cvgen-summary-card">
+                    <strong>
+                      {importPreview.projects?.length || 0}
+                    </strong>
+                    <span>Projekte</span>
+                  </div>
+                </div>
+
+                <div className="cvgen-import-success">
+                  ✅ Die KI hat Ihren Lebenslauf erfolgreich analysiert und die erkannten Daten
+                  automatisch strukturiert.
+                </div>
               </div>
-            )}
 
-            <button
-              type="button"
-              className="cvgen-analysis-row cvgen-analysis-row--clickable"
-              onClick={() =>
-                setShowImportedEducation((value) => !value)
-              }
-            >
-              <span>🟡 Ausbildung</span>
+              <h4>Detailanalyse</h4>
 
-              <span>
-                {importPreview.education?.length || 0} Einträge erkannt{" "}
-                {showImportedEducation ? "▲" : "▼"}
-              </span>
-            </button>
+              <div className="cvgen-analysis-row">
+                <span>🟢 Kontaktdaten</span>
+                <span>Vollständig erkannt</span>
+              </div>
 
-            {showImportedEducation &&
-              importPreview.education?.length > 0 && (
+              <button
+                type="button"
+                className="cvgen-analysis-row cvgen-analysis-row--clickable"
+                onClick={() => setShowImportedWork((value) => !value)}
+              >
+                <span>🟡 Berufserfahrung</span>
+                <span>
+                  {importPreview.workExperience?.length || 0} Stellen erkannt{" "}
+                  {showImportedWork ? "▲" : "▼"}
+                </span>
+              </button>
+
+              {showImportedWork && importPreview.workExperience?.length > 0 && (
                 <div className="cvgen-import-work-list">
-                  {importPreview.education.map(
-                    (edu: any, index: number) => (
-                      <div
-                        key={edu.id || index}
-                        className="cvgen-import-work-item"
-                      >
-                        <strong>
-                          {edu.degree || "Abschluss nicht erkannt"}
-                        </strong>
+                  {importPreview.workExperience.map((job: any, index: number) => (
+                    <div
+                      key={job.id || index}
+                      className="cvgen-import-work-item"
+                    >
+                      <strong>
+                        {job.functionTitle || "Funktion nicht erkannt"}
+                      </strong>
 
-                        {edu.field && <span>{edu.field}</span>}
+                      <span>
+                        {job.company || "Unternehmen nicht erkannt"}
+                      </span>
 
-                        {edu.institution && (
-                          <span>{edu.institution}</span>
-                        )}
-
-                        {(edu.from || edu.to) && (
-                          <small>
-                            {edu.from || "?"} – {edu.to || "?"}
-                          </small>
-                        )}
-                      </div>
-                    )
-                  )}
+                      <small>
+                        {job.from || "?"} – {job.to || "?"}
+                      </small>
+                    </div>
+                  ))}
                 </div>
               )}
 
-            <button
-              type="button"
-              className="cvgen-analysis-row cvgen-analysis-row--clickable"
-              onClick={() =>
-                setShowImportedLanguages((value) => !value)
-              }
-            >
-              <span>🟡 Sprachen</span>
+              <button
+                type="button"
+                className="cvgen-analysis-row cvgen-analysis-row--clickable"
+                onClick={() =>
+                  setShowImportedEducation((value) => !value)
+                }
+              >
+                <span>🟡 Ausbildung</span>
 
-              <span>
-                {importPreview.languages?.length || 0} erkannt{" "}
-                {showImportedLanguages ? "▲" : "▼"}
-              </span>
-            </button>
+                <span>
+                  {importPreview.education?.length || 0} Einträge erkannt{" "}
+                  {showImportedEducation ? "▲" : "▼"}
+                </span>
+              </button>
 
-            {showImportedLanguages &&
-              importPreview.languages?.length > 0 && (
-                <div className="cvgen-import-work-list">
-                  {importPreview.languages.map(
-                    (language: any, index: number) => (
-                      <div
-                        key={language.id || index}
-                        className="cvgen-import-work-item"
-                      >
-                        <strong>
-                          {language.language || "Sprache nicht erkannt"}
-                        </strong>
-
-                        <span>
-                          {language.level || "Niveau nicht erkannt"}
-                        </span>
-                      </div>
-                    )
-                  )}
-                </div>
-              )}
-
-            <button
-              type="button"
-              className="cvgen-analysis-row cvgen-analysis-row--clickable"
-              onClick={() =>
-                setShowImportedITSkills((value) => !value)
-              }
-            >
-              <span>🟡 IT-Kenntnisse</span>
-
-              <span>
-                {importPreview.itSkills?.length || 0} erkannt{" "}
-                {showImportedITSkills ? "▲" : "▼"}
-              </span>
-            </button>
-
-            {showImportedITSkills &&
-              importPreview.itSkills?.length > 0 && (
-                <div className="cvgen-import-work-list">
-                  {importPreview.itSkills.map(
-                    (skill: any, index: number) => (
-                      <div
-                        key={skill.id || index}
-                        className="cvgen-import-work-item"
-                      >
-                        <strong>
-                          {skill.name || "Kenntnis nicht erkannt"}
-                        </strong>
-
-                        {skill.level && <span>{skill.level}</span>}
-                      </div>
-                    )
-                  )}
-                </div>
-              )}
-
-            {importPreview.projects?.length > 0 && (
-              <>
-                <button
-                  type="button"
-                  className="cvgen-analysis-row cvgen-analysis-row--clickable"
-                  onClick={() =>
-                    setShowImportedProjects((value) => !value)
-                  }
-                >
-                  <span>🟡 Projekte</span>
-
-                  <span>
-                    {importPreview.projects.length} erkannt{" "}
-                    {showImportedProjects ? "▲" : "▼"}
-                  </span>
-                </button>
-
-                {showImportedProjects && (
+              {showImportedEducation &&
+                importPreview.education?.length > 0 && (
                   <div className="cvgen-import-work-list">
-                    {importPreview.projects.map(
-                      (project: any, index: number) => (
+                    {importPreview.education.map(
+                      (edu: any, index: number) => (
                         <div
-                          key={project.id || index}
+                          key={edu.id || index}
                           className="cvgen-import-work-item"
                         >
-                          <strong>{project.title || "Projekt"}</strong>
+                          <strong>
+                            {edu.degree || "Abschluss nicht erkannt"}
+                          </strong>
 
-                          {project.role && (
-                            <span>{project.role}</span>
+                          {edu.field && <span>{edu.field}</span>}
+
+                          {edu.institution && (
+                            <span>{edu.institution}</span>
+                          )}
+
+                          {(edu.from || edu.to) && (
+                            <small>
+                              {edu.from || "?"} – {edu.to || "?"}
+                            </small>
                           )}
                         </div>
                       )
                     )}
                   </div>
                 )}
-              </>
-            )}
-
-            <button
-              type="button"
-              className="cvgen-analysis-row cvgen-analysis-row--clickable"
-              onClick={() =>
-                setShowImportedCertificates((value) => !value)
-              }
-            >
-              <span>
-                {importPreview.certificates?.length > 0
-                  ? "🟡"
-                  : "⚪"}{" "}
-                Zertifikate
-              </span>
-
-              <span>
-                {importPreview.certificates?.length || 0} erkannt{" "}
-                {showImportedCertificates ? "▲" : "▼"}
-              </span>
-            </button>
-
-            {showImportedCertificates &&
-              importPreview.certificates?.length > 0 && (
-                <div className="cvgen-import-work-list">
-                  {importPreview.certificates.map(
-                    (certificate: any, index: number) => (
-                      <div
-                        key={certificate.id || index}
-                        className="cvgen-import-work-item"
-                      >
-                        <strong>
-                          {certificate.title || "Zertifikat"}
-                        </strong>
-
-                        <span>
-                          {certificate.issuer || ""}
-                        </span>
-
-                        {(certificate.date ||
-                          certificate.from ||
-                          certificate.to ||
-                          certificate.year) && (
-                            <small>
-                              {certificate.date ||
-                                [certificate.from, certificate.to]
-                                  .filter(Boolean)
-                                  .join(" – ") ||
-                                certificate.year}
-                            </small>
-                          )}
-                      </div>
-                    )
-                  )}
-                </div>
-              )}
-
-            <p className="cvgen-import-note">
-              Die erkannten Angaben werden in den CV übernommen. Bitte prüfen Sie
-              insbesondere Zeiträume, Tätigkeiten, Ausbildung, Weiterbildungen,
-              Sprachen, Projekte und Resultate.
-            </p>
-
-            <div className="cvgen-import-preview-actions">
-              <button type="button" onClick={applyImportPreview}>
-                ✓ CV-Daten übernehmen
-              </button>
 
               <button
                 type="button"
-                onClick={() => {
-                  setImportPreview(null);
-                  setShowImportedWork(false);
-                  setShowImportedEducation(false);
-                  setShowImportedLanguages(false);
-                  setShowImportedITSkills(false);
-                  setShowImportedCertificates(false);
-                  setShowImportedProjects(false);
-                }}
+                className="cvgen-analysis-row cvgen-analysis-row--clickable"
+                onClick={() =>
+                  setShowImportedLanguages((value) => !value)
+                }
               >
-                Abbrechen
+                <span>🟡 Sprachen</span>
+
+                <span>
+                  {importPreview.languages?.length || 0} erkannt{" "}
+                  {showImportedLanguages ? "▲" : "▼"}
+                </span>
               </button>
+
+              {showImportedLanguages &&
+                importPreview.languages?.length > 0 && (
+                  <div className="cvgen-import-work-list">
+                    {importPreview.languages.map(
+                      (language: any, index: number) => (
+                        <div
+                          key={language.id || index}
+                          className="cvgen-import-work-item"
+                        >
+                          <strong>
+                            {language.language || "Sprache nicht erkannt"}
+                          </strong>
+
+                          <span>
+                            {language.level || "Niveau nicht erkannt"}
+                          </span>
+                        </div>
+                      )
+                    )}
+                  </div>
+                )}
+
+              <button
+                type="button"
+                className="cvgen-analysis-row cvgen-analysis-row--clickable"
+                onClick={() =>
+                  setShowImportedITSkills((value) => !value)
+                }
+              >
+                <span>🟡 IT-Kenntnisse</span>
+
+                <span>
+                  {importPreview.itSkills?.length || 0} erkannt{" "}
+                  {showImportedITSkills ? "▲" : "▼"}
+                </span>
+              </button>
+
+              {showImportedITSkills &&
+                importPreview.itSkills?.length > 0 && (
+                  <div className="cvgen-import-work-list">
+                    {importPreview.itSkills.map(
+                      (skill: any, index: number) => (
+                        <div
+                          key={skill.id || index}
+                          className="cvgen-import-work-item"
+                        >
+                          <strong>
+                            {skill.name || "Kenntnis nicht erkannt"}
+                          </strong>
+
+                          {skill.level && <span>{skill.level}</span>}
+                        </div>
+                      )
+                    )}
+                  </div>
+                )}
+
+              {importPreview.projects?.length > 0 && (
+                <>
+                  <button
+                    type="button"
+                    className="cvgen-analysis-row cvgen-analysis-row--clickable"
+                    onClick={() =>
+                      setShowImportedProjects((value) => !value)
+                    }
+                  >
+                    <span>🟡 Projekte</span>
+
+                    <span>
+                      {importPreview.projects.length} erkannt{" "}
+                      {showImportedProjects ? "▲" : "▼"}
+                    </span>
+                  </button>
+
+                  {showImportedProjects && (
+                    <div className="cvgen-import-work-list">
+                      {importPreview.projects.map(
+                        (project: any, index: number) => (
+                          <div
+                            key={project.id || index}
+                            className="cvgen-import-work-item"
+                          >
+                            <strong>{project.title || "Projekt"}</strong>
+
+                            {project.role && (
+                              <span>{project.role}</span>
+                            )}
+                          </div>
+                        )
+                      )}
+                    </div>
+                  )}
+                </>
+              )}
+
+              <button
+                type="button"
+                className="cvgen-analysis-row cvgen-analysis-row--clickable"
+                onClick={() =>
+                  setShowImportedCertificates((value) => !value)
+                }
+              >
+                <span>
+                  {importPreview.certificates?.length > 0
+                    ? "🟡"
+                    : "⚪"}{" "}
+                  Zertifikate
+                </span>
+
+                <span>
+                  {importPreview.certificates?.length || 0} erkannt{" "}
+                  {showImportedCertificates ? "▲" : "▼"}
+                </span>
+              </button>
+
+              {showImportedCertificates &&
+                importPreview.certificates?.length > 0 && (
+                  <div className="cvgen-import-work-list">
+                    {importPreview.certificates.map(
+                      (certificate: any, index: number) => (
+                        <div
+                          key={certificate.id || index}
+                          className="cvgen-import-work-item"
+                        >
+                          <strong>
+                            {certificate.title || "Zertifikat"}
+                          </strong>
+
+                          <span>
+                            {certificate.issuer || ""}
+                          </span>
+
+                          {(certificate.date ||
+                            certificate.from ||
+                            certificate.to ||
+                            certificate.year) && (
+                              <small>
+                                {certificate.date ||
+                                  [certificate.from, certificate.to]
+                                    .filter(Boolean)
+                                    .join(" – ") ||
+                                  certificate.year}
+                              </small>
+                            )}
+                        </div>
+                      )
+                    )}
+                  </div>
+                )}
+
+              <p className="cvgen-import-note">
+                Die erkannten Angaben werden in den CV übernommen. Bitte prüfen Sie
+                insbesondere Zeiträume, Tätigkeiten, Ausbildung, Weiterbildungen,
+                Sprachen, Projekte und Resultate.
+              </p>
+
+              <div className="cvgen-import-preview-actions">
+                <button type="button" onClick={applyImportPreview}>
+                  ✓ CV-Daten übernehmen
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setImportPreview(null);
+                    setShowImportedWork(false);
+                    setShowImportedEducation(false);
+                    setShowImportedLanguages(false);
+                    setShowImportedITSkills(false);
+                    setShowImportedCertificates(false);
+                    setShowImportedProjects(false);
+                  }}
+                >
+                  Abbrechen
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
 
       <div className="cvgen-layout-bar">
@@ -1741,6 +1752,6 @@ export default function CVGeneratorPage() {
           </div>
         )}
       </main>
-    </div>
+    </div >
   );
 }
