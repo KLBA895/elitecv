@@ -4,98 +4,83 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "Karriere-Ratgeber Schweiz: CV, Lebenslauf & Bewerbung | EliteCV",
+    "Career Guide Switzerland: CV, Resume & Applications | EliteCV",
 
   description:
-    "Praxisnahe Ratgeber zu Lebenslauf, CV, ATS, Bewerbung, LinkedIn und Karriere für den Schweizer Arbeitsmarkt.",
+    "Practical guides on CVs, resumes, ATS, applications, LinkedIn and career development for the Swiss job market.",
 
   alternates: {
-    canonical: "https://www.elitecv.ch/ratgeber",
+    canonical: "https://www.elitecv.ch/en/guides",
+    languages: {
+      "de-CH": "https://www.elitecv.ch/ratgeber",
+      "en": "https://www.elitecv.ch/en/guides",
+    },
   },
 
   openGraph: {
-    title: "EliteCV Karriere-Ratgeber Schweiz",
+    title: "EliteCV Career Guide Switzerland",
     description:
-      "Tipps zu CV, Lebenslauf, ATS, Bewerbung, LinkedIn und Karriere im Schweizer Arbeitsmarkt.",
-    url: "https://www.elitecv.ch/ratgeber",
+      "Practical advice on CVs, resumes, ATS, applications and LinkedIn for the Swiss job market.",
+    url: "https://www.elitecv.ch/en/guides",
     siteName: "EliteCV",
-    locale: "de_CH",
+    locale: "en_CH",
     type: "website",
   },
 };
 
-type Article = {
-  title: string;
-  description: string;
-  href: string;
-  category: string;
-  readingTime: string;
-  badge?: string;
-};
-
-const articles: Article[] = [
+const articles = [
   {
-    title: "ATS Lebenslauf Schweiz 2026",
+    title: "ATS Resume Switzerland 2026",
     description:
-      "Wie Sie einen ATS-konformen Lebenslauf erstellen, der Bewerbungsportale und Recruiter überzeugt.",
-    href: "/ratgeber/ats-lebenslauf-schweiz-2026",
+      "Learn how to create an ATS-friendly resume that works for modern application systems and recruiters.",
+    href: "/en/guides/ats-resume-switzerland-2026",
     category: "ATS",
-    readingTime: "8 Min.",
-    badge: "NEU",
+    readingTime: "8 min",
+    badge: "NEW",
   },
   {
-    title: "Lebenslauf optimieren Schweiz",
+    title: "Optimize Your Resume for Switzerland",
     description:
-      "Die häufigsten Fehler im Lebenslauf und wie Sie Ihren CV für den Schweizer Arbeitsmarkt professionell verbessern.",
-    href: "/ratgeber/lebenslauf-optimieren-schweiz",
-    category: "Lebenslauf",
-    readingTime: "7 Min.",
+      "Common resume mistakes and how to improve your CV for the Swiss job market.",
+    href: "/en/guides/optimize-resume-switzerland",
+    category: "Resume",
+    readingTime: "7 min",
   },
   {
-    title: "LinkedIn Profil optimieren Schweiz",
+    title: "Optimize Your LinkedIn Profile in Switzerland",
     description:
-      "Mehr Sichtbarkeit, bessere Positionierung und mehr relevante Recruiter-Anfragen auf LinkedIn.",
-    href: "/ratgeber/linkedin-profil-optimieren-schweiz",
+      "Improve visibility, positioning and recruiter interest on LinkedIn.",
+    href: "/en/guides/linkedin-profile-switzerland",
     category: "LinkedIn",
-    readingTime: "7 Min.",
+    readingTime: "7 min",
   },
   {
-    title: "CV Schweiz vs. Deutschland",
+    title: "CV Switzerland vs. Germany",
     description:
-      "Die wichtigsten Unterschiede zwischen Schweizer und deutschen Bewerbungsunterlagen.",
-    href: "/ratgeber/cv-schweiz-vs-deutschland",
-    category: "Lebenslauf",
-    readingTime: "6 Min.",
+      "The most important differences between Swiss and German application documents.",
+    href: "/en/guides/cv-switzerland-vs-germany",
+    category: "Resume",
+    readingTime: "6 min",
   },
   {
-    title: "Bewerbung Schweiz Tipps",
+    title: "Applying for Jobs in Switzerland",
     description:
-      "Praktische Tipps für überzeugende Bewerbungsunterlagen und einen professionellen Auftritt.",
-    href: "/ratgeber/bewerbung-schweiz-tipps",
-    category: "Bewerbung",
-    readingTime: "6 Min.",
+      "Practical tips for stronger applications and a professional overall presentation.",
+    href: "/en/guides/applying-in-switzerland",
+    category: "Application",
+    readingTime: "6 min",
   },
-];
-
-const upcomingTopics = [
-  "Lebenslauf Schweiz 2026",
-  "CV Vorlage Schweiz",
-  "CV Beispiel Schweiz",
-  "Lebenslauf Aufbau Schweiz",
-  "Lebenslauf Foto Schweiz",
-  "Motivationsschreiben Schweiz",
-  "Executive CV Schweiz",
 ];
 
 const cvExamples = [
   {
     title: "Chief Operating Officer",
-    subtitle: "C-Level & Führungskräfte",
+    subtitle: "C-Level & Executives",
     image:
       "/images/ratgeber/executive-cv-schweiz-laura-schmidt.png",
     alt:
-      "Executive CV Schweiz Beispiel für Führungskräfte und C-Level von EliteCV",
-    href: "/ratgeber/executive-cv-schweiz",
+      "Executive CV Switzerland example for C-Level and senior leadership by EliteCV",
+    href: "/en/guides/executive-cv-switzerland",
   },
   {
     title: "Head of Operations",
@@ -103,17 +88,17 @@ const cvExamples = [
     image:
       "/images/ratgeber/professional-cv-schweiz-michael-steiner.png",
     alt:
-      "Professional CV Schweiz Beispiel für Management und Operations von EliteCV",
-    href: "/ratgeber/cv-beispiel-schweiz",
+      "Professional CV Switzerland example for management and operations by EliteCV",
+    href: "/en/guides/cv-example-switzerland",
   },
   {
-    title: "Maschinenbauingenieur",
-    subtitle: "Maschinenbau & Engineering",
+    title: "Mechanical Engineer",
+    subtitle: "Mechanical Engineering",
     image:
       "/images/ratgeber/professional-cv-schweiz-lukas-meier.png",
     alt:
-      "Professional CV Schweiz Beispiel für Maschinenbauingenieur von EliteCV",
-    href: "/ratgeber/lebenslauf-beispiel-maschinenbauingenieur",
+      "Professional CV Switzerland example for a mechanical engineer by EliteCV",
+    href: "/en/guides/mechanical-engineer-resume-switzerland",
   },
   {
     title: "HR Specialist",
@@ -121,34 +106,36 @@ const cvExamples = [
     image:
       "/images/ratgeber/hr-specialist-lebenslauf-schweiz-sarah-keller.png",
     alt:
-      "HR Specialist Lebenslauf Schweiz Beispiel für Human Resources von EliteCV",
-    href: "/ratgeber/lebenslauf-beispiel-hr-specialist",
+      "HR Specialist resume Switzerland example for Human Resources by EliteCV",
+    href: "/en/guides/hr-specialist-resume-switzerland",
   },
 ];
 
-export default function RatgeberPage() {
+export default function GuidesPage() {
   return (
     <main className="min-h-screen bg-[#F7F8FA] text-[#0A1F44]">
       <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+
+        {/* TOP NAV */}
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/"
             className="text-sm font-semibold text-[#8A6A22] hover:underline"
           >
-            ← Zurück zu EliteCV
+            ← Back to EliteCV
           </Link>
 
           <div className="inline-flex rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
             <Link
               href="/ratgeber"
-              className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
+              className="rounded-full px-4 py-2 text-xs font-bold text-[#0A1F44]/60 transition hover:text-[#0A1F44]"
             >
               DE
             </Link>
 
             <Link
               href="/en/guides"
-              className="rounded-full px-4 py-2 text-xs font-bold text-[#0A1F44]/60 transition hover:text-[#0A1F44]"
+              className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
             >
               EN
             </Link>
@@ -158,29 +145,29 @@ export default function RatgeberPage() {
         {/* HERO */}
         <div className="mt-10 max-w-4xl">
           <span className="inline-flex rounded-full bg-[#C9A95A]/15 px-4 py-2 text-sm font-semibold text-[#8A6A22]">
-            EliteCV Karriere-Ratgeber
+            EliteCV Career Guide
           </span>
 
           <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-            CV, Lebenslauf & Bewerbung in der Schweiz
+            CV, Resume & Job Applications in Switzerland
           </h1>
 
           <p className="mt-6 max-w-3xl text-lg leading-8 text-[#0A1F44]/75 sm:text-xl sm:leading-9">
-            Praxisnahe Ratgeber für einen professionellen Lebenslauf,
-            ATS-optimierte Bewerbungsunterlagen, LinkedIn und die erfolgreiche
-            Positionierung im Schweizer Arbeitsmarkt.
+            Practical guidance for professional resumes, ATS-friendly
+            applications, LinkedIn and successful career positioning in the
+            Swiss job market.
           </p>
         </div>
 
-        {/* THEMEN */}
+        {/* TOPICS */}
         <div className="mt-10 flex flex-wrap gap-3">
           {[
-            "Lebenslauf",
+            "Resume",
             "ATS",
-            "Bewerbung",
+            "Application",
             "LinkedIn",
-            "Karriere",
-            "CV-Vorlagen",
+            "Career",
+            "CV Templates",
           ].map((category) => (
             <span
               key={category}
@@ -191,18 +178,16 @@ export default function RatgeberPage() {
           ))}
         </div>
 
-        {/* ARTIKEL */}
+        {/* ARTICLES */}
         <section className="mt-16">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
-                Wissen für Ihre Bewerbung
-              </p>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
+              Career knowledge
+            </p>
 
-              <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
-                Aktuelle Ratgeber
-              </h2>
-            </div>
+            <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
+              Latest Guides
+            </h2>
           </div>
 
           <div className="mt-10 grid gap-7 md:grid-cols-2">
@@ -218,7 +203,7 @@ export default function RatgeberPage() {
                   </span>
 
                   <span className="text-xs text-[#0A1F44]/50">
-                    {article.readingTime} Lesezeit
+                    {article.readingTime} read
                   </span>
 
                   {article.badge && (
@@ -237,25 +222,23 @@ export default function RatgeberPage() {
                 </p>
 
                 <div className="mt-7 font-semibold text-[#C9A95A]">
-                  Ratgeber lesen →
+                  Read guide →
                 </div>
               </Link>
             ))}
           </div>
         </section>
 
-        {/* CV-BEISPIELE */}
+        {/* CV EXAMPLES */}
         <section className="mt-20">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
-                EliteCV Beispiele
-              </p>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
+              EliteCV Examples
+            </p>
 
-              <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
-                CV-Beispiele für den Schweizer Arbeitsmarkt
-              </h2>
-            </div>
+            <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+              CV Examples for the Swiss Job Market
+            </h2>
           </div>
 
           <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -285,12 +268,12 @@ export default function RatgeberPage() {
                   </h3>
 
                   <p className="mt-3 leading-7 text-[#0A1F44]/65">
-                    Modernes, klar strukturiertes CV-Beispiel im EliteCV-Stil
-                    für Bewerbungen in der Schweiz.
+                    Modern, clearly structured EliteCV example for
+                    applications in Switzerland.
                   </p>
 
                   <div className="mt-5 font-semibold text-[#C9A95A]">
-                    Beispiel ansehen →
+                    View example →
                   </div>
                 </div>
               </Link>
@@ -305,13 +288,12 @@ export default function RatgeberPage() {
           </p>
 
           <h2 className="mt-3 max-w-3xl text-3xl font-bold sm:text-4xl">
-            Ihren professionellen CV direkt erstellen
+            Create your professional CV
           </h2>
 
           <p className="mt-5 max-w-3xl leading-8 text-white/75">
-            Erstellen Sie einen strukturierten und professionellen Lebenslauf
-            mit modernen Professional- und Executive-Layouts,
-            KI-Unterstützung, CV-Import und PDF-Export.
+            Create a structured professional resume with modern Professional
+            and Executive layouts, AI assistance, CV import and PDF export.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -319,14 +301,14 @@ export default function RatgeberPage() {
               href="/cv-generator"
               className="inline-flex items-center justify-center rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
             >
-              EliteCV Generator öffnen
+              Open EliteCV Generator
             </Link>
 
             <Link
               href="/#pakete"
               className="inline-flex items-center justify-center rounded-xl border border-white/20 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
             >
-              Pakete ansehen
+              View Packages
             </Link>
           </div>
         </section>
