@@ -3,14 +3,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Executive CV Schweiz: Beispiel & Vorlage | EliteCV",
+  title: "Executive CV Switzerland: Example & Template | EliteCV",
 
   description:
-    "Executive CV für die Schweiz: Entdecken Sie ein professionelles Lebenslauf-Beispiel für Führungskräfte, Management und C-Level.",
+    "Executive CV example for Switzerland. Discover how senior managers, executives and C-level professionals can present leadership experience, achievements and strategic impact.",
 
   alternates: {
     canonical:
-      "https://www.elitecv.ch/ratgeber/executive-cv-schweiz",
+      "https://www.elitecv.ch/en/guides/executive-cv-switzerland",
     languages: {
       "de-CH":
         "https://www.elitecv.ch/ratgeber/executive-cv-schweiz",
@@ -20,48 +20,52 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Executive CV Schweiz: Beispiel & Vorlage | EliteCV",
+    title: "Executive CV Switzerland: Example & Template | EliteCV",
     description:
-      "Professionelles Executive-CV-Beispiel für Führungskräfte und C-Level im Schweizer Arbeitsmarkt.",
-    url: "https://www.elitecv.ch/ratgeber/executive-cv-schweiz",
+      "Professional Executive CV example for senior managers, executives and C-level professionals in the Swiss job market.",
+    url:
+      "https://www.elitecv.ch/en/guides/executive-cv-switzerland",
     siteName: "EliteCV",
-    locale: "de_CH",
+    locale: "en_CH",
     type: "article",
     images: [
       {
-        url: "https://www.elitecv.ch/images/ratgeber/executive-cv-schweiz-laura-schmidt.png",
+        url:
+          "https://www.elitecv.ch/images/ratgeber/executive-cv-schweiz-laura-schmidt.png",
         width: 1200,
         height: 1600,
-        alt: "Executive CV Schweiz Beispiel für Führungskräfte – EliteCV",
+        alt:
+          "Executive CV Switzerland example for senior managers and C-level professionals – EliteCV",
       },
     ],
   },
 };
 
-export default function ExecutiveCVSchweizPage() {
+export default function ExecutiveCVSwitzerlandPage() {
   return (
     <main className="min-h-screen bg-[#F7F8FA] text-[#0A1F44]">
       <article className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
 
+        {/* TOP NAVIGATION */}
         <div className="flex items-center justify-between gap-4">
           <Link
-            href="/ratgeber"
+            href="/en/guides"
             className="text-sm font-semibold text-[#8A6A22] hover:underline"
           >
-            ← Zurück zum Ratgeber
+            ← Back to Career Guide
           </Link>
 
           <div className="inline-flex rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
             <Link
               href="/ratgeber/executive-cv-schweiz"
-              className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
+              className="rounded-full px-4 py-2 text-xs font-bold text-[#0A1F44]/60 transition hover:text-[#0A1F44]"
             >
               DE
             </Link>
 
             <Link
               href="/en/guides/executive-cv-switzerland"
-              className="rounded-full px-4 py-2 text-xs font-bold text-[#0A1F44]/60 transition hover:text-[#0A1F44]"
+              className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
             >
               EN
             </Link>
@@ -71,27 +75,27 @@ export default function ExecutiveCVSchweizPage() {
         {/* HERO */}
         <header className="mt-10 max-w-4xl">
           <span className="inline-flex rounded-full bg-[#C9A95A]/15 px-4 py-2 text-sm font-semibold text-[#8A6A22]">
-            Executive CV Schweiz
+            Executive CV Switzerland
           </span>
 
           <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-            Executive CV Schweiz: Beispiel für Führungskräfte
+            Executive CV Switzerland: Example for Senior Leaders
           </h1>
 
           <p className="mt-6 text-lg leading-8 text-[#0A1F44]/75 sm:text-xl sm:leading-9">
-            Ein Executive CV muss mehr leisten als ein klassischer
-            Lebenslauf. Für Führungskräfte, Senior Manager und
-            C-Level-Positionen stehen strategische Verantwortung,
-            Führungserfahrung und messbare Resultate im Mittelpunkt.
+            An Executive CV needs to communicate more than a traditional
+            resume. For senior management and C-level positions, strategic
+            responsibility, leadership experience and measurable business
+            impact should be immediately visible.
           </p>
         </header>
 
-        {/* CV-BILD */}
+        {/* CV IMAGE */}
         <section className="mt-14">
           <div className="overflow-hidden rounded-3xl border border-[#0A1F44]/10 bg-white p-4 shadow-xl sm:p-7">
             <Image
               src="/images/ratgeber/executive-cv-schweiz-laura-schmidt.png"
-              alt="Executive CV Schweiz Beispiel für Chief Operating Officer und Führungskräfte – EliteCV"
+              alt="Executive CV Switzerland example for Chief Operating Officer and senior leaders by EliteCV"
               width={1200}
               height={1600}
               priority
@@ -100,126 +104,121 @@ export default function ExecutiveCVSchweizPage() {
           </div>
 
           <p className="mt-4 text-sm leading-6 text-[#0A1F44]/55">
-            Beispiel eines modernen Executive CV für den Schweizer
-            Arbeitsmarkt. Die dargestellten Personendaten dienen als
-            Musterbeispiel.
+            Example of a modern Executive CV for the Swiss job market.
+            The personal information shown is used for illustrative purposes.
           </p>
         </section>
 
-        {/* INHALT */}
+        {/* CONTENT */}
         <section className="mt-16 space-y-12 leading-8 text-[#0A1F44]/78">
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              Was zeichnet einen guten Executive CV aus?
+              What makes a strong Executive CV?
             </h2>
 
             <p className="mt-5">
-              Bei einer Bewerbung auf Management- oder
-              C-Level-Positionen sollte der Lebenslauf nicht lediglich
-              berufliche Stationen auflisten. Entscheidend ist, welche
-              Verantwortung übernommen wurde, welche Veränderungen
-              angestossen wurden und welche Ergebnisse daraus entstanden
-              sind.
+              When applying for senior management or C-level positions,
+              a CV should do more than list previous roles. It should clearly
+              communicate the scope of responsibility, strategic contribution
+              and results achieved throughout the candidate&apos;s career.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              1. Klare Positionierung
+              1. Clear executive positioning
             </h2>
 
             <p className="mt-5">
-              Bereits im oberen Bereich des CV sollte erkennbar sein,
-              für welche Funktionen und Verantwortungsbereiche die
-              Führungskraft steht. Eine klare Zielpositionierung erleichtert
-              Recruitern und Unternehmen die schnelle Einordnung des Profils.
+              The upper section of the CV should immediately communicate the
+              candidate&apos;s professional positioning, leadership profile
+              and target level. This helps recruiters and decision-makers
+              quickly understand the relevance of the profile.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              2. Führungserfahrung sichtbar machen
+              2. Make leadership experience visible
             </h2>
 
             <p className="mt-5">
-              Teamgrössen, internationale Verantwortung,
-              Budgetverantwortung und strategische Aufgaben können wichtige
-              Informationen sein. Sie zeigen den Umfang bisheriger
-              Führungsverantwortung wesentlich konkreter als allgemeine
-              Aussagen.
+              Team size, international responsibility, budget ownership,
+              transformation initiatives and strategic responsibilities can
+              provide important context. They demonstrate the actual scope of
+              leadership more effectively than generic management statements.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              3. Messbare Erfolge statt reiner Aufgabenlisten
+              3. Focus on measurable achievements
             </h2>
 
             <p className="mt-5">
-              Ein Executive CV gewinnt an Aussagekraft, wenn relevante
-              Resultate nachvollziehbar dargestellt werden. Dazu gehören
-              beispielsweise Effizienzsteigerungen, Kostensenkungen,
-              Umsatzentwicklungen, Transformationen oder erfolgreich
-              umgesetzte Grossprojekte.
+              Executive CVs become more compelling when achievements are
+              supported by concrete results. Examples include efficiency
+              improvements, cost reductions, revenue growth, successful
+              transformations and major projects delivered.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              4. Professionelles und ruhiges Design
+              4. Professional and refined design
             </h2>
 
             <p className="mt-5">
-              Auf Executive-Level sollte das Design hochwertig wirken,
-              ohne die Inhalte zu überlagern. Klare Hierarchien,
-              konsistente Typografie und eine strukturierte Darstellung
-              unterstützen die professionelle Wirkung.
+              An Executive CV should look sophisticated without distracting
+              from the content. Clear visual hierarchy, consistent typography,
+              appropriate white space and a structured layout support a
+              professional senior-level presentation.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              Executive CV für den Schweizer Arbeitsmarkt
+              Executive CVs for the Swiss job market
             </h2>
 
             <p className="mt-5">
-              Für Bewerbungen in der Schweiz sind eine nachvollziehbare
-              Karriereentwicklung, relevante Qualifikationen,
-              Sprachkenntnisse und eine präzise Darstellung der
-              Berufserfahrung besonders wichtig. Der CV sollte dabei immer
-              auf die konkrete Zielposition abgestimmt werden.
+              For applications in Switzerland, a transparent career history,
+              relevant qualifications, language skills and a precise
+              presentation of professional experience are particularly
+              important. The Executive CV should always be tailored to the
+              target role and industry.
             </p>
           </div>
 
         </section>
 
-        {/* INTERNE LINKS */}
+        {/* INTERNAL LINKS */}
         <section className="mt-16 rounded-3xl border border-[#0A1F44]/10 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold">
-            Weitere EliteCV Ratgeber
+            Explore the EliteCV Career Guide
           </h2>
 
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="/ratgeber/ats-lebenslauf-schweiz-2026"
+              href="/en/guides"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold hover:bg-[#EEF1F5]"
             >
-              ATS Lebenslauf Schweiz
+              Career Guide Switzerland
             </Link>
 
             <Link
-              href="/ratgeber/lebenslauf-optimieren-schweiz"
+              href="/ratgeber/ats-lebenslauf-schweiz-2026"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold hover:bg-[#EEF1F5]"
             >
-              Lebenslauf optimieren
+              ATS CV Switzerland
             </Link>
 
             <Link
               href="/ratgeber/cv-schweiz-vs-deutschland"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold hover:bg-[#EEF1F5]"
             >
-              CV Schweiz vs. Deutschland
+              CV Switzerland vs. Germany
             </Link>
           </div>
         </section>
@@ -231,13 +230,12 @@ export default function ExecutiveCVSchweizPage() {
           </p>
 
           <h2 className="mt-3 text-3xl font-bold">
-            Professionellen Executive CV erstellen
+            Create your professional Executive CV
           </h2>
 
           <p className="mt-5 max-w-3xl leading-8 text-white/80">
-            Mit EliteCV erstellen Sie einen professionell strukturierten
-            Lebenslauf für den Schweizer Arbeitsmarkt – mit modernen
-            Professional- und Executive-Layouts.
+            Create a professionally structured CV for the Swiss job market
+            with modern Professional and Executive layouts from EliteCV.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -245,14 +243,14 @@ export default function ExecutiveCVSchweizPage() {
               href="/cv-generator"
               className="rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
             >
-              EliteCV Generator
+              Open EliteCV Generator
             </Link>
 
             <Link
               href="/#pakete"
               className="rounded-xl border border-white/20 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
             >
-              Angebote ansehen
+              View Packages
             </Link>
           </div>
         </section>

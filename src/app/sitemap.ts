@@ -65,6 +65,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
 
+    {
+      url: "https://www.elitecv.ch/en/guides/executive-cv-switzerland",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
     // ─── Unternehmensseiten ────────────────────────────────────
     {
       url: "https://www.elitecv.ch/kontakt",

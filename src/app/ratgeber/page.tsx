@@ -288,10 +288,6 @@ export default function RatgeberPage() {
                     Modernes, klar strukturiertes CV-Beispiel im EliteCV-Stil
                     für Bewerbungen in der Schweiz.
                   </p>
-
-                  <div className="mt-5 font-semibold text-[#C9A95A]">
-                    Beispiel ansehen →
-                  </div>
                 </div>
               </Link>
             ))}
