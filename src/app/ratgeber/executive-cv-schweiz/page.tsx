@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Executive CV Schweiz: Beispiel & Vorlage | EliteCV",
+  title: "Executive CV Schweiz – Beispiel für Führungskräfte",
 
   description:
     "Executive CV für die Schweiz: Entdecken Sie ein professionelles Lebenslauf-Beispiel für Führungskräfte, Management und C-Level.",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Executive CV Schweiz: Beispiel & Vorlage | EliteCV",
+    title: "Executive CV Schweiz – Beispiel für Führungskräfte",
     description:
       "Professionelles Executive-CV-Beispiel für Führungskräfte und C-Level im Schweizer Arbeitsmarkt.",
     url: "https://www.elitecv.ch/ratgeber/executive-cv-schweiz",
@@ -249,7 +249,7 @@ export default function ExecutiveCVSchweizPage() {
             </Link>
 
             <Link
-              href="/#pakete"
+              href="/#preise"
               className="rounded-xl border border-white/20 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
             >
               Angebote ansehen

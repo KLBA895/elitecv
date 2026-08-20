@@ -243,14 +243,14 @@ export default function ExecutiveCVSwitzerlandPage() {
               href="/cv-generator"
               className="rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
             >
-              Open EliteCV Generator
+              EliteCV Generator
             </Link>
 
             <Link
-              href="/#pakete"
+              href="/#preise"
               className="rounded-xl border border-white/20 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
             >
-              View Packages
+              Angebote ansehen
             </Link>
           </div>
         </section>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title:
-    "ATS-Lebenslauf Schweiz 2026: Aufbau, Keywords und häufige Fehler | EliteCV",
+    "ATS Lebenslauf Schweiz 2026 – CV für ATS optimieren",
   description:
     "Erfahren Sie, wie Sie einen ATS-optimierten Lebenslauf für den Schweizer Arbeitsmarkt erstellen. Mit Tipps zu Struktur, Keywords, Layout und KI-Unterstützung.",
   keywords: [
@@ -367,7 +367,7 @@ export default function AtsLebenslaufSchweizPage() {
               </Link>
 
               <Link
-                href="/#pakete"
+                href="/#preise"
                 className="inline-flex items-center justify-center rounded-xl border border-white/25 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
               >
                 Pakete ansehen

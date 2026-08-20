@@ -2,9 +2,25 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Lebenslauf optimieren Schweiz | EliteCV",
+  title: "Lebenslauf optimieren Schweiz – CV professionell verbessern",
+
   description:
-    "Erfahren Sie, wie Sie Ihren Lebenslauf für den Schweizer Arbeitsmarkt professionell optimieren und typische Fehler vermeiden.",
+    "Lebenslauf optimieren für die Schweiz: Erfahren Sie, wie Sie Struktur, Berufserfahrung, Keywords und ATS-Tauglichkeit verbessern und Ihren CV professionell auf die Zielposition ausrichten.",
+
+  alternates: {
+    canonical:
+      "https://www.elitecv.ch/ratgeber/lebenslauf-optimieren-schweiz",
+  },
+
+  openGraph: {
+    title:
+      "Lebenslauf optimieren Schweiz – CV professionell verbessern",
+    description:
+      "Praktische Tipps zur CV-Optimierung für den Schweizer Arbeitsmarkt: Struktur, ATS, Berufserfahrung, Keywords und Positionierung.",
+    url:
+      "https://www.elitecv.ch/ratgeber/lebenslauf-optimieren-schweiz",
+    type: "article",
+  },
 };
 
 export default function LebenslaufOptimierenSchweizPage() {
@@ -74,23 +90,46 @@ export default function LebenslaufOptimierenSchweizPage() {
             Sie zu allgemeine Aussagen wie „teamfähig“ oder „motiviert“, wenn
             diese nicht durch konkrete Beispiele belegt werden.
           </p>
+
+          <h2 className="text-2xl font-semibold text-[#0A1F44]">
+            6. Lebenslauf für ATS und Recruiter optimieren
+          </h2>
+          <p>
+            Viele Unternehmen nutzen digitale Bewerbungs- und
+            Recruiting-Systeme zur ersten Verarbeitung von Lebensläufen.
+            Verwenden Sie deshalb klare Überschriften, eine nachvollziehbare
+            Struktur und relevante Begriffe aus der Stellenanzeige. Wichtige
+            Kompetenzen sollten nicht nur grafisch dargestellt, sondern auch
+            als Text im CV vorhanden sein.
+          </p>
         </section>
 
         <div className="mt-12 rounded-2xl border border-[#0A1F44]/10 bg-[#FCFCFB] p-7 shadow-sm">
           <h2 className="text-2xl font-semibold">
-            Möchten Sie Ihren Lebenslauf professionell optimieren lassen?
+            Möchten Sie Ihren Lebenslauf jetzt verbessern?
           </h2>
+
           <p className="mt-4 text-[#0A1F44]/72">
-            EliteCV unterstützt Fach- und Führungskräfte bei der professionellen
-            CV-Optimierung, LinkedIn-Optimierung und Karrierepositionierung für
-            den Schweizer Arbeitsmarkt.
+            Erstellen Sie Ihren CV mit dem EliteCV Generator selbst oder
+            lassen Sie Ihre Bewerbungsunterlagen professionell für den
+            Schweizer Arbeitsmarkt optimieren.
           </p>
-          <Link
-            href="/#preise"
-            className="mt-6 inline-block rounded-full bg-[#0A1F44] px-6 py-3 text-sm font-semibold text-white hover:bg-[#102A5E]"
-          >
-            Angebote ansehen
-          </Link>
+
+          <div className="mt-6 flex flex-wrap gap-4">
+            <Link
+              href="/cv-generator-schweiz"
+              className="inline-block rounded-full bg-[#0A1F44] px-6 py-3 text-sm font-semibold text-white hover:bg-[#102A5E]"
+            >
+              CV Generator starten
+            </Link>
+
+            <Link
+              href="/#preise"
+              className="inline-block rounded-full border border-[#0A1F44] px-6 py-3 text-sm font-semibold text-[#0A1F44] hover:bg-[#F5F7FA]"
+            >
+              Professionelle CV-Optimierung
+            </Link>
+          </div>
         </div>
       </article>
     </main>
