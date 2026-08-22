@@ -11,6 +11,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical:
       "https://www.elitecv.ch/ratgeber/linkedin-profil-optimieren-schweiz",
+
+    languages: {
+      "de-CH":
+        "https://www.elitecv.ch/ratgeber/linkedin-profil-optimieren-schweiz",
+      en:
+        "https://www.elitecv.ch/guides/linkedin-profile-optimization-switzerland",
+    },
   },
 
   openGraph: {
@@ -28,12 +35,32 @@ export default function LinkedInProfilOptimierenSchweizPage() {
   return (
     <main className="min-h-screen bg-white text-[#0A1F44]">
       <article className="mx-auto max-w-4xl px-6 py-20">
-        <Link
-          href="/ratgeber"
-          className="text-sm font-semibold text-[#C9A95A]"
-        >
-          ← Zurück zum Ratgeber
-        </Link>
+
+        {/* NAVIGATION + SPRACHE */}
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Link
+            href="/ratgeber"
+            className="text-sm font-semibold text-[#C9A95A]"
+          >
+            ← Zurück zum Ratgeber
+          </Link>
+
+          <div className="inline-flex rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
+            <Link
+              href="/ratgeber/linkedin-profil-optimieren-schweiz"
+              className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
+            >
+              DE
+            </Link>
+
+            <Link
+              href="/guides/linkedin-profile-optimization-switzerland"
+              className="rounded-full px-4 py-2 text-xs font-bold text-[#0A1F44]/60 transition hover:text-[#0A1F44]"
+            >
+              EN
+            </Link>
+          </div>
+        </div>
 
         <h1 className="mt-10 text-4xl font-semibold md:text-5xl">
           LinkedIn Profil optimieren Schweiz: Professioneller auftreten und
@@ -46,8 +73,6 @@ export default function LinkedInProfilOptimierenSchweizPage() {
           Recruiter, HR-Verantwortliche und Unternehmen LinkedIn, um passende
           Fach- und Führungskräfte zu finden.
         </p>
-
-        {/* ─── Tipps ─────────────────────────────────────────────── */}
 
         <section className="mt-10 space-y-6 leading-8 text-[#0A1F44]/78">
           <h2 className="text-2xl font-semibold text-[#0A1F44]">
@@ -105,8 +130,7 @@ export default function LinkedInProfilOptimierenSchweizPage() {
           </p>
         </section>
 
-        {/* ─── Praxisbeispiel ────────────────────────────────────── */}
-
+        {/* PRAXISBEISPIEL */}
         <section className="mt-16">
           <div className="border-t border-[#0A1F44]/10 pt-12">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
@@ -120,19 +144,16 @@ export default function LinkedInProfilOptimierenSchweizPage() {
             <p className="mt-5 leading-8 text-[#0A1F44]/78">
               Das folgende Beispiel zeigt, wie aus einem wenig klar
               positionierten LinkedIn-Profil ein professioneller und
-              zielgerichteter Auftritt entstehen kann. Für dieses
-              Demonstrationsbeispiel verwenden wir die fiktive Person Daniel
-              Meier.
+              zielgerichteter Auftritt entstehen kann. Für dieses Beispiel
+              verwenden wir die fiktive Person Daniel Meier.
             </p>
 
             <p className="mt-3 text-sm leading-6 text-[#0A1F44]/60">
               Hinweis: Name, Unternehmen und dargestellte Profildaten sind
-              fiktiv bzw. anonymisiert und dienen ausschließlich der
+              fiktiv bzw. anonymisiert und dienen ausschliesslich der
               Veranschaulichung einer möglichen LinkedIn-Optimierung.
             </p>
           </div>
-
-          {/* ─── Bild 1: Vorher ─────────────────────────────────── */}
 
           <div className="mt-12">
             <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -163,8 +184,6 @@ export default function LinkedInProfilOptimierenSchweizPage() {
             </div>
           </div>
 
-          {/* ─── Bild 2: Analyse ────────────────────────────────── */}
-
           <div className="mt-14">
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <span className="rounded-full bg-[#C9A95A] px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white">
@@ -179,9 +198,7 @@ export default function LinkedInProfilOptimierenSchweizPage() {
             <p className="mb-6 leading-7 text-[#0A1F44]/72">
               EliteCV analysiert die berufliche Positionierung, die
               LinkedIn-Headline, den Info-Bereich, relevante Keywords sowie die
-              Darstellung der Berufserfahrung. Daraus entsteht eine klarere
-              Struktur mit stärkerem Fokus auf die gewünschte berufliche
-              Positionierung.
+              Darstellung der Berufserfahrung.
             </p>
 
             <div className="overflow-hidden rounded-2xl border border-[#0A1F44]/10 bg-white shadow-sm">
@@ -194,8 +211,6 @@ export default function LinkedInProfilOptimierenSchweizPage() {
               />
             </div>
           </div>
-
-          {/* ─── Bild 3: Nachher ───────────────────────────────── */}
 
           <div className="mt-14">
             <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -227,8 +242,7 @@ export default function LinkedInProfilOptimierenSchweizPage() {
           </div>
         </section>
 
-        {/* ─── CTA ───────────────────────────────────────────────── */}
-
+        {/* CTA */}
         <div className="mt-16 rounded-2xl border border-[#0A1F44]/10 bg-[#FCFCFB] p-7 shadow-sm">
           <h2 className="text-2xl font-semibold">
             Möchten Sie Ihr LinkedIn-Profil professionell optimieren lassen?

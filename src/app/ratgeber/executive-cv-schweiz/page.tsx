@@ -11,25 +11,34 @@ export const metadata: Metadata = {
   alternates: {
     canonical:
       "https://www.elitecv.ch/ratgeber/executive-cv-schweiz",
+
     languages: {
       "de-CH":
         "https://www.elitecv.ch/ratgeber/executive-cv-schweiz",
-      "en":
+      en:
         "https://www.elitecv.ch/en/guides/executive-cv-switzerland",
     },
   },
 
   openGraph: {
     title: "Executive CV Schweiz – Beispiel für Führungskräfte",
+
     description:
       "Professionelles Executive-CV-Beispiel für Führungskräfte und C-Level im Schweizer Arbeitsmarkt.",
-    url: "https://www.elitecv.ch/ratgeber/executive-cv-schweiz",
+
+    url:
+      "https://www.elitecv.ch/ratgeber/executive-cv-schweiz",
+
     siteName: "EliteCV",
+
     locale: "de_CH",
+
     type: "article",
+
     images: [
       {
-        url: "https://www.elitecv.ch/images/ratgeber/executive-cv-schweiz-laura-schmidt.png",
+        url:
+          "https://www.elitecv.ch/images/ratgeber/executive-cv-schweiz-laura-schmidt.png",
         width: 1200,
         height: 1600,
         alt: "Executive CV Schweiz Beispiel für Führungskräfte – EliteCV",
@@ -43,6 +52,7 @@ export default function ExecutiveCVSchweizPage() {
     <main className="min-h-screen bg-[#F7F8FA] text-[#0A1F44]">
       <article className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
 
+        {/* NAVIGATION + SPRACHWECHSEL */}
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/ratgeber"
@@ -108,19 +118,17 @@ export default function ExecutiveCVSchweizPage() {
 
         {/* INHALT */}
         <section className="mt-16 space-y-12 leading-8 text-[#0A1F44]/78">
-
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
               Was zeichnet einen guten Executive CV aus?
             </h2>
 
             <p className="mt-5">
-              Bei einer Bewerbung auf Management- oder
-              C-Level-Positionen sollte der Lebenslauf nicht lediglich
-              berufliche Stationen auflisten. Entscheidend ist, welche
-              Verantwortung übernommen wurde, welche Veränderungen
-              angestossen wurden und welche Ergebnisse daraus entstanden
-              sind.
+              Bei einer Bewerbung auf Management- oder C-Level-Positionen
+              sollte der Lebenslauf nicht lediglich berufliche Stationen
+              auflisten. Entscheidend ist, welche Verantwortung übernommen
+              wurde, welche Veränderungen angestossen wurden und welche
+              Ergebnisse daraus entstanden sind.
             </p>
           </div>
 
@@ -130,10 +138,10 @@ export default function ExecutiveCVSchweizPage() {
             </h2>
 
             <p className="mt-5">
-              Bereits im oberen Bereich des CV sollte erkennbar sein,
-              für welche Funktionen und Verantwortungsbereiche die
-              Führungskraft steht. Eine klare Zielpositionierung erleichtert
-              Recruitern und Unternehmen die schnelle Einordnung des Profils.
+              Bereits im oberen Bereich des CV sollte erkennbar sein, für
+              welche Funktionen und Verantwortungsbereiche die Führungskraft
+              steht. Eine klare Zielpositionierung erleichtert Recruitern und
+              Unternehmen die schnelle Einordnung des Profils.
             </p>
           </div>
 
@@ -143,11 +151,10 @@ export default function ExecutiveCVSchweizPage() {
             </h2>
 
             <p className="mt-5">
-              Teamgrössen, internationale Verantwortung,
-              Budgetverantwortung und strategische Aufgaben können wichtige
-              Informationen sein. Sie zeigen den Umfang bisheriger
-              Führungsverantwortung wesentlich konkreter als allgemeine
-              Aussagen.
+              Teamgrössen, internationale Verantwortung, Budgetverantwortung
+              und strategische Aufgaben können wichtige Informationen sein.
+              Sie zeigen den Umfang bisheriger Führungsverantwortung wesentlich
+              konkreter als allgemeine Aussagen.
             </p>
           </div>
 
@@ -171,10 +178,10 @@ export default function ExecutiveCVSchweizPage() {
             </h2>
 
             <p className="mt-5">
-              Auf Executive-Level sollte das Design hochwertig wirken,
-              ohne die Inhalte zu überlagern. Klare Hierarchien,
-              konsistente Typografie und eine strukturierte Darstellung
-              unterstützen die professionelle Wirkung.
+              Auf Executive-Level sollte das Design hochwertig wirken, ohne
+              die Inhalte zu überlagern. Klare Hierarchien, konsistente
+              Typografie und eine strukturierte Darstellung unterstützen die
+              professionelle Wirkung.
             </p>
           </div>
 
@@ -191,7 +198,6 @@ export default function ExecutiveCVSchweizPage() {
               auf die konkrete Zielposition abgestimmt werden.
             </p>
           </div>
-
         </section>
 
         {/* INTERNE LINKS */}
@@ -212,7 +218,7 @@ export default function ExecutiveCVSchweizPage() {
               href="/ratgeber/lebenslauf-optimieren-schweiz"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold hover:bg-[#EEF1F5]"
             >
-              Lebenslauf optimieren
+              Lebenslauf optimieren Schweiz
             </Link>
 
             <Link
@@ -220,6 +226,13 @@ export default function ExecutiveCVSchweizPage() {
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold hover:bg-[#EEF1F5]"
             >
               CV Schweiz vs. Deutschland
+            </Link>
+
+            <Link
+              href="/ratgeber/bewerbung-schweiz-tipps"
+              className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold hover:bg-[#EEF1F5]"
+            >
+              Bewerbung Schweiz
             </Link>
           </div>
         </section>
@@ -242,7 +255,7 @@ export default function ExecutiveCVSchweizPage() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              href="/cv-generator"
+              href="/cv-generator-schweiz"
               className="rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
             >
               EliteCV Generator
@@ -256,7 +269,6 @@ export default function ExecutiveCVSchweizPage() {
             </Link>
           </div>
         </section>
-
       </article>
     </main>
   );

@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
+    {
+      url: `${baseUrl}/cv-generator-schweiz`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 1,
+    },
 
     // ─── Ratgeber Deutsch ──────────────────────────────────────
     {
@@ -40,6 +46,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/ratgeber/ats-lebenslauf-schweiz-2026`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/ratgeber/executive-cv-schweiz`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/ratgeber/cv-schweiz-vs-deutschland`,
       lastModified,
       changeFrequency: "monthly",
@@ -52,22 +70,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
 
-    // Diese URL nur behalten, wenn die Seite tatsächlich existiert:
-    // {
-    //   url: `${baseUrl}/ratgeber/ats-lebenslauf-schweiz-2026`,
-    //   lastModified,
-    //   changeFrequency: "monthly",
-    //   priority: 0.9,
-    // },
-
-    // Diese URL nur behalten, wenn die Seite tatsächlich existiert:
-    // {
-    //   url: `${baseUrl}/ratgeber/executive-cv-schweiz`,
-    //   lastModified,
-    //   changeFrequency: "monthly",
-    //   priority: 0.8,
-    // },
-
     // ─── English Guides ────────────────────────────────────────
     {
       url: `${baseUrl}/guides`,
@@ -77,6 +79,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/guides/cv-optimization-switzerland`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/guides/linkedin-profile-optimization-switzerland`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
@@ -94,13 +102,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/guides/linkedin-profile-optimization-switzerland`,
+      url: `${baseUrl}/guides/ats-resume-switzerland-2026`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/en/guides`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/en/guides/executive-cv-switzerland`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
     },
 
-    // ─── Rechtliches ───────────────────────────────────────────
+    // ─── Kontakt / Rechtliches ─────────────────────────────────
+    {
+      url: `${baseUrl}/kontakt`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
     {
       url: `${baseUrl}/impressum`,
       lastModified,

@@ -11,20 +11,25 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.elitecv.ch"),
 
-  title: "EliteCV | CV-Optimierung & LinkedIn Optimierung Schweiz",
+  title: {
+    default: "EliteCV | CV Generator & CV-Optimierung Schweiz",
+    template: "%s | EliteCV",
+  },
 
   description:
-    "Professionelle CV-Optimierung, LinkedIn Optimierung und Karriereberatung für Fach- und Führungskräfte in der Schweiz. Deutsch und Englisch.",
+    "CV Generator, professionelle CV-Optimierung und LinkedIn-Profil-Optimierung für den Schweizer Arbeitsmarkt. ATS-optimierte Lebensläufe, Executive CVs und Bewerbungslösungen auf Deutsch und Englisch.",
 
   keywords: [
+    "CV Generator Schweiz",
     "CV Optimierung Schweiz",
     "Lebenslauf optimieren Schweiz",
-    "Professioneller Lebenslauf Schweiz",
+    "Lebenslauf erstellen Schweiz",
+    "LinkedIn Profil optimieren Schweiz",
     "LinkedIn Optimierung Schweiz",
-    "Karriereberatung Schweiz",
-    "Bewerbungsservice Schweiz",
     "Executive CV Schweiz",
-    "CV Service Schweiz",
+    "ATS Lebenslauf Schweiz",
+    "Bewerbungsservice Schweiz",
+    "Karriereberatung Schweiz",
   ],
 
   alternates: {
@@ -42,9 +47,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EliteCV | CV-Optimierung & LinkedIn Optimierung Schweiz",
+    title: "EliteCV | CV Generator & CV-Optimierung Schweiz",
     description:
-      "Professionelle CV-Optimierung, LinkedIn Optimierung und Karriereberatung für Fach- und Führungskräfte in der Schweiz.",
+      "CV Generator, CV-Optimierung und LinkedIn-Profil-Optimierung für den Schweizer Arbeitsmarkt. Professional & Executive CVs, ATS-Optimierung und Deutsch/Englisch.",
     url: "https://www.elitecv.ch",
     siteName: "EliteCV",
     images: [
@@ -52,7 +57,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "EliteCV Schweiz",
+        alt: "EliteCV Schweiz – CV Generator und CV-Optimierung",
       },
     ],
     locale: "de_CH",
@@ -61,43 +66,57 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "EliteCV | CV-Optimierung & LinkedIn Optimierung Schweiz",
+    title: "EliteCV | CV Generator & CV-Optimierung Schweiz",
     description:
-      "Professionelle CV-Optimierung, LinkedIn Optimierung und Karriereberatung für Fach- und Führungskräfte in der Schweiz.",
+      "CV Generator, CV-Optimierung und LinkedIn-Profil-Optimierung für den Schweizer Arbeitsmarkt.",
     images: ["/og-image.png"],
   },
 };
+
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "EliteCV Schweiz",
+
+  name: "EliteCV",
   url: "https://www.elitecv.ch",
+
   logo: "https://www.elitecv.ch/og-image.png",
   image: "https://www.elitecv.ch/og-image.png",
+
   description:
-    "Professionelle CV-Optimierung, LinkedIn Optimierung und Karriereberatung für Fach- und Führungskräfte in der Schweiz.",
+    "EliteCV bietet einen CV Generator, professionelle CV-Optimierung, LinkedIn-Profil-Optimierung und Karrierepositionierung für den Schweizer Arbeitsmarkt.",
+
   email: "info@elitecv.ch",
+
   areaServed: {
     "@type": "Country",
     name: "Switzerland",
   },
+
   availableLanguage: ["German", "English"],
+
   sameAs: [
     "https://www.linkedin.com/company/elitecv-ch/",
     "https://www.facebook.com/profile.php?id=61590596581435",
     "https://www.instagram.com/elitecv.ch/",
   ],
+
   serviceType: [
+    "CV Generator Schweiz",
     "CV Optimierung",
-    "LinkedIn Optimierung",
+    "LinkedIn Profil Optimierung",
+    "Executive CV",
+    "ATS Lebenslauf",
     "Karriereberatung",
     "Bewerbungsunterlagen",
   ],
+
   founder: {
     "@type": "Person",
     name: "Klaudio Batinic",
   },
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -106,17 +125,17 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body className={`${inter.variable} antialiased`}>
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(structuredData),
-    }}
-  />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
 
-  {children}
+        {children}
 
-  <GoogleAnalytics gaId="G-36ZRQK48BQ" />
-</body>
+        <GoogleAnalytics gaId="G-36ZRQK48BQ" />
+      </body>
     </html>
   );
 }
