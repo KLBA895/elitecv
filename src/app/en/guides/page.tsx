@@ -33,7 +33,7 @@ const articles = [
     title: "ATS Resume Switzerland 2026",
     description:
       "Learn how to create an ATS-friendly resume that works for modern application systems and recruiters.",
-    href: "/en/guides/ats-resume-switzerland-2026",
+    href: "/guides/ats-resume-switzerland-2026",
     category: "ATS",
     readingTime: "8 min",
     badge: "NEW",
@@ -42,7 +42,7 @@ const articles = [
     title: "Optimize Your Resume for Switzerland",
     description:
       "Common resume mistakes and how to improve your CV for the Swiss job market.",
-    href: "/en/guides/optimize-resume-switzerland",
+    href: "/guides/cv-optimization-switzerland",
     category: "Resume",
     readingTime: "7 min",
   },
@@ -50,7 +50,7 @@ const articles = [
     title: "Optimize Your LinkedIn Profile in Switzerland",
     description:
       "Improve visibility, positioning and recruiter interest on LinkedIn.",
-    href: "/en/guides/linkedin-profile-switzerland",
+    href: "/guides/linkedin-profile-optimization-switzerland",
     category: "LinkedIn",
     readingTime: "7 min",
   },
@@ -58,7 +58,7 @@ const articles = [
     title: "CV Switzerland vs. Germany",
     description:
       "The most important differences between Swiss and German application documents.",
-    href: "/en/guides/cv-switzerland-vs-germany",
+    href: "/guides/cv-switzerland-vs-germany",
     category: "Resume",
     readingTime: "6 min",
   },
@@ -66,7 +66,7 @@ const articles = [
     title: "Applying for Jobs in Switzerland",
     description:
       "Practical tips for stronger applications and a professional overall presentation.",
-    href: "/en/guides/applying-in-switzerland",
+    href: "/guides/job-application-switzerland",
     category: "Application",
     readingTime: "6 min",
   },
@@ -77,7 +77,7 @@ const cvExamples = [
     title: "Chief Operating Officer",
     subtitle: "C-Level & Executives",
     image:
-      "/images/ratgeber/executive-cv-schweiz-laura-schmidt.png",
+      "/images/ratgeber/executive-cv-switzerland-laura-schmidt.png",
     alt:
       "Executive CV Switzerland example for C-Level and senior leadership by EliteCV",
     href: "/en/guides/executive-cv-switzerland",
@@ -86,7 +86,7 @@ const cvExamples = [
     title: "Head of Operations",
     subtitle: "Management & Operations",
     image:
-      "/images/ratgeber/professional-cv-schweiz-michael-steiner.png",
+      "/images/ratgeber/professional-cv-switzerland-michael-steiner.png",
     alt:
       "Professional CV Switzerland example for management and operations by EliteCV",
     href: "/en/guides/cv-example-switzerland",
@@ -95,7 +95,7 @@ const cvExamples = [
     title: "Mechanical Engineer",
     subtitle: "Mechanical Engineering",
     image:
-      "/images/ratgeber/professional-cv-schweiz-lukas-meier.png",
+      "/images/ratgeber/professional-cv-switzerland-lukas-meier.png",
     alt:
       "Professional CV Switzerland example for a mechanical engineer by EliteCV",
     href: "/en/guides/mechanical-engineer-resume-switzerland",
@@ -104,7 +104,7 @@ const cvExamples = [
     title: "HR Specialist",
     subtitle: "Human Resources",
     image:
-      "/images/ratgeber/hr-specialist-lebenslauf-schweiz-sarah-keller.png",
+      "/images/ratgeber/hr-specialist-cv-switzerland-sarah-keller.png",
     alt:
       "HR Specialist resume Switzerland example for Human Resources by EliteCV",
     href: "/en/guides/hr-specialist-resume-switzerland",

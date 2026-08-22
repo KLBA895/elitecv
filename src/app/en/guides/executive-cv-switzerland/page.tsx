@@ -94,8 +94,8 @@ export default function ExecutiveCVSwitzerlandPage() {
         <section className="mt-14">
           <div className="overflow-hidden rounded-3xl border border-[#0A1F44]/10 bg-white p-4 shadow-xl sm:p-7">
             <Image
-              src="/images/ratgeber/executive-cv-schweiz-laura-schmidt.png"
-              alt="Executive CV Switzerland example for Chief Operating Officer and senior leaders by EliteCV"
+              src="/images/ratgeber/executive-cv-switzerland-laura-schmidt.png"
+              alt="Executive CV Switzerland example for senior leaders and C-level executives"
               width={1200}
               height={1600}
               priority
