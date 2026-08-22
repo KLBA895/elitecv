@@ -104,7 +104,7 @@ const cvExamples = [
       "/images/ratgeber/professional-cv-schweiz-michael-steiner.png",
     alt:
       "Professional CV Schweiz Beispiel für Management und Operations von EliteCV",
-    href: "/ratgeber/cv-beispiel-schweiz",
+    href: "/ratgeber/cv-beispiel-operations-manager-schweiz",
   },
   {
     title: "Maschinenbauingenieur",
@@ -113,7 +113,7 @@ const cvExamples = [
       "/images/ratgeber/professional-cv-schweiz-lukas-meier.png",
     alt:
       "Professional CV Schweiz Beispiel für Maschinenbauingenieur von EliteCV",
-    href: "/ratgeber/lebenslauf-beispiel-maschinenbauingenieur",
+    href: "/ratgeber/maschinenbauingenieur-cv-schweiz",
   },
   {
     title: "HR Specialist",
@@ -122,7 +122,7 @@ const cvExamples = [
       "/images/ratgeber/hr-specialist-lebenslauf-schweiz-sarah-keller.png",
     alt:
       "HR Specialist Lebenslauf Schweiz Beispiel für Human Resources von EliteCV",
-    href: "/ratgeber/lebenslauf-beispiel-hr-specialist",
+    href: "/ratgeber/hr-specialist-cv-schweiz",
   },
 ];
 
