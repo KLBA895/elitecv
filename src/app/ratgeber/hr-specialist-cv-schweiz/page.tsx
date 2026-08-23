@@ -96,7 +96,7 @@ export default function HRSpecialistCVSchweizPage() {
         <section className="mt-14">
           <div className="overflow-hidden rounded-3xl border border-[#0A1F44]/10 bg-white p-4 shadow-xl sm:p-7">
             <Image
-              src="/images/ratgeber/hr-specialist-cv-schweiz-sarah-keller.png"
+              src="/images/ratgeber/hr-specialist-lebenslauf-schweiz-sarah-keller.png"
               alt="HR Specialist CV Schweiz Beispiel Sarah Keller"
               width={1600}
               height={1200}

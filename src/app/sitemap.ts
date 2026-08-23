@@ -25,12 +25,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
+    {
+      url: `${baseUrl}/cv-beratung-schweiz`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/cv-beratung-dietikon-zuerich`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
 
     // ─── Ratgeber Deutsch ──────────────────────────────────────
     {
       url: `${baseUrl}/ratgeber`,
       lastModified,
       changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/ratgeber/lebenslauf-schweiz`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/ratgeber/cv-vorlage-schweiz`,
+      lastModified,
+      changeFrequency: "monthly",
       priority: 0.9,
     },
     {
@@ -56,6 +80,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/ratgeber/cv-beispiel-operations-manager-schweiz`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/ratgeber/maschinenbauingenieur-cv-schweiz`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/ratgeber/hr-specialist-cv-schweiz`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/ratgeber/cv-schweiz-vs-deutschland`,
@@ -107,6 +149,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/guides/operations-manager-cv-switzerland`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/guides/mechanical-engineer-cv-switzerland`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/guides/hr-specialist-cv-switzerland`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    // ─── English Executive ─────────────────────────────────────
     {
       url: `${baseUrl}/en/guides`,
       lastModified,

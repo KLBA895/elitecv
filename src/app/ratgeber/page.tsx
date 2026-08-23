@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Karriere-Ratgeber Schweiz: CV, Lebenslauf & Bewerbung | EliteCV",
 
   description:
-    "Praxisnahe Ratgeber zu Lebenslauf, CV, ATS, Bewerbung, LinkedIn und Karriere für den Schweizer Arbeitsmarkt.",
+    "Ratgeber zu Lebenslauf Schweiz, CV Vorlagen, ATS, Bewerbung, LinkedIn, CV-Beispielen und Karriere für den Schweizer Arbeitsmarkt.",
 
   alternates: {
     canonical: "https://www.elitecv.ch/ratgeber",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "EliteCV Karriere-Ratgeber Schweiz",
     description:
-      "Tipps zu CV, Lebenslauf, ATS, Bewerbung, LinkedIn und Karriere im Schweizer Arbeitsmarkt.",
+      "Tipps zu Lebenslauf, CV, Vorlagen, ATS, Bewerbung, LinkedIn und Karriere im Schweizer Arbeitsmarkt.",
     url: "https://www.elitecv.ch/ratgeber",
     siteName: "EliteCV",
     locale: "de_CH",
@@ -35,13 +35,30 @@ type Article = {
 
 const articles: Article[] = [
   {
+    title: "Lebenslauf Schweiz 2026",
+    description:
+      "Aufbau, Inhalt, Länge, Foto und Beispiele: So erstellen Sie einen professionellen Lebenslauf für den Schweizer Arbeitsmarkt.",
+    href: "/ratgeber/lebenslauf-schweiz",
+    category: "Lebenslauf",
+    readingTime: "10 Min.",
+    badge: "NEU",
+  },
+  {
+    title: "CV Vorlage Schweiz 2026",
+    description:
+      "Professionelle CV-Vorlagen für die Schweiz: Aufbau, Gestaltung, ATS-Tauglichkeit und Beispiele für verschiedene Karrierelevel.",
+    href: "/ratgeber/cv-vorlage-schweiz",
+    category: "CV-Vorlagen",
+    readingTime: "9 Min.",
+    badge: "NEU",
+  },
+  {
     title: "ATS Lebenslauf Schweiz 2026",
     description:
       "Wie Sie einen ATS-konformen Lebenslauf erstellen, der Bewerbungsportale und Recruiter überzeugt.",
     href: "/ratgeber/ats-lebenslauf-schweiz-2026",
     category: "ATS",
     readingTime: "8 Min.",
-    badge: "NEU",
   },
   {
     title: "Lebenslauf optimieren Schweiz",
@@ -75,16 +92,6 @@ const articles: Article[] = [
     category: "Bewerbung",
     readingTime: "6 Min.",
   },
-];
-
-const upcomingTopics = [
-  "Lebenslauf Schweiz 2026",
-  "CV Vorlage Schweiz",
-  "CV Beispiel Schweiz",
-  "Lebenslauf Aufbau Schweiz",
-  "Lebenslauf Foto Schweiz",
-  "Motivationsschreiben Schweiz",
-  "Executive CV Schweiz",
 ];
 
 const cvExamples = [
@@ -130,6 +137,8 @@ export default function RatgeberPage() {
   return (
     <main className="min-h-screen bg-[#F7F8FA] text-[#0A1F44]">
       <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+
+        {/* NAVIGATION */}
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/"
@@ -166,21 +175,22 @@ export default function RatgeberPage() {
           </h1>
 
           <p className="mt-6 max-w-3xl text-lg leading-8 text-[#0A1F44]/75 sm:text-xl sm:leading-9">
-            Praxisnahe Ratgeber für einen professionellen Lebenslauf,
-            ATS-optimierte Bewerbungsunterlagen, LinkedIn und die erfolgreiche
-            Positionierung im Schweizer Arbeitsmarkt.
+            Ratgeber, CV-Vorlagen und Beispiele für einen professionellen
+            Lebenslauf, ATS-optimierte Bewerbungsunterlagen, LinkedIn und die
+            erfolgreiche Positionierung im Schweizer Arbeitsmarkt.
           </p>
         </div>
 
         {/* THEMEN */}
         <div className="mt-10 flex flex-wrap gap-3">
           {[
-            "Lebenslauf",
+            "Lebenslauf Schweiz",
+            "CV Schweiz",
+            "CV-Vorlagen",
             "ATS",
             "Bewerbung",
             "LinkedIn",
             "Karriere",
-            "CV-Vorlagen",
           ].map((category) => (
             <span
               key={category}
@@ -193,16 +203,14 @@ export default function RatgeberPage() {
 
         {/* ARTIKEL */}
         <section className="mt-16">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
-                Wissen für Ihre Bewerbung
-              </p>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
+              Wissen für Ihre Bewerbung
+            </p>
 
-              <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
-                Aktuelle Ratgeber
-              </h2>
-            </div>
+            <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
+              Aktuelle Ratgeber
+            </h2>
           </div>
 
           <div className="mt-10 grid gap-7 md:grid-cols-2">
@@ -246,16 +254,19 @@ export default function RatgeberPage() {
 
         {/* CV-BEISPIELE */}
         <section className="mt-20">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
-                EliteCV Beispiele
-              </p>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
+              EliteCV Beispiele
+            </p>
 
-              <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
-                CV-Beispiele für den Schweizer Arbeitsmarkt
-              </h2>
-            </div>
+            <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+              CV- und Lebenslauf-Beispiele für die Schweiz
+            </h2>
+
+            <p className="mt-4 max-w-3xl leading-8 text-[#0A1F44]/70">
+              Professionelle CV-Beispiele für Führungskräfte, Management,
+              Ingenieure und Human Resources im Schweizer Arbeitsmarkt.
+            </p>
           </div>
 
           <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -280,7 +291,7 @@ export default function RatgeberPage() {
                     {example.subtitle}
                   </p>
 
-                  <h3 className="mt-2 text-2xl font-bold text-[#0A1F44] transition-colors group-hover:text-[#8A6A22]">
+                  <h3 className="mt-2 text-2xl font-bold transition-colors group-hover:text-[#8A6A22]">
                     {example.title}
                   </h3>
 
@@ -288,34 +299,104 @@ export default function RatgeberPage() {
                     Modernes, klar strukturiertes CV-Beispiel im EliteCV-Stil
                     für Bewerbungen in der Schweiz.
                   </p>
+
+                  <div className="mt-5 font-semibold text-[#C9A95A]">
+                    CV-Beispiel ansehen →
+                  </div>
                 </div>
               </Link>
             ))}
           </div>
         </section>
 
-        {/* GENERATOR */}
+        {/* CV SERVICES */}
+        <section className="mt-20">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
+            Professionelle Unterstützung
+          </p>
+
+          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
+            CV erstellen oder professionell optimieren lassen
+          </h2>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <Link
+              href="/cv-generator-schweiz"
+              className="rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 className="text-2xl font-bold">
+                CV Generator Schweiz
+              </h3>
+
+              <p className="mt-4 leading-7 text-[#0A1F44]/70">
+                Erstellen Sie Ihren professionellen CV online mit modernen
+                Vorlagen und strukturierter Unterstützung.
+              </p>
+
+              <div className="mt-6 font-semibold text-[#C9A95A]">
+                CV erstellen →
+              </div>
+            </Link>
+
+            <Link
+              href="/cv-beratung-schweiz"
+              className="rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 className="text-2xl font-bold">
+                CV Beratung Schweiz
+              </h3>
+
+              <p className="mt-4 leading-7 text-[#0A1F44]/70">
+                Professionelle Lebenslauf-Beratung und CV-Optimierung für
+                Fach- und Führungskräfte.
+              </p>
+
+              <div className="mt-6 font-semibold text-[#C9A95A]">
+                CV-Beratung →
+              </div>
+            </Link>
+
+            <Link
+              href="/cv-beratung-dietikon-zuerich"
+              className="rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            >
+              <h3 className="text-2xl font-bold">
+                CV Beratung Dietikon & Zürich
+              </h3>
+
+              <p className="mt-4 leading-7 text-[#0A1F44]/70">
+                CV- und Lebenslauf-Unterstützung für Dietikon, Zürich und die
+                gesamte Region.
+              </p>
+
+              <div className="mt-6 font-semibold text-[#C9A95A]">
+                Beratung ansehen →
+              </div>
+            </Link>
+          </div>
+        </section>
+
+        {/* GENERATOR CTA */}
         <section className="mt-20 rounded-3xl bg-[#0A1F44] p-8 text-white sm:p-10 lg:p-12">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
             EliteCV Generator
           </p>
 
           <h2 className="mt-3 max-w-3xl text-3xl font-bold sm:text-4xl">
-            Ihren professionellen CV direkt erstellen
+            Professionellen Lebenslauf für die Schweiz erstellen
           </h2>
 
           <p className="mt-5 max-w-3xl leading-8 text-white/75">
-            Erstellen Sie einen strukturierten und professionellen Lebenslauf
-            mit modernen Professional- und Executive-Layouts,
-            KI-Unterstützung, CV-Import und PDF-Export.
+            Erstellen Sie einen professionellen CV mit modernen Professional-
+            und Executive-Layouts, KI-Unterstützung, CV-Import und PDF-Export.
           </p>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Link
-              href="/cv-generator"
+              href="/cv-generator-schweiz"
               className="inline-flex items-center justify-center rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
             >
-              EliteCV Generator öffnen
+              CV jetzt erstellen
             </Link>
 
             <Link
@@ -326,6 +407,7 @@ export default function RatgeberPage() {
             </Link>
           </div>
         </section>
+
       </section>
     </main>
   );
