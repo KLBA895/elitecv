@@ -119,6 +119,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+
+    // Neue englische SEO-Kernseiten
+    {
+      url: `${baseUrl}/guides/cv-switzerland`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/guides/cv-template-switzerland`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+
     {
       url: `${baseUrl}/guides/cv-optimization-switzerland`,
       lastModified,

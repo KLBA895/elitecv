@@ -9,6 +9,10 @@ export const metadata: Metadata = {
 
   alternates: {
     canonical: "https://www.elitecv.ch/ratgeber/cv-vorlage-schweiz",
+    languages: {
+      "de-CH": "https://www.elitecv.ch/ratgeber/cv-vorlage-schweiz",
+      "en": "https://www.elitecv.ch/guides/cv-template-switzerland",
+    },
   },
 
   openGraph: {
@@ -27,12 +31,31 @@ export default function CVVorlageSchweizPage() {
     <main className="min-h-screen bg-[#F7F8FA] text-[#0A1F44]">
       <article className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
 
-        <Link
-          href="/ratgeber"
-          className="text-sm font-semibold text-[#8A6A22] hover:underline"
-        >
-          ← Zurück zum Ratgeber
-        </Link>
+        {/* NAVIGATION */}
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            href="/ratgeber"
+            className="text-sm font-semibold text-[#8A6A22] hover:underline"
+          >
+            ← Zurück zum Ratgeber
+          </Link>
+
+          <div className="inline-flex rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
+            <Link
+              href="/ratgeber/cv-vorlage-schweiz"
+              className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
+            >
+              DE
+            </Link>
+
+            <Link
+              href="/guides/cv-template-switzerland"
+              className="rounded-full px-4 py-2 text-xs font-bold text-[#0A1F44]/60 transition hover:text-[#0A1F44]"
+            >
+              EN
+            </Link>
+          </div>
+        </div>
 
         {/* HERO */}
         <header className="mt-10">
@@ -90,6 +113,30 @@ export default function CVVorlageSchweizPage() {
                 <li>8. Optional: Interessen und Engagement</li>
               </ol>
             </div>
+          </div>
+
+          <div>
+            <h2 className="text-3xl font-bold text-[#0A1F44]">
+              Wie lang sollte ein CV in der Schweiz sein?
+            </h2>
+
+            <p className="mt-5">
+              Für die meisten Bewerbungen in der Schweiz sind ein bis zwei
+              Seiten ideal. Berufseinsteiger können ihren Lebenslauf häufig
+              auf einer Seite übersichtlich darstellen. Bei Berufserfahrenen,
+              Spezialisten und Führungskräften sind zwei Seiten in der Regel
+              sinnvoll, wenn die zusätzlichen Informationen für die
+              angestrebte Position relevant sind.
+            </p>
+
+            <p className="mt-5">
+              Entscheidend ist nicht, möglichst viele Informationen
+              unterzubringen. Der CV sollte sich auf relevante Erfahrung,
+              Kompetenzen, Verantwortlichkeiten und Resultate konzentrieren.
+              Lange Aufgabenlisten oder weit zurückliegende, für die
+              Zielposition wenig relevante Tätigkeiten können entsprechend
+              gekürzt werden.
+            </p>
           </div>
 
           <div>
@@ -155,6 +202,28 @@ export default function CVVorlageSchweizPage() {
               darzustellen, sollten aktuelle und für die Zielposition wichtige
               Erfahrungen priorisiert werden.
             </p>
+
+            <p className="mt-5">
+              Auf zwei Seiten lassen sich relevante Berufsstationen,
+              Verantwortlichkeiten, Projekte und messbare Erfolge in der Regel
+              gut darstellen. Dabei sollte jede Information einen klaren Bezug
+              zur angestrebten Position haben.
+            </p>
+
+            <p className="mt-5">
+              Mit dem{" "}
+              <Link
+                href="/cv-generator-schweiz"
+                className="font-semibold text-[#8A6A22] hover:underline"
+              >
+                EliteCV CV Generator Schweiz
+              </Link>{" "}
+              können Sie Ihren Lebenslauf strukturiert erstellen und zwischen
+              professionellen Professional- und Executive-Layouts wählen.
+              Die exklusiven EliteCV Designs sind Bestandteil des Generators
+              und stehen nicht als kostenlose CV Vorlagen zum Download zur
+              Verfügung.
+            </p>
           </div>
 
           <div>
@@ -169,11 +238,17 @@ export default function CVVorlageSchweizPage() {
               sichtbar sein.
             </p>
 
+            <p className="mt-5">
+              Für Senior Manager und Executive-Positionen bietet sich ein
+              hochwertiges, ruhiges Layout an, das strategische Erfahrung und
+              Resultate in den Vordergrund stellt.
+            </p>
+
             <Link
               href="/ratgeber/executive-cv-schweiz"
               className="mt-5 inline-block font-semibold text-[#8A6A22] hover:underline"
             >
-              → Executive CV Schweiz Beispiel
+              → Executive CV Schweiz Beispiel ansehen
             </Link>
           </div>
 
@@ -218,13 +293,36 @@ export default function CVVorlageSchweizPage() {
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              CV Vorlage Schweiz: Beispiel ansehen
+              Sind die EliteCV Vorlagen kostenlos verfügbar?
+            </h2>
+
+            <p className="mt-5">
+              Die auf EliteCV gezeigten Professional- und Executive-Designs
+              sind exklusive EliteCV Layouts und werden nicht als kostenlose
+              Word- oder PDF-Vorlagen zum Download angeboten. Sie können die
+              Designs im EliteCV Generator für die Erstellung Ihres
+              professionellen Lebenslaufs verwenden.
+            </p>
+
+            <Link
+              href="/cv-generator-schweiz"
+              className="mt-5 inline-block font-semibold text-[#8A6A22] hover:underline"
+            >
+              → EliteCV CV Generator Schweiz
+            </Link>
+          </div>
+
+          <div>
+            <h2 className="text-3xl font-bold text-[#0A1F44]">
+              CV Vorlage Schweiz: Beispiele ansehen
             </h2>
 
             <p className="mt-5">
               EliteCV zeigt verschiedene Lebenslauf Beispiele für den
               Schweizer Arbeitsmarkt – von Fachkräften über Engineering und
-              Human Resources bis zu Management- und C-Level-Profilen.
+              Human Resources bis zu Management- und C-Level-Profilen. Die
+              Beispiele zeigen, wie unterschiedliche Karriereprofile
+              professionell strukturiert und dargestellt werden können.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -292,9 +390,9 @@ export default function CVVorlageSchweizPage() {
 
           <p className="mt-5 max-w-3xl leading-8 text-white/80">
             Nutzen Sie den EliteCV Generator, um Ihren Lebenslauf mit einer
-            professionellen Struktur und modernen CV-Layouts zu erstellen.
-            Alternativ können Sie Ihren bestehenden Lebenslauf professionell
-            optimieren lassen.
+            professionellen Struktur und modernen Professional- oder
+            Executive-Layouts zu erstellen. Alternativ können Sie Ihren
+            bestehenden Lebenslauf professionell optimieren lassen.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -306,7 +404,7 @@ export default function CVVorlageSchweizPage() {
             </Link>
 
             <Link
-              href="/#preise"
+              href="/cv-beratung-schweiz"
               className="rounded-xl border border-white/20 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
             >
               CV Beratung & Optimierung
