@@ -334,7 +334,7 @@ export default function KontaktPage() {
                     <br />
                     8953 Dietikon
                     <br />
-                    Switzerland
+                    {lang === "de" ? "Schweiz" : "Switzerland"}
                   </address>
                 </div>
               </div>

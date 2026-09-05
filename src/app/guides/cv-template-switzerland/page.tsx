@@ -203,7 +203,7 @@ export default function CVTemplateSwitzerlandPage() {
             <p className="mt-5">
               With the{" "}
               <Link
-                href="/cv-generator-schweiz"
+                href="/cv-generator"
                 className="font-semibold text-[#8A6A22] hover:underline"
               >
                 EliteCV CV Generator Switzerland
@@ -284,7 +284,7 @@ export default function CVTemplateSwitzerlandPage() {
             </p>
 
             <Link
-              href="/cv-generator-schweiz"
+              href="/cv-generator"
               className="mt-5 inline-block font-semibold text-[#8A6A22] hover:underline"
             >
               → Open EliteCV CV Generator
@@ -352,7 +352,7 @@ export default function CVTemplateSwitzerlandPage() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              href="/cv-generator-schweiz"
+              href="/cv-generator"
               className="rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
             >
               Create CV

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical: "https://www.elitecv.ch/ratgeber/cv-vorlage-schweiz",
     languages: {
       "de-CH": "https://www.elitecv.ch/ratgeber/cv-vorlage-schweiz",
-      "en": "https://www.elitecv.ch/guides/cv-template-switzerland",
+      en: "https://www.elitecv.ch/guides/cv-template-switzerland",
     },
   },
 
@@ -75,6 +75,7 @@ export default function CVVorlageSchweizPage() {
           </p>
         </header>
 
+        {/* INHALT */}
         <section className="mt-16 space-y-12 leading-8 text-[#0A1F44]/78">
 
           <div>
@@ -213,7 +214,7 @@ export default function CVVorlageSchweizPage() {
             <p className="mt-5">
               Mit dem{" "}
               <Link
-                href="/cv-generator-schweiz"
+                href="/cv-generator"
                 className="font-semibold text-[#8A6A22] hover:underline"
               >
                 EliteCV CV Generator Schweiz
@@ -305,7 +306,7 @@ export default function CVVorlageSchweizPage() {
             </p>
 
             <Link
-              href="/cv-generator-schweiz"
+              href="/cv-generator"
               className="mt-5 inline-block font-semibold text-[#8A6A22] hover:underline"
             >
               → EliteCV CV Generator Schweiz
@@ -397,7 +398,7 @@ export default function CVVorlageSchweizPage() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              href="/cv-generator-schweiz"
+              href="/cv-generator"
               className="rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
             >
               CV erstellen

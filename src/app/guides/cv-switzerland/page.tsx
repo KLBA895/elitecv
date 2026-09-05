@@ -314,7 +314,7 @@ export default function CVSwitzerlandPage() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              href="/cv-generator-schweiz"
+              href="/cv-generator"
               className="rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
             >
               Create CV

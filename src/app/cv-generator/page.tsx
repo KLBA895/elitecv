@@ -658,15 +658,15 @@ export default function CVGeneratorPage() {
         </p>
 
         <p>
-          Dieser Zugangscode wird nach Zahlungseingang individuell erstellt.
+          Ihren persönlichen Zugangscode erhalten Sie nach erfolgreicher Zahlung per E-Mail.
           <br />
-          Bitte geben Sie Ihren persönlichen EliteCV-Zugangscode ein.
+          Bitte geben Sie Ihre E-Mail-Adresse und Ihren EliteCV-Zugangscode ein.
         </p>
 
         <p>
-          This access code is generated individually after payment.
+          You will receive your personal access code by email after successful payment.
           <br />
-          Please enter your personal EliteCV access code.
+          Please enter your email address and EliteCV access code.
         </p>
 
         <input
@@ -983,10 +983,6 @@ export default function CVGeneratorPage() {
         <div className="cvgen-topbar-left">
           <span className="cvgen-logo">
             EliteCV Generator
-          </span>
-
-          <span className="cvgen-badge">
-            Beta
           </span>
         </div>
 

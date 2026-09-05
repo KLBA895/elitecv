@@ -7,19 +7,6 @@ export const metadata: Metadata = {
   description:
     "CV Generator Schweiz: Erstellen Sie einen professionellen Lebenslauf mit modernen CV-Vorlagen, ATS-orientierter Struktur, Professional- und Executive-Layouts sowie KI-Unterstützung.",
 
-  keywords: [
-    "CV Generator Schweiz",
-    "CV erstellen Schweiz",
-    "Lebenslauf erstellen Schweiz",
-    "CV Vorlage Schweiz",
-    "CV Vorlagen Generator",
-    "Lebenslauf Vorlage Schweiz",
-    "professionellen CV erstellen",
-    "CV online erstellen",
-    "ATS Lebenslauf Schweiz",
-    "Executive CV Schweiz",
-  ],
-
   alternates: {
     canonical: "https://www.elitecv.ch/cv-generator-schweiz",
   },

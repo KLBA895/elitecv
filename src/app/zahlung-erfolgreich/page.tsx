@@ -49,15 +49,13 @@ export default async function PaymentSuccessPage({
   }
 
   try {
-    /*
+    /**
      * Die Stripe-Session wird serverseitig geprüft.
      * Der Zugangscode wird nicht allein aufgrund
      * einer URL-Session-ID ausgegeben.
      */
     const session =
-      await stripe.checkout.sessions.retrieve(
-        sessionId
-      );
+      await stripe.checkout.sessions.retrieve(sessionId);
 
     if (
       session.payment_status !== "paid" ||
@@ -72,7 +70,7 @@ export default async function PaymentSuccessPage({
       );
     }
 
-    /*
+    /**
      * Der Stripe-Webhook kann wenige Augenblicke
      * benötigen, bis Bestellung und Zugangscode
      * in Supabase gespeichert sind.
@@ -85,19 +83,14 @@ export default async function PaymentSuccessPage({
     } | null = null;
 
     for (let attempt = 0; attempt < 5; attempt += 1) {
-      const {
-        data,
-        error,
-      } = await supabaseAdmin
+      const { data, error } = await supabaseAdmin
         .from("orders")
-        .select(
-          `
-            customer_name,
-            customer_email,
-            package,
-            access_code
-          `
-        )
+        .select(`
+          customer_name,
+          customer_email,
+          package,
+          access_code
+        `)
         .eq("stripe_session_id", sessionId)
         .order("created_at", {
           ascending: false,
@@ -183,23 +176,23 @@ export default async function PaymentSuccessPage({
         : "EliteCV Professional Generator";
 
     return (
-      <main className="mx-auto flex min-h-screen max-w-2xl items-center px-6 py-16">
-        <div className="w-full rounded-2xl border border-emerald-600/20 bg-white p-8 shadow-sm">
-          <div className="text-4xl text-emerald-600">
+      <main className="flex min-h-screen items-center bg-[#F7F8FA] px-6 py-16">
+        <div className="mx-auto w-full max-w-2xl rounded-3xl border border-emerald-600/20 bg-white p-8 shadow-sm sm:p-10">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-3xl font-bold text-emerald-600">
             ✓
           </div>
 
-          <h1 className="mt-4 text-3xl font-semibold text-[#0A1F44]">
+          <h1 className="mt-6 text-3xl font-bold tracking-[-0.02em] text-[#0A1F44] sm:text-4xl">
             Zahlung erfolgreich
           </h1>
 
-          <p className="mt-4 text-[#0A1F44]/70">
+          <p className="mt-4 leading-7 text-[#0A1F44]/70">
             Vielen Dank
             {order.customer_name
               ? `, ${order.customer_name}`
               : ""}
             . Ihre Zahlung für den {packageLabel} wurde
-            bestätigt.
+            erfolgreich bestätigt.
           </p>
 
           <div className="mt-7 rounded-2xl border border-[#C9A95A]/40 bg-[#FFFDF7] p-6">
@@ -213,16 +206,14 @@ export default async function PaymentSuccessPage({
 
             {expiryText && (
               <p className="mt-4 text-sm text-[#0A1F44]/70">
-                Gültig bis:{" "}
-                <strong>{expiryText}</strong>
+                Gültig bis: <strong>{expiryText}</strong>
               </p>
             )}
 
             <p className="mt-3 text-sm leading-6 text-[#0A1F44]/65">
-              Der Zugangscode ist mit der bei der
-              Bestellung verwendeten E-Mail-Adresse
-              verknüpft. Bitte bewahren Sie ihn sicher
-              auf.
+              Der Zugangscode ist mit der bei der Bestellung
+              verwendeten E-Mail-Adresse verknüpft. Bitte
+              bewahren Sie ihn sicher auf.
             </p>
           </div>
 
@@ -235,7 +226,7 @@ export default async function PaymentSuccessPage({
 
           <Link
             href="/"
-            className="mt-3 inline-flex w-full items-center justify-center rounded-xl border border-[#0A1F44]/15 px-5 py-3 text-sm font-semibold text-[#0A1F44]"
+            className="mt-3 inline-flex w-full items-center justify-center rounded-xl border border-[#0A1F44]/15 px-5 py-3 text-sm font-semibold text-[#0A1F44] transition hover:bg-[#F7F8FA]"
           >
             Zurück zu EliteCV
           </Link>
@@ -277,9 +268,9 @@ function PaymentMessage({
   showReload?: boolean;
 }) {
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl items-center px-6 py-16">
-      <div className="w-full rounded-2xl border border-[#0A1F44]/10 bg-white p-8 shadow-sm">
-        <h1 className="text-3xl font-semibold text-[#0A1F44]">
+    <main className="flex min-h-screen items-center bg-[#F7F8FA] px-6 py-16">
+      <div className="mx-auto w-full max-w-2xl rounded-3xl border border-[#0A1F44]/10 bg-white p-8 shadow-sm sm:p-10">
+        <h1 className="text-3xl font-bold tracking-[-0.02em] text-[#0A1F44]">
           {title}
         </h1>
 
@@ -291,7 +282,7 @@ function PaymentMessage({
           {showReload && (
             <a
               href=""
-              className="inline-flex items-center justify-center rounded-xl bg-[#0A1F44] px-5 py-3 text-sm font-semibold text-white"
+              className="inline-flex items-center justify-center rounded-xl bg-[#0A1F44] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#12305F]"
             >
               Seite neu laden
             </a>
@@ -299,28 +290,32 @@ function PaymentMessage({
 
           <Link
             href="/"
-            className="inline-flex items-center justify-center rounded-xl border border-[#0A1F44]/15 px-5 py-3 text-sm font-semibold text-[#0A1F44]"
+            className="inline-flex items-center justify-center rounded-xl border border-[#0A1F44]/15 px-5 py-3 text-sm font-semibold text-[#0A1F44] transition hover:bg-[#F7F8FA]"
           >
             Zurück zu EliteCV
           </Link>
+        </div>
+
+        <div className="mt-8 border-t border-[#0A1F44]/10 pt-6">
           <Link
             href="/ratgeber/ats-lebenslauf-schweiz-2026"
-            className="block rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            className="block rounded-2xl border border-[#0A1F44]/10 bg-[#F7F8FA] p-6 transition hover:-translate-y-1 hover:shadow-md"
           >
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#8A6A22]">
               CV & ATS
             </p>
 
-            <h2 className="mt-3 text-2xl font-bold text-[#0A1F44]">
+            <h2 className="mt-3 text-xl font-bold text-[#0A1F44]">
               ATS-Lebenslauf Schweiz 2026
             </h2>
 
             <p className="mt-3 leading-7 text-[#0A1F44]/70">
-              So erstellen Sie einen strukturierten und ATS-optimierten Lebenslauf
-              für moderne Bewerbungsportale.
+              So erstellen Sie einen strukturierten und
+              ATS-optimierten Lebenslauf für moderne
+              Bewerbungsportale.
             </p>
 
-            <span className="mt-5 inline-block font-semibold text-[#8A6A22]">
+            <span className="mt-4 inline-block font-semibold text-[#8A6A22]">
               Ratgeber lesen →
             </span>
           </Link>

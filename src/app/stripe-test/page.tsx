@@ -56,13 +56,21 @@ export default function StripeTestPage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-xl items-center px-6 py-16">
-      <div className="w-full rounded-2xl border border-[#0A1F44]/10 bg-white p-8 shadow-sm">
-        <h1 className="text-3xl font-semibold text-[#0A1F44]">
-          Stripe testen
+    <main className="flex min-h-screen items-center bg-[#F7F8FA] px-6 py-16">
+      <div className="mx-auto w-full max-w-xl rounded-3xl border border-[#0A1F44]/10 bg-white p-8 shadow-sm">
+        <span className="inline-flex rounded-full bg-[#C9A95A]/15 px-4 py-2 text-sm font-semibold text-[#8A6A22]">
+          Interne Testseite
+        </span>
+
+        <h1 className="mt-6 text-3xl font-bold text-[#0A1F44]">
+          Stripe Checkout testen
         </h1>
 
         <p className="mt-3 text-[#0A1F44]/65">
+          Diese Seite dient ausschliesslich zur technischen Prüfung der Stripe-Integration.
+        </p>
+
+        <p className="mt-2 font-semibold text-[#0A1F44]">
           Testbetrag: CHF 1.00
         </p>
 
@@ -108,6 +116,13 @@ export default function StripeTestPage() {
               : "CHF 1.00 bezahlen"}
           </button>
         </form>
+
+        <a
+          href="/"
+          className="mt-6 inline-flex text-sm font-semibold text-[#8A6A22] hover:underline"
+        >
+          ← Zurück zur Startseite
+        </a>
       </div>
     </main>
   );

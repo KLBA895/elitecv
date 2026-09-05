@@ -37,11 +37,11 @@ const content = {
     ],
     login: "Login",
     cta: "Jetzt starten",
-    heroTag: "Premium Karrierepositionierung",
-    heroTitle: "Professionelle CV-Optimierung für den Schweizer Arbeitsmarkt.",
+    heroTag: "PROFESSIONELLE BEWERBUNGSUNTERLAGEN SCHWEIZ",
+    heroTitle: "Professioneller Lebenslauf für Ihre Bewerbung in der Schweiz.",
     heroText:
-      "Individuelle CVs, LinkedIn-Profile und Bewerbungsunterlagen für Fach- und Führungskräfte. Klar positioniert. Professionell aufbereitet.",
-    secondaryCta: "Preise & Pakete ansehen",
+      "Wir optimieren Ihren bestehenden CV oder erstellen einen professionellen Lebenslauf für Sie – individuell, ATS-orientiert und auf Ihre Zielposition abgestimmt.",
+    secondaryCta: "Pakete & Preise ansehen",
     generatorNoticeTitle: "Neu: EliteCV Generator 1.0",
     generatorNoticeText:
       "CV, Motivationsschreiben, ATS-Check und PDF-Export in wenigen Minuten.",
@@ -58,11 +58,9 @@ const content = {
     processTitle: "So funktioniert es",
     processSteps: [
       "Paket auswählen",
-      "Lebenslauf hochladen",
-      "Anfrage senden",
-      "Prüfung & Rückmeldung per E-Mail",
-      "Zahlung",
-      "Bearbeitung",
+      "Unterlagen hochladen",
+      "Sicher über Stripe bezahlen",
+      "Bearbeitung & Lieferung",
     ],
     trustTitle: "Vertrauen durch Ergebnisse",
     googleReviewTitle: "auf Google",
@@ -100,10 +98,10 @@ const content = {
       "Wir verwandeln komplexe Karrierewege in klare, strukturierte und überzeugende Profile, die ihren Mehrwert innerhalb weniger Sekunden vermitteln.",
     leistungenTitle: "Leistungen",
     leistungen: [
-      "🚀 EliteCV Professional CV Generator",
-      "CV Optimierung",
+      "🚀 EliteCV Generator",
+      "CV-Optimierung",
       "Motivationsschreiben",
-      "LinkedIn Optimierung",
+      "Professionelle LinkedIn-Optimierung",
       "Karriereberatung",
     ],
     methodeTitle: "Methode WHY / HOW / WHAT",
@@ -113,10 +111,10 @@ const content = {
       { title: "WHAT", heading: "Erfahrung", text: "Erfahrung in konkrete Ergebnisse übersetzen." },
     ],
     pricingTitle: "Preise",
-    pricingDescription: "Klicke auf ein Paket für Details.",
+    pricingDescription: "Wählen Sie zwischen CV-Check, CV-Generator zur Selbstbedienung und persönlicher CV-Optimierung durch EliteCV.",
     selectedLabel: "Ausgewählt",
     orderTitle: "Auftrag starten",
-    orderText: "Wählen Sie ein Paket und senden Sie Ihren Auftrag. Wir melden uns per E-Mail.",
+    orderText: "Wählen Sie Ihr Paket, laden Sie Ihre Unterlagen hoch und schliessen Sie die Bestellung sicher über Stripe ab.",
     orderName: "Name",
     orderEmail: "E-Mail",
     orderUpload: "Lebenslauf & Zusatzdokumente hochladen",
@@ -125,10 +123,10 @@ const content = {
     orderMessage: "Optionale Nachricht",
     orderMessagePlaceholder: "Zielrolle, Branche oder besondere Anforderungen...",
     orderTerms: "Ich akzeptiere die AGB, Datenschutzbestimmungen und das Widerrufsrecht.",
-    orderSubmit: "Auftrag senden",
+    orderSubmit: "Weiter zur sicheren Zahlung",
     orderSuccess:
-      "Vielen Dank für Ihre Bestellung. Wir haben Ihre Anfrage erfolgreich erhalten. Sie erhalten in Kürze eine Bestätigung per E-Mail. Nach Zahlungseingang senden wir Ihnen Ihren persönlichen EliteCV-Zugangscode sowie alle weiteren Informationen.",
-    paymentTitle: "Sichere Zahlung & Freischaltung",
+      "Vielen Dank für Ihre Bestellung. Ihre Bestellung wurde erfolgreich übermittelt. Nach erfolgreicher Zahlung erhalten Sie per E-Mail Ihre Bestellbestätigung sowie – bei einem Generator-Paket – Ihren persönlichen EliteCV-Zugangscode.",
+    paymentTitle: "Sichere Zahlung & Bestellbestätigung",
     paymentLead:
       "Nach dem Absenden Ihrer Bestellung werden Sie direkt zur sicheren Zahlungsseite von Stripe weitergeleitet. Nach erfolgreicher Zahlung erhalten Sie automatisch eine Bestätigung per E-Mail.",
     paymentItems: [
@@ -191,7 +189,7 @@ const content = {
     contactFormMessage: "Nachricht",
     contactFormSubmit: "Nachricht senden",
     finalTitle: "Bereit für Ihren nächsten Karriereschritt mit EliteCV?",
-    finalText: "Keine generische CV-Bearbeitung. Klare Positionierung für echte Chancen.",
+    finalText: "Wählen Sie das passende Paket und starten Sie Ihre professionelle Bewerbung für den Schweizer Arbeitsmarkt.",
     legalLinks: [
       { label: "Impressum", href: "/impressum" },
       { label: "Datenschutz", href: "/datenschutz" },
@@ -212,11 +210,11 @@ const content = {
     ],
     login: "Login",
     cta: "Start now",
-    heroTag: "Premium Career Positioning",
-    heroTitle: "Professional CV optimization for the Swiss job market.",
+    heroTag: "PROFESSIONAL CV SERVICES SWITZERLAND",
+    heroTitle: "A professional CV for your application in Switzerland.",
     heroText:
-      "Individual CVs, LinkedIn profiles and application documents for professionals and executives. Clearly positioned. Professionally presented.",
-    secondaryCta: "View Pricing & Plans",
+      "We optimize your existing CV or create a professional CV for you – individually tailored, ATS-oriented and aligned with your target position.",
+    secondaryCta: "View Packages & Pricing",
     generatorNoticeText:
       "CV, cover letter, ATS check and PDF export in just a few minutes.",
     generatorNoticeLink: "Open generator →",
@@ -231,12 +229,10 @@ const content = {
     ],
     processTitle: "How it works",
     processSteps: [
-      "Choose package",
-      "Upload CV",
-      "Send request",
-      "Review & response by email",
-      "Payment",
-      "Delivery",
+      "Choose your package",
+      "Upload your documents",
+      "Pay securely via Stripe",
+      "Processing & delivery",
     ],
     trustTitle: "Trust Through Results",
     googleReviewTitle: "Google Reviews",
@@ -286,10 +282,10 @@ const content = {
       { title: "WHAT", heading: "Experience", text: "Present experience as clear, relevant outcomes." },
     ],
     pricingTitle: "Pricing",
-    pricingDescription: "Click a package to see details.",
+    pricingDescription: "Choose between a CV check, a self-service CV generator and personal CV optimization by EliteCV.",
     selectedLabel: "Selected",
     orderTitle: "Start your order",
-    orderText: "Choose a package and submit your request. We will get back to you by email.",
+    orderText: "Choose your package, upload your documents and complete your order securely via Stripe.",
     orderName: "Name",
     orderEmail: "Email",
     orderUpload: "Upload CV & supporting documents",
@@ -298,12 +294,12 @@ const content = {
     orderMessage: "Optional message",
     orderMessagePlaceholder: "Target role, industry, or specific requirements...",
     orderTerms: "I accept the Terms and Conditions, Privacy Policy and acknowledge the Right of Withdrawal.",
-    orderSubmit: "Send request",
+    orderSubmit: "Proceed to secure payment",
     orderSuccess:
-      "Thank you for your order. We have successfully received your request. You will receive an order confirmation by email shortly. After payment has been received, we will send you your personal EliteCV access code together with all further information.",
-    paymentTitle: "Secure Payment & Access",
+      "Thank you for your order. Your payment has been successfully completed. You will receive your order confirmation by email. For generator packages, your personal EliteCV access code will also be provided.",
+    paymentTitle: "Secure Payment & Order Confirmation",
     paymentLead:
-      "After submitting your order, you will be redirected to Stripe's secure payment page. Once payment has been completed successfully, you will automatically receive a confirmation by email.",
+      "After submitting your order, you will be redirected to Stripe's secure checkout. Once payment is completed successfully, you will automatically receive your order confirmation by email.",
     paymentItems: [
       "confirmation of your order",
       "an overview of the selected package, add-ons and total amount",
@@ -316,7 +312,7 @@ const content = {
       "Apple Pay and other payment methods offered by Stripe",
     ],
     paymentEnd:
-      "Processing or access activation begins once payment has been successfully confirmed.",
+      "Your order will be processed, or your generator access activated, once your payment has been successfully confirmed.",
     faqTitle: "FAQ",
     faqs: [
       {
@@ -364,7 +360,7 @@ const content = {
     contactFormMessage: "Message",
     contactFormSubmit: "Send message",
     finalTitle: "Ready for your next career move with EliteCV?",
-    finalText: "Not generic CV editing. Strategic positioning for real opportunities.",
+    finalText: "Choose the right package and start your professional application for the Swiss job market.",
     legalLinks: [
       { label: "Legal Notice", href: "/impressum" },
       { label: "Privacy Policy", href: "/datenschutz" },
@@ -383,112 +379,108 @@ const pricingPlans = [
     name: "CV Check",
     price: "CHF 79",
     detailsDe: [
-      "Professionelle CV Analyse",
-      "Struktur & Layout Feedback",
-      "Optimierungsempfehlungen",
+      "Professionelle CV-Analyse",
+      "Struktur- & Layout-Feedback",
+      "Konkrete Optimierungsempfehlungen",
     ],
     detailsEn: [
       "Professional CV analysis",
       "Structure & layout feedback",
-      "Optimization recommendations",
+      "Actionable optimization recommendations",
     ],
   },
   {
     key: "generatorProfessional" as const,
-    name: "EliteCV Professional Generator",
+    name: "CV Generator Professional",
     price: "CHF 99",
     detailsDe: [
       "EliteCV Professional Layout",
-      "PDF Export",
-      "3 Tage Zugang",
-      "Farbauswahl",
-      "Deutsch oder Englisch (+ CHF 29)",
+      "PDF-Export",
+      "3 Tage Zugriff",
+      "Individuelle Farbauswahl",
+      "Deutsch inklusive · Englisch + CHF 29",
     ],
     detailsEn: [
       "EliteCV Professional Layout",
       "PDF export",
       "3 days access",
-      "Color selection",
-      "German or English (+ CHF 29)",
-    ]
+      "Individual color selection",
+      "German included · English + CHF 29",
+    ],
   },
-
   {
     key: "generatorExecutive" as const,
-    name: "EliteCV Executive Generator",
+    name: "CV Generator Executive",
     price: "CHF 149",
     detailsDe: [
       "EliteCV Executive Layout",
-      "PDF Export",
-      "5 Tage Zugang",
-      "Farbauswahl",
-      "Deutsch oder Englisch (+ CHF 29)",
+      "PDF-Export",
+      "5 Tage Zugriff",
+      "Individuelle Farbauswahl",
+      "Deutsch inklusive · Englisch + CHF 29",
     ],
     detailsEn: [
       "EliteCV Executive Layout",
       "PDF export",
       "5 days access",
-      "Color selection",
-      "German or English (+ CHF 29)",
+      "Individual color selection",
+      "German included · English + CHF 29",
     ],
   },
-
   {
     key: "professional" as const,
-    name: "CV Executive",
+    name: "Executive CV Service",
     price: "CHF 179",
     detailsDe: [
-      "Executive CV Optimierung",
-      "Strategische Positionierung",
-      "Executive Design",
-      "Persönliche Beratung",
+      "Persönliche Executive-CV-Optimierung",
+      "Strategische Karrierepositionierung",
+      "Professionelles Executive-Design",
+      "Persönliche Executive-Beratung",
     ],
     detailsEn: [
-      "Professional CV optimization",
-      "New creation or revision",
-      "Strategic positioning",
-      "Individual layout",
+      "Personal Executive CV optimization",
+      "Strategic career positioning",
+      "Professional Executive design",
+      "Personal Executive consultation",
     ],
   },
-
   {
     key: "premium" as const,
     name: "Premium",
     price: "CHF 249",
     detailsDe: [
-      "Professionelle CV Optimierung",
-      "Canva Premium Design",
-      "LinkedIn Optimierung",
-      "CV Übersetzung (DE ↔ EN)",
-      "1 Motivationsschreiben inklusive",
-      "Priorisierte Bearbeitung",
+      "Professionelle CV-Optimierung",
+      "Professionelles Premium-CV-Design",
+      "Professionelle LinkedIn-Optimierung",
+      "Professionelle CV-Übersetzung (DE ↔ EN)",
+      "1 professionelles Motivationsschreiben inklusive",
+      "Priorisierte Bearbeitung Ihres Auftrags",
     ],
     detailsEn: [
       "Professional CV optimization",
-      "Canva premium design",
-      "LinkedIn optimization",
-      "CV translation (DE ↔ EN)",
-      "1 Cover Letter included",
+      "Professional Premium CV design",
+      "Professional LinkedIn optimization",
+      "Professional CV translation (DE ↔ EN)",
+      "1 professional cover letter included",
       "Priority processing",
     ],
   },
-
   {
     key: "elite" as const,
     name: "Elite",
     price: "CHF 399",
     detailsDe: [
-      "Executive Karrierepositionierung",
-      "Individuelle Karrierestrategie",
-      "CV, LinkedIn & Bewerbungsstrategie",
-      "CV Übersetzung (DE ↔ EN)",
+      "Strategische Executive-Karrierepositionierung",
+      "Individuelle Executive-Karrierestrategie",
+      "CV-, LinkedIn- und Bewerbungsstrategie",
+      "Professionelle CV-Übersetzung (DE ↔ EN)",
       "Persönliche Betreuung",
     ],
     detailsEn: [
-      "Executive career positioning",
-      "Individual career strategy",
+      "Strategic executive career positioning",
+      "Individual executive career strategy",
       "CV, LinkedIn & application strategy",
-      "CV translation (DE ↔ EN)",
+      "Professional CV translation (DE ↔ EN)",
       "Personal support",
     ],
   },
@@ -525,7 +517,7 @@ function EliteCVInlineCertified() {
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>("de");
-  const [activePlan, setActivePlan] = useState<PlanKey>("generatorProfessional");
+  const [activePlan, setActivePlan] = useState<PlanKey>("professional");
   const [orderSubmitted, setOrderSubmitted] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [contactError, setContactError] = useState(false);
@@ -643,10 +635,10 @@ export default function Home() {
     );
 
     const addonLabels: Record<string, string> = {
-      linkedin: "LinkedIn-Profil Optimierung (+ CHF 99)",
-      coverLetter: "Motivationsschreiben Erstellung (+ CHF 89)",
-      translation: "CV Übersetzung DE ↔ EN (+ CHF 59)",
-      referenceAnalysis: "Arbeitszeugnis Analyse (+ CHF 39)",
+      linkedin: "LinkedIn-Profiloptimierung (+ CHF 99)",
+      coverLetter: "Professionelles Motivationsschreiben (+ CHF 89)",
+      translation: "CV-Übersetzung DE ↔ EN (+ CHF 59)",
+      referenceAnalysis: "Arbeitszeugnis-Analyse (+ CHF 39)",
       express: "Express-Bearbeitung 24h (+ CHF 59)",
     };
 
@@ -861,13 +853,20 @@ export default function Home() {
               </div>
 
               <div className="mt-10 flex flex-wrap items-center gap-3 text-sm text-[#0A1F44]/65">
-                {[
-                  "ATS",
-                  "KI",
-                  "PDF",
-                  "Executive",
-                  "English",
-                ].map((item) => (
+                {(lang === "de"
+                  ? [
+                    "ATS-orientiert",
+                    "Schweizer Arbeitsmarkt",
+                    "Professionelles Design",
+                    "DE & EN",
+                  ]
+                  : [
+                    "ATS-oriented",
+                    "Swiss job market",
+                    "Professional design",
+                    "DE & EN",
+                  ]
+                ).map((item) => (
                   <span
                     key={item}
                     className="rounded-full border border-[#0A1F44]/10 bg-white px-4 py-2 shadow-sm"
@@ -889,12 +888,12 @@ export default function Home() {
                       </p>
 
                       <p className="mt-2 text-xl font-semibold tracking-[-0.02em]">
-                        Profil-Performance
+                        {t.visualTitle}
                       </p>
                     </div>
 
                     <span className="rounded-full border border-emerald-600/25 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-700">
-                      +36% Klarheit
+                      {t.visualGain}
                     </span>
                   </div>
 
@@ -977,7 +976,7 @@ export default function Home() {
 
         <section className="mx-auto w-full max-w-7xl px-6 pb-20">
           <h2 className="text-3xl font-semibold tracking-[-0.02em]">{t.processTitle}</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 grid gap-4 md:grid-cols-4">
             {t.processSteps.map((step, index) => (
               <article key={step} className="rounded-2xl border border-[#0A1F44]/10 bg-white p-5 shadow-sm">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
@@ -1040,7 +1039,7 @@ export default function Home() {
                 >
                   {item.includes("Generator") && (
                     <span className="mb-3 inline-flex rounded-full bg-[#C9A95A] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
-                      NEU
+                      {lang === "de" ? "NEU" : "NEW"}
                     </span>
                   )}
 
@@ -1161,35 +1160,35 @@ export default function Home() {
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
                 <p className="font-semibold">
-                  {lang === "de" ? "LinkedIn-Profil Optimierung" : "LinkedIn Profile Optimization"}
+                  {lang === "de" ? "LinkedIn-Profiloptimierung" : "LinkedIn Profile Optimization"}
                 </p>
                 <p className="mt-1 font-bold text-[#C9A95A]">CHF 99</p>
               </div>
 
               <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
                 <p className="font-semibold">
-                  {lang === "de" ? "Motivationsschreiben Erstellung" : "Cover Letter Creation"}
+                  {lang === "de" ? "Professionelles Motivationsschreiben" : "Professional Cover Letter"}
                 </p>
                 <p className="mt-1 font-bold text-[#C9A95A]">CHF 89</p>
               </div>
 
               <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
                 <p className="font-semibold">
-                  {lang === "de" ? "CV Übersetzung DE ↔ EN" : "CV Translation DE ↔ EN"}
+                  {lang === "de" ? "CV-Übersetzung DE ↔ EN" : "CV Translation DE ↔ EN"}
                 </p>
                 <p className="mt-1 font-bold text-[#C9A95A]">CHF 59</p>
               </div>
 
               <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
                 <p className="font-semibold">
-                  {lang === "de" ? "Arbeitszeugnis Analyse" : "Reference Letter Analysis"}
+                  {lang === "de" ? "Arbeitszeugnis-Analyse" : "Employment Reference Analysis"}
                 </p>
                 <p className="mt-1 font-bold text-[#C9A95A]">CHF 39</p>
               </div>
 
               <div className="rounded-xl border border-[#0A1F44]/10 bg-white p-4">
                 <p className="font-semibold">
-                  {lang === "de" ? "Express-Bearbeitung (24h)" : "Express Processing (24h)"}
+                  {lang === "de" ? "Express-Bearbeitung (24h)" : "24-Hour Express Processing"}
                 </p>
                 <p className="mt-1 font-bold text-[#C9A95A]">CHF 59</p>
               </div>
@@ -1243,7 +1242,7 @@ export default function Home() {
               </div>
               <div className="mt-5">
                 <label className="text-sm font-medium text-[#0A1F44]/85">
-                  Sprache
+                  {lang === "de" ? "Sprache" : "Language"}
 
                   <select
                     name="language"
@@ -1257,13 +1256,17 @@ export default function Home() {
               </div>
               <div className="mt-5">
                 <label className="text-sm font-medium text-[#0A1F44]/85">
-                  Bemerkungen / Wünsche
+                  {lang === "de" ? "Bemerkungen / Wünsche" : "Comments / Requests"}
 
                   <textarea
                     name="message"
                     rows={4}
                     className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
-                    placeholder="z.B. Zielposition, Branche, gewünschte Sprache, besondere Hinweise..."
+                    placeholder={
+                      lang === "de"
+                        ? "z.B. Zielposition, Branche, gewünschte Sprache, besondere Hinweise..."
+                        : "e.g. target position, industry, preferred language, special requirements..."
+                    }
                   />
                 </label>
               </div>
@@ -1335,7 +1338,11 @@ export default function Home() {
                 <input
                   name="linkedinUrl"
                   type="text"
-                  placeholder="https://linkedin.com/in/ihrprofil"
+                  placeholder={
+                    lang === "de"
+                      ? "https://linkedin.com/in/ihrprofil"
+                      : "https://linkedin.com/in/yourprofile"
+                  }
                   className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
                 />
               </label>
@@ -1369,7 +1376,7 @@ export default function Home() {
                     <span>
                       {lang === "de"
                         ? "Motivationsschreiben Erstellung (+ CHF 89)"
-                        : "Cover Letter Creation (+ CHF 89)"}
+                        : "Professional Cover Letter (+ CHF 89)"}
                     </span>
                   </label>
 
@@ -1395,7 +1402,7 @@ export default function Home() {
                     <span>
                       {lang === "de"
                         ? "Arbeitszeugnis Analyse (+ CHF 39)"
-                        : "Reference Letter Analysis (+ CHF 39)"}
+                        : "Employment Reference Analysis (+ CHF 39)"}
                     </span>
                   </label>
 
@@ -1408,7 +1415,7 @@ export default function Home() {
                     <span>
                       {lang === "de"
                         ? "Express-Bearbeitung 24h (+ CHF 59)"
-                        : "Express Processing 24h (+ CHF 59)"}
+                        : "24-Hour Express Processing (+ CHF 59)"}
                     </span>
                   </label>
 
@@ -1429,7 +1436,7 @@ export default function Home() {
                   disabled
                   className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white"
                 >
-                  ✓ {lang === "de" ? "Bestellung erfolgreich gesendet" : "Order sent successfully"}
+                  ✓ {lang === "de" ? "Bestellung erfolgreich abgeschlossen" : "Order completed successfully"}
                 </button>
               ) : (
                 <button
@@ -1442,8 +1449,8 @@ export default function Home() {
                       <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/20 border-t-white border-r-white" />
                       <span>
                         {lang === "de"
-                          ? "Bestellung wird gesendet..."
-                          : "Sending order..."}
+                          ? "Weiterleitung zur Zahlung..."
+                          : "Redirecting to payment..."}
                       </span>
                     </>
                   ) : (
@@ -1451,8 +1458,8 @@ export default function Home() {
                       <span>🚀</span>
                       <span>
                         {lang === "de"
-                          ? "Kostenpflichtig bestellen"
-                          : "Place Binding Order"}
+                          ? "Weiter zur sicheren Zahlung"
+                          : "Proceed to Payment"}
                       </span>
                     </>
                   )}
@@ -1465,7 +1472,11 @@ export default function Home() {
             <aside className="rounded-2xl border border-[#0A1F44]/10 bg-[#FCFCFB] p-7 shadow-sm">
               <h3 className="text-xl font-semibold">{t.paymentTitle}</h3>
               <p className="mt-3 text-[#0A1F44]/70">{t.paymentLead}</p>
-              <p className="mt-4 text-sm font-medium text-[#0A1F44]/80">{lang === "de" ? "Sie erhalten anschliessend per E-Mail:" : "You will then receive by email:"}</p>
+              <p className="mt-4 text-sm font-medium text-[#0A1F44]/80">
+                {lang === "de"
+                  ? "Nach erfolgreicher Zahlung erhalten Sie per E-Mail:"
+                  : "After payment, you will receive by email:"}
+              </p>
               <ul className="mt-2 space-y-2 text-sm text-[#0A1F44]/76">{t.paymentItems.map((item) => <li key={item}>- {item}</li>)}</ul>
               <p className="mt-4 text-sm font-medium text-[#0A1F44]/80">{t.paymentMethodsTitle}</p>
               <ul className="mt-2 space-y-2 text-sm text-[#0A1F44]/76">{t.paymentMethods.map((method) => <li key={method}>- {method}</li>)}</ul>
@@ -1671,17 +1682,31 @@ export default function Home() {
 
                 <ul className="mt-4 space-y-2 text-sm text-[#0A1F44]/75">
 
-                  <li>✓ ATS-optimierte Lebensläufe</li>
+                  <li>
+                    ✓ {lang === "de" ? "ATS-optimierte Lebensläufe" : "ATS-Optimized CVs"}
+                  </li>
 
-                  <li>✓ CV-Optimierung</li>
+                  <li>
+                    ✓ {lang === "de" ? "CV-Optimierung" : "CV Optimization"}
+                  </li>
 
-                  <li>✓ LinkedIn-Profil Optimierung</li>
+                  <li>
+                    ✓ {lang === "de" ? "LinkedIn-Profiloptimierung" : "LinkedIn Profile Optimization"}
+                  </li>
 
-                  <li>✓ Motivationsschreiben</li>
+                  <li>
+                    ✓ {lang === "de" ? "Motivationsschreiben" : "Cover Letters"}
+                  </li>
 
-                  <li>✓ Arbeitszeugnis Analyse</li>
+                  <li>
+                    ✓ {lang === "de" ? "Arbeitszeugnis Analyse" : "Employment Reference Analysis"}
+                  </li>
 
-                  <li>✓ EliteCV Generator</li>
+                  <li>
+                    <li>
+                      ✓ EliteCV Generator
+                    </li>
+                  </li>
 
                 </ul>
 
@@ -1735,7 +1760,7 @@ export default function Home() {
                 </label>
 
                 <label className="text-sm font-medium text-[#0A1F44]/85">
-                  Telefon (optional)
+                  {lang === "de" ? "Telefon (optional)" : "Phone (optional)"}
                   <input
                     name="phone"
                     type="tel"
@@ -1745,21 +1770,37 @@ export default function Home() {
                 </label>
 
                 <label className="text-sm font-medium text-[#0A1F44]/85">
-                  Betreff
+                  {lang === "de" ? "Betreff" : "Subject"}
                   <select
                     name="subject"
                     required
                     className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 bg-white px-4 py-2.5 outline-none transition focus:border-[#C9A95A]"
                   >
-                    <option value="">Bitte auswählen</option>
-                    <option>Allgemeine Anfrage</option>
+                    <option value="">
+                      {lang === "de" ? "Bitte auswählen" : "Please select"}
+                    </option>
+                    <option>
+                      {lang === "de" ? "Allgemeine Anfrage" : "General Inquiry"}
+                    </option>
                     <option>EliteCV Generator</option>
-                    <option>CV Optimierung</option>
-                    <option>LinkedIn Optimierung</option>
-                    <option>Motivationsschreiben</option>
-                    <option>Arbeitszeugnis Analyse</option>
-                    <option>Technischer Support</option>
-                    <option>Sonstiges</option>
+                    <option>
+                      {lang === "de" ? "CV Optimierung" : "CV Optimization"}
+                    </option>
+                    <option>
+                      {lang === "de" ? "LinkedIn Optimierung" : "LinkedIn Optimization"}
+                    </option>
+                    <option>
+                      {lang === "de" ? "Motivationsschreiben" : "Cover Letter"}
+                    </option>
+                    <option>
+                      {lang === "de" ? "Arbeitszeugnis Analyse" : "Employment Reference Analysis"}
+                    </option>
+                    <option>
+                      {lang === "de" ? "Technischer Support" : "Technical Support"}
+                    </option>
+                    <option>
+                      {lang === "de" ? "Sonstiges" : "Other"}
+                    </option>
                   </select>
                 </label>
 
@@ -1770,7 +1811,11 @@ export default function Home() {
                     name="message"
                     required
                     rows={6}
-                    placeholder="Wie können wir Ihnen helfen?"
+                    placeholder={
+                      lang === "de"
+                        ? "Wie können wir Ihnen helfen?"
+                        : "How can we help you?"
+                    }
                     className="mt-2 w-full rounded-xl border border-[#0A1F44]/15 px-4 py-3 outline-none transition focus:border-[#C9A95A]"
                   />
                 </label>
@@ -1835,14 +1880,14 @@ export default function Home() {
               )}
             </form>
           </div>
-        </section>
+        </section >
 
         <section id="login" className="bg-[#0A1F44]">
           <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-6 px-6 py-16 text-center md:flex-row md:text-left">
             <div><h2 className="max-w-2xl text-3xl font-semibold text-white">{t.finalTitle}</h2><p className="mt-3 text-white/80">{t.finalText}</p><div className="mt-4"><EliteCVInlineCertified /></div></div>
           </div>
         </section>
-      </main>
+      </main >
 
       <footer className="border-t border-[#0A1F44]/10 bg-white py-10">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-6">
@@ -1885,6 +1930,6 @@ export default function Home() {
           <p className="text-sm text-[#0A1F44]/62">© {new Date().getFullYear()} EliteCV. {t.footer}</p>
         </div>
       </footer>
-    </div>
+    </div >
   );
 }

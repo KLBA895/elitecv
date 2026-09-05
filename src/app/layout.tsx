@@ -12,33 +12,27 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.elitecv.ch"),
 
   title: {
-    default: "EliteCV | CV Generator & CV-Optimierung Schweiz",
+    default: "CV erstellen & optimieren Schweiz | EliteCV",
     template: "%s | EliteCV",
   },
 
   description:
-    "CV Generator, professionelle CV-Optimierung und LinkedIn-Profil-Optimierung für den Schweizer Arbeitsmarkt. ATS-optimierte Lebensläufe, Executive CVs und Bewerbungslösungen auf Deutsch und Englisch.",
-
-  keywords: [
-    "CV Generator Schweiz",
-    "CV Optimierung Schweiz",
-    "Lebenslauf optimieren Schweiz",
-    "Lebenslauf erstellen Schweiz",
-    "LinkedIn Profil optimieren Schweiz",
-    "LinkedIn Optimierung Schweiz",
-    "Executive CV Schweiz",
-    "ATS Lebenslauf Schweiz",
-    "Bewerbungsservice Schweiz",
-    "Karriereberatung Schweiz",
-  ],
+    "Professionellen CV für die Schweiz erstellen oder optimieren lassen. EliteCV bietet CV Generator, ATS-orientierte CVs, Executive CVs und LinkedIn-Optimierung.",
 
   alternates: {
-    canonical: "https://www.elitecv.ch",
+    canonical: "/",
   },
 
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 
   icons: {
@@ -47,17 +41,17 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "EliteCV | CV Generator & CV-Optimierung Schweiz",
+    title: "CV erstellen & optimieren Schweiz | EliteCV",
     description:
-      "CV Generator, CV-Optimierung und LinkedIn-Profil-Optimierung für den Schweizer Arbeitsmarkt. Professional & Executive CVs, ATS-Optimierung und Deutsch/Englisch.",
-    url: "https://www.elitecv.ch",
+      "Professionelle CV-Optimierung und CV Generator für den Schweizer Arbeitsmarkt. ATS-orientiert, modern und auf Ihre Zielposition abgestimmt.",
+    url: "/",
     siteName: "EliteCV",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "EliteCV Schweiz – CV Generator und CV-Optimierung",
+        alt: "EliteCV – Professioneller CV und CV Generator Schweiz",
       },
     ],
     locale: "de_CH",
@@ -66,9 +60,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "EliteCV | CV Generator & CV-Optimierung Schweiz",
+    title: "CV erstellen & optimieren Schweiz | EliteCV",
     description:
-      "CV Generator, CV-Optimierung und LinkedIn-Profil-Optimierung für den Schweizer Arbeitsmarkt.",
+      "Professionelle CV-Optimierung und CV Generator für Bewerbungen in der Schweiz.",
     images: ["/og-image.png"],
   },
 };
@@ -76,24 +70,38 @@ export const metadata: Metadata = {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://www.elitecv.ch/#business",
 
   name: "EliteCV",
-  url: "https://www.elitecv.ch",
-
+  url: "https://www.elitecv.ch/",
   logo: "https://www.elitecv.ch/og-image.png",
   image: "https://www.elitecv.ch/og-image.png",
 
   description:
-    "EliteCV bietet einen CV Generator, professionelle CV-Optimierung, LinkedIn-Profil-Optimierung und Karrierepositionierung für den Schweizer Arbeitsmarkt.",
+    "EliteCV unterstützt Bewerber, Fachkräfte und Führungskräfte mit professioneller CV-Optimierung, einem CV Generator, Executive CVs, LinkedIn-Optimierung und Karrierepositionierung für den Schweizer Arbeitsmarkt.",
 
   email: "info@elitecv.ch",
+  telephone: "+41 76 331 46 24",
+
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Schulgutstrasse 1",
+    postalCode: "8953",
+    addressLocality: "Dietikon",
+    addressCountry: "CH",
+  },
 
   areaServed: {
     "@type": "Country",
     name: "Switzerland",
   },
 
-  availableLanguage: ["German", "English"],
+  availableLanguage: ["de", "en"],
+
+  founder: {
+    "@type": "Person",
+    name: "Klaudio Batinic",
+  },
 
   sameAs: [
     "https://www.linkedin.com/company/elitecv-ch/",
@@ -101,19 +109,47 @@ const structuredData = {
     "https://www.instagram.com/elitecv.ch/",
   ],
 
-  serviceType: [
-    "CV Generator Schweiz",
-    "CV Optimierung",
-    "LinkedIn Profil Optimierung",
-    "Executive CV",
-    "ATS Lebenslauf",
-    "Karriereberatung",
-    "Bewerbungsunterlagen",
-  ],
-
-  founder: {
-    "@type": "Person",
-    name: "Klaudio Batinic",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "EliteCV Leistungen",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "CV Check",
+          description:
+            "Professionelle Analyse und Optimierungsempfehlungen für bestehende Lebensläufe.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "EliteCV CV Generator",
+          description:
+            "CV Generator für professionelle und ATS-orientierte Lebensläufe.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Executive CV Service",
+          description:
+            "Persönliche CV-Optimierung und strategische Positionierung für Fach- und Führungskräfte.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "LinkedIn-Optimierung",
+          description:
+            "Professionelle Optimierung des LinkedIn-Profils für den Schweizer Arbeitsmarkt.",
+        },
+      },
+    ],
   },
 };
 

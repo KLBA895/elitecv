@@ -1,22 +1,42 @@
+import Link from "next/link";
+
 export default function PaymentCancelledPage() {
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl items-center px-6 py-16">
-      <div className="w-full rounded-2xl border border-[#0A1F44]/10 bg-white p-8 shadow-sm">
-        <h1 className="text-3xl font-semibold text-[#0A1F44]">
+    <main className="flex min-h-screen items-center bg-[#F7F8FA] px-6 py-16 text-[#0A1F44]">
+      <div className="mx-auto w-full max-w-2xl rounded-3xl border border-[#0A1F44]/10 bg-white p-8 shadow-sm sm:p-10">
+        <span className="inline-flex rounded-full bg-[#C9A95A]/15 px-4 py-2 text-sm font-semibold text-[#8A6A22]">
+          EliteCV
+        </span>
+
+        <h1 className="mt-6 text-3xl font-bold tracking-[-0.02em] sm:text-4xl">
           Zahlung abgebrochen
         </h1>
 
-        <p className="mt-4 text-[#0A1F44]/70">
-          Die Zahlung wurde abgebrochen. Es wurde noch kein Zugangscode
-          erstellt.
+        <p className="mt-5 leading-8 text-[#0A1F44]/70">
+          Die Zahlung wurde nicht abgeschlossen. Es wurde keine Zahlung
+          ausgeführt und noch kein Zugangscode freigeschaltet.
         </p>
 
-        <a
-          href="/#preise"
-          className="mt-7 inline-flex rounded-xl bg-[#0A1F44] px-5 py-3 text-sm font-semibold text-white"
-        >
-          Zurück zur Bestellung
-        </a>
+        <p className="mt-3 leading-8 text-[#0A1F44]/70">
+          Sie können jederzeit zu den Paketen zurückkehren und die Bestellung
+          erneut starten.
+        </p>
+
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Link
+            href="/#preise"
+            className="rounded-xl bg-[#0A1F44] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#12305F]"
+          >
+            Zurück zu den Paketen
+          </Link>
+
+          <Link
+            href="/kontakt"
+            className="rounded-xl border border-[#0A1F44]/15 px-6 py-3 text-sm font-semibold text-[#0A1F44] transition hover:bg-[#F7F8FA]"
+          >
+            Kontakt
+          </Link>
+        </div>
       </div>
     </main>
   );

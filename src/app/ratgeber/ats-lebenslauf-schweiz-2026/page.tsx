@@ -2,19 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title:
-    "ATS Lebenslauf Schweiz 2026 – CV für ATS optimieren",
+  title: "ATS Lebenslauf Schweiz 2026: CV für ATS optimieren | EliteCV",
+
   description:
-    "Erfahren Sie, wie Sie einen ATS-optimierten Lebenslauf für den Schweizer Arbeitsmarkt erstellen. Mit Tipps zu Struktur, Keywords, Layout und KI-Unterstützung.",
-  keywords: [
-    "ATS Lebenslauf Schweiz",
-    "ATS CV Schweiz",
-    "Lebenslauf Schweiz 2026",
-    "ATS optimierter Lebenslauf",
-    "CV Generator Schweiz",
-    "Lebenslauf mit KI",
-    "Bewerbung Schweiz",
-  ],
+    "ATS Lebenslauf Schweiz 2026: Erfahren Sie, wie Sie Ihren CV für Bewerbungssoftware optimieren – mit Tipps zu Struktur, Keywords, Layout, PDF und KI.",
+
   alternates: {
     canonical:
       "https://www.elitecv.ch/ratgeber/ats-lebenslauf-schweiz-2026",
@@ -26,14 +18,20 @@ export const metadata: Metadata = {
         "https://www.elitecv.ch/guides/ats-resume-switzerland-2026",
     },
   },
+
   openGraph: {
-    title:
-      "ATS-Lebenslauf Schweiz 2026 – So überzeugen Sie moderne Bewerbungsportale",
+    title: "ATS Lebenslauf Schweiz 2026: CV für ATS optimieren",
+
     description:
-      "Praktische Tipps für einen klar strukturierten und ATS-optimierten Lebenslauf für den Schweizer Arbeitsmarkt.",
-    url: "https://www.elitecv.ch/ratgeber/ats-lebenslauf-schweiz-2026",
+      "Praktische Tipps für einen klar strukturierten und ATS-orientierten Lebenslauf für den Schweizer Arbeitsmarkt.",
+
+    url:
+      "https://www.elitecv.ch/ratgeber/ats-lebenslauf-schweiz-2026",
+
     siteName: "EliteCV",
+
     locale: "de_CH",
+
     type: "article",
   },
 };
@@ -66,6 +64,8 @@ export default function AtsLebenslaufSchweizPage() {
   return (
     <main className="bg-[#F7F8FA] text-[#0A1F44]">
       <article className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
+
+        {/* NAVIGATION */}
         <div className="mb-8 flex items-center justify-between gap-4">
           <Link
             href="/ratgeber"
@@ -91,6 +91,7 @@ export default function AtsLebenslaufSchweizPage() {
           </div>
         </div>
 
+        {/* HERO */}
         <header className="rounded-3xl bg-[#0A1F44] px-7 py-10 text-white shadow-sm sm:px-12 sm:py-14">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#D4B15A]">
             EliteCV-Ratgeber
@@ -101,7 +102,7 @@ export default function AtsLebenslaufSchweizPage() {
           </h1>
 
           <p className="mt-4 text-xl font-medium text-white/90">
-            So überzeugen Sie moderne Bewerbungsportale und Recruiter
+            So optimieren Sie Ihren CV für Bewerbungssoftware und Recruiter
           </p>
 
           <p className="mt-6 max-w-3xl leading-8 text-white/75">
@@ -112,6 +113,8 @@ export default function AtsLebenslaufSchweizPage() {
         </header>
 
         <div className="mt-10 space-y-12 rounded-3xl bg-white p-7 shadow-sm sm:p-12">
+
+          {/* ATS ERKLÄRUNG */}
           <section>
             <h2 className="text-3xl font-bold">
               Was ist ein Applicant Tracking System?
@@ -133,6 +136,7 @@ export default function AtsLebenslaufSchweizPage() {
             </p>
           </section>
 
+          {/* WARUM */}
           <section>
             <h2 className="text-3xl font-bold">
               Warum ein guter CV trotzdem übersehen werden kann
@@ -159,6 +163,7 @@ export default function AtsLebenslaufSchweizPage() {
             </div>
           </section>
 
+          {/* FEHLER */}
           <section>
             <h2 className="text-3xl font-bold">
               Die 10 häufigsten ATS-Fehler
@@ -182,6 +187,7 @@ export default function AtsLebenslaufSchweizPage() {
             </ol>
           </section>
 
+          {/* CHECKLISTE */}
           <section>
             <h2 className="text-3xl font-bold">
               So bauen Sie einen ATS-konformen Lebenslauf auf
@@ -211,9 +217,10 @@ export default function AtsLebenslaufSchweizPage() {
             </div>
           </section>
 
+          {/* KEYWORDS */}
           <section>
             <h2 className="text-3xl font-bold">
-              Keywords richtig einsetzen
+              Keywords im ATS-Lebenslauf richtig einsetzen
             </h2>
 
             <p className="mt-5 leading-8 text-[#0A1F44]/75">
@@ -236,6 +243,7 @@ export default function AtsLebenslaufSchweizPage() {
             </p>
           </section>
 
+          {/* ERFOLGE */}
           <section>
             <h2 className="text-3xl font-bold">
               Aufgaben und Erfolge klar formulieren
@@ -273,6 +281,7 @@ export default function AtsLebenslaufSchweizPage() {
             </div>
           </section>
 
+          {/* KI */}
           <section>
             <h2 className="text-3xl font-bold">
               Welche Rolle spielt künstliche Intelligenz?
@@ -292,6 +301,7 @@ export default function AtsLebenslaufSchweizPage() {
             </p>
           </section>
 
+          {/* LÄNGE */}
           <section>
             <h2 className="text-3xl font-bold">
               Wie lang sollte ein Schweizer Lebenslauf sein?
@@ -311,9 +321,10 @@ export default function AtsLebenslaufSchweizPage() {
             </p>
           </section>
 
+          {/* FAQ */}
           <section>
             <h2 className="text-3xl font-bold">
-              Häufig gestellte Fragen
+              Häufig gestellte Fragen zum ATS-Lebenslauf
             </h2>
 
             <div className="mt-6 space-y-5">
@@ -356,6 +367,7 @@ export default function AtsLebenslaufSchweizPage() {
             </div>
           </section>
 
+          {/* GENERATOR */}
           <section className="rounded-3xl bg-[#0A1F44] p-7 text-white sm:p-10">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#D4B15A]">
               EliteCV Generator
@@ -383,7 +395,7 @@ export default function AtsLebenslaufSchweizPage() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/cv-generator-schweiz"
+                href="/cv-generator"
                 className="inline-flex items-center justify-center rounded-xl bg-[#D4B15A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#E0C06B]"
               >
                 EliteCV Generator öffnen
@@ -393,11 +405,12 @@ export default function AtsLebenslaufSchweizPage() {
                 href="/#preise"
                 className="inline-flex items-center justify-center rounded-xl border border-white/25 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
               >
-                Pakete ansehen
+                Pakete & Preise ansehen
               </Link>
             </div>
           </section>
 
+          {/* FAZIT */}
           <section>
             <h2 className="text-3xl font-bold">
               Fazit
@@ -407,13 +420,20 @@ export default function AtsLebenslaufSchweizPage() {
               Ein ATS-optimierter Lebenslauf verbindet technische
               Lesbarkeit mit einer überzeugenden Darstellung für Recruiter.
               Eine klare Struktur, passende Keywords, verständliche
-              Formulierungen und ein professionelles Layout erhöhen die
-              Chance, dass die relevanten Informationen korrekt erkannt
-              werden.
+              Formulierungen und ein professionelles Layout helfen dabei,
+              dass relevante Informationen zuverlässig erkannt und schnell
+              verstanden werden können.
             </p>
 
             <p className="mt-4 leading-8 text-[#0A1F44]/75">
-              Weitere Hinweise finden Sie in unseren Ratgebern zur{" "}
+              Weitere Hinweise finden Sie in unserem Ratgeber zum{" "}
+              <Link
+                href="/ratgeber/lebenslauf-schweiz"
+                className="font-semibold text-[#8A6A22] hover:underline"
+              >
+                Lebenslauf Schweiz
+              </Link>
+              , zur{" "}
               <Link
                 href="/ratgeber/lebenslauf-optimieren-schweiz"
                 className="font-semibold text-[#8A6A22] hover:underline"
@@ -437,6 +457,7 @@ export default function AtsLebenslaufSchweizPage() {
               .
             </p>
           </section>
+
         </div>
       </article>
     </main>

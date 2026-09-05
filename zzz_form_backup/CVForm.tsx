@@ -235,21 +235,7 @@ export function CVForm({ data, onChange }: CVFormProps) {
     <div className="cv-form-root">
       <h2 className="cv-form-title">CV-Daten</h2>
 
-      <div className="cv-form-field">
-        <FieldLabel>Layout-Vorlage</FieldLabel>
-        <select
-          className="cv-form-select"
-          value={data.layout}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-            update("layout", event.target.value as CVData["layout"])
-          }
-        >
-          <option value="professional">EliteCV Professional</option>
-          <option value="executive">EliteCV Executive</option>
-          <option value="swiss">Swiss Professional</option>
-          <option value="ats">ATS Professional</option>
-        </select>
-      </div>
+      // Layout-Auswahl erfolgt zentral im EliteCV Generator.
 
       <AccordionSection title="Persönliche Daten">
         <div className="cv-form-grid2">
