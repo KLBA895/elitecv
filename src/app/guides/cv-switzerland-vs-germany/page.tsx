@@ -8,7 +8,14 @@ export const metadata: Metadata = {
     "CV Schweiz vs. Deutschland: Erfahren Sie die wichtigsten Unterschiede bei Lebenslauf, Foto, Sprache, Referenzen und Bewerbungsunterlagen für den Schweizer Arbeitsmarkt.",
 
   alternates: {
-    canonical: "https://www.elitecv.ch/ratgeber/cv-schweiz-vs-deutschland",
+    canonical:
+      "https://www.elitecv.ch/ratgeber/cv-schweiz-vs-deutschland",
+    languages: {
+      "de-CH":
+        "https://www.elitecv.ch/ratgeber/cv-schweiz-vs-deutschland",
+      "en-CH":
+        "https://www.elitecv.ch/guides/cv-switzerland-vs-germany",
+    },
   },
 
   openGraph: {
@@ -32,13 +39,32 @@ export default function CVSchweizVsDeutschlandPage() {
     <main className="min-h-screen bg-white text-[#0A1F44]">
       <article className="mx-auto max-w-5xl px-6 py-20">
 
-        {/* NAVIGATION */}
-        <Link
-          href="/ratgeber"
-          className="text-sm font-semibold text-[#C9A95A] hover:underline"
-        >
-          ← Zurück zum Ratgeber
-        </Link>
+        {/* NAVIGATION + LANGUAGE SWITCH */}
+        <div className="flex items-center justify-between gap-6">
+          <Link
+            href="/ratgeber"
+            className="text-sm font-semibold text-[#C9A95A] hover:underline"
+          >
+            ← Zurück zum Ratgeber
+          </Link>
+
+          <div className="flex items-center rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
+            <Link
+              href="/ratgeber/cv-schweiz-vs-deutschland"
+              className="rounded-full bg-[#0A1F44] px-5 py-2 text-sm font-semibold text-white"
+              aria-current="page"
+            >
+              DE
+            </Link>
+
+            <Link
+              href="/guides/cv-switzerland-vs-germany"
+              className="rounded-full px-5 py-2 text-sm font-semibold text-[#0A1F44]/65 transition hover:bg-[#F7F8FA]"
+            >
+              EN
+            </Link>
+          </div>
+        </div>
 
         {/* HERO */}
         <header className="mt-10">

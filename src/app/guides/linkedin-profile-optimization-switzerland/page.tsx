@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     languages: {
       "de-CH":
         "https://www.elitecv.ch/ratgeber/linkedin-profil-optimieren-schweiz",
-      en:
+      "en-CH":
         "https://www.elitecv.ch/guides/linkedin-profile-optimization-switzerland",
     },
   },
@@ -43,10 +43,10 @@ export default function LinkedInProfileOptimizationSwitzerlandPage() {
         {/* NAVIGATION + LANGUAGE */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
-            href="/guides"
+            href="/en/guides"
             className="text-sm font-semibold text-[#8A6A22] hover:underline"
           >
-            ← Back to Guides
+            ← Back to Career Guides
           </Link>
 
           <div className="inline-flex rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
@@ -60,6 +60,7 @@ export default function LinkedInProfileOptimizationSwitzerlandPage() {
             <Link
               href="/guides/linkedin-profile-optimization-switzerland"
               className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
+              aria-current="page"
             >
               EN
             </Link>

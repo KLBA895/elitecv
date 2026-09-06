@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Lebenslauf optimieren Schweiz | CV professionell verbessern | EliteCV",
+  title:
+    "Lebenslauf optimieren Schweiz | CV professionell verbessern | EliteCV",
 
   description:
     "Lebenslauf für die Schweiz optimieren: Verbessern Sie Struktur, Berufserfahrung, Keywords, ATS-Tauglichkeit und Positionierung Ihres CV gezielt.",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     languages: {
       "de-CH":
         "https://www.elitecv.ch/ratgeber/lebenslauf-optimieren-schweiz",
-      en:
+      "en-CH":
         "https://www.elitecv.ch/guides/cv-optimization-switzerland",
     },
   },
@@ -53,6 +54,7 @@ export default function LebenslaufOptimierenSchweizPage() {
             <Link
               href="/ratgeber/lebenslauf-optimieren-schweiz"
               className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
+              aria-current="page"
             >
               DE
             </Link>

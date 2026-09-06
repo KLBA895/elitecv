@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     languages: {
       "de-CH":
         "https://www.elitecv.ch/ratgeber/ats-lebenslauf-schweiz-2026",
-      en:
+      "en-CH":
         "https://www.elitecv.ch/guides/ats-resume-switzerland-2026",
     },
   },
@@ -42,7 +42,7 @@ export default function ATSResumeSwitzerlandPage() {
         {/* TOP NAVIGATION */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
-            href="/guides"
+            href="/en/guides"
             className="text-sm font-semibold text-[#8A6A22] hover:underline"
           >
             ← Back to Career Guides
@@ -59,6 +59,7 @@ export default function ATSResumeSwitzerlandPage() {
             <Link
               href="/guides/ats-resume-switzerland-2026"
               className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
+              aria-current="page"
             >
               EN
             </Link>

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     languages: {
       "de-CH":
         "https://www.elitecv.ch/ratgeber/executive-cv-schweiz",
-      en:
+      "en-CH":
         "https://www.elitecv.ch/en/guides/executive-cv-switzerland",
     },
   },
@@ -56,10 +56,10 @@ export default function ExecutiveCVSwitzerlandPage() {
         {/* TOP NAVIGATION */}
         <div className="flex items-center justify-between gap-4">
           <Link
-            href="/en/guides"
+            href="/guides"
             className="text-sm font-semibold text-[#8A6A22] hover:underline"
           >
-            ← Back to Career Guide
+            ← Back to Career Guides
           </Link>
 
           <div className="inline-flex rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
@@ -73,6 +73,7 @@ export default function ExecutiveCVSwitzerlandPage() {
             <Link
               href="/en/guides/executive-cv-switzerland"
               className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
+              aria-current="page"
             >
               EN
             </Link>
@@ -270,21 +271,21 @@ export default function ExecutiveCVSwitzerlandPage() {
 
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="/en/guides"
+              href="/guides"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold hover:bg-[#EEF1F5]"
             >
-              Career Guide Switzerland
+              Career Guides Switzerland
             </Link>
 
             <Link
-              href="/ratgeber/ats-lebenslauf-schweiz-2026"
+              href="/guides/ats-resume-switzerland-2026"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold hover:bg-[#EEF1F5]"
             >
               ATS CV Switzerland
             </Link>
 
             <Link
-              href="/ratgeber/cv-schweiz-vs-deutschland"
+              href="/guides/cv-switzerland-vs-germany"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold hover:bg-[#EEF1F5]"
             >
               CV Switzerland vs. Germany
@@ -331,6 +332,7 @@ export default function ExecutiveCVSwitzerlandPage() {
             </Link>
           </div>
         </section>
+
       </article>
     </main>
   );
