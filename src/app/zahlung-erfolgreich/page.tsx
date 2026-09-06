@@ -1,7 +1,16 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 
 import { stripe } from "@/lib/stripe";
 import { supabaseAdmin } from "@/lib/supabase/admin";
+
+export const metadata: Metadata = {
+  title: "Zahlung erfolgreich | EliteCV",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 type PaymentSuccessPageProps = {
   searchParams: Promise<{
@@ -28,9 +37,9 @@ function formatExpiryDate(value: string | null) {
 }
 
 function wait(milliseconds: number) {
-  return new Promise((resolve) =>
-    setTimeout(resolve, milliseconds)
-  );
+  return new Promise((resolve) => {
+    setTimeout(resolve, milliseconds);
+  });
 }
 
 export default async function PaymentSuccessPage({
@@ -49,7 +58,7 @@ export default async function PaymentSuccessPage({
   }
 
   try {
-    /**
+    /*
      * Die Stripe-Session wird serverseitig geprüft.
      * Der Zugangscode wird nicht allein aufgrund
      * einer URL-Session-ID ausgegeben.
@@ -70,7 +79,7 @@ export default async function PaymentSuccessPage({
       );
     }
 
-    /**
+    /*
      * Der Stripe-Webhook kann wenige Augenblicke
      * benötigen, bis Bestellung und Zugangscode
      * in Supabase gespeichert sind.
@@ -182,7 +191,11 @@ export default async function PaymentSuccessPage({
             ✓
           </div>
 
-          <h1 className="mt-6 text-3xl font-bold tracking-[-0.02em] text-[#0A1F44] sm:text-4xl">
+          <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-[#8A6A22]">
+            EliteCV
+          </p>
+
+          <h1 className="mt-2 text-3xl font-bold tracking-[-0.02em] text-[#0A1F44] sm:text-4xl">
             Zahlung erfolgreich
           </h1>
 
@@ -270,7 +283,11 @@ function PaymentMessage({
   return (
     <main className="flex min-h-screen items-center bg-[#F7F8FA] px-6 py-16">
       <div className="mx-auto w-full max-w-2xl rounded-3xl border border-[#0A1F44]/10 bg-white p-8 shadow-sm sm:p-10">
-        <h1 className="text-3xl font-bold tracking-[-0.02em] text-[#0A1F44]">
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#8A6A22]">
+          EliteCV
+        </p>
+
+        <h1 className="mt-2 text-3xl font-bold tracking-[-0.02em] text-[#0A1F44]">
           {title}
         </h1>
 

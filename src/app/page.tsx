@@ -1423,12 +1423,80 @@ export default function Home() {
               </div>
 
               <div className="mt-5 space-y-3 text-sm text-[#0A1F44]/80">
-                <label className="flex items-start gap-2"><input
-                  name="termsAccepted"
-                  required
-                  type="checkbox"
-                /><span>{t.orderTerms}</span></label>
+                <label className="flex items-start gap-3">
+                  <input
+                    name="termsAccepted"
+                    required
+                    type="checkbox"
+                    className="mt-1 h-4 w-4 shrink-0 accent-[#0A1F44]"
+                  />
 
+                  <span className="leading-6">
+                    {lang === "de" ? (
+                      <>
+                        Ich akzeptiere die{" "}
+                        <Link
+                          href="/agb"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-[#0A1F44] underline decoration-[#C9A95A] decoration-2 underline-offset-2 hover:text-[#8A6A22]"
+                        >
+                          AGB
+                        </Link>
+                        , die{" "}
+                        <Link
+                          href="/datenschutz"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-[#0A1F44] underline decoration-[#C9A95A] decoration-2 underline-offset-2 hover:text-[#8A6A22]"
+                        >
+                          Datenschutzbestimmungen
+                        </Link>{" "}
+                        und die{" "}
+                        <Link
+                          href="/widerrufsrecht"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-[#0A1F44] underline decoration-[#C9A95A] decoration-2 underline-offset-2 hover:text-[#8A6A22]"
+                        >
+                          Hinweise zum Widerrufsrecht
+                        </Link>
+                        .
+                      </>
+                    ) : (
+                      <>
+                        I accept the{" "}
+                        <Link
+                          href="/agb"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-[#0A1F44] underline decoration-[#C9A95A] decoration-2 underline-offset-2 hover:text-[#8A6A22]"
+                        >
+                          Terms &amp; Conditions
+                        </Link>
+                        , the{" "}
+                        <Link
+                          href="/datenschutz"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-[#0A1F44] underline decoration-[#C9A95A] decoration-2 underline-offset-2 hover:text-[#8A6A22]"
+                        >
+                          Privacy Policy
+                        </Link>{" "}
+                        and acknowledge the{" "}
+                        <Link
+                          href="/widerrufsrecht"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-[#0A1F44] underline decoration-[#C9A95A] decoration-2 underline-offset-2 hover:text-[#8A6A22]"
+                        >
+                          Right of Withdrawal information
+                        </Link>
+                        .
+                      </>
+                    )}
+                  </span>
+                </label>
               </div>
               {orderSubmitted ? (
                 <button

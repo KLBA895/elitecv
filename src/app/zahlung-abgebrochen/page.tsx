@@ -1,4 +1,13 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Zahlung abgebrochen | EliteCV",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function PaymentCancelledPage() {
   return (
@@ -22,17 +31,17 @@ export default function PaymentCancelledPage() {
           erneut starten.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-4">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/#preise"
-            className="rounded-xl bg-[#0A1F44] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#12305F]"
+            className="inline-flex items-center justify-center rounded-xl bg-[#0A1F44] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#12305F]"
           >
             Zurück zu den Paketen
           </Link>
 
           <Link
             href="/kontakt"
-            className="rounded-xl border border-[#0A1F44]/15 px-6 py-3 text-sm font-semibold text-[#0A1F44] transition hover:bg-[#F7F8FA]"
+            className="inline-flex items-center justify-center rounded-xl border border-[#0A1F44]/15 px-6 py-3 text-sm font-semibold text-[#0A1F44] transition hover:bg-[#F7F8FA]"
           >
             Kontakt
           </Link>
