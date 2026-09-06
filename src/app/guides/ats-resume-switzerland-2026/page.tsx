@@ -34,18 +34,42 @@ export const metadata: Metadata = {
   },
 };
 
+const commonErrors = [
+  "Complex tables, text boxes or multi-column elements",
+  "Important information presented only as graphics or icons",
+  "Missing keywords from the job description",
+  "Inconsistent or unclear date formats",
+  "Unstructured professional experience without clear responsibilities and results",
+  "Unusual section headings that systems may not recognize easily",
+  "Too many colors, fonts or decorative elements",
+  "Skills and IT knowledge that are not clearly labeled",
+  "Long blocks of text without concise bullet points",
+  "Unsuitable file formats or incorrectly exported PDF files",
+];
+
+const atsChecklist = [
+  "Use clear and recognizable section headings",
+  "Present professional experience chronologically and consistently",
+  "Clearly state employer, job title, location and dates",
+  "Describe responsibilities and achievements concisely",
+  "Integrate relevant professional terms and keywords naturally",
+  "Group skills, IT knowledge and languages clearly",
+  "Choose a professional, calm and readable layout",
+  "Check the final PDF carefully before submitting your application",
+];
+
 export default function ATSResumeSwitzerlandPage() {
   return (
     <main className="min-h-screen bg-[#F7F8FA] text-[#0A1F44]">
-      <article className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+      <article className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
 
-        {/* TOP NAVIGATION */}
+        {/* NAVIGATION */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
-            href="/en/guides"
+            href="/guides"
             className="text-sm font-semibold text-[#8A6A22] hover:underline"
           >
-            ← Back to Career Guides
+            ← Back to EliteCV Career Guides
           </Link>
 
           <div className="inline-flex rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
@@ -67,357 +91,350 @@ export default function ATSResumeSwitzerlandPage() {
         </div>
 
         {/* HERO */}
-        <header className="mt-10 max-w-4xl">
-          <span className="inline-flex rounded-full bg-[#C9A95A]/15 px-4 py-2 text-sm font-semibold text-[#8A6A22]">
-            ATS Resume Switzerland
-          </span>
+        <header className="mt-10">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
+            EliteCV Career Guide
+          </p>
 
-          <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-            ATS Resume Switzerland 2026: How to Create an ATS-Friendly CV
+          <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl">
+            ATS Resume Switzerland 2026
           </h1>
 
-          <p className="mt-6 text-lg leading-8 text-[#0A1F44]/75 sm:text-xl">
-            Applicant Tracking Systems are used by many employers and
-            recruiters to process job applications. A well-structured,
-            readable and relevant CV can help ensure that your professional
-            experience, qualifications and skills are recognized clearly
-            during the recruiting process.
+          <p className="mt-4 text-xl font-medium text-[#0A1F44]">
+            How to create an ATS-friendly CV for recruiters and application systems
+          </p>
+
+          <p className="mt-6 max-w-3xl leading-8 text-[#0A1F44]/75">
+            A modern CV needs to do more than look professional. It should also
+            be structured so that recruiting software can reliably recognize
+            and organize your most important professional information.
           </p>
         </header>
 
-        {/* INTRO */}
-        <section className="mt-12 rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm sm:p-8">
-          <h2 className="text-3xl font-bold">
-            What is an Applicant Tracking System?
-          </h2>
-
-          <p className="mt-5 leading-8 text-[#0A1F44]/75">
-            An Applicant Tracking System, commonly referred to as an ATS, is
-            software used to organize and process job applications. Depending
-            on the system and recruiting process, information such as work
-            experience, education, skills, job titles and keywords may be
-            extracted from a CV.
-          </p>
-
-          <p className="mt-4 leading-8 text-[#0A1F44]/75">
-            ATS optimization does not mean writing a CV only for software. The
-            goal is to create a document that is easy to process while
-            remaining clear, credible and professional for human recruiters.
-          </p>
-        </section>
-
         {/* CONTENT */}
-        <section className="mt-12 space-y-12 rounded-3xl bg-white p-7 shadow-sm sm:p-10">
+        <div className="mt-12 space-y-12 rounded-3xl bg-white p-7 shadow-sm sm:p-12">
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
-              1. Use a clear CV structure
+              What is an Applicant Tracking System?
             </h2>
 
             <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              Use recognizable section headings such as Professional
-              Experience, Education, Skills and Languages. A clear structure
-              makes the document easier to understand for both recruiting
-              systems and human recruiters.
+              An Applicant Tracking System, commonly referred to as an ATS, is
+              software used to organize and process job applications.
+              Companies can use these systems to collect, search, compare and
+              assign incoming CVs to specific positions.
             </p>
 
             <p className="mt-4 leading-8 text-[#0A1F44]/75">
-              Keep job titles, employers and dates clearly separated and use
-              consistent formatting throughout the document.
+              ATS platforms are particularly common among larger companies,
+              recruitment agencies and international organizations. Your CV
+              should therefore be designed so that both the software and the
+              recruiter reviewing it can understand the information quickly.
             </p>
+          </section>
 
-            <Link
-              href="/guides/cv-switzerland"
-              className="mt-5 inline-block font-semibold text-[#8A6A22] hover:underline"
-            >
-              → CV Switzerland: Structure and Practical Tips
-            </Link>
-          </div>
-
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
-              2. Include relevant keywords
+              Why a strong CV can still be overlooked
             </h2>
 
             <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              Review the job description and identify relevant skills,
-              qualifications, technologies, methods and professional terms.
-              Where they genuinely match your experience, integrate these terms
-              naturally into your CV.
+              A visually sophisticated CV is not automatically ATS-friendly.
+              If important information is placed inside graphics, unusual
+              tables or difficult-to-read elements, some information may not
+              be processed correctly.
+            </p>
+
+            <div className="mt-7 rounded-2xl border border-[#D4B15A]/30 bg-[#FFFDF7] p-6">
+              <p className="font-semibold text-[#8A6A22]">
+                Important:
+              </p>
+
+              <p className="mt-2 leading-7 text-[#0A1F44]/75">
+                ATS optimization does not mean that a CV has to look boring.
+                The goal is to combine a clear structure, professional design
+                and understandable content.
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-3xl font-bold">
+              The 10 most common ATS mistakes
+            </h2>
+
+            <ol className="mt-6 space-y-4">
+              {commonErrors.map((error, index) => (
+                <li
+                  key={error}
+                  className="flex gap-4 rounded-2xl border border-[#0A1F44]/10 p-5"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0A1F44] text-sm font-bold text-white">
+                    {index + 1}
+                  </span>
+
+                  <span className="pt-1 leading-7 text-[#0A1F44]/75">
+                    {error}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section>
+            <h2 className="text-3xl font-bold">
+              How to structure an ATS-friendly CV
+            </h2>
+
+            <p className="mt-5 leading-8 text-[#0A1F44]/75">
+              A clear and logical structure works well for the Swiss job
+              market. The most important information should be visible without
+              requiring recruiters to search through the document.
+            </p>
+
+            <div className="mt-7 grid gap-5 sm:grid-cols-2">
+              {atsChecklist.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-[#0A1F44]/10 bg-[#F7F8FA] p-5"
+                >
+                  <span className="font-bold text-[#8A6A22]">
+                    ✓
+                  </span>
+
+                  <p className="mt-2 leading-7 text-[#0A1F44]/75">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-3xl font-bold">
+              Use keywords effectively
+            </h2>
+
+            <p className="mt-5 leading-8 text-[#0A1F44]/75">
+              Keywords help recruiting systems and recruiters connect your
+              experience and competencies with a specific position. Relevant
+              terminology from the job advertisement can be included when it
+              genuinely matches your professional background.
             </p>
 
             <p className="mt-4 leading-8 text-[#0A1F44]/75">
-              Do not simply copy keywords. They should be connected to your
-              actual experience and professional background.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-3xl font-bold">
-              3. Make important information available as text
-            </h2>
-
-            <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              Important qualifications and skills should be written clearly
-              rather than communicated only through icons, graphics, charts or
-              visual rating systems.
+              Typical examples include Project Management, SAP, ERP, Business
+              Analysis, Controlling, Lean Management, Leadership, Microsoft
+              365, Scrum and Process Optimization.
             </p>
 
             <p className="mt-4 leading-8 text-[#0A1F44]/75">
-              This also improves readability for recruiters who may quickly
-              scan the document before reading it in detail.
+              Keywords should not simply be listed without context. Connect
+              them naturally with your responsibilities, projects and
+              achievements.
             </p>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
-              4. Focus on achievements, not only responsibilities
+              Present responsibilities and achievements clearly
             </h2>
 
             <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              Strong CVs explain more than daily tasks. Where possible, describe
-              measurable achievements such as process improvements, cost
-              reductions, revenue growth, project responsibility, team
-              leadership or successful transformations.
+              Instead of generic statements such as “Responsible for
+              projects,” your CV should explain what you actually delivered
+              and what impact your work had.
             </p>
 
-            <div className="mt-6 grid gap-5 sm:grid-cols-2">
-              <div className="rounded-2xl border border-[#0A1F44]/10 bg-[#F7F8FA] p-6">
-                <p className="font-semibold">
-                  Generic
+            <div className="mt-7 grid gap-5 sm:grid-cols-2">
+              <div className="rounded-2xl border border-red-200 bg-red-50 p-6">
+                <p className="font-semibold text-red-800">
+                  Less effective
                 </p>
 
-                <p className="mt-3 leading-7 text-[#0A1F44]/70">
-                  Responsible for project management and process improvement.
+                <p className="mt-3 leading-7 text-red-900/75">
+                  Responsible for various projects and collaboration with
+                  internal departments.
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-[#C9A95A]/30 bg-[#FFFDF7] p-6">
-                <p className="font-semibold text-[#8A6A22]">
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
+                <p className="font-semibold text-emerald-800">
                   Stronger
                 </p>
 
-                <p className="mt-3 leading-7 text-[#0A1F44]/75">
-                  Managed cross-functional projects and reduced process lead
-                  time by 15 percent.
+                <p className="mt-3 leading-7 text-emerald-900/75">
+                  Led cross-functional projects, coordinated internal
+                  stakeholders and reduced process lead time by 15 percent.
                 </p>
               </div>
             </div>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
-              5. Tailor your CV to the target position
+              What role can artificial intelligence play?
             </h2>
 
             <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              A generic CV may not communicate your suitability for a specific
-              position effectively. Prioritize the experience, competencies and
-              achievements that are most relevant to the role you are applying
-              for.
-            </p>
-
-            <Link
-              href="/guides/cv-optimization-switzerland"
-              className="mt-5 inline-block font-semibold text-[#8A6A22] hover:underline"
-            >
-              → CV Optimization Switzerland
-            </Link>
-          </div>
-
-          <div>
-            <h2 className="text-3xl font-bold">
-              6. Keep the design professional and readable
-            </h2>
-
-            <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              An ATS-friendly CV does not need to look basic. A professional
-              design can still use clear typography, consistent spacing and a
-              strong information hierarchy while keeping the content easy to
-              read.
+              AI can help structure existing information, improve wording and
+              present relevant competencies more clearly. However, it does not
+              replace careful review of the content.
             </p>
 
             <p className="mt-4 leading-8 text-[#0A1F44]/75">
-              Avoid overcrowded layouts and visual elements that make essential
-              information difficult to identify.
+              All information must remain factually correct and reflect your
+              actual professional experience. A convincing CV should remain
+              individual and should not read like generic AI-generated text.
             </p>
+          </section>
 
-            <Link
-              href="/guides/cv-template-switzerland"
-              className="mt-5 inline-block font-semibold text-[#8A6A22] hover:underline"
-            >
-              → CV Template Switzerland
-            </Link>
-          </div>
-
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
-              7. Use standard and recognizable section headings
+              How long should a Swiss CV be?
             </h2>
 
             <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              Creative section names can look attractive but may make
-              information harder to understand. Standard headings such as
-              Professional Experience, Education, Skills, Certifications and
-              Languages are usually clearer.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-3xl font-bold">
-              8. Present dates and job titles consistently
-            </h2>
-
-            <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              Use one consistent date format throughout your CV and make job
-              titles and company names easy to distinguish.
+              One or two pages are appropriate for many applications. Junior
+              candidates can often present their profile on one page, while
+              professionals with extensive experience may benefit from two
+              clearly structured pages.
             </p>
 
             <p className="mt-4 leading-8 text-[#0A1F44]/75">
-              Consistency improves readability and gives the document a more
-              professional appearance.
+              The number of pages is not the only consideration. Relevance,
+              readability and clear prioritization are more important than
+              including every possible detail.
             </p>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
-              9. ATS resumes for the Swiss job market
+              Frequently asked questions
             </h2>
 
-            <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              For applications in Switzerland, your CV should combine clear
-              structure with professional positioning. Relevant work
-              experience, qualifications, language skills and achievements
-              should be easy to identify while the document remains tailored
-              to the target role and industry.
-            </p>
-          </div>
+            <div className="mt-6 space-y-5">
+              <div className="rounded-2xl border border-[#0A1F44]/10 p-6">
+                <h3 className="text-xl font-semibold">
+                  Can ATS systems read PDF files?
+                </h3>
 
-          <div>
-            <h2 className="text-3xl font-bold">
-              10. Do not optimize only for ATS
-            </h2>
-
-            <p className="mt-5 leading-8 text-[#0A1F44]/75">
-              Your CV ultimately needs to convince people. Keywords and
-              structure matter, but your professional profile, achievements
-              and career positioning remain essential.
-            </p>
-
-            <p className="mt-4 leading-8 text-[#0A1F44]/75">
-              The strongest CV combines technical readability with clear,
-              relevant and credible content.
-            </p>
-          </div>
-
-        </section>
-
-        {/* CHECKLIST */}
-        <section className="mt-14 rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm sm:p-8">
-          <h2 className="text-3xl font-bold">
-            ATS-Friendly CV Checklist
-          </h2>
-
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {[
-              "Clear section headings",
-              "Consistent dates and job titles",
-              "Relevant keywords included naturally",
-              "Important information available as text",
-              "Professional experience easy to scan",
-              "Measurable achievements included",
-              "No unnecessary graphic overload",
-              "Readable typography and spacing",
-              "CV tailored to the target role",
-              "Content written for recruiters as well as systems",
-            ].map((item) => (
-              <div
-                key={item}
-                className="rounded-2xl bg-[#F7F8FA] px-5 py-4 text-sm font-semibold"
-              >
-                ✓ {item}
+                <p className="mt-3 leading-7 text-[#0A1F44]/75">
+                  Many current ATS platforms can process properly exported PDF
+                  files. However, the text should remain real selectable text
+                  rather than being embedded only as an image.
+                </p>
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* INTERNAL LINKS */}
-        <section className="mt-14 rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm">
-          <h2 className="text-2xl font-bold">
-            More EliteCV Career Guides
-          </h2>
+              <div className="rounded-2xl border border-[#0A1F44]/10 p-6">
+                <h3 className="text-xl font-semibold">
+                  Are tables always a problem?
+                </h3>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/guides/cv-switzerland"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              CV Switzerland
-            </Link>
+                <p className="mt-3 leading-7 text-[#0A1F44]/75">
+                  Not every table causes problems. Complex, nested or
+                  multi-column structures can make information harder to
+                  process. A clear arrangement is generally more reliable.
+                </p>
+              </div>
 
-            <Link
-              href="/guides/cv-template-switzerland"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              CV Template Switzerland
-            </Link>
+              <div className="rounded-2xl border border-[#0A1F44]/10 p-6">
+                <h3 className="text-xl font-semibold">
+                  Should every application be individually tailored?
+                </h3>
 
-            <Link
-              href="/guides/cv-optimization-switzerland"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              CV Optimization Switzerland
-            </Link>
+                <p className="mt-3 leading-7 text-[#0A1F44]/75">
+                  The basic CV structure can remain the same. However, your
+                  target position, profile summary, relevant competencies and
+                  selected achievements should reflect the specific role.
+                </p>
+              </div>
+            </div>
+          </section>
 
-            <Link
-              href="/guides/linkedin-profile-optimization-switzerland"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              LinkedIn Optimization
-            </Link>
+          {/* GENERATOR CTA */}
+          <section className="rounded-3xl bg-[#0A1F44] p-7 text-white sm:p-10">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#D4B15A]">
+              EliteCV Generator
+            </p>
 
-            <Link
-              href="/en/guides/executive-cv-switzerland"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              Executive CV Switzerland
-            </Link>
-          </div>
-        </section>
+            <h2 className="mt-3 text-3xl font-bold">
+              Create a structured CV faster
+            </h2>
 
-        {/* CTA */}
-        <section className="mt-14 rounded-3xl bg-[#0A1F44] p-8 text-white sm:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
-            EliteCV
-          </p>
+            <p className="mt-5 leading-8 text-white/75">
+              The EliteCV Generator helps you create your CV in a structured
+              and efficient way with clearly organized input sections,
+              professional CV layouts and AI-assisted wording options.
+            </p>
 
-          <h2 className="mt-3 text-3xl font-bold">
-            Create an ATS-friendly CV for Switzerland
-          </h2>
+            <ul className="mt-6 space-y-3 text-white/80">
+              <li>✓ ATS-oriented and clear CV structure</li>
+              <li>✓ Professional and Executive CV layouts</li>
+              <li>✓ Structured presentation of experience and achievements</li>
+              <li>✓ AI assistance for selected wording</li>
+              <li>✓ German and English user interface</li>
+              <li>✓ Direct PDF export</li>
+            </ul>
 
-          <p className="mt-5 max-w-3xl leading-8 text-white/80">
-            Create your CV with a professional structure and EliteCV
-            Professional or Executive design, or have your existing CV
-            professionally optimized for your target role.
-          </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/cv-generator"
+                className="inline-flex items-center justify-center rounded-xl bg-[#D4B15A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#E0C06B]"
+              >
+                Open EliteCV Generator
+              </Link>
 
-          <div className="mt-7 flex flex-wrap gap-4">
-            <Link
-              href="/cv-generator"
-              className="rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
-            >
-              Start CV Generator
-            </Link>
+              <Link
+                href="/#preise"
+                className="inline-flex items-center justify-center rounded-xl border border-white/25 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
+              >
+                View Packages
+              </Link>
+            </div>
+          </section>
 
-            <Link
-              href="/#preise"
-              className="rounded-xl border border-white/25 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-            >
-              View Packages & Pricing
-            </Link>
-          </div>
-        </section>
+          <section>
+            <h2 className="text-3xl font-bold">
+              Conclusion
+            </h2>
 
+            <p className="mt-5 leading-8 text-[#0A1F44]/75">
+              An ATS-optimized CV combines technical readability with a
+              convincing presentation for recruiters. Clear structure,
+              relevant keywords, understandable wording and professional
+              design help ensure that the most important information can be
+              recognized correctly.
+            </p>
+
+            <p className="mt-4 leading-8 text-[#0A1F44]/75">
+              Continue with our guides to{" "}
+              <Link
+                href="/guides/cv-optimization-switzerland"
+                className="font-semibold text-[#8A6A22] hover:underline"
+              >
+                CV Optimization in Switzerland
+              </Link>
+              ,{" "}
+              <Link
+                href="/guides/cv-switzerland-vs-germany"
+                className="font-semibold text-[#8A6A22] hover:underline"
+              >
+                CV Switzerland vs. Germany
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/guides/linkedin-profile-optimization-switzerland"
+                className="font-semibold text-[#8A6A22] hover:underline"
+              >
+                LinkedIn Profile Optimization
+              </Link>
+              .
+            </p>
+          </section>
+
+        </div>
       </article>
     </main>
   );

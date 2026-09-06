@@ -61,11 +61,11 @@ const atsChecklist = [
 
 export default function AtsLebenslaufSchweizPage() {
   return (
-    <main className="bg-[#F7F8FA] text-[#0A1F44]">
+    <main className="min-h-screen bg-[#F7F8FA] text-[#0A1F44]">
       <article className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
 
         {/* NAVIGATION */}
-        <div className="mb-8 flex items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
             href="/ratgeber"
             className="text-sm font-semibold text-[#8A6A22] hover:underline"
@@ -92,8 +92,8 @@ export default function AtsLebenslaufSchweizPage() {
         </div>
 
         {/* HERO */}
-        <header className="rounded-3xl bg-[#0A1F44] px-7 py-10 text-white shadow-sm sm:px-12 sm:py-14">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#D4B15A]">
+        <header className="mt-10">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
             EliteCV-Ratgeber
           </p>
 
@@ -101,11 +101,11 @@ export default function AtsLebenslaufSchweizPage() {
             ATS-Lebenslauf Schweiz 2026
           </h1>
 
-          <p className="mt-4 text-xl font-medium text-white/90">
+          <p className="mt-4 text-xl font-medium text-[#0A1F44]">
             So überzeugen Sie moderne Bewerbungsportale und Recruiter
           </p>
 
-          <p className="mt-6 max-w-3xl leading-8 text-white/75">
+          <p className="mt-6 max-w-3xl leading-8 text-[#0A1F44]/75">
             Ein moderner Lebenslauf muss nicht nur professionell aussehen.
             Er sollte auch so aufgebaut sein, dass Bewerbungssoftware die
             wichtigsten Informationen zuverlässig erkennen und einordnen kann.
@@ -113,7 +113,7 @@ export default function AtsLebenslaufSchweizPage() {
         </header>
 
         {/* CONTENT */}
-        <div className="mt-10 space-y-12 rounded-3xl bg-white p-7 shadow-sm sm:p-12">
+        <div className="mt-12 space-y-12 rounded-3xl bg-white p-7 shadow-sm sm:p-12">
 
           <section>
             <h2 className="text-3xl font-bold">

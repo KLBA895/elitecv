@@ -2,14 +2,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CV Schweiz vs. Deutschland: Die wichtigsten Unterschiede",
+  title: "CV Switzerland vs. Germany: Key Differences | EliteCV",
 
   description:
-    "CV Schweiz vs. Deutschland: Erfahren Sie die wichtigsten Unterschiede bei Lebenslauf, Foto, Sprache, Referenzen und Bewerbungsunterlagen für den Schweizer Arbeitsmarkt.",
+    "CV Switzerland vs. Germany: Learn the key differences in CV structure, language, photos, references, certificates and job applications for the Swiss job market.",
 
   alternates: {
     canonical:
-      "https://www.elitecv.ch/ratgeber/cv-schweiz-vs-deutschland",
+      "https://www.elitecv.ch/guides/cv-switzerland-vs-germany",
+
     languages: {
       "de-CH":
         "https://www.elitecv.ch/ratgeber/cv-schweiz-vs-deutschland",
@@ -19,22 +20,21 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "CV Schweiz vs. Deutschland: Die wichtigsten Unterschiede",
+    title: "CV Switzerland vs. Germany: Key Differences",
 
     description:
-      "Die wichtigsten Unterschiede zwischen einem Schweizer und einem deutschen Lebenslauf – mit praktischen Tipps für Bewerbungen in der Schweiz.",
+      "The key differences between Swiss and German CVs, with practical advice for job applications in Switzerland.",
 
-    url: "https://www.elitecv.ch/ratgeber/cv-schweiz-vs-deutschland",
+    url:
+      "https://www.elitecv.ch/guides/cv-switzerland-vs-germany",
 
     siteName: "EliteCV",
-
-    locale: "de_CH",
-
+    locale: "en_CH",
     type: "article",
   },
 };
 
-export default function CVSchweizVsDeutschlandPage() {
+export default function CVSwitzerlandVsGermanyPage() {
   return (
     <main className="min-h-screen bg-white text-[#0A1F44]">
       <article className="mx-auto max-w-5xl px-6 py-20">
@@ -42,24 +42,24 @@ export default function CVSchweizVsDeutschlandPage() {
         {/* NAVIGATION + LANGUAGE SWITCH */}
         <div className="flex items-center justify-between gap-6">
           <Link
-            href="/ratgeber"
+            href="/guides"
             className="text-sm font-semibold text-[#C9A95A] hover:underline"
           >
-            ← Zurück zum Ratgeber
+            ← Back to Career Guides
           </Link>
 
           <div className="flex items-center rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
             <Link
               href="/ratgeber/cv-schweiz-vs-deutschland"
-              className="rounded-full bg-[#0A1F44] px-5 py-2 text-sm font-semibold text-white"
-              aria-current="page"
+              className="rounded-full px-5 py-2 text-sm font-semibold text-[#0A1F44]/65 transition hover:bg-[#F7F8FA]"
             >
               DE
             </Link>
 
             <Link
               href="/guides/cv-switzerland-vs-germany"
-              className="rounded-full px-5 py-2 text-sm font-semibold text-[#0A1F44]/65 transition hover:bg-[#F7F8FA]"
+              className="rounded-full bg-[#0A1F44] px-5 py-2 text-sm font-semibold text-white"
+              aria-current="page"
             >
               EN
             </Link>
@@ -69,31 +69,32 @@ export default function CVSchweizVsDeutschlandPage() {
         {/* HERO */}
         <header className="mt-10">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
-            Bewerbung Schweiz
+            Applying in Switzerland
           </p>
 
           <h1 className="mt-4 text-4xl font-bold leading-tight md:text-6xl">
-            CV Schweiz vs. Deutschland: Die wichtigsten Unterschiede
+            CV Switzerland vs. Germany: The Key Differences
           </h1>
 
           <p className="mt-6 max-w-4xl text-lg leading-8 text-[#0A1F44]/72 md:text-xl">
-            Wer sich aus Deutschland in der Schweiz bewirbt, kann den bestehenden
-            Lebenslauf grundsätzlich weiterverwenden – sollte ihn aber an einige
-            typische Erwartungen des Schweizer Arbeitsmarkts anpassen.
+            If you are applying for jobs in Switzerland from Germany, you can
+            usually use your existing CV as a starting point. However, several
+            details should be adapted to the expectations and conventions of
+            the Swiss job market.
           </p>
         </header>
 
         {/* INTRO */}
         <section className="mt-12 rounded-3xl bg-[#F7F8FA] p-8">
           <h2 className="text-2xl font-bold">
-            Schweizer und deutsche CVs sind ähnlich – aber nicht identisch
+            Swiss and German CVs are similar – but not identical
           </h2>
 
           <p className="mt-4 leading-8 text-[#0A1F44]/75">
-            Aufbau, berufliche Stationen und Qualifikationen unterscheiden sich
-            grundsätzlich nicht stark. Unterschiede zeigen sich eher bei der
-            Darstellung, bei persönlichen Angaben, Sprachkenntnissen,
-            Arbeitszeugnissen und bei der Anpassung an den Schweizer Markt.
+            The basic structure, professional experience and qualifications are
+            generally comparable. The main differences are found in
+            presentation, personal information, language skills, employment
+            references and the way a CV is adapted to the Swiss market.
           </p>
         </section>
 
@@ -102,237 +103,239 @@ export default function CVSchweizVsDeutschlandPage() {
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              1. Schweizer CVs sollten klar und kompakt aufgebaut sein
+              1. Swiss CVs should be clear and concise
             </h2>
 
             <p className="mt-5">
-              Recruiter möchten die wichtigsten Informationen schnell erfassen
-              können. Berufserfahrung, Ausbildung, Kompetenzen und
-              Sprachkenntnisse sollten übersichtlich gegliedert und klar
-              priorisiert sein.
+              Recruiters should be able to identify the most important
+              information quickly. Professional experience, education,
+              competencies and language skills should be clearly structured
+              and prioritized.
             </p>
 
             <p className="mt-4">
-              Lange Aufgabenlisten sind meist weniger hilfreich als eine
-              kompakte Darstellung relevanter Verantwortungsbereiche und
-              Resultate.
+              Long lists of responsibilities are usually less effective than a
+              concise presentation of relevant responsibilities, projects and
+              measurable results.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              2. Sprachkenntnisse spielen in der Schweiz eine grössere Rolle
+              2. Language skills are particularly important in Switzerland
             </h2>
 
             <p className="mt-5">
-              Die Schweiz ist mehrsprachig. Je nach Region und Funktion können
-              Deutsch, Französisch, Italienisch und Englisch unterschiedlich
-              wichtig sein.
+              Switzerland is a multilingual country. Depending on the region
+              and position, German, French, Italian and English can have very
+              different levels of importance.
             </p>
 
             <p className="mt-4">
-              Sprachkenntnisse sollten deshalb klar und nachvollziehbar
-              angegeben werden, beispielsweise mit Bezeichnungen wie
-              Muttersprache, fliessend oder guten Kenntnissen.
+              Language skills should therefore be presented clearly, for
+              example using recognized levels or descriptions such as native,
+              fluent or professional working proficiency.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              3. Berufserfahrung auf den Schweizer Markt ausrichten
+              3. Adapt professional experience to the Swiss market
             </h2>
 
             <p className="mt-5">
-              Internationale Berufserfahrung wird in der Schweiz geschätzt.
-              Entscheidend ist jedoch, dass Tätigkeiten und Verantwortlichkeiten
-              auch für Schweizer Recruiter verständlich eingeordnet werden
-              können.
+              International experience is valued in Switzerland. What matters,
+              however, is that responsibilities and achievements are easy for
+              Swiss recruiters to understand and evaluate.
             </p>
 
             <p className="mt-4">
-              Besonders relevant sind konkrete Verantwortungsbereiche,
-              Projektgrössen, Führungserfahrung und messbare Erfolge.
+              Relevant information can include project scope, leadership
+              responsibility, budgets, team size and measurable business
+              outcomes.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              4. Foto und persönliche Angaben
+              4. Photo and personal information
             </h2>
 
             <p className="mt-5">
-              Ein professionelles Bewerbungsfoto ist in der Schweiz weiterhin
-              verbreitet, aber nicht zwingend erforderlich. Entscheidend ist,
-              dass der Lebenslauf insgesamt professionell und konsistent wirkt.
+              A professional application photo is still common in Switzerland,
+              although it is not mandatory. The overall CV should remain
+              professional, modern and consistent.
             </p>
 
             <p className="mt-4">
-              Telefonnummer, E-Mail-Adresse, Wohnort und gegebenenfalls das
-              LinkedIn-Profil sollten einfach auffindbar sein.
+              Your phone number, email address, location and, where relevant,
+              LinkedIn profile should be easy to find.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              5. Arbeitszeugnisse und Diplome sind häufig wichtig
+              5. Employment references and diplomas are often important
             </h2>
 
             <p className="mt-5">
-              In der Schweiz werden vollständige Bewerbungsunterlagen häufig
-              geschätzt. Dazu können Arbeitszeugnisse, Ausbildungsnachweise,
-              Diplome und weitere relevante Zertifikate gehören.
+              Complete application documents are often valued by Swiss
+              employers. These may include employment references, diplomas,
+              certificates and other relevant qualifications.
             </p>
 
             <p className="mt-4">
-              Die Angaben im CV sollten mit diesen Dokumenten konsistent sein
-              und sich zeitlich nachvollziehbar ergänzen.
+              Dates, job titles and other information in your CV should remain
+              consistent with the supporting documents.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              6. Begriffe und Berufsbezeichnungen anpassen
+              6. Adapt terminology and job titles
             </h2>
 
             <p className="mt-5">
-              Einzelne Berufsbezeichnungen, Ausbildungsabschlüsse oder
-              organisationsspezifische Begriffe können in Deutschland und der
-              Schweiz unterschiedlich verwendet werden.
+              Some job titles, qualifications and organizational terms differ
+              between Germany and Switzerland.
             </p>
 
             <p className="mt-4">
-              Bei einer Bewerbung in der Schweiz sollte deshalb geprüft werden,
-              ob die verwendeten Begriffe für Schweizer Recruiter eindeutig
-              verständlich sind.
+              When applying in Switzerland, check whether your terminology is
+              immediately understandable to Swiss recruiters and employers.
             </p>
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-[#0A1F44]">
-              7. ATS und Keywords berücksichtigen
+              7. Consider ATS and relevant keywords
             </h2>
 
             <p className="mt-5">
-              Auch bei Schweizer Unternehmen werden digitale
-              Bewerbermanagementsysteme eingesetzt. Ein klar strukturierter CV
-              und relevante Begriffe aus der Stellenausschreibung können helfen,
-              dass das Profil sowohl technisch als auch inhaltlich gut
-              eingeordnet wird.
+              Swiss companies also use applicant tracking systems and digital
+              recruitment platforms. A clearly structured CV with relevant
+              terminology from the job advertisement can make your profile
+              easier to process and understand.
             </p>
 
             <p className="mt-4">
-              Keywords sollten jedoch immer natürlich und passend zur
-              tatsächlichen Erfahrung verwendet werden.
+              Keywords should always be used naturally and must accurately
+              reflect your actual experience and qualifications.
             </p>
           </div>
+
         </section>
 
-        {/* VERGLEICH */}
+        {/* COMPARISON */}
         <section className="mt-16">
           <h2 className="text-3xl font-bold">
-            CV Schweiz und Deutschland im direkten Vergleich
+            Switzerland and Germany: CV comparison
           </h2>
 
           <div className="mt-8 overflow-hidden rounded-2xl border border-[#0A1F44]/10">
             <div className="grid grid-cols-3 bg-[#0A1F44] text-white">
-              <div className="p-4 font-semibold">Thema</div>
-              <div className="p-4 font-semibold">Schweiz</div>
-              <div className="p-4 font-semibold">Deutschland</div>
+              <div className="p-4 font-semibold">Topic</div>
+              <div className="p-4 font-semibold">Switzerland</div>
+              <div className="p-4 font-semibold">Germany</div>
             </div>
 
             {[
               [
-                "Bewerbungsfoto",
-                "Häufig verwendet, aber freiwillig",
-                "Ebenfalls freiwillig",
+                "Application photo",
+                "Common, but optional",
+                "Also optional",
               ],
               [
-                "Sprachen",
-                "Oft besonders wichtig",
-                "Abhängig von Funktion und Unternehmen",
+                "Languages",
+                "Often particularly important",
+                "Depends on role and employer",
               ],
               [
-                "Arbeitszeugnisse",
-                "Häufig relevant",
-                "Ebenfalls verbreitet",
+                "Employment references",
+                "Frequently relevant",
+                "Also commonly used",
               ],
               [
-                "CV-Struktur",
-                "Klar, kompakt und zielgerichtet",
-                "Ähnliche Grundstruktur",
+                "CV structure",
+                "Clear, concise and targeted",
+                "Similar basic structure",
               ],
               [
-                "Marktanpassung",
-                "Schweizer Begriffe und Anforderungen berücksichtigen",
-                "Deutsche Marktstandards",
+                "Market adaptation",
+                "Swiss terminology and requirements should be considered",
+                "German market conventions",
               ],
-            ].map(([topic, swiss, germany]) => (
+            ].map(([topic, switzerland, germany]) => (
               <div
                 key={topic}
                 className="grid grid-cols-3 border-t border-[#0A1F44]/10 bg-white"
               >
                 <div className="p-4 font-semibold">{topic}</div>
-                <div className="p-4 text-[#0A1F44]/75">{swiss}</div>
-                <div className="p-4 text-[#0A1F44]/75">{germany}</div>
+                <div className="p-4 text-[#0A1F44]/75">
+                  {switzerland}
+                </div>
+                <div className="p-4 text-[#0A1F44]/75">
+                  {germany}
+                </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* FAZIT */}
+        {/* CONCLUSION */}
         <section className="mt-16 rounded-3xl bg-[#F7F8FA] p-8">
           <h2 className="text-3xl font-bold">
-            Fazit: Lebenslauf für die Schweiz gezielt anpassen
+            Conclusion: Adapt your CV for the Swiss job market
           </h2>
 
           <p className="mt-5 leading-8 text-[#0A1F44]/75">
-            Ein deutscher CV muss für eine Bewerbung in der Schweiz nicht
-            vollständig neu aufgebaut werden. Sinnvoll ist jedoch eine gezielte
-            Anpassung an Schweizer Erwartungen, Begriffe, Sprachkenntnisse,
-            Dokumente und die konkrete Zielposition.
+            A German CV does not need to be completely rebuilt for an
+            application in Switzerland. However, adapting terminology,
+            language skills, supporting documents, presentation and positioning
+            to the Swiss market can significantly strengthen the application.
           </p>
         </section>
 
         {/* INTERNAL LINKS */}
         <section className="mt-16">
           <h2 className="text-3xl font-bold">
-            Weitere Ratgeber für Bewerbungen in der Schweiz
+            More career guides for Switzerland
           </h2>
 
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
-              href="/ratgeber/lebenslauf-schweiz"
+              href="/guides/cv-switzerland"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold transition hover:bg-[#EEF1F5]"
             >
-              Lebenslauf Schweiz
+              CV Switzerland
             </Link>
 
             <Link
-              href="/ratgeber/lebenslauf-optimieren-schweiz"
+              href="/guides/cv-optimization-switzerland"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold transition hover:bg-[#EEF1F5]"
             >
-              Lebenslauf optimieren Schweiz
+              CV Optimization Switzerland
             </Link>
 
             <Link
-              href="/ratgeber/ats-lebenslauf-schweiz-2026"
+              href="/guides/ats-resume-switzerland-2026"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold transition hover:bg-[#EEF1F5]"
             >
-              ATS Lebenslauf Schweiz
+              ATS Resume Switzerland
             </Link>
 
             <Link
-              href="/ratgeber/executive-cv-schweiz"
+              href="/en/guides/executive-cv-switzerland"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold transition hover:bg-[#EEF1F5]"
             >
-              Executive CV Schweiz
+              Executive CV Switzerland
             </Link>
 
             <Link
               href="/cv-beratung-schweiz"
               className="rounded-full bg-[#F7F8FA] px-5 py-3 font-semibold transition hover:bg-[#EEF1F5]"
             >
-              CV Beratung Schweiz
+              CV Consulting Switzerland
             </Link>
           </div>
         </section>
@@ -344,13 +347,12 @@ export default function CVSchweizVsDeutschlandPage() {
           </p>
 
           <h2 className="mt-3 text-3xl font-bold">
-            Bewerben Sie sich in der Schweiz?
+            Applying for jobs in Switzerland?
           </h2>
 
           <p className="mt-5 max-w-3xl leading-8 text-white/80">
-            Lassen Sie Ihren bestehenden Lebenslauf professionell für den
-            Schweizer Arbeitsmarkt optimieren oder erstellen Sie Ihren CV
-            selbst mit dem EliteCV Generator.
+            Optimize your existing CV for the Swiss job market or create your
+            professional CV with the EliteCV Generator.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-4">
@@ -358,14 +360,14 @@ export default function CVSchweizVsDeutschlandPage() {
               href="/#preise"
               className="rounded-full bg-[#C9A95A] px-7 py-3.5 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
             >
-              Pakete & Preise ansehen
+              View Packages & Pricing
             </Link>
 
             <Link
               href="/cv-generator"
               className="rounded-full border border-white/25 px-7 py-3.5 font-semibold text-white transition hover:bg-white/10"
             >
-              CV Generator starten
+              Start CV Generator
             </Link>
           </div>
         </section>

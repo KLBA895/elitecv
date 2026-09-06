@@ -37,15 +37,15 @@ export const metadata: Metadata = {
 export default function CVOptimizationSwitzerlandPage() {
   return (
     <main className="min-h-screen bg-[#F7F8FA] text-[#0A1F44]">
-      <article className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+      <article className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
 
-        {/* NAVIGATION + LANGUAGE */}
+        {/* NAVIGATION */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
-            href="/en/guides"
+            href="/guides"
             className="text-sm font-semibold text-[#8A6A22] hover:underline"
           >
-            ← Back to Career Guides
+            ← Back to EliteCV Career Guides
           </Link>
 
           <div className="inline-flex rounded-full border border-[#0A1F44]/10 bg-white p-1 shadow-sm">
@@ -67,16 +67,20 @@ export default function CVOptimizationSwitzerlandPage() {
         </div>
 
         {/* HERO */}
-        <header className="mt-10 max-w-4xl">
-          <span className="inline-flex rounded-full bg-[#C9A95A]/15 px-4 py-2 text-sm font-semibold text-[#8A6A22]">
-            CV Optimization Switzerland
-          </span>
+        <header className="mt-10">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
+            EliteCV Career Guide
+          </p>
 
-          <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-            CV Optimization Switzerland: Improve Your CV for the Swiss Job Market
+          <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl">
+            CV Optimization Switzerland
           </h1>
 
-          <p className="mt-6 text-lg leading-8 text-[#0A1F44]/75 sm:text-xl">
+          <p className="mt-4 text-xl font-medium text-[#0A1F44]">
+            Improve your CV for the Swiss job market
+          </p>
+
+          <p className="mt-6 max-w-3xl leading-8 text-[#0A1F44]/75">
             A professional CV is more than a list of previous positions.
             Structure, relevance, measurable achievements and clear career
             positioning determine how effectively your profile communicates
@@ -84,30 +88,29 @@ export default function CVOptimizationSwitzerlandPage() {
           </p>
         </header>
 
-        {/* INTRO */}
-        <section className="mt-12 rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm sm:p-8">
-          <h2 className="text-3xl font-bold">
-            What does professional CV optimization mean?
-          </h2>
-
-          <p className="mt-5 leading-8 text-[#0A1F44]/75">
-            CV optimization means improving both the content and presentation
-            of your existing CV. The goal is to make your professional profile,
-            relevant experience, competencies and achievements easier to
-            understand while aligning the document with your target position.
-          </p>
-
-          <p className="mt-4 leading-8 text-[#0A1F44]/75">
-            A strong CV should answer three questions quickly: Who are you
-            professionally? What relevant experience and results do you bring?
-            And why does your profile fit the target role?
-          </p>
-        </section>
-
         {/* CONTENT */}
-        <section className="mt-12 space-y-12 rounded-3xl bg-white p-7 shadow-sm sm:p-10">
+        <div className="mt-12 space-y-12 rounded-3xl bg-white p-7 shadow-sm sm:p-12">
 
-          <div>
+          <section>
+            <h2 className="text-3xl font-bold">
+              What does professional CV optimization mean?
+            </h2>
+
+            <p className="mt-5 leading-8 text-[#0A1F44]/75">
+              CV optimization means improving both the content and presentation
+              of your existing CV. The goal is to make your professional profile,
+              relevant experience, competencies and achievements easier to
+              understand while aligning the document with your target position.
+            </p>
+
+            <p className="mt-4 leading-8 text-[#0A1F44]/75">
+              A strong CV should answer three questions quickly: Who are you
+              professionally? What relevant experience and results do you bring?
+              And why does your profile fit the target role?
+            </p>
+          </section>
+
+          <section>
             <h2 className="text-3xl font-bold">
               1. Improve the overall CV structure
             </h2>
@@ -131,9 +134,9 @@ export default function CVOptimizationSwitzerlandPage() {
             >
               → CV Switzerland: Structure and Practical Tips
             </Link>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
               2. Strengthen your professional profile
             </h2>
@@ -149,9 +152,9 @@ export default function CVOptimizationSwitzerlandPage() {
               context. Focus instead on your professional level, industry
               experience, core competencies and relevant strengths.
             </p>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
               3. Connect responsibilities with measurable results
             </h2>
@@ -162,7 +165,7 @@ export default function CVOptimizationSwitzerlandPage() {
               improvements, leadership or business results.
             </p>
 
-            <div className="mt-6 grid gap-5 sm:grid-cols-2">
+            <div className="mt-7 grid gap-5 sm:grid-cols-2">
               <div className="rounded-2xl border border-[#0A1F44]/10 bg-[#F7F8FA] p-6">
                 <p className="font-semibold">
                   Before
@@ -184,9 +187,9 @@ export default function CVOptimizationSwitzerlandPage() {
                 </p>
               </div>
             </div>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
               4. Adapt your CV to the target role
             </h2>
@@ -202,9 +205,9 @@ export default function CVOptimizationSwitzerlandPage() {
               skills and experiences are particularly relevant. Prioritize
               those elements when they genuinely match your background.
             </p>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
               5. Use relevant keywords
             </h2>
@@ -221,9 +224,9 @@ export default function CVOptimizationSwitzerlandPage() {
               copying terms from the vacancy when they do not match your
               background.
             </p>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
               6. Optimize your CV for ATS readability
             </h2>
@@ -245,9 +248,9 @@ export default function CVOptimizationSwitzerlandPage() {
             >
               → ATS Resume Switzerland 2026
             </Link>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
               7. Use a professional CV design
             </h2>
@@ -264,9 +267,9 @@ export default function CVOptimizationSwitzerlandPage() {
             >
               → CV Template Switzerland
             </Link>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
               8. Remove irrelevant or outdated information
             </h2>
@@ -281,9 +284,9 @@ export default function CVOptimizationSwitzerlandPage() {
               Older roles can often be summarized, while recent and relevant
               positions should receive more detail.
             </p>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
               9. Optimize executive and senior-level CVs differently
             </h2>
@@ -305,9 +308,9 @@ export default function CVOptimizationSwitzerlandPage() {
             >
               → Executive CV Switzerland
             </Link>
-          </div>
+          </section>
 
-          <div>
+          <section>
             <h2 className="text-3xl font-bold">
               10. Keep your CV and LinkedIn profile consistent
             </h2>
@@ -324,116 +327,115 @@ export default function CVOptimizationSwitzerlandPage() {
             >
               → LinkedIn Profile Optimization Switzerland
             </Link>
-          </div>
+          </section>
 
-        </section>
+          {/* CHECKLIST */}
+          <section>
+            <h2 className="text-3xl font-bold">
+              CV Optimization Checklist
+            </h2>
 
-        {/* CHECKLIST */}
-        <section className="mt-14 rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm sm:p-8">
-          <h2 className="text-3xl font-bold">
-            CV Optimization Checklist
-          </h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {[
+                "Clear professional positioning",
+                "Logical and readable structure",
+                "Relevant experience prioritized",
+                "Measurable achievements included",
+                "Target-role keywords integrated",
+                "ATS-friendly content structure",
+                "Professional and consistent design",
+                "Unnecessary information removed",
+                "Language and spelling checked",
+                "LinkedIn profile aligned with CV",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl bg-[#F7F8FA] px-5 py-4 text-sm font-semibold"
+                >
+                  ✓ {item}
+                </div>
+              ))}
+            </div>
+          </section>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {[
-              "Clear professional positioning",
-              "Logical and readable structure",
-              "Relevant experience prioritized",
-              "Measurable achievements included",
-              "Target-role keywords integrated",
-              "ATS-friendly content structure",
-              "Professional and consistent design",
-              "Unnecessary information removed",
-              "Language and spelling checked",
-              "LinkedIn profile aligned with CV",
-            ].map((item) => (
-              <div
-                key={item}
-                className="rounded-2xl bg-[#F7F8FA] px-5 py-4 text-sm font-semibold"
+          {/* INTERNAL LINKS */}
+          <section>
+            <h2 className="text-2xl font-bold">
+              More Career Guides for Switzerland
+            </h2>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/guides/cv-switzerland"
+                className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
               >
-                ✓ {item}
-              </div>
-            ))}
-          </div>
-        </section>
+                CV Switzerland
+              </Link>
 
-        {/* INTERNAL LINKS */}
-        <section className="mt-14 rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm">
-          <h2 className="text-2xl font-bold">
-            More Career Guides for Switzerland
-          </h2>
+              <Link
+                href="/guides/cv-template-switzerland"
+                className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
+              >
+                CV Template Switzerland
+              </Link>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/guides/cv-switzerland"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              CV Switzerland
-            </Link>
+              <Link
+                href="/guides/ats-resume-switzerland-2026"
+                className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
+              >
+                ATS Resume Switzerland
+              </Link>
 
-            <Link
-              href="/guides/cv-template-switzerland"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              CV Template Switzerland
-            </Link>
+              <Link
+                href="/guides/linkedin-profile-optimization-switzerland"
+                className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
+              >
+                LinkedIn Optimization
+              </Link>
 
-            <Link
-              href="/guides/ats-resume-switzerland-2026"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              ATS Resume Switzerland
-            </Link>
+              <Link
+                href="/guides/job-application-switzerland"
+                className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
+              >
+                Job Application Switzerland
+              </Link>
+            </div>
+          </section>
 
-            <Link
-              href="/guides/linkedin-profile-optimization-switzerland"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              LinkedIn Optimization
-            </Link>
+          {/* CTA */}
+          <section className="rounded-3xl bg-[#0A1F44] p-7 text-white sm:p-10">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
+              EliteCV
+            </p>
 
-            <Link
-              href="/guides/job-application-switzerland"
-              className="rounded-full bg-[#F7F8FA] px-5 py-3 text-sm font-semibold hover:bg-[#EEF1F5]"
-            >
-              Job Application Switzerland
-            </Link>
-          </div>
-        </section>
+            <h2 className="mt-3 text-3xl font-bold">
+              Optimize your CV for the Swiss job market
+            </h2>
 
-        {/* CTA */}
-        <section className="mt-14 rounded-3xl bg-[#0A1F44] p-8 text-white sm:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
-            EliteCV
-          </p>
+            <p className="mt-5 max-w-3xl leading-8 text-white/80">
+              Create your CV with the EliteCV Generator or have your existing CV
+              professionally optimized and aligned with your target position in
+              Switzerland.
+            </p>
 
-          <h2 className="mt-3 text-3xl font-bold">
-            Optimize your CV for the Swiss job market
-          </h2>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/cv-generator"
+                className="inline-flex items-center justify-center rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
+              >
+                Start CV Generator
+              </Link>
 
-          <p className="mt-5 max-w-3xl leading-8 text-white/80">
-            Create your CV with the EliteCV Generator or have your existing CV
-            professionally optimized and aligned with your target position in
-            Switzerland.
-          </p>
+              <Link
+                href="/#preise"
+                className="inline-flex items-center justify-center rounded-xl border border-white/25 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
+              >
+                View Packages & Pricing
+              </Link>
+            </div>
+          </section>
 
-          <div className="mt-7 flex flex-wrap gap-4">
-            <Link
-              href="/cv-generator"
-              className="rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
-            >
-              Start CV Generator
-            </Link>
-
-            <Link
-              href="/#preise"
-              className="rounded-xl border border-white/25 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-            >
-              View Packages & Pricing
-            </Link>
-          </div>
-        </section>
-
+        </div>
       </article>
     </main>
   );
