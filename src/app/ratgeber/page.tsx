@@ -11,6 +11,10 @@ export const metadata: Metadata = {
 
   alternates: {
     canonical: "https://www.elitecv.ch/ratgeber",
+    languages: {
+      "de-CH": "https://www.elitecv.ch/ratgeber",
+      "en-CH": "https://www.elitecv.ch/guides",
+    },
   },
 
   openGraph: {
@@ -151,12 +155,13 @@ export default function RatgeberPage() {
             <Link
               href="/ratgeber"
               className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
+              aria-current="page"
             >
               DE
             </Link>
 
             <Link
-              href="/en/guides"
+              href="/guides"
               className="rounded-full px-4 py-2 text-xs font-bold text-[#0A1F44]/60 transition hover:text-[#0A1F44]"
             >
               EN
