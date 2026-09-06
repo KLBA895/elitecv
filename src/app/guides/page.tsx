@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
     languages: {
       "de-CH": "https://www.elitecv.ch/ratgeber",
-      "en-CH": "https://www.elitecv.ch/en/guides",
+      "en-CH": "https://www.elitecv.ch/guides",
     },
   },
 
@@ -123,7 +123,7 @@ export default function GuidesPage() {
               </Link>
 
               <Link
-                href="/en/guides"
+                href="/guides"
                 className="rounded-full bg-[#0A1F44] px-4 py-2 text-xs font-bold text-white"
                 aria-current="page"
               >
