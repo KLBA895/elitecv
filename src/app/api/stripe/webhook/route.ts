@@ -279,11 +279,14 @@ export async function POST(req: NextRequest) {
 
     const hasEnglishAccess =
       session.metadata?.english_access === "true" ||
-      language === "en";
+      language === "en" ||
+      packageKey === "premium" ||
+      packageKey === "elite";
 
     const hasCoverLetterAccess =
       session.metadata?.cover_letter_access === "true" ||
       packageKey === "generatorExecutive" ||
+      packageKey === "premium" ||
       addons.includes("coverLetter");
 
     const isGeneratorPackage =

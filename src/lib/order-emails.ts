@@ -87,14 +87,69 @@ export async function sendOrderConfirmationEmails({
 }: SendOrderConfirmationEmailParams) {
   const packageLabel =
     getPackageLabel(packageKey);
+  const includedServicesByPackage: Record<string, string[]> = {
+    basic: [
+      "Professionelle CV-Analyse",
+      "Struktur- & Layout-Feedback",
+      "Konkrete Optimierungsempfehlungen",
+    ],
+
+    generatorProfessional: [
+      "EliteCV Professional Layout",
+      "PDF-Export",
+      "3 Tage Zugriff",
+      "Individuelle Farbauswahl",
+      "Deutsch inklusive · Englisch + CHF 29",
+    ],
+
+    generatorExecutive: [
+      "EliteCV Executive Layout",
+      "PDF-Export",
+      "5 Tage Zugriff",
+      "Individuelle Farbauswahl",
+      "Deutsch inklusive · Englisch + CHF 29",
+    ],
+
+    professional: [
+      "Persönliche Executive-CV-Optimierung",
+      "Strategische Karrierepositionierung",
+      "Professionelles Executive-Design",
+      "Persönliche Executive-Beratung",
+    ],
+
+    premium: [
+      "Professionelle CV-Optimierung",
+      "Professionelles Premium-CV-Design",
+      "Professionelle LinkedIn-Optimierung",
+      "Professionelle CV-Übersetzung (DE ↔ EN)",
+      "1 professionelles Motivationsschreiben inklusive",
+      "Priorisierte Bearbeitung innerhalb von 3–5 Werktagen",
+    ],
+
+    elite: [
+      "Strategische Executive-Karrierepositionierung",
+      "Individuelle Executive-Karrierestrategie",
+      "CV-, LinkedIn- und Bewerbungsstrategie",
+      "Professionelle CV-Übersetzung (DE ↔ EN)",
+      "Persönliche Betreuung",
+    ],
+  };
+
+  const includedServices =
+    includedServicesByPackage[packageKey] ?? [];
+
+  const includedServicesText =
+    includedServices.length > 0
+      ? includedServices.map((service) => `✓ ${service}`).join("\n")
+      : "Gemäss gewähltem Paket";
 
   const selectedAddonLabels =
     getAddonLabels(addons);
 
   const addonsText =
     selectedAddonLabels.length > 0
-      ? selectedAddonLabels.join("\n")
-      : "Keine Zusatzleistungen";
+      ? selectedAddonLabels.map((addon) => `+ ${addon}`).join("\n")
+      : "Keine zusätzlich gebuchten Leistungen";
 
   const expiryText =
     formatExpiryDate(expiresAt);
@@ -151,10 +206,13 @@ vielen Dank für Ihre Bestellung bei EliteCV.
 Paket:
 ${packageLabel}
 
+Im Paket enthalten:
+${includedServicesText}
+
 Sprache:
 ${language === "en" ? "Englisch" : "Deutsch"}
 
-Zusatzleistungen:
+Zusätzlich gebuchte Leistungen:
 ${addonsText}
 
 Gesamtbetrag:
@@ -192,10 +250,13 @@ ${packageLabel}
 Paket-Key:
 ${packageKey}
 
+Im Paket enthalten:
+${includedServicesText}
+
 Sprache:
 ${language}
 
-Zusatzleistungen:
+Zusätzlich gebuchte Leistungen:
 ${addonsText}
 
 Gesamtbetrag:

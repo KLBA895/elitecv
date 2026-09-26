@@ -4,11 +4,20 @@ type RequestBody = {
   action: string;
   field?: string;
   text?: string;
+  targetLanguage?: "de" | "en";
+
   data?: {
     language?: "de" | "en";
     position?: string;
     company?: string;
     jobAd?: string;
+
+    why?: string;
+    howExperience?: string;
+    howAchievements?: string;
+    howSkills?: string;
+    whatValue?: string;
+    whatClosing?: string;
   };
 };
 
@@ -39,6 +48,105 @@ export async function POST(request: Request) {
     const language = body.data?.language ?? "de";
     const instruction =
       actionLabels[body.action] ?? "Überarbeite den Abschnitt professionell.";
+    if (body.action === "translateLetter") {
+      const targetLanguage = body.targetLanguage ?? "en";
+
+      const prompt = `
+      Du übersetzt die vorhandenen Inhalte eines Motivationsschreibens.
+      
+      Zielsprache:
+      ${targetLanguage === "de" ? "Schweizer Hochdeutsch" : "professionelles Englisch"}
+      
+      WICHTIG:
+      - Übersetze ausschließlich die vorhandenen Inhalte.
+      - Erstelle KEIN neues Motivationsschreiben.
+      - Ergänze KEINE Anrede.
+      - Ergänze KEINE Grussformel.
+      - Ergänze KEIN "Sehr geehrte Damen und Herren".
+      - Ergänze KEIN "Dear Sir or Madam".
+      - Ergänze KEIN "Freundliche Grüsse".
+      - Ergänze KEIN "Kind regards".
+      - Erfinde keine Informationen.
+      - Erfinde keine Kennzahlen, Erfahrungen oder Qualifikationen.
+      - Behalte Inhalt, Aussage und Struktur der einzelnen Felder bei.
+      - Formuliere natürlich und professionell.
+      - Firmennamen, Produktnamen und Eigennamen nicht unnötig übersetzen.
+      - Leere Felder bleiben leer.
+      - Gib ausschließlich gültiges JSON zurück.
+      
+      Vorhandene Inhalte:
+      
+      {
+        "why": ${JSON.stringify(body.data?.why ?? "")},
+        "howExperience": ${JSON.stringify(body.data?.howExperience ?? "")},
+        "howAchievements": ${JSON.stringify(body.data?.howAchievements ?? "")},
+        "howSkills": ${JSON.stringify(body.data?.howSkills ?? "")},
+        "whatValue": ${JSON.stringify(body.data?.whatValue ?? "")},
+        "whatClosing": ${JSON.stringify(body.data?.whatClosing ?? "")}
+      }
+      
+      Gib exakt diese JSON-Struktur zurück:
+      
+      {
+        "why": "...",
+        "howExperience": "...",
+        "howAchievements": "...",
+        "howSkills": "...",
+        "whatValue": "...",
+        "whatClosing": "..."
+      }
+      `.trim();
+
+      const response = await fetch(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            temperature: 0.2,
+            messages: [
+              {
+                role: "system",
+                content:
+                  "Du bist ein professioneller Übersetzer für Bewerbungsunterlagen. Du übersetzt ausschließlich den vorhandenen Inhalt und ergänzt keine Anrede, Grussformel oder neuen Inhalte.",
+              },
+              {
+                role: "user",
+                content: prompt,
+              },
+            ],
+            response_format: {
+              type: "json_object",
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+
+        return NextResponse.json(
+          { error: errorText },
+          { status: response.status }
+        );
+      }
+
+      const result = await response.json();
+      const content = result.choices?.[0]?.message?.content;
+
+      if (!content) {
+        return NextResponse.json(
+          { error: "No AI response" },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json(JSON.parse(content));
+    }
     if (body.action === "generateFullLetter") {
       const prompt = `
       Du bist ein erfahrener Bewerbungsberater für den Schweizer Arbeitsmarkt.
@@ -57,7 +165,10 @@ export async function POST(request: Request) {
       ${body.data?.jobAd || "nicht angegeben"}
       
       Regeln:
-      - Schreibe in Schweizer Hochdeutsch.
+      - Schreibe in ${language === "de"
+          ? "Schweizer Hochdeutsch"
+          : "professionellem Englisch"
+        }.
       - Keine Floskeln.
       - Niemals mit "Mit grossem Interesse" beginnen.
       - Niemals "Hiermit bewerbe ich mich" verwenden.
@@ -93,7 +204,7 @@ export async function POST(request: Request) {
             {
               role: "system",
               content:
-                "Du erstellst hochwertige Motivationsschreiben für den Schweizer Arbeitsmarkt. Du gibst nur gültiges JSON zurück.",
+                "Du erstellst hochwertige Bewerbungs- und Motivationsschreiben für den Schweizer Arbeitsmarkt auf Deutsch oder Englisch. Du gibst ausschließlich gültiges JSON zurück.",
             },
             {
               role: "user",

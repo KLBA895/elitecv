@@ -157,6 +157,84 @@ export function CoverLetterGenerator({
   const [isGenerated, setIsGenerated] = useState(false);
   const [isGeneratingLetter, setIsGeneratingLetter] = useState(false);
   const [letterGeneratedMessage, setLetterGeneratedMessage] = useState(false);
+
+  // ─── Motivationsschreiben DE ↔ EN übersetzen ─────────────────────
+  const [isTranslatingLetter, setIsTranslatingLetter] = useState(false);
+  const [letterTranslationMessage, setLetterTranslationMessage] = useState(false);
+
+  const handleTranslateLetter = async (targetLanguage: "de" | "en") => {
+    if (isTranslatingLetter || data.language === targetLanguage) {
+      return;
+    }
+
+    try {
+      setIsTranslatingLetter(true);
+      setLetterTranslationMessage(false);
+
+      const response = await fetch("/api/cover-letter-ai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "translateLetter",
+          targetLanguage,
+          data: {
+            language: data.language,
+            position: data.position,
+            company: data.company,
+            jobAd: data.jobAd,
+
+            why: data.why,
+            howExperience: data.howExperience,
+            howAchievements: data.howAchievements,
+            howSkills: data.howSkills,
+            whatValue: data.whatValue,
+            whatClosing: data.whatClosing,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        alert(
+          targetLanguage === "en"
+            ? "Das Motivationsschreiben konnte nicht ins Englische übersetzt werden."
+            : "Das Motivationsschreiben konnte nicht ins Deutsche übersetzt werden."
+        );
+        return;
+      }
+
+      const result = await response.json();
+
+      setData((current) => ({
+        ...current,
+        language: targetLanguage,
+        why: result.why ?? current.why,
+        howExperience: result.howExperience ?? current.howExperience,
+        howAchievements: result.howAchievements ?? current.howAchievements,
+        howSkills: result.howSkills ?? current.howSkills,
+        whatValue: result.whatValue ?? current.whatValue,
+        whatClosing: result.whatClosing ?? current.whatClosing,
+      }));
+
+      setLetterTranslationMessage(true);
+
+      setTimeout(() => {
+        setLetterTranslationMessage(false);
+      }, 2500);
+    } catch (error) {
+      console.error("Fehler bei der Übersetzung des Motivationsschreibens:", error);
+
+      alert(
+        targetLanguage === "en"
+          ? "Das Motivationsschreiben konnte nicht ins Englische übersetzt werden."
+          : "Das Motivationsschreiben konnte nicht ins Deutsche übersetzt werden."
+      );
+    } finally {
+      setIsTranslatingLetter(false);
+    }
+  };
+
   const letterPrintRef = useRef<HTMLDivElement>(null);
   const handleLetterExport = async () => {
     if (!letterPrintRef.current) return;
@@ -275,6 +353,58 @@ export function CoverLetterGenerator({
               ? "✅ Anschreiben erstellt"
               : "✨ Anschreiben automatisch erstellen"}
         </button>
+        {/* SPRACHE MOTIVATIONSSCHREIBEN */}
+        <div className="mt-6 rounded-2xl border border-[#0A1F44]/10 bg-white p-5 shadow-sm">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-base font-semibold text-[#0A1F44]">
+                Sprache Motivationsschreiben
+              </h2>
+
+              <p className="mt-1 text-sm text-[#0A1F44]/60">
+                Bestehendes Motivationsschreiben mit KI übersetzen.
+              </p>
+            </div>
+
+            <div className="inline-flex w-fit rounded-xl border border-[#0A1F44]/10 bg-[#F7F8FA] p-1">
+              <button
+                type="button"
+                disabled={isTranslatingLetter}
+                onClick={() => handleTranslateLetter("de")}
+                className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${data.language === "de"
+                  ? "bg-[#0A1F44] text-white shadow-sm"
+                  : "text-[#0A1F44]/65 hover:bg-white"
+                  } disabled:cursor-not-allowed disabled:opacity-60`}
+              >
+                🇩🇪 DE
+              </button>
+
+              <button
+                type="button"
+                disabled={isTranslatingLetter}
+                onClick={() => handleTranslateLetter("en")}
+                className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${data.language === "en"
+                  ? "bg-[#0A1F44] text-white shadow-sm"
+                  : "text-[#0A1F44]/65 hover:bg-white"
+                  } disabled:cursor-not-allowed disabled:opacity-60`}
+              >
+                🇬🇧 EN
+              </button>
+            </div>
+          </div>
+
+          {isTranslatingLetter && (
+            <div className="mt-4 rounded-xl bg-[#C9A95A]/10 px-4 py-3 text-sm font-semibold text-[#8A6A22]">
+              ⏳ Motivationsschreiben wird übersetzt...
+            </div>
+          )}
+
+          {!isTranslatingLetter && letterTranslationMessage && (
+            <div className="mt-4 rounded-xl bg-green-50 px-4 py-3 text-sm font-semibold text-green-700">
+              ✓ Motivationsschreiben wurde übersetzt.
+            </div>
+          )}
+        </div>
 
         <div className="mt-6 rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
           <h2 className="text-xl font-semibold text-[#0A1F44]">

@@ -454,7 +454,7 @@ const pricingPlans = [
       "Professionelle LinkedIn-Optimierung",
       "Professionelle CV-Übersetzung (DE ↔ EN)",
       "1 professionelles Motivationsschreiben inklusive",
-      "Priorisierte Bearbeitung Ihres Auftrags",
+      "Priorisierte Bearbeitung innerhalb von 3–5 Werktagen",
     ],
     detailsEn: [
       "Professional CV optimization",
@@ -462,7 +462,7 @@ const pricingPlans = [
       "Professional LinkedIn optimization",
       "Professional CV translation (DE ↔ EN)",
       "1 professional cover letter included",
-      "Priority processing",
+      "Priority processing within 3–5 business days",
     ],
   },
   {
@@ -591,9 +591,16 @@ export default function Home() {
     const addonKeys = formData
       .getAll("addons")
       .map(String);
+    const languageSurcharge =
+      selectedLanguage === "en" &&
+        (selectedPlan.key === "generatorProfessional" ||
+          selectedPlan.key === "generatorExecutive")
+        ? 29
+        : 0;
+
     const totalPrice =
       planPrices[selectedPlan.key] +
-      (selectedLanguage === "en" ? 29 : 0) +
+      languageSurcharge +
       addonKeys.reduce(
         (sum, addon) => sum + (addonPrices[addon] ?? 0),
         0
@@ -630,7 +637,9 @@ export default function Home() {
     formData.append(
       "languageText",
       selectedLanguage === "en"
-        ? "English (+ CHF 29)"
+        ? languageSurcharge > 0
+          ? "English (+ CHF 29)"
+          : "English"
         : "Deutsch"
     );
 
@@ -1250,7 +1259,14 @@ export default function Home() {
                     defaultValue="de"
                   >
                     <option value="de">Deutsch</option>
-                    <option value="en">English (+ CHF 29)</option>
+                    <option value="en">
+                      {selectedPlan.key === "premium" || selectedPlan.key === "elite"
+                        ? "English (im Paket enthalten)"
+                        : selectedPlan.key === "generatorProfessional" ||
+                          selectedPlan.key === "generatorExecutive"
+                          ? "English (+ CHF 29)"
+                          : "English"}
+                    </option>
                   </select>
                 </label>
               </div>
@@ -1349,49 +1365,64 @@ export default function Home() {
 
               <div className="mt-5">
                 <p className="mb-3 text-sm font-semibold text-[#0A1F44]">
-                  {lang === "de" ? "Zusatzleistungen auswählen" : "Select Add-ons"}
+                  {lang === "de" ? "Leistungen & Zusatzoptionen" : "Services & Add-ons"}
+                </p>
+
+                {selectedPlan.key === "premium" && (
+                  <div className="mb-4 rounded-xl border border-[#C9A95A]/35 bg-[#FFFCF5] p-4">
+                    <p className="text-sm font-semibold text-[#0A1F44]">
+                      {lang === "de" ? "Im Premium-Paket enthalten" : "Included in Premium"}
+                    </p>
+
+                    <div className="mt-3 space-y-2 text-sm text-[#0A1F44]/80">
+                      <p>✓ {lang === "de" ? "LinkedIn-Profiloptimierung" : "LinkedIn Profile Optimization"}</p>
+                      <p>✓ {lang === "de" ? "CV-Übersetzung DE ↔ EN" : "CV Translation DE ↔ EN"}</p>
+                      <p>✓ {lang === "de" ? "1 professionelles Motivationsschreiben" : "1 Professional Cover Letter"}</p>
+                      <p>
+                        ✓{" "}
+                        {lang === "de"
+                          ? "Priorisierte Bearbeitung innerhalb von 3–5 Werktagen"
+                          : "Priority processing within 3–5 business days"}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                <p className="mb-3 text-sm font-semibold text-[#0A1F44]">
+                  {lang === "de" ? "Optional hinzubuchbar" : "Optional Add-ons"}
                 </p>
 
                 <div className="space-y-2">
 
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      name="addons"
-                      value="linkedin"
-                    />
-                    <span>
-                      {lang === "de"
-                        ? "LinkedIn-Profil Optimierung (+ CHF 99)"
-                        : "LinkedIn Profile Optimization (+ CHF 99)"}
-                    </span>
-                  </label>
+                  {selectedPlan.key !== "premium" && (
+                    <>
+                      <label className="flex items-center gap-2 text-sm">
+                        <input
+                          type="checkbox"
+                          name="addons"
+                          value="coverLetter"
+                        />
+                        <span>
+                          {lang === "de"
+                            ? "Professionelles Motivationsschreiben (+ CHF 89)"
+                            : "Professional Cover Letter (+ CHF 89)"}
+                        </span>
+                      </label>
 
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      name="addons"
-                      value="coverLetter"
-                    />
-                    <span>
-                      {lang === "de"
-                        ? "Motivationsschreiben Erstellung (+ CHF 89)"
-                        : "Professional Cover Letter (+ CHF 89)"}
-                    </span>
-                  </label>
-
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      name="addons"
-                      value="translation"
-                    />
-                    <span>
-                      {lang === "de"
-                        ? "CV Übersetzung DE ↔ EN (+ CHF 59)"
-                        : "CV Translation DE ↔ EN (+ CHF 59)"}
-                    </span>
-                  </label>
+                      <label className="flex items-center gap-2 text-sm">
+                        <input
+                          type="checkbox"
+                          name="addons"
+                          value="translation"
+                        />
+                        <span>
+                          {lang === "de"
+                            ? "CV-Übersetzung DE ↔ EN (+ CHF 59)"
+                            : "CV Translation DE ↔ EN (+ CHF 59)"}
+                        </span>
+                      </label>
+                    </>
+                  )}
 
                   <label className="flex items-center gap-2 text-sm">
                     <input
@@ -1401,7 +1432,7 @@ export default function Home() {
                     />
                     <span>
                       {lang === "de"
-                        ? "Arbeitszeugnis Analyse (+ CHF 39)"
+                        ? "Arbeitszeugnis-Analyse (+ CHF 39)"
                         : "Employment Reference Analysis (+ CHF 39)"}
                     </span>
                   </label>
@@ -1414,10 +1445,18 @@ export default function Home() {
                     />
                     <span>
                       {lang === "de"
-                        ? "Express-Bearbeitung 24h (+ CHF 59)"
+                        ? "Express-Bearbeitung innerhalb 24h (+ CHF 59)"
                         : "24-Hour Express Processing (+ CHF 59)"}
                     </span>
                   </label>
+
+                  {selectedPlan.key === "premium" && (
+                    <p className="mt-3 rounded-lg bg-[#F7F8FA] p-3 text-xs leading-5 text-[#0A1F44]/65">
+                      {lang === "de"
+                        ? "Premium umfasst eine Bearbeitung innerhalb von 3–5 Werktagen. Für eine Bearbeitung innerhalb von 24 Stunden kann Express separat hinzugebucht werden."
+                        : "Premium includes processing within 3–5 business days. For processing within 24 hours, Express can be added separately."}
+                    </p>
+                  )}
 
                 </div>
               </div>
@@ -1771,9 +1810,7 @@ export default function Home() {
                   </li>
 
                   <li>
-                    <li>
-                      ✓ EliteCV Generator
-                    </li>
+                    ✓ EliteCV Generator
                   </li>
 
                 </ul>

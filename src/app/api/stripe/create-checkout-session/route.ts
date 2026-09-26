@@ -199,11 +199,24 @@ export async function POST(request: NextRequest) {
       ? body.addons
       : [];
 
-    const validAddons = [
+    const submittedValidAddons = [
       ...new Set(
         submittedAddons.filter(isValidAddonKey)
       ),
     ];
+
+    // Leistungen, die gemäss bestehender Paketkonfiguration
+    // bereits im Paket enthalten sind, dürfen nicht nochmals verrechnet werden.
+    const includedAddonsByPlan: Partial<Record<PlanKey, AddonKey[]>> = {
+      premium: ["linkedin", "coverLetter", "translation"],
+      elite: ["translation"],
+    };
+
+    const includedAddons = includedAddonsByPlan[planKey] ?? [];
+
+    const validAddons = submittedValidAddons.filter(
+      (addonKey) => !includedAddons.includes(addonKey)
+    );
 
     const lineItems = [
       {
@@ -218,7 +231,12 @@ export async function POST(request: NextRequest) {
       },
     ];
 
-    if (language === "en") {
+    const hasLanguageSurcharge =
+      language === "en" &&
+      (planKey === "generatorProfessional" ||
+        planKey === "generatorExecutive");
+
+    if (hasLanguageSurcharge) {
       lineItems.push({
         quantity: 1,
         price_data: {
@@ -257,10 +275,13 @@ export async function POST(request: NextRequest) {
 
     const hasCoverLetterAccess =
       planKey === "generatorExecutive" ||
+      planKey === "premium" ||
       validAddons.includes("coverLetter");
 
     const hasEnglishAccess =
       language === "en" ||
+      planKey === "premium" ||
+      planKey === "elite" ||
       validAddons.includes("translation");
 
     const accessLevel =
