@@ -658,15 +658,13 @@ export default function CVGeneratorPage() {
         </p>
 
         <p>
-          Ihren persönlichen Zugangscode erhalten Sie nach erfolgreicher Zahlung per E-Mail.
+          Bereits EliteCV gekauft? Geben Sie Ihre E-Mail-Adresse und Ihren
+          persönlichen Zugangscode ein.
           <br />
-          Bitte geben Sie Ihre E-Mail-Adresse und Ihren EliteCV-Zugangscode ein.
-        </p>
-
-        <p>
-          You will receive your personal access code by email after successful payment.
-          <br />
-          Please enter your email address and EliteCV access code.
+          <span style={{ opacity: 0.7 }}>
+            Already purchased EliteCV? Enter your email address and personal
+            access code.
+          </span>
         </p>
 
         <input
@@ -694,11 +692,56 @@ export default function CVGeneratorPage() {
             ? "Zugang wird geprüft..."
             : "Zugang freischalten / Unlock Access"}
         </button>
+
         {accessError && (
           <p className="cvgen-access-error" role="alert">
             {accessError}
           </p>
         )}
+
+        <div
+          style={{
+            marginTop: "28px",
+            paddingTop: "24px",
+            borderTop: "1px solid rgba(10, 31, 68, 0.12)",
+          }}
+        >
+          <p style={{ marginBottom: "8px" }}>
+            <strong>Noch keinen Zugangscode?</strong>
+            <br />
+            <span style={{ opacity: 0.7 }}>
+              Don't have an access code yet?
+            </span>
+          </p>
+
+          <p style={{ marginBottom: "18px" }}>
+            Wählen Sie zuerst das passende EliteCV-Paket. Nach erfolgreicher
+            Zahlung erhalten Sie Ihren persönlichen Zugangscode per E-Mail.
+            <br />
+            <span style={{ opacity: 0.7 }}>
+              Choose the appropriate EliteCV package first. After successful
+              payment, you will receive your personal access code by email.
+            </span>
+          </p>
+
+          <a
+            href="/#pakete"
+            style={{
+              display: "inline-flex",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "12px",
+              background: "#C9A95A",
+              color: "#0A1F44",
+              padding: "14px 20px",
+              fontWeight: 700,
+              textDecoration: "none",
+            }}
+          >
+            ✨ Pakete & Preise ansehen / View Packages & Prices →
+          </a>
+        </div>
       </div>
     );
   }

@@ -283,11 +283,15 @@ export function CoverLetterGenerator({
   const handleAiAction = async (
     field: keyof CoverLetterData,
     action: AiAction
-  ) => {
+  ): Promise<void> => {
+    const currentValue = String(data[field] ?? "").trim();
 
-    console.log("AI gestartet", action, field);
-
-    const currentValue = String(data[field] ?? "");
+    if (!currentValue) {
+      alert(
+        "Bitte geben Sie zuerst einen Text ein oder erstellen Sie das Anschreiben automatisch."
+      );
+      throw new Error("Das ausgewählte Textfeld ist leer.");
+    }
 
     try {
       const response = await fetch("/api/cover-letter-ai", {
@@ -309,21 +313,28 @@ export function CoverLetterGenerator({
       });
 
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error("KI-Überarbeitung fehlgeschlagen:", errorText);
+
         alert("KI-Überarbeitung fehlgeschlagen.");
-        return;
+        throw new Error("KI-Überarbeitung fehlgeschlagen.");
       }
 
       const result = await response.json();
 
-      if (result.text) {
-        setData((current) => ({
-          ...current,
-          [field]: result.text,
-        }));
+      if (!result.text) {
+        alert("Die KI hat keinen überarbeiteten Text zurückgegeben.");
+        throw new Error("Keine KI-Antwort erhalten.");
       }
+
+      setData((current) => ({
+        ...current,
+        [field]: result.text,
+      }));
     } catch (error) {
-      console.error(error);
-      alert("KI-Überarbeitung fehlgeschlagen.");
+      console.error("Cover-Letter AI error:", error);
+
+      throw error;
     }
   };
 

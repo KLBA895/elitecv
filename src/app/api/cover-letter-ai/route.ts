@@ -25,6 +25,8 @@ const actionLabels: Record<string, string> = {
   professional: "Formuliere den Abschnitt professioneller.",
   shorter: "Kürze den Abschnitt deutlich, ohne wichtige Inhalte zu verlieren.",
   moreConvincing: "Formuliere den Abschnitt überzeugender und konkreter.",
+  ats:
+    "Optimiere den Abschnitt für ATS-Systeme. Verwende relevante Begriffe aus dem Stelleninserat nur dort, wo sie inhaltlich zum vorhandenen Text und Profil passen. Erfinde keine Qualifikationen, Erfahrungen, Kenntnisse oder Erfolge. Kopiere keine vollständigen Sätze aus dem Stelleninserat.",
   executive: "Formuliere den Abschnitt auf Executive-Niveau.",
   modern: "Formuliere den Abschnitt moderner und natürlicher.",
   translate: "Übersetze den Abschnitt in die jeweils andere Sprache.",
