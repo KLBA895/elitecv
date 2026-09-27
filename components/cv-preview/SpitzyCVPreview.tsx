@@ -36,12 +36,25 @@ function WorkEntry({
   job: CVData["workExperience"][0];
   successLabel?: string;
 }) {
+  const responsibilities = (job.responsibilities ?? []).filter(
+    (item) => typeof item === "string" && item.trim().length > 0
+  );
+
+  const achievements = (job.achievements ?? []).filter(
+    (item) => typeof item === "string" && item.trim().length > 0
+  );
+
   return (
     <article className="cv-work-entry">
       <div className="cv-work-header">
         <div className="cv-work-meta">
-          <span className="cv-work-period">{job.from} – {job.to}</span>
-          <span className="cv-work-location">{job.location}</span>
+          <span className="cv-work-period">
+            {job.from} – {job.to}
+          </span>
+
+          {job.location && (
+            <span className="cv-work-location">{job.location}</span>
+          )}
         </div>
 
         <div className="cv-work-info">
@@ -50,20 +63,22 @@ function WorkEntry({
         </div>
       </div>
 
-      {job.responsibilities.length > 0 && (
+      {responsibilities.length > 0 && (
         <ul className="cv-work-list">
-          {job.responsibilities.map((item, index) => (
+          {responsibilities.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
       )}
 
-      {job.achievements.length > 0 && (
+      {achievements.length > 0 && (
         <>
-          <p className="cv-work-achievements-title">{successLabel}</p>
+          <p className="cv-work-achievements-title">
+            {successLabel}
+          </p>
 
           <ul className="cv-work-achievements">
-            {job.achievements.map((item, index) => (
+            {achievements.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
@@ -94,8 +109,57 @@ export function ProfessionalCVPreview({
     certificates,
   } = data;
 
-  const firstPageJobs = workExperience.slice(0, 1);
-  const secondPageJobs = workExperience.slice(1);
+  const getJobWeight = (job: CVData["workExperience"][0]) => {
+    const responsibilities = (job.responsibilities ?? []).filter(
+      (item) => typeof item === "string" && item.trim().length > 0
+    );
+
+    const achievements = (job.achievements ?? []).filter(
+      (item) => typeof item === "string" && item.trim().length > 0
+    );
+
+    return (
+      2 +
+      responsibilities.length +
+      achievements.length * 1.25
+    );
+  };
+
+  const profileWeight =
+    [profile.rawText, profile.why, profile.how, profile.what]
+      .filter(Boolean)
+      .join(" ").length / 180;
+
+  const uspWeight = usps.length * 1.5;
+
+  const firstJobWeight =
+    workExperience[0] ? getJobWeight(workExperience[0]) : 0;
+
+  const secondJobWeight =
+    workExperience[1] ? getJobWeight(workExperience[1]) : 0;
+
+  const automaticFirstPageCount =
+    workExperience.length >= 2 &&
+      profileWeight + uspWeight + firstJobWeight + secondJobWeight <= 14
+      ? 2
+      : 1;
+
+  const firstPageExperienceCount = Math.max(
+    1,
+    Math.min(
+      data.firstPageExperienceCount ?? automaticFirstPageCount,
+      workExperience.length
+    )
+  );
+
+  const firstPageJobs = workExperience.slice(
+    0,
+    firstPageExperienceCount
+  );
+
+  const secondPageJobs = workExperience.slice(
+    firstPageExperienceCount
+  );
 
   const itLevelDots = (level?: string) => {
     const levels = { "Grundkenntnisse": 1, "Gut": 2, "Sehr gut": 3, "Expertenwissen": 4 };
@@ -183,7 +247,20 @@ export function ProfessionalCVPreview({
             {personal.email && <span>{personal.email}</span>}
             {personal.phone && <span>{personal.phone}</span>}
             {personal.location && <span>{personal.location}</span>}
-            {personal.linkedin && <span>{personal.linkedin}</span>}
+            {personal.linkedin && (
+              <a
+                href={
+                  personal.linkedin.startsWith("http")
+                    ? personal.linkedin
+                    : `https://${personal.linkedin}`
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cv-linkedin-link"
+              >
+                LinkedIn
+              </a>
+            )}
           </div>
         </header>
 
@@ -338,7 +415,7 @@ export function ProfessionalCVPreview({
 
           <main className="cv-main">
             {secondPageJobs.length > 0 && (
-              <MainSection title="Weitere Berufserfahrung">
+              <MainSection title={t.moreExperience}>
                 {secondPageJobs.map((job) => (
                   <WorkEntry
                     key={job.id}
@@ -375,8 +452,9 @@ export function ProfessionalCVPreview({
 
         <footer className="cv-footer cv-footer--page2">
           <span>
-            {personal.firstName} {personal.lastName} · {personal.email} · {personal.phone}
-            {personal.linkedin && <> · {personal.linkedin}</>}
+            {personal.firstName} {personal.lastName}
+            {personal.email && <> · {personal.email}</>}
+            {personal.phone && <> · {personal.phone}</>}
           </span>
         </footer>
       </section>

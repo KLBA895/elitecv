@@ -156,7 +156,7 @@ export interface CVData {
   | "teal"
   | "charcoal";
 
-  firstPageExperienceCount?: 2 | 3 | 4;
+  firstPageExperienceCount?: 1 | 2 | 3 | 4;
   bulletPointCount?: 2 | 3 | 4 | 5;
 
   personal: PersonalData;
