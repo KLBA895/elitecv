@@ -4,10 +4,24 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "LinkedIn Profil optimieren Schweiz | Besser gefunden werden | EliteCV",
+    "LinkedIn Profil optimieren Zürich & Schweiz | LinkedIn Beratung | EliteCV",
 
   description:
-    "LinkedIn Profil für die Schweiz optimieren: Headline, Info-Bereich, Berufserfahrung und Keywords verbessern. Mit konkretem Vorher-Nachher-Beispiel.",
+    "Professionelle LinkedIn-Profiloptimierung in Zürich, Dietikon & der Schweiz: individueller Optimierungsbericht, Positionierung, Headline, About, Keywords, Skills, CV-Abgleich und professionelles LinkedIn-Banner.",
+
+  keywords: [
+    "LinkedIn Profil optimieren Schweiz",
+    "LinkedIn Profil optimieren Zürich",
+    "LinkedIn Beratung Zürich",
+    "LinkedIn Beratung Schweiz",
+    "LinkedIn Profiloptimierung Zürich",
+    "LinkedIn Profiloptimierung Schweiz",
+    "LinkedIn Optimierungsbericht",
+    "LinkedIn Profil Analyse",
+    "LinkedIn Banner",
+    "LinkedIn Recruiter",
+    "LinkedIn CV Schweiz",
+  ],
 
   alternates: {
     canonical:
@@ -24,10 +38,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "LinkedIn Profil optimieren Schweiz | Besser gefunden werden",
+      "LinkedIn Profil optimieren Zürich & Schweiz | EliteCV",
 
     description:
-      "LinkedIn-Optimierung für den Schweizer Arbeitsmarkt: Positionierung, Headline, Keywords und Berufserfahrung mit Vorher-Nachher-Beispiel.",
+      "LinkedIn Professional von EliteCV: individuelle Profilanalyse, Optimierungsbericht, Positionierung, Keywords, CV-Abgleich und professionelles LinkedIn-Banner.",
 
     url:
       "https://www.elitecv.ch/ratgeber/linkedin-profil-optimieren-schweiz",
@@ -72,21 +86,65 @@ export default function LinkedInProfilOptimierenSchweizPage() {
         {/* HERO */}
         <header className="mt-10">
           <span className="inline-flex rounded-full bg-[#C9A95A]/15 px-4 py-2 text-sm font-semibold text-[#8A6A22]">
-            LinkedIn-Optimierung Schweiz
+            LinkedIn-Optimierung Zürich & Schweiz
           </span>
 
           <h1 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl">
-            LinkedIn Profil optimieren Schweiz: Professioneller auftreten und
-            besser gefunden werden
+            LinkedIn Profil optimieren in Zürich & der Schweiz
           </h1>
 
           <p className="mt-6 text-lg leading-8 text-[#0A1F44]/75">
-            Ein professionelles LinkedIn-Profil unterstützt Ihre berufliche
-            Positionierung und ergänzt Ihren Lebenslauf. Headline,
-            Info-Bereich, Berufserfahrung und relevante Keywords sollten
-            Recruitern schnell zeigen, welche Erfahrung und Kompetenzen Sie
-            für Ihre Zielposition mitbringen.
+            Professionelle LinkedIn-Profiloptimierung für Fach- und Führungskräfte:
+            EliteCV analysiert nicht nur einzelne Texte, sondern Ihre gesamte
+            berufliche Positionierung auf LinkedIn. Sie erhalten einen individuellen
+            Optimierungsbericht mit konkreten Empfehlungen und
+            Formulierungsvorschlägen sowie ein professionelles LinkedIn-Banner.
           </p>
+
+          <p className="mt-4 text-lg leading-8 text-[#0A1F44]/75">
+            EliteCV mit Sitz in Dietikon unterstützt Kundinnen und Kunden aus
+            Zürich, dem Limmattal und der gesamten Schweiz. Die Zusammenarbeit
+            erfolgt digital und ortsunabhängig.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/#preise"
+              className="rounded-xl bg-[#C9A95A] px-6 py-3.5 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
+            >
+              LinkedIn Professional – CHF 99 →
+            </Link>
+
+            <a
+              href="#linkedin-professional"
+              className="rounded-xl border border-[#0A1F44]/15 bg-white px-6 py-3.5 font-semibold text-[#0A1F44] transition hover:bg-[#F3F5F8]"
+            >
+              Leistungsumfang ansehen
+            </a>
+          </div>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl border border-[#0A1F44]/10 bg-white p-4 shadow-sm">
+              <p className="font-semibold">✓ Individueller Bericht</p>
+              <p className="mt-1 text-sm text-[#0A1F44]/65">
+                Konkrete Analyse statt allgemeiner Standardtipps
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-[#0A1F44]/10 bg-white p-4 shadow-sm">
+              <p className="font-semibold">✓ Professionelles Banner</p>
+              <p className="mt-1 text-sm text-[#0A1F44]/65">
+                Passend zu Positionierung und beruflichem Auftritt
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-[#0A1F44]/10 bg-white p-4 shadow-sm">
+              <p className="font-semibold">✓ Schweizer Arbeitsmarkt</p>
+              <p className="mt-1 text-sm text-[#0A1F44]/65">
+                Für Zürich, Dietikon und die gesamte Schweiz
+              </p>
+            </div>
+          </div>
         </header>
 
         {/* INHALT */}
@@ -379,95 +437,229 @@ export default function LinkedInProfilOptimierenSchweizPage() {
           </div>
         </section>
 
-        {/* LINKEDIN ANALYSE & OPTIMIERUNGSBERICHT */}
-        <section className="mt-16">
+        {/* LINKEDIN PROFESSIONAL */}
+        <section id="linkedin-professional" className="mt-16">
           <div className="border-t border-[#0A1F44]/10 pt-12">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#C9A95A]">
-              EliteCV LinkedIn-Analyse
+              LinkedIn Professional
             </p>
 
             <h2 className="mt-3 text-3xl font-bold">
-              LinkedIn-Profil professionell analysieren lassen
+              Was Sie bei EliteCV für CHF 99 erhalten
             </h2>
 
             <p className="mt-5 max-w-3xl leading-8 text-[#0A1F44]/75">
-              Eine professionelle LinkedIn-Optimierung geht über einzelne
-              Textkorrekturen hinaus. EliteCV analysiert Ihr bestehendes Profil
-              strukturiert und zeigt konkret auf, wo Positionierung, Inhalte,
-              Keywords und Gesamtauftritt verbessert werden können.
+              LinkedIn Professional ist mehr als eine Textkorrektur oder ein
+              standardisierter Profil-Check. EliteCV betrachtet Ihre berufliche
+              Positionierung, Ihr bestehendes LinkedIn-Profil und den professionellen
+              Gesamtauftritt.
             </p>
 
             <p className="mt-4 max-w-3xl leading-8 text-[#0A1F44]/75">
-              Sie erhalten einen individuellen LinkedIn-Optimierungsbericht mit
-              konkreten Empfehlungen und Formulierungsvorschlägen, die Sie
-              direkt in Ihrem Profil umsetzen können.
+              Sie erhalten eine individuelle Analyse mit konkreten
+              Formulierungsvorschlägen und Handlungsempfehlungen, die Sie direkt für
+              Ihr LinkedIn-Profil verwenden können.
             </p>
           </div>
 
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
             <div className="rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
               <h3 className="text-lg font-bold">
-                Positionierung &amp; Sichtbarkeit
+                Profilanalyse & Positionierung
               </h3>
 
               <ul className="mt-4 space-y-3 text-sm leading-6 text-[#0A1F44]/72">
-                <li>✓ Berufliche Positionierung und Zielprofil</li>
-                <li>✓ LinkedIn-Headline und relevante Keywords</li>
-                <li>✓ Info-/About-Bereich</li>
-                <li>✓ Auffindbarkeit für relevante Suchbegriffe</li>
-                <li>✓ Konsistenz zwischen CV und LinkedIn-Profil</li>
+                <li>✓ Analyse der beruflichen Positionierung und Zielrollen</li>
+                <li>✓ Optimierung der LinkedIn-Headline</li>
+                <li>✓ Analyse des Info-/About-Bereichs</li>
+                <li>✓ Berufserfahrung, Verantwortung und Erfolge</li>
+                <li>✓ Skills, Kompetenzen und relevante Keywords</li>
+                <li>✓ Auffindbarkeit für passende Suchbegriffe</li>
               </ul>
             </div>
 
             <div className="rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
               <h3 className="text-lg font-bold">
-                Inhalt &amp; professioneller Auftritt
+                Professioneller Gesamtauftritt
               </h3>
 
               <ul className="mt-4 space-y-3 text-sm leading-6 text-[#0A1F44]/72">
-                <li>✓ Berufserfahrung und Darstellung von Erfolgen</li>
-                <li>✓ Kompetenzen und Skills</li>
-                <li>✓ Profilbild und visueller Gesamteindruck</li>
-                <li>✓ LinkedIn-Banner und Positionierung</li>
-                <li>✓ Konkrete Optimierungs- und Handlungsempfehlungen</li>
+                <li>✓ Abgleich zwischen CV und LinkedIn-Profil</li>
+                <li>✓ Prüfung von Profilbild und visuellem Auftritt</li>
+                <li>✓ Individuelles professionelles LinkedIn-Banner</li>
+                <li>✓ Konkrete Formulierungsvorschläge</li>
+                <li>✓ Individuelle Optimierungs- und Handlungsempfehlungen</li>
+                <li>✓ Ausrichtung auf den Schweizer Arbeitsmarkt</li>
               </ul>
             </div>
           </div>
 
-          <div className="mt-8 rounded-3xl border border-[#C9A95A]/35 bg-[#FFFDF7] p-7 shadow-sm sm:p-8">
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          {/* BERICHT */}
+          <div className="mt-10 rounded-3xl border border-[#C9A95A]/35 bg-[#FFFDF7] p-7 shadow-sm sm:p-9">
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#8A6A22]">
+                Ihr persönlicher LinkedIn-Optimierungsbericht
+              </p>
+
+              <h3 className="mt-3 text-2xl font-bold text-[#0A1F44]">
+                Sie erhalten nicht nur Tipps – sondern eine konkrete Analyse Ihres Profils
+              </h3>
+
+              <p className="mt-5 leading-7 text-[#0A1F44]/72">
+                Der LinkedIn-Optimierungsbericht dokumentiert strukturiert, wo Ihr
+                Profil bereits überzeugt und wo konkretes Optimierungspotenzial
+                besteht. Sie erhalten nachvollziehbare Empfehlungen für
+                Positionierung, Inhalte, Keywords, Skills und Ihren professionellen
+                Gesamtauftritt.
+              </p>
+
+              <p className="mt-4 leading-7 text-[#0A1F44]/72">
+                Dazu gehören – abhängig von Ihrem Profil – konkrete Vorschläge für
+                Headline, Info-Bereich, Berufserfahrung und weitere relevante
+                Profilbereiche. So wissen Sie nicht nur, <strong>was</strong> geändert
+                werden sollte, sondern auch <strong>wie</strong> Sie die Empfehlungen
+                umsetzen können.
+              </p>
+
+              <div className="mt-7 rounded-2xl bg-white p-6">
+                <h4 className="font-bold text-[#0A1F44]">
+                  Der Bericht kann unter anderem enthalten:
+                </h4>
+
+                <div className="mt-4 grid gap-3 text-sm leading-6 text-[#0A1F44]/72 sm:grid-cols-2">
+                  <p>✓ Gesamtanalyse des Profils</p>
+                  <p>✓ Positionierungsanalyse</p>
+                  <p>✓ Headline-Empfehlungen</p>
+                  <p>✓ About-/Info-Optimierung</p>
+                  <p>✓ Analyse der Berufserfahrung</p>
+                  <p>✓ Skills- & Keyword-Empfehlungen</p>
+                  <p>✓ CV–LinkedIn-Abgleich</p>
+                  <p>✓ Visueller Profilcheck</p>
+                  <p>✓ Konkrete Formulierungsvorschläge</p>
+                  <p>✓ Priorisierte nächste Schritte</p>
+                </div>
+              </div>
+
+              <p className="mt-6 text-sm leading-6 text-[#0A1F44]/60">
+                Kein standardisierter Kurzcheck: Umfang und Tiefe des Berichts richten
+                sich nach Ihrem bestehenden Profil, Ihrer Berufserfahrung, Ihrer
+                Karrierestufe, Ihren Zielpositionen und dem tatsächlichen
+                Optimierungsbedarf.
+              </p>
+            </div>
+          </div>
+
+          {/* BANNER */}
+          <div className="mt-8 rounded-3xl border border-[#0A1F44]/10 bg-white p-7 shadow-sm sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
+              Inklusive LinkedIn-Banner
+            </p>
+
+            <h3 className="mt-3 text-2xl font-bold">
+              Professioneller visueller Auftritt
+            </h3>
+
+            <p className="mt-4 max-w-3xl leading-7 text-[#0A1F44]/72">
+              Zu LinkedIn Professional gehört ein individuell gestaltetes
+              LinkedIn-Banner. Das Design wird auf Ihre berufliche Positionierung
+              abgestimmt und ergänzt Profilbild, Headline und Inhalte zu einem
+              konsistenten professionellen Auftritt.
+            </p>
+          </div>
+
+          {/* WARUM ELITECV */}
+          <div className="mt-8 rounded-3xl bg-[#0A1F44] p-7 text-white sm:p-9">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#C9A95A]">
+              Der EliteCV-Ansatz
+            </p>
+
+            <h3 className="mt-3 text-2xl font-bold">
+              LinkedIn nicht isoliert betrachten
+            </h3>
+
+            <p className="mt-4 max-w-3xl leading-7 text-white/80">
+              Ein professionelles LinkedIn-Profil sollte zur tatsächlichen
+              Berufserfahrung, zum Lebenslauf und zur angestrebten Positionierung
+              passen. Deshalb betrachtet EliteCV nicht nur einzelne Profilfelder,
+              sondern das Zusammenspiel von CV, LinkedIn, Kompetenzen, Erfolgen,
+              Keywords und beruflicher Zielrichtung.
+            </p>
+
+            <div className="mt-7 grid gap-4 sm:grid-cols-3">
+              <div className="rounded-2xl border border-white/15 bg-white/5 p-5">
+                <p className="font-semibold text-[#C9A95A]">Analyse</p>
+                <p className="mt-2 text-sm leading-6 text-white/75">
+                  Ausgangslage und Optimierungspotenzial erkennen.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/15 bg-white/5 p-5">
+                <p className="font-semibold text-[#C9A95A]">Positionierung</p>
+                <p className="mt-2 text-sm leading-6 text-white/75">
+                  Erfahrung, Kompetenzen und Zielrollen klar herausarbeiten.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/15 bg-white/5 p-5">
+                <p className="font-semibold text-[#C9A95A]">Umsetzung</p>
+                <p className="mt-2 text-sm leading-6 text-white/75">
+                  Konkrete Texte, Empfehlungen und professionelles Banner erhalten.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* ZÜRICH / SCHWEIZ */}
+          <div className="mt-10">
+            <h2 className="text-3xl font-bold">
+              LinkedIn-Profiloptimierung in Zürich, Dietikon & der Schweiz
+            </h2>
+
+            <p className="mt-5 max-w-3xl leading-8 text-[#0A1F44]/75">
+              EliteCV hat seinen Sitz in Dietikon im Kanton Zürich. Die
+              LinkedIn-Beratung und Profiloptimierung richtet sich an Fach- und
+              Führungskräfte aus Zürich, dem Limmattal und der gesamten Schweiz.
+              Da die Analyse digital erfolgt, können Sie LinkedIn Professional
+              unabhängig von Ihrem Wohnort nutzen.
+            </p>
+
+            <p className="mt-4 max-w-3xl leading-8 text-[#0A1F44]/75">
+              Besonders sinnvoll ist die Optimierung bei einer beruflichen
+              Neuorientierung, Stellensuche, Bewerbung auf Fach- oder
+              Führungspositionen oder wenn Ihr LinkedIn-Profil Ihre heutige Erfahrung
+              und Positionierung nicht mehr ausreichend widerspiegelt.
+            </p>
+          </div>
+
+          {/* PREIS / CTA */}
+          <div className="mt-10 rounded-3xl border border-[#C9A95A]/40 bg-[#FFFDF7] p-7 shadow-sm sm:p-9">
+            <div className="flex flex-col gap-7 sm:flex-row sm:items-center sm:justify-between">
               <div className="max-w-2xl">
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#8A6A22]">
-                  Ihr persönlicher Optimierungsbericht
+                  LinkedIn Professional
                 </p>
 
-                <h3 className="mt-2 text-2xl font-bold text-[#0A1F44]">
-                  Konkrete Empfehlungen statt allgemeiner Tipps
+                <h3 className="mt-2 text-2xl font-bold">
+                  Professioneller LinkedIn-Auftritt mit individuellem Bericht
                 </h3>
 
-                <p className="mt-4 leading-7 text-[#0A1F44]/72">
-                  Der Bericht zeigt strukturiert, welche Bereiche Ihres
-                  LinkedIn-Profils optimiert werden sollten und enthält
-                  konkrete Empfehlungen für Ihre berufliche Positionierung.
-                  Der Umfang richtet sich nach Profil, Karrierestufe und
-                  individuellem Optimierungsbedarf.
+                <p className="mt-3 leading-7 text-[#0A1F44]/70">
+                  Profilanalyse, Positionierung, konkrete Empfehlungen,
+                  Formulierungsvorschläge, Skills & Keywords, CV-Abgleich und
+                  individuelles LinkedIn-Banner.
                 </p>
               </div>
 
               <div className="shrink-0 sm:text-right">
-                <p className="text-sm font-medium text-[#0A1F44]/60">
-                  LinkedIn-Profiloptimierung
-                </p>
-
-                <p className="mt-1 text-3xl font-bold text-[#0A1F44]">
+                <p className="text-4xl font-bold text-[#0A1F44]">
                   CHF 99
                 </p>
 
                 <Link
                   href="/#preise"
-                  className="mt-4 inline-flex rounded-xl bg-[#C9A95A] px-6 py-3 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
+                  className="mt-4 inline-flex rounded-xl bg-[#C9A95A] px-6 py-3.5 font-semibold text-[#0A1F44] transition hover:bg-[#D6B96E]"
                 >
-                  LinkedIn-Optimierung anfragen →
+                  LinkedIn Professional bestellen →
                 </Link>
               </div>
             </div>
