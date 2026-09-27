@@ -1015,18 +1015,115 @@ export default function Home() {
               </article>
             </div>
             <p className="mt-6 text-sm text-[#0A1F44]/62">{t.logosText}</p>
-            <div className="mt-8 max-w-[520px] rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
-              <p className="text-lg font-semibold">
-                ⭐⭐⭐⭐⭐ 5.0 – {t.googleReviewTitle}
-              </p>
+            <div className="mt-8">
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <p className="text-xl font-semibold text-[#0A1F44]">
+                    <span className="text-[#C9A95A]">★★★★★</span> 5.0 auf Google
+                  </p>
 
-              <p className="mt-3 text-[#0A1F44]/70">
-                "{t.googleReviewText}"
-              </p>
+                  <p className="mt-1 text-sm text-[#0A1F44]/60">
+                    4 Google-Bewertungen
+                  </p>
+                </div>
+              </div>
 
-              <p className="mt-2 text-sm font-medium text-[#0A1F44]/60">
-                {t.googleReviewAuthor}
-              </p>
+              <div className="mt-5 grid gap-5 md:grid-cols-2">
+                <article className="flex h-full flex-col rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
+                  <p
+                    className="text-lg tracking-[0.08em] text-[#C9A95A]"
+                    aria-label="5 von 5 Sternen"
+                  >
+                    ★★★★★
+                  </p>
+
+                  <blockquote className="mt-4 flex-1 leading-relaxed text-[#0A1F44]/75">
+                    „Herr Batinic hat mir meinen Lebenslauf derart professionell gestaltet,
+                    dass die Jobsuche fortan ein Vergnügen wurde! Danke für die tollen
+                    Unterlagen aus Wien.“
+                  </blockquote>
+
+                  <div className="mt-5 border-t border-[#0A1F44]/10 pt-4">
+                    <p className="font-semibold text-[#0A1F44]">
+                      Stefanie Spitzy
+                    </p>
+                    <p className="mt-1 text-xs text-[#0A1F44]/55">
+                      Google-Rezension · Wien
+                    </p>
+                  </div>
+                </article>
+
+                <article className="flex h-full flex-col rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
+                  <p
+                    className="text-lg tracking-[0.08em] text-[#C9A95A]"
+                    aria-label="5 von 5 Sternen"
+                  >
+                    ★★★★★
+                  </p>
+
+                  <blockquote className="mt-4 flex-1 leading-relaxed text-[#0A1F44]/75">
+                    „Ich bin sehr zufrieden mit EliteCV. Klaudio ist sehr professionell und
+                    hat mein CV zu meiner vollen Überzeugung bearbeitet.“
+                  </blockquote>
+
+                  <div className="mt-5 border-t border-[#0A1F44]/10 pt-4">
+                    <p className="font-semibold text-[#0A1F44]">
+                      tomii28
+                    </p>
+                    <p className="mt-1 text-xs text-[#0A1F44]/55">
+                      Google-Rezension
+                    </p>
+                  </div>
+                </article>
+
+                <article className="flex h-full flex-col rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
+                  <p
+                    className="text-lg tracking-[0.08em] text-[#C9A95A]"
+                    aria-label="5 von 5 Sternen"
+                  >
+                    ★★★★★
+                  </p>
+
+                  <blockquote className="mt-4 flex-1 leading-relaxed text-[#0A1F44]/75">
+                    „Vielen Dank für das neue Layout meines CVs, sieht sehr gut aus,
+                    aktuell und übersichtlich.“
+                  </blockquote>
+
+                  <div className="mt-5 border-t border-[#0A1F44]/10 pt-4">
+                    <p className="font-semibold text-[#0A1F44]">
+                      Priska Heiniger
+                    </p>
+                    <p className="mt-1 text-xs text-[#0A1F44]/55">
+                      Google-Rezension
+                    </p>
+                  </div>
+                </article>
+
+                <article className="flex h-full flex-col rounded-2xl border border-[#0A1F44]/10 bg-white p-6 shadow-sm">
+                  <p
+                    className="text-lg tracking-[0.08em] text-[#C9A95A]"
+                    aria-label="5 von 5 Sternen"
+                  >
+                    ★★★★★
+                  </p>
+
+                  <blockquote className="mt-4 flex-1 leading-relaxed text-[#0A1F44]/75">
+                    „Das Ergebnis hat meine Erwartungen übertroffen. Ich erhielt einen sehr
+                    professionell gestalteten Lebenslauf sowie ein überzeugendes
+                    Motivationsschreiben, in denen meine wichtigsten Qualifikationen und
+                    Stärken gezielt hervorgehoben wurden.“
+                  </blockquote>
+
+                  <div className="mt-5 border-t border-[#0A1F44]/10 pt-4">
+                    <p className="font-semibold text-[#0A1F44]">
+                      Tried And Noted
+                    </p>
+                    <p className="mt-1 text-xs text-[#0A1F44]/55">
+                      Google-Rezension
+                    </p>
+                  </div>
+                </article>
+              </div>
             </div>
           </div>
         </section>
