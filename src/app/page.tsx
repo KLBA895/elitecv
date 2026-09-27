@@ -855,9 +855,9 @@ export default function Home() {
               <div className="mt-12 flex flex-wrap gap-4">
                 <a
                   href="#preise"
-                  className="rounded-full border border-[#0A1F44]/18 bg-white px-7 py-3 text-sm font-semibold text-[#0A1F44] transition-all hover:-translate-y-0.5 hover:border-[#C9A95A] hover:text-[#C9A95A]"
+                  className="inline-flex items-center justify-center rounded-full border border-[#C9A95A] bg-[#C9A95A] px-7 py-3 text-sm font-semibold text-[#0A1F44] shadow-sm transition-all hover:-translate-y-0.5 hover:bg-[#d4b867] hover:shadow-md"
                 >
-                  {t.secondaryCta}
+                  ✨ {t.secondaryCta} →
                 </a>
               </div>
 
