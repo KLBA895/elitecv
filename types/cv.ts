@@ -156,7 +156,10 @@ export interface CVData {
   | "teal"
   | "charcoal";
 
+  // Steuerung der Seitenaufteilung
   firstPageExperienceCount?: 1 | 2 | 3 | 4;
+
+  // Maximale Anzahl Bulletpoints pro ausführlicher Berufsstation
   bulletPointCount?: 2 | 3 | 4 | 5;
 
   personal: PersonalData;

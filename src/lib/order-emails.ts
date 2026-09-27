@@ -16,29 +16,41 @@ type SendOrderConfirmationEmailParams = {
 };
 
 const packageLabels: Record<string, string> = {
+  basic:
+    "CV Check",
+
   generatorProfessional:
     "EliteCV Professional Generator",
+
   generatorExecutive:
     "EliteCV Executive Generator",
-  cvCheck:
-    "CV Check",
-  cvExecutive:
-    "CV Executive",
+
+  professional:
+    "Executive CV Service",
+
+  linkedin:
+    "LinkedIn Professional",
+
   premium:
     "Premium",
+
   elite:
     "Elite",
 };
 
 const addonLabels: Record<string, string> = {
   linkedin:
-    "LinkedIn-Profil Optimierung",
+    "LinkedIn Professional",
+
   coverLetter:
-    "Motivationsschreiben Erstellung",
+    "Professionelles Motivationsschreiben",
+
   translation:
-    "CV Übersetzung DE ↔ EN",
+    "CV-Übersetzung DE ↔ EN",
+
   referenceAnalysis:
-    "Arbeitszeugnis Analyse",
+    "Arbeitszeugnis-Analyse",
+
   express:
     "Express-Bearbeitung 24h",
 };
@@ -87,6 +99,7 @@ export async function sendOrderConfirmationEmails({
 }: SendOrderConfirmationEmailParams) {
   const packageLabel =
     getPackageLabel(packageKey);
+
   const includedServicesByPackage: Record<string, string[]> = {
     basic: [
       "Professionelle CV-Analyse",
@@ -117,10 +130,19 @@ export async function sendOrderConfirmationEmails({
       "Persönliche Executive-Beratung",
     ],
 
+    linkedin: [
+      "Professionelle LinkedIn-Profilanalyse",
+      "Strategische Positionierung & Headline",
+      "Optimierung von Info-Bereich & Berufserfahrung",
+      "Skills, Keywords & Recruiter-Sichtbarkeit",
+      "Individueller LinkedIn-Optimierungsbericht",
+      "Professionelles LinkedIn-Banner",
+    ],
+
     premium: [
       "Professionelle CV-Optimierung",
       "Professionelles Premium-CV-Design",
-      "Professionelle LinkedIn-Optimierung",
+      "LinkedIn Professional inkl. Optimierungsbericht & Banner",
       "Professionelle CV-Übersetzung (DE ↔ EN)",
       "1 professionelles Motivationsschreiben inklusive",
       "Priorisierte Bearbeitung innerhalb von 3–5 Werktagen",
@@ -129,8 +151,10 @@ export async function sendOrderConfirmationEmails({
     elite: [
       "Strategische Executive-Karrierepositionierung",
       "Individuelle Executive-Karrierestrategie",
-      "CV-, LinkedIn- und Bewerbungsstrategie",
+      "Executive CV-Optimierung & professionelles Design",
+      "LinkedIn Professional inkl. Optimierungsbericht & Banner",
       "Professionelle CV-Übersetzung (DE ↔ EN)",
+      "CV-, LinkedIn- und Bewerbungsstrategie",
       "Persönliche Betreuung",
     ],
   };
@@ -140,7 +164,9 @@ export async function sendOrderConfirmationEmails({
 
   const includedServicesText =
     includedServices.length > 0
-      ? includedServices.map((service) => `✓ ${service}`).join("\n")
+      ? includedServices
+        .map((service) => `✓ ${service}`)
+        .join("\n")
       : "Gemäss gewähltem Paket";
 
   const selectedAddonLabels =
@@ -148,7 +174,9 @@ export async function sendOrderConfirmationEmails({
 
   const addonsText =
     selectedAddonLabels.length > 0
-      ? selectedAddonLabels.map((addon) => `+ ${addon}`).join("\n")
+      ? selectedAddonLabels
+        .map((addon) => `+ ${addon}`)
+        .join("\n")
       : "Keine zusätzlich gebuchten Leistungen";
 
   const expiryText =
@@ -194,10 +222,12 @@ Die weitere Bearbeitung Ihres Auftrags erfolgt persönlich.
   await mailTransporter.sendMail({
     from: mailFrom,
     to: customerEmail,
+
     subject:
       accessCode
         ? "Ihre EliteCV-Bestellung – persönlicher Zugangscode"
         : "Ihre EliteCV-Bestellung wurde bestätigt",
+
     text: `
 ${customerGreeting}
 
@@ -229,20 +259,21 @@ www.elitecv.ch
     from: mailFrom,
     to: internalRecipient,
     replyTo: customerEmail,
+
     subject:
       `Neue bezahlte Bestellung – ${packageLabel}`,
 
     text: `
-      Neue bezahlte EliteCV-Bestellung
-      
-      Status:
-      Bezahlt
-      
-      Name:
-      ${customerName || "Nicht angegeben"}
-      
-      E-Mail:
-      ${customerEmail}
+Neue bezahlte EliteCV-Bestellung
+
+Status:
+Bezahlt
+
+Name:
+${customerName || "Nicht angegeben"}
+
+E-Mail:
+${customerEmail}
 
 Paket:
 ${packageLabel}

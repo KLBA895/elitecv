@@ -21,23 +21,28 @@ const splitParagraphs = (text: string) =>
     .map((line) => line.trim())
     .filter(Boolean);
 
-    import { LETTER_THEME_COLORS } from "./theme";
-
 export function ExecutiveLetter({ data, previewRef }: Props) {
   const subject = buildSubject(data);
   const greeting = buildGreeting(data);
   const senderName = getSenderName(data);
   const senderAddress = getSenderAddress(data);
-  const themeColor =
-  THEME_COLORS[data.themeColor] ?? THEME_COLORS.gray;
 
-  const locationDate = [data.location, data.date].filter(Boolean).join(", ");
+  const themeColor =
+    THEME_COLORS[data.themeColor] ?? THEME_COLORS.gray;
+
+  const locationDate = [data.location, data.date]
+    .filter(Boolean)
+    .join(", ");
+
   const companyAddress = [data.companyZipCode, data.companyCity]
     .filter(Boolean)
     .join(" ");
 
   const hasRecipient =
-    data.company || data.contactPerson || data.companyStreet || companyAddress;
+    data.company ||
+    data.contactPerson ||
+    data.companyStreet ||
+    companyAddress;
 
   const bodyParagraphs = [
     data.why,
@@ -77,6 +82,7 @@ export function ExecutiveLetter({ data, previewRef }: Props) {
                 {senderName}
               </h1>
             )}
+
             {data.position && (
               <p className="mt-1 text-[13px] font-semibold text-white/85">
                 {data.position}
@@ -86,10 +92,28 @@ export function ExecutiveLetter({ data, previewRef }: Props) {
         </div>
 
         <div className="max-w-[62mm] space-y-1 text-right text-[11.5px] leading-5 text-white/90">
-          {data.senderEmail && <p className="break-all">{data.senderEmail}</p>}
+          {data.senderEmail && (
+            <p className="break-all">{data.senderEmail}</p>
+          )}
+
           {data.senderPhone && <p>{data.senderPhone}</p>}
+
           {senderAddress && <p>{senderAddress}</p>}
-          {data.senderLinkedin && <p className="break-all">{data.senderLinkedin}</p>}
+
+          {data.senderLinkedin && (
+            <a
+              href={
+                data.senderLinkedin.startsWith("http")
+                  ? data.senderLinkedin
+                  : `https://${data.senderLinkedin}`
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block font-medium text-white/90 no-underline"
+            >
+              LinkedIn
+            </a>
+          )}
         </div>
       </header>
 
@@ -105,10 +129,15 @@ export function ExecutiveLetter({ data, previewRef }: Props) {
           {hasRecipient ? (
             <div>
               {data.company && (
-                <p className="font-semibold text-[#151922]">{data.company}</p>
+                <p className="font-semibold text-[#151922]">
+                  {data.company}
+                </p>
               )}
+
               {data.contactPerson && <p>{data.contactPerson}</p>}
+
               {data.companyStreet && <p>{data.companyStreet}</p>}
+
               {companyAddress && <p>{companyAddress}</p>}
             </div>
           ) : (
@@ -126,25 +155,38 @@ export function ExecutiveLetter({ data, previewRef }: Props) {
           {subject}
         </h2>
 
-        <div className="mt-[7mm] text-[12.5px] leading-[1.58] text-[#151922] text-justify">
+        <div className="mt-[7mm] text-justify text-[12.5px] leading-[1.58] text-[#151922]">
           <p>{greeting}</p>
 
           <div className="mt-[5mm] space-y-[4.2mm]">
             {bodyParagraphs.length > 0 ? (
-              bodyParagraphs.flatMap(splitParagraphs).map((paragraph, index) => (
-                <p key={`${paragraph}-${index}`}>{paragraph}</p>
-              ))
+              bodyParagraphs
+                .flatMap(splitParagraphs)
+                .map((paragraph, index) => (
+                  <p key={`${paragraph}-${index}`}>
+                    {paragraph}
+                  </p>
+                ))
             ) : (
               <p className="text-[#151922]/45">
-                Sobald Sie Ihre Angaben erfassen, erscheint hier Ihr professionelles
-                Motivationsschreiben.
+                Sobald Sie Ihre Angaben erfassen, erscheint hier Ihr
+                professionelles Motivationsschreiben.
               </p>
             )}
           </div>
 
           <div className="mt-[8mm]">
-            <p>{data.language === "de" ? "Freundliche Grüsse" : "Kind regards"}</p>
-            {senderName && <p className="mt-[5mm] font-semibold">{senderName}</p>}
+            <p>
+              {data.language === "de"
+                ? "Freundliche Grüsse"
+                : "Kind regards"}
+            </p>
+
+            {senderName && (
+              <p className="mt-[5mm] font-semibold">
+                {senderName}
+              </p>
+            )}
           </div>
         </div>
       </main>

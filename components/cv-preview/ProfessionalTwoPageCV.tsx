@@ -275,7 +275,7 @@ export function ProfessionalTwoPageCV({
   } = data;
 
   const firstPageCount =
-    data.firstPageExperienceCount ?? 3;
+    data.firstPageExperienceCount ?? 2;
 
   const firstPageJobs =
     workExperience.slice(0, firstPageCount);
@@ -359,7 +359,7 @@ export function ProfessionalTwoPageCV({
                   jobIndex={index}
                   successLabel={t.successes}
                   language={language}
-                  bulletPointCount={data.bulletPointCount ?? 3}
+                  bulletPointCount={data.bulletPointCount ?? 4}
                 />
               ))}
             </div>
@@ -554,7 +554,7 @@ export function ProfessionalTwoPageCV({
                       jobIndex={index + firstPageCount}
                       successLabel={t.successes}
                       language={language}
-                      bulletPointCount={data.bulletPointCount ?? 3}
+                      bulletPointCount={data.bulletPointCount ?? 4}
                     />
                   ))}
                 </div>

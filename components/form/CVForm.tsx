@@ -650,7 +650,7 @@ export function CVForm({
 
           <select
             className="cv-form-select"
-            value={data.firstPageExperienceCount ?? 3}
+            value={data.firstPageExperienceCount ?? 2}
             onChange={(event) =>
               update(
                 "firstPageExperienceCount",

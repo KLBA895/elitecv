@@ -8,13 +8,13 @@ type PlanKey =
   | "generatorProfessional"
   | "generatorExecutive"
   | "professional"
+  | "linkedin"
   | "premium"
   | "elite";
 
 type Language = "de" | "en";
 
 type AddonKey =
-  | "linkedin"
   | "coverLetter"
   | "translation"
   | "referenceAnalysis"
@@ -41,22 +41,32 @@ const PACKAGE_DATA: Record<PlanKey, ProductData> = {
     name: "CV Check",
     price: 7900,
   },
+
   generatorProfessional: {
     name: "EliteCV Professional Generator",
     price: 9900,
   },
+
   generatorExecutive: {
     name: "EliteCV Executive Generator",
     price: 14900,
   },
+
   professional: {
-    name: "CV Executive",
+    name: "Executive CV Service",
     price: 17900,
   },
+
+  linkedin: {
+    name: "LinkedIn Professional",
+    price: 9900,
+  },
+
   premium: {
     name: "Premium",
     price: 24900,
   },
+
   elite: {
     name: "Elite",
     price: 39900,
@@ -64,22 +74,21 @@ const PACKAGE_DATA: Record<PlanKey, ProductData> = {
 };
 
 const ADDON_DATA: Record<AddonKey, ProductData> = {
-  linkedin: {
-    name: "LinkedIn-Profil Optimierung",
-    price: 9900,
-  },
   coverLetter: {
-    name: "Motivationsschreiben Erstellung",
+    name: "Professionelles Motivationsschreiben",
     price: 8900,
   },
+
   translation: {
     name: "CV Übersetzung DE ↔ EN",
     price: 5900,
   },
+
   referenceAnalysis: {
     name: "Arbeitszeugnis Analyse",
     price: 3900,
   },
+
   express: {
     name: "Express-Bearbeitung 24h",
     price: 5900,
@@ -205,17 +214,32 @@ export async function POST(request: NextRequest) {
       ),
     ];
 
-    // Leistungen, die gemäss bestehender Paketkonfiguration
-    // bereits im Paket enthalten sind, dürfen nicht nochmals verrechnet werden.
-    const includedAddonsByPlan: Partial<Record<PlanKey, AddonKey[]>> = {
-      premium: ["linkedin", "coverLetter", "translation"],
-      elite: ["translation"],
+    /**
+     * Leistungen, die bereits im gewählten Paket enthalten sind,
+     * dürfen nicht nochmals als Zusatzleistung verrechnet werden.
+     *
+     * LinkedIn ist kein Add-on mehr. Es ist ein eigenständiges Paket
+     * und Bestandteil von Premium bzw. Elite.
+     */
+    const includedAddonsByPlan: Partial<
+      Record<PlanKey, AddonKey[]>
+    > = {
+      premium: [
+        "coverLetter",
+        "translation",
+      ],
+
+      elite: [
+        "translation",
+      ],
     };
 
-    const includedAddons = includedAddonsByPlan[planKey] ?? [];
+    const includedAddons =
+      includedAddonsByPlan[planKey] ?? [];
 
     const validAddons = submittedValidAddons.filter(
-      (addonKey) => !includedAddons.includes(addonKey)
+      (addonKey) =>
+        !includedAddons.includes(addonKey)
     );
 
     const lineItems = [
@@ -231,10 +255,16 @@ export async function POST(request: NextRequest) {
       },
     ];
 
+    /**
+     * Die englische Generator-Version kostet nur bei den
+     * beiden Generator-Paketen zusätzlich CHF 29.
+     */
     const hasLanguageSurcharge =
       language === "en" &&
-      (planKey === "generatorProfessional" ||
-        planKey === "generatorExecutive");
+      (
+        planKey === "generatorProfessional" ||
+        planKey === "generatorExecutive"
+      );
 
     if (hasLanguageSurcharge) {
       lineItems.push({
@@ -249,6 +279,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    /**
+     * Gewählte und nicht bereits enthaltene Zusatzleistungen
+     * als separate Stripe-Positionen hinzufügen.
+     */
     for (const addonKey of validAddons) {
       const addon = ADDON_DATA[addonKey];
 
@@ -273,8 +307,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    /**
+     * Generator-Funktionsrechte.
+     *
+     * LinkedIn Professional ist eine persönliche Dienstleistung
+     * und erhält deshalb keinen Generator-Zugang.
+     */
     const hasCoverLetterAccess =
-      planKey === "generatorExecutive" ||
       planKey === "premium" ||
       validAddons.includes("coverLetter");
 
@@ -301,6 +340,7 @@ export async function POST(request: NextRequest) {
 
         metadata: {
           source: "elitecv_order",
+
           customer_name: customerName,
           customer_email: customerEmail,
 

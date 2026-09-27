@@ -23,6 +23,7 @@ type PlanKey =
   | "generatorProfessional"
   | "generatorExecutive"
   | "professional"
+  | "linkedin"
   | "premium"
   | "elite";
 
@@ -444,6 +445,30 @@ const pricingPlans = [
       "Personal Executive consultation",
     ],
   },
+
+  // ─── Eigenständiges LinkedIn-Paket ─────────────────────────────
+  {
+    key: "linkedin" as const,
+    name: "LinkedIn Professional",
+    price: "CHF 99",
+    detailsDe: [
+      "Professionelle LinkedIn-Profilanalyse",
+      "Strategische Positionierung & Headline",
+      "Optimierung von Info-Bereich & Berufserfahrung",
+      "Skills, Keywords & Recruiter-Sichtbarkeit",
+      "Individueller LinkedIn-Optimierungsbericht",
+      "Professionelles LinkedIn-Banner",
+    ],
+    detailsEn: [
+      "Professional LinkedIn profile analysis",
+      "Strategic positioning & headline",
+      "Optimization of About section & experience",
+      "Skills, keywords & recruiter visibility",
+      "Individual LinkedIn optimization report",
+      "Professional LinkedIn banner",
+    ],
+  },
+
   {
     key: "premium" as const,
     name: "Premium",
@@ -451,7 +476,7 @@ const pricingPlans = [
     detailsDe: [
       "Professionelle CV-Optimierung",
       "Professionelles Premium-CV-Design",
-      "Professionelle LinkedIn-Optimierung",
+      "LinkedIn Professional inkl. Optimierungsbericht & Banner",
       "Professionelle CV-Übersetzung (DE ↔ EN)",
       "1 professionelles Motivationsschreiben inklusive",
       "Priorisierte Bearbeitung innerhalb von 3–5 Werktagen",
@@ -459,7 +484,7 @@ const pricingPlans = [
     detailsEn: [
       "Professional CV optimization",
       "Professional Premium CV design",
-      "Professional LinkedIn optimization",
+      "LinkedIn Professional incl. optimization report & banner",
       "Professional CV translation (DE ↔ EN)",
       "1 professional cover letter included",
       "Priority processing within 3–5 business days",
@@ -472,15 +497,19 @@ const pricingPlans = [
     detailsDe: [
       "Strategische Executive-Karrierepositionierung",
       "Individuelle Executive-Karrierestrategie",
-      "CV-, LinkedIn- und Bewerbungsstrategie",
+      "Executive CV-Optimierung & professionelles Design",
+      "LinkedIn Professional inkl. Optimierungsbericht & Banner",
       "Professionelle CV-Übersetzung (DE ↔ EN)",
+      "CV-, LinkedIn- und Bewerbungsstrategie",
       "Persönliche Betreuung",
     ],
     detailsEn: [
       "Strategic executive career positioning",
       "Individual executive career strategy",
-      "CV, LinkedIn & application strategy",
+      "Executive CV optimization & professional design",
+      "LinkedIn Professional incl. optimization report & banner",
       "Professional CV translation (DE ↔ EN)",
+      "CV, LinkedIn & application strategy",
       "Personal support",
     ],
   },
@@ -553,12 +582,12 @@ export default function Home() {
     generatorProfessional: 99,
     generatorExecutive: 149,
     professional: 179,
+    linkedin: 99,
     premium: 249,
     elite: 399,
   };
 
   const addonPrices: Record<string, number> = {
-    linkedin: 99,
     coverLetter: 89,
     translation: 59,
     referenceAnalysis: 39,
@@ -644,7 +673,6 @@ export default function Home() {
     );
 
     const addonLabels: Record<string, string> = {
-      linkedin: "LinkedIn-Profiloptimierung (+ CHF 99)",
       coverLetter: "Professionelles Motivationsschreiben (+ CHF 89)",
       translation: "CV-Übersetzung DE ↔ EN (+ CHF 59)",
       referenceAnalysis: "Arbeitszeugnis-Analyse (+ CHF 39)",
@@ -1491,36 +1519,58 @@ export default function Home() {
 
                 <div className="space-y-2">
 
-                  {selectedPlan.key !== "premium" && (
-                    <>
-                      <label className="flex items-center gap-2 text-sm">
-                        <input
-                          type="checkbox"
-                          name="addons"
-                          value="coverLetter"
-                        />
-                        <span>
-                          {lang === "de"
-                            ? "Professionelles Motivationsschreiben (+ CHF 89)"
-                            : "Professional Cover Letter (+ CHF 89)"}
-                        </span>
-                      </label>
-
-                      <label className="flex items-center gap-2 text-sm">
-                        <input
-                          type="checkbox"
-                          name="addons"
-                          value="translation"
-                        />
-                        <span>
-                          {lang === "de"
-                            ? "CV-Übersetzung DE ↔ EN (+ CHF 59)"
-                            : "CV Translation DE ↔ EN (+ CHF 59)"}
-                        </span>
-                      </label>
-                    </>
+                  {/* Motivationsschreiben – bei Premium bereits enthalten */}
+                  {selectedPlan.key === "premium" ? (
+                    <div className="flex items-center gap-2 rounded-lg bg-[#F7F8FA] px-3 py-2 text-sm text-[#0A1F44]/70">
+                      <span className="font-semibold text-[#C9A95A]">✓</span>
+                      <span>
+                        {lang === "de"
+                          ? "Professionelles Motivationsschreiben – im Paket enthalten"
+                          : "Professional Cover Letter – included in package"}
+                      </span>
+                    </div>
+                  ) : (
+                    <label className="flex items-center gap-2 text-sm">
+                      <input
+                        type="checkbox"
+                        name="addons"
+                        value="coverLetter"
+                      />
+                      <span>
+                        {lang === "de"
+                          ? "Professionelles Motivationsschreiben (+ CHF 89)"
+                          : "Professional Cover Letter (+ CHF 89)"}
+                      </span>
+                    </label>
                   )}
 
+                  {/* Übersetzung – bei Premium und Elite bereits enthalten */}
+                  {selectedPlan.key === "premium" ||
+                    selectedPlan.key === "elite" ? (
+                    <div className="flex items-center gap-2 rounded-lg bg-[#F7F8FA] px-3 py-2 text-sm text-[#0A1F44]/70">
+                      <span className="font-semibold text-[#C9A95A]">✓</span>
+                      <span>
+                        {lang === "de"
+                          ? "CV-Übersetzung DE ↔ EN – im Paket enthalten"
+                          : "CV Translation DE ↔ EN – included in package"}
+                      </span>
+                    </div>
+                  ) : (
+                    <label className="flex items-center gap-2 text-sm">
+                      <input
+                        type="checkbox"
+                        name="addons"
+                        value="translation"
+                      />
+                      <span>
+                        {lang === "de"
+                          ? "CV-Übersetzung DE ↔ EN (+ CHF 59)"
+                          : "CV Translation DE ↔ EN (+ CHF 59)"}
+                      </span>
+                    </label>
+                  )}
+
+                  {/* Zeugnisanalyse – immer optional */}
                   <label className="flex items-center gap-2 text-sm">
                     <input
                       type="checkbox"
@@ -1534,6 +1584,7 @@ export default function Home() {
                     </span>
                   </label>
 
+                  {/* Express – immer optional */}
                   <label className="flex items-center gap-2 text-sm">
                     <input
                       type="checkbox"
@@ -1547,11 +1598,12 @@ export default function Home() {
                     </span>
                   </label>
 
+                  {/* Hinweis Premium */}
                   {selectedPlan.key === "premium" && (
                     <p className="mt-3 rounded-lg bg-[#F7F8FA] p-3 text-xs leading-5 text-[#0A1F44]/65">
                       {lang === "de"
-                        ? "Premium umfasst eine Bearbeitung innerhalb von 3–5 Werktagen. Für eine Bearbeitung innerhalb von 24 Stunden kann Express separat hinzugebucht werden."
-                        : "Premium includes processing within 3–5 business days. For processing within 24 hours, Express can be added separately."}
+                        ? "Premium umfasst eine priorisierte Bearbeitung innerhalb von 3–5 Werktagen. Für eine Bearbeitung innerhalb von 24 Stunden kann Express separat hinzugebucht werden."
+                        : "Premium includes priority processing within 3–5 business days. For processing within 24 hours, Express can be added separately."}
                     </p>
                   )}
 

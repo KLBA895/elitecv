@@ -144,10 +144,13 @@ export function ProfessionalCVPreview({
       ? 2
       : 1;
 
+  const defaultFirstPageExperienceCount =
+    data.layout === "executive" ? 2 : 3;
+
   const firstPageExperienceCount = Math.max(
     1,
     Math.min(
-      data.firstPageExperienceCount ?? automaticFirstPageCount,
+      data.firstPageExperienceCount ?? defaultFirstPageExperienceCount,
       workExperience.length
     )
   );
